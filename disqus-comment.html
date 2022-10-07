@@ -1,5 +1,7 @@
 <html>
-	<head></head>
+	<head>
+		<title>disqus comment iframe</title>
+	</head>
 
 	<body>
 		<div id="disqus_thread"></div>
@@ -55,7 +57,6 @@
 			var disqus_config = function () {
 				this.page.url = decodeURIComponent(params.get('url') || encodeURIComponent(location.href));
 				this.page.identifier = window.location.hash;
-				// console.log(this)
 			};
 			(function () {
 				// DON'T EDIT BELOW THIS LINE
@@ -68,7 +69,5 @@
 				(d.head || d.body).appendChild(s);
 			})();
 		</script>
-		<<<<<<< HEAD
 	</body>
 </html>
-======= >>>>>>> 2e6076be3038ef4655620e1612693b0c1449bbd8
