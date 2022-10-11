@@ -1,0 +1,217 @@
+console.clear();
+let logdiv = document.getElementById("selenium");
+let test = runBotDetection();
+logdiv.innerHTML = test;
+if (typeof fetch != "undefined") {
+  fetch("https://www.cloudflare.com/cdn-cgi/trace").then((response) => {
+    response.text().then(function (data) {
+      data = data
+        .trim()
+        .split("\n")
+        .reduce(function (obj, pair) {
+          pair = pair.split("=");
+          return (obj[pair[0]] = pair[1]), obj;
+        }, {});
+      //console.log(data);
+      document.getElementById("ip").innerText = data.ip;
+      document.getElementById("ua").innerText = data.uag;
+    });
+  });
+  fetch("https://httpbin.org/headers")
+    .then((response) => response.json())
+    .then((data) => {
+      //console.log(data.headers);
+      const headers = [
+        "HTTP_VIA",
+        "HTTP_X_FORWARDED_FOR",
+        "HTTP_FORWARDED_FOR",
+        "HTTP_X_FORWARDED",
+        "HTTP_FORWARDED",
+        "HTTP_CLIENT_IP",
+        "HTTP_FORWARDED_FOR_IP",
+        "VIA",
+        "X_FORWARDED_FOR",
+        "FORWARDED_FOR",
+        "X_FORWARDED",
+        "FORWARDED",
+        "CLIENT_IP",
+        "FORWARDED_FOR_IP",
+        "HTTP_PROXY_CONNECTION"
+      ];
+      headers.forEach(function (header) {
+        const isProxy = data.headers.hasOwnProperty(header);
+        document.getElementById("isProxy").innerText = isProxy;
+        document.getElementById("proxy").innerText = data.headers[header] || "";
+      });
+    });
+}
+
+function runBotDetection() {
+  const documentDetectionKeys = [
+    "__webdriver_evaluate",
+    "__selenium_evaluate",
+    "__webdriver_script_function",
+    "__webdriver_script_func",
+    "__webdriver_script_fn",
+    "__fxdriver_evaluate",
+    "__driver_unwrapped",
+    "__webdriver_unwrapped",
+    "__driver_evaluate",
+    "__selenium_unwrapped",
+    "__fxdriver_unwrapped"
+  ];
+  const windowDetectionKeys = [
+    "_phantom",
+    "__nightmare",
+    "_selenium",
+    "callPhantom",
+    "callSelenium",
+    "_Selenium_IDE_Recorder"
+  ];
+  for (const windowDetectionKey in windowDetectionKeys) {
+    const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
+    if (window[windowDetectionKeyValue] || windowDetectionKeyValue in window) {
+      return true;
+    }
+  }
+  for (const documentDetectionKey in documentDetectionKeys) {
+    const documentDetectionKeyValue =
+      documentDetectionKeys[documentDetectionKey];
+    if (
+      window["document"][documentDetectionKeyValue] ||
+      documentDetectionKeyValue in document
+    ) {
+      return true;
+    }
+  }
+  for (const documentKey in window["document"]) {
+    if (
+      documentKey.match(/\$[a-z]dc_/) &&
+      window["document"][documentKey]["cache_"]
+    ) {
+      return true;
+    }
+  }
+  if (
+    window["external"] &&
+    window["external"].toString() &&
+    window["external"].toString()["indexOf"]("Sequentum") !== -1
+  )
+    return true;
+  if (window["document"]["documentElement"]["getAttribute"]("selenium"))
+    return true;
+  if (window["document"]["documentElement"]["getAttribute"]("webdriver"))
+    return true;
+  if (window["document"]["documentElement"]["getAttribute"]("driver"))
+    return true;
+  if (window.document.documentElement.getAttribute("webdriver")) {
+    return true;
+  }
+  if (
+    window.hasOwnProperty("callPhantom") ||
+    window.hasOwnProperty("_phantom")
+  ) {
+    if (window.callPhantom || window._phantom) {
+      return true;
+    }
+  }
+  if (navigator.hasOwnProperty("webdriver")) {
+    if (navigator.webdriver == true) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getCookies() {
+  var cookies = document.cookie
+    .split(";")
+    .reduce(
+      (ac, cv, i) =>
+        Object.assign(ac, { [cv.split("=")[0]]: cv.split("=")[1] }),
+      {}
+    );
+  return cookies;
+}
+
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+function eraseCookie(name) {
+  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
+if (!getCookie("random math")) setCookie("random math", Math.random(), 1);
+
+/** Cookies **/
+const tbl = document.querySelector("table#cookies");
+const tbody = tbl.querySelector("tbody");
+const gck = getCookies();
+for (let key in gck) {
+  //console.log(key, gck[key]);
+  var row = document.createElement("tr");
+  var cell = document.createElement("td");
+  var cellText = document.createTextNode(key);
+  cell.appendChild(cellText);
+  row.appendChild(cell);
+
+  cell = document.createElement("td");
+  cellText = document.createTextNode(gck[key]);
+  cell.appendChild(cellText);
+  row.appendChild(cell);
+  tbody.appendChild(row);
+}
+
+/** Navigator **/
+const tbln = document.querySelector("table#navigator");
+const tbodyn = tbln.querySelector("tbody");
+for (let key in navigator) {
+  let value = navigator[key];
+  if (typeof value !== "string") {
+    value = JSON.stringify(value, null, 2);
+  }
+  var row = document.createElement("tr");
+  var cell = document.createElement("td");
+  var cellText = document.createTextNode(key);
+  cell.appendChild(cellText);
+  row.appendChild(cell);
+
+  cell = document.createElement("td");
+  cellText = document.createTextNode(value);
+  cell.appendChild(cellText);
+  row.appendChild(cell);
+  tbodyn.appendChild(row);
+}
+
+/** Stylesheet **/
+loadStyleSheet(
+  "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+);
+// to defer the loading of stylesheets
+// just add it right before the </body> tag
+// and before any javaScript file inclusion (for performance)
+function loadStyleSheet(src) {
+  if (document.createStyleSheet) document.createStyleSheet(src);
+  else {
+    var stylesheet = document.createElement("link");
+    stylesheet.href = src;
+    stylesheet.rel = "stylesheet";
+    stylesheet.type = "text/css";
+    document.getElementsByTagName("head")[0].appendChild(stylesheet);
+  }
+}
