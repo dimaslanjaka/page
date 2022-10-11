@@ -182,8 +182,8 @@ const tbln = document.querySelector("table#navigator");
 const tbodyn = tbln.querySelector("tbody");
 for (let key in navigator) {
   let value = navigator[key];
-  if (typeof value !== "string") {
-    value = JSON.stringify(value, null, 2);
+  if (typeof value === "object") {
+    value = "<pre>" + JSON.stringify(value, null, 2) + "</pre>";
   }
   var row = document.createElement("tr");
   var cell = document.createElement("td");
@@ -193,7 +193,8 @@ for (let key in navigator) {
 
   cell = document.createElement("td");
   cellText = document.createTextNode(value);
-  cell.appendChild(cellText);
+  //cell.appendChild(cellText);
+  cell.innerHTML = value;
   row.appendChild(cell);
   tbodyn.appendChild(row);
 }
