@@ -202,6 +202,29 @@ for (let key in navigator) {
 loadStyleSheet(
   "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
 );
+// load google analytics
+loadScript("https://www.googletagmanager.com/gtag/js?id=UA-106238155-1").then(
+  function () {
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("send", "pageview");
+    gtag("config", "UA-106238155-1", {
+      page_title: document.title,
+      page_path: location.pathname,
+      page_location: location.href
+    });
+    gtag("config", "G-BG75CLNJZ1", {
+      page_title: document.title,
+      page_path: location.pathname,
+      page_location: location.href
+    });
+  }
+);
+
 // to defer the loading of stylesheets
 // just add it right before the </body> tag
 // and before any javaScript file inclusion (for performance)
@@ -214,4 +237,13 @@ function loadStyleSheet(src) {
     stylesheet.type = "text/css";
     document.getElementsByTagName("head")[0].appendChild(stylesheet);
   }
+}
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = resolve;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  });
 }
