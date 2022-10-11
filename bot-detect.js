@@ -120,6 +120,10 @@ function runBotDetection() {
       return true;
     }
   }
+  if ("userAgentData" in navigator) {
+    const udata = JSON.stringify(navigator.userAgentData);
+    return udata.includes("Not=A?Brand");
+  }
   return false;
 }
 
