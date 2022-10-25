@@ -564,10 +564,10 @@
 							<div class="col-lg-4 col-12 mb-2">
 								<div class="card" style="min-height: 350px;">
 									<div class="card-body">
-										<h2>${element.title}</h2>
-										<p class="m-2">${element.categories.map(str => '<span class="mr-1">' + str + '</span>')}</p>
-										<p class="card-text" style="height: 100%">${element.content}</p>
-										<a href='${element.link}'>${element.title}</a>
+										<h2><a href='${element.link}'>${element.title}</a></h2>
+										<p class="m-2">${element.categories.map(str => '<span>' + str + '</span>').join(', ')}</p>
+										<p class="card-text" style="min-height: 50px">${element.content}</p>
+										<a href='${element.link}' class='btn btn-primary'>Read More</a>
 									</div>
 								</div>
 							</div>
