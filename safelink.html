@@ -2,8 +2,6 @@
 <html>
 	<head>
 		<title>Verify Links | Insurance Loans Site Information Health</title>
-	</head>
-	<body class="fixed-sn mdb-skin-custom" data-spy="scroll" data-target="#scrollspy" data-offset="15">
 		<include expiration="7d" path="*.css"></include>
 		<include expiration="7d" path="*.js"></include>
 		<include expiration="3d" path="*.gif"></include>
@@ -127,25 +125,10 @@
 				opacity: 0.4;
 			}
 		</style>
+	</head>
+	<body class="fixed-sn mdb-skin-custom" data-spy="scroll" data-target="#scrollspy" data-offset="15">
 		<script>
-			var script = document.createElement('script');
-			script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-			script.setAttribute('crossorigin', 'anonymous');
-			script.async = true;
-			script.onload = function () {
-				var adsbygoogle = window.adsbygoogle || [];
-				Array.from(document.querySelectorAll('ins.adsbygoogle')).forEach(ins => {
-					var adsid = ins.getAttribute('data-ad-slot'); //nullable
-					if (adsid) {
-						adsbygoogle.push({ google_ad_client: 'ca-pub-2188063137129806' });
-						console.log('[adsense][ins]', adsid);
-					}
-				});
-			};
-			var target = document.getElementsByTagName('script')[0];
-			target.parentNode.insertBefore(script, target);
-		</script>
-		<script>
+			// overlay progress
 			(function () {
 				function id(v) {
 					return document.getElementById(v);
@@ -207,12 +190,10 @@
 							<a class="nav-link waves-effect waves-light" href="/">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link waves-effect waves-light" href="//web-manajemen.blogspot.com/p/privacy.html"
-								>Privacy</a
-							>
+							<a class="nav-link waves-effect waves-light" href="/p/privacy.html">Privacy</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link waves-effect waves-light" href="//web-manajemen.blogspot.com/p/tos.html">Terms</a>
+							<a class="nav-link waves-effect waves-light" href="/p/tos.html">Terms</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a
@@ -568,123 +549,35 @@
 		<script src="https://storage.googleapis.com/feednami-static/js/feednami-client-v1.0.1.js"></script>
 
 		<script type="text/javascript">
-			var postTitle = new Array();
-			var postUrl = new Array();
-			var postMp3 = new Array();
-			var postDate = new Array();
-			var postYear = new Array();
-			var postMonth = new Array();
-			var postYearMonth = new Array();
-			var postYearMonth2 = new Array();
-			var postTanggal = new Array();
-			var postLabels = new Array();
-			var postBaru = new Array();
-			var sortBy = 'titleasc';
-			var tocLoaded = false;
-			var numChars = 250;
-			var postFilter = '';
-			var numberfeed = 0;
-			var imageDisplayToc = new Array();
-			var month2 = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-			var no_image =
-				'https://res.cloudinary.com/dimaslanjaka/image/fetch/https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';
-			function loadtoc(a) {
-				function b() {
-					if ('entry' in a.feed) {
-						var d = a.feed.entry.length;
-						numberfeed = d;
-						ii = 0;
-						for (var h = 0; h < d; h++) {
-							var m = a.feed.entry[h];
-							var u;
-							var n = m;
-							try {
-								u = m.media$thumbnail.url;
-							} catch (error) {
-								var ss = m.content.$t,
-									sa = ss.indexOf('<img'),
-									sb = ss.indexOf('src="', sa),
-									sc = ss.indexOf('"', sb + 5),
-									sd = ss.substr(sb + 5, sc - sb - 5),
-									u = -1 != sa && -1 != sb && -1 != sc && '' != sd ? sd : no_image;
-							}
-							imageDisplayToc.push(u);
-							var e = m.title.$t;
-							var l = m.published.$t.substring(0, 10);
-							var p = m.published.$t.substring(5, 7);
-							var g = m.published.$t.substring(8, 10);
-							var n = month2[parseInt(p, 10) - 1] + ' ' + m.published.$t.substring(0, 4);
-							var c = '/' + m.published.$t.substring(0, 4) + '_' + p + '_01_archive.html';
-							var j;
-							for (var f = 0; f < m.link.length; f++) {
-								if (m.link[f].rel == 'alternate') {
-									j = m.link[f].href;
-									break;
-								}
-							}
-							var o = '';
-							for (var f = 0; f < m.link.length; f++) {
-								if (m.link[f].rel == 'enclosure') {
-									o = m.link[f].href;
-									break;
-								}
-							}
-							// imageDisplayToc.push(u);
-							postTitle.push(e);
-							postDate.push(l);
-							postUrl.push(j);
-							postYearMonth.push(n);
-							postYearMonth2.push(c);
-							postTanggal.push(g);
-						}
+			document.addEventListener('DOMContentLoaded', function (event) {
+				feednami.loadGoogleFormat(encodeURI('https://www.webmanajemen.com/rss.xml'), function (result) {
+					if (result.error) {
+						console.log(result.error);
+					} else {
+						//createCarouselList(result.feed.entries.slice(0, 5));
+						//createFeedList(result.feed.entries.slice(0, 20));
+						const elements = result.feed.entries.slice(0, 9);
+						const list = [];
+						$(elements).each(function (index, element) {
+							//console.log(element);
+							list.push(`
+							<div class="col-lg-4 col-12 mb-2">
+								<div class="card" style="min-height: 350px;">
+									<div class="card-body">
+										<h2>${element.title}</h2>
+										<p class="m-2">${element.categories.map(str => '<span class="mr-1">' + str + '</span>')}</p>
+										<p class="card-text" style="height: 100%">${element.content}</p>
+										<a href='${element.link}'>${element.title}</a>
+									</div>
+								</div>
+							</div>
+							`);
+						});
+						$('#recent').append(`<div class="row">${list.join('\n')}</div>`);
 					}
-				}
-				b();
-				displayToc2();
-				//document.write('<br/><a href="http://feeds2.feedburner.com/YourFeed" style="font-size: 11px; text-decoration:none; color: #616469;">Subscribe to Our RSS Feed and Get all the updates On the Fly</a></br/>')
-			}
-
-			function displayToc2() {
-				var a = 0;
-				var b = 0;
-				var htmlx = '';
-				while (b < postTitle.length) {
-					temp1 = postYearMonth[b];
-					firsti = a;
-					do {
-						var x =
-							'<div class="col-md-4"><div class="card mb-3"><img onerror="imgError(this);" class="card-img-top img-thumbnail" src="' +
-							imageDisplayToc[a] +
-							'" /><div class="card-body"><p class="card-text"><small>[<a href="' +
-							postYearMonth2[b] +
-							'">' +
-							postTanggal[a] +
-							' ' +
-							temp1 +
-							'</a> ]</small> <a href="' +
-							postUrl[a] +
-							'">' +
-							postTitle[a] +
-							'</a></p></div></div></div>';
-						htmlx += x;
-						//document.write(x);
-						a = a + 1;
-					} while (postYearMonth[a] == temp1);
-					b = a;
-					if (b > postTitle.length) {
-						break;
-					}
-				}
-				document.getElementById('recent').innerHTML = '<div class="row">' + htmlx + '</div>';
-				// return html
-			}
-			function imgError(image) {
-				image.onerror = '';
-				image.src = no_image;
-				return true;
-			}
+				});
+			});
 		</script>
-		<script src="https://web-manajemen.blogspot.com/feeds/posts/default?redirect=false&amp;max-results=11&amp;alt=json-in-script&amp;callback=loadtoc"></script>
 
 		<!--script src="//www.webmanajemen.com/r-ads.js"></script-->
 		<style>
@@ -699,5 +592,31 @@
 				margin-right: auto;
 			}
 		</style>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function (event) {
+				// google adsense
+				const script = document.createElement('script');
+				script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+				script.setAttribute('crossorigin', 'anonymous');
+				script.async = true;
+				script.onload = function () {
+					Array.from(document.querySelectorAll('ins.adsbygoogle')).forEach(ins => {
+						// return when adsense already rendered
+						if (ins.innerHTML.trim().length > 0) return;
+
+						const slot = ins.getAttribute('data-ad-slot');
+						const pub = ins.getAttribute('data-ad-client');
+						if (slot) {
+							const adsbygoogle = window.adsbygoogle || [];
+							adsbygoogle.push({ google_ad_client: pub });
+							console.log('[adsense][ins]', { slot, pub });
+						}
+					});
+				};
+				const target = document.getElementsByTagName('script')[0];
+				target.parentNode.insertBefore(script, target);
+			});
+		</script>
 	</body>
 </html>
