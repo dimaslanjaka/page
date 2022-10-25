@@ -478,13 +478,14 @@
 			<section id="ads-result" class="text-center">
 				<div class="row">
 					<div class="col-md-12 border">
+						<!-- text only-->
 						<ins
 							class="adsbygoogle"
 							style="display: block"
 							data-ad-format="fluid"
-							data-ad-layout-key="-fb+5w+4e-db+86"
-							data-ad-client="ca-pub-1165447249910969"
-							data-ad-slot="9368288283"
+							data-ad-layout-key="-gw-3+1f-3d+2z"
+							data-ad-client="ca-pub-2188063137129806"
+							data-ad-slot="6979059162"
 						></ins>
 					</div>
 					<div class="col-md-4 border">
@@ -514,18 +515,17 @@
 					</div>
 					<div class="col-md-12 border">
 						<ins
-							class="adsbygoogle responsive"
+							class="adsbygoogle"
 							style="display: block"
-							data-ad-client="ca-pub-1165447249910969"
-							data-ad-slot="2600604346"
-							data-ad-format="auto"
-							data-full-width-responsive="true"
+							data-ad-format="autorelaxed"
+							data-ad-client="ca-pub-2188063137129806"
+							data-ad-slot="5041245242"
 						></ins>
 					</div>
 				</div>
 			</section>
 
-			<section id="recent"></section>
+			<section id="recent" class="mt-2 mb-2"></section>
 		</main>
 
 		<footer id="colophon" class="site-footer" role="contentinfo">
@@ -536,18 +536,8 @@
 						<span>
 							<small
 								>This site is protected by reCAPTCHA and the Google
-								<a
-									href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9wb2xpY2llcy5nb29nbGUuY29tL3ByaXZhY3k="
-									rel="nofollow noopener noreferer"
-									>Privacy Policy</a
-								>
-								and
-								<a
-									href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9wb2xpY2llcy5nb29nbGUuY29tL3Rlcm1z"
-									rel="nofollow noopener noreferer"
-									>Terms of Service</a
-								>
-								apply.
+								<a href="https://policies.google.com/privacy" rel="nofollow">Privacy Policy</a> and
+								<a href="https://policies.google.com/terms" rel="nofollow">Terms of Service</a> apply.
 							</small>
 						</span>
 					</div>
@@ -557,6 +547,7 @@
 			<!--  .container -->
 		</footer>
 
+		<!-- Main JS-->
 		<script src="https://www.webmanajemen.com/Web-Manajemen/js/compiled.core.js"></script>
 		<script src="https://www.webmanajemen.com/Web-Manajemen/js/compiled.gzip.js"></script>
 		<script src="https://www.webmanajemen.com/Web-Manajemen/js/compiled.min.js"></script>
@@ -572,6 +563,9 @@
 		<script async="" src="assets/js/analystic.js?hash=GEN-HASH"></script>
 		<!-- page script -->
 		<script async="" src="assets/js/safelink.js?hash=GEN-HASH"></script>
+		<!--RSS Reader-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://storage.googleapis.com/feednami-static/js/feednami-client-v1.0.1.js"></script>
 
 		<script type="text/javascript">
 			var postTitle = new Array();
@@ -682,7 +676,7 @@
 					}
 				}
 				document.getElementById('recent').innerHTML = '<div class="row">' + htmlx + '</div>';
-				//eturn htmlx;
+				// return html
 			}
 			function imgError(image) {
 				image.onerror = '';
@@ -693,5 +687,17 @@
 		<script src="https://web-manajemen.blogspot.com/feeds/posts/default?redirect=false&amp;max-results=11&amp;alt=json-in-script&amp;callback=loadtoc"></script>
 
 		<!--script src="//www.webmanajemen.com/r-ads.js"></script-->
+		<style>
+			.adsbygoogle {
+				display: block;
+				background: #fff url(//i.imgur.com/mBbv90p.png) no-repeat top right;
+				color: #303030;
+				min-height: 180px;
+				min-width: 250px;
+				text-align: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
 	</body>
 </html>
