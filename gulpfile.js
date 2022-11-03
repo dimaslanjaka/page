@@ -1,7 +1,10 @@
+const { default: git } = require('git-command-helper');
 const gulp = require('gulp');
 const { join } = require('path');
 
-gulp.task('copy', function (done) {
+const buildDir = join(__dirname, 'build');
+
+function copy(done) {
 	const finish = () => done();
 	gulp
 		.src(
@@ -18,11 +21,19 @@ gulp.task('copy', function (done) {
 				cwd: __dirname,
 			},
 		)
-		.pipe(gulp.dest(join(__dirname, 'build')));
+		.pipe(gulp.dest(buildDir));
+
 	gulp
 		.src(['assets/**/*'], {
 			cwd: __dirname,
 		})
-		.pipe(gulp.dest(join(__dirname, 'build/assets')))
+		.pipe(gulp.dest(join(buildDir, 'assets')))
 		.once('end', finish);
+}
+
+gulp.task('pull', async function () {
+	const github = new git(buildDir);
+	await github.pull(['origin', 'gh-pages']);
 });
+
+gulp.task('copy', gulp.series('pull', copy));
