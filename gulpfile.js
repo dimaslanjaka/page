@@ -63,13 +63,13 @@ gulp.task('compile', function () {
 		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk'] })
 		.pipe(
 			through2.obj((file, _enc, next) => {
-				if (file.isDirectory()) return next(null, file);
-				if (file.isNull()) return next();
+				if (file.isDirectory() || file.isNull()) return next();
 				if (file.extname === '.njk') {
 					const template = nunjucks.compile(fs.readFileSync(file.path, 'utf-8'), env);
 					const render = template.render({});
 					fs.writeFileSync(file.path.replace(/.njk$/, '.html'), render);
 				}
+				next();
 			}),
 		)
 		.pipe(gulp.dest(join(__dirname, 'tmp/compile')));
