@@ -55,7 +55,6 @@ gulp.task('push', async function () {
 });
 
 gulp.task('copy', gulp.series('pull', copy));
-gulp.task('build', gulp.series('copy', 'compile', 'push'));
 
 const env = envNunjucks();
 
@@ -72,6 +71,8 @@ gulp.task('compile', function () {
 		}),
 	);
 });
+
+gulp.task('build', gulp.series('copy', 'compile', 'push'));
 
 /**
  * Env Nunjucks
