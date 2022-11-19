@@ -6,7 +6,9 @@
     "./index.ts",
     "./webpack.*.js",
     "./tsconfig.json",
-    "./package.json"
+    "./package.json",
+    "./server.js",
+    "*.njk"
   ],
   "ignore": [
     "*.test.js",

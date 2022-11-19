@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Moment Timezone Playground</title>
+  <link rel="alternate" href="https://codepen.io/dimaslanjaka/pen/LYegjaV" />
+  <link rel="canonical" href="/page/moment-timezone.html" />
+  <!-- defer bootstrap -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+  </noscript>
+  <!-- defer stylesheet -->
+  <link rel="preload" as="style" href="moment-timezone.css" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="moment-timezone.css">
+  </noscript>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
+  <script src="node_modules/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+</head>
+
+<body>
+  {% include "./moment-timezone.content.njk" %}
+</body>
+
+</html>

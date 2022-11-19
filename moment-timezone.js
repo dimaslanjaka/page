@@ -6,21 +6,24 @@ const idate = document.querySelector('input#date');
 const pattern = document.querySelector('input#pattern');
 const result = document.querySelector('#moment-result');
 
-function moment_format(datestr) {
-	/*moment.tz.add([
-		'America/Los_Angeles|PST PDT|80 70|0101|1Lzm0 1zb0 Op0',
-		'America/New_York|EST EDT|50 40|0101|1Lz50 1zb0 Op0',
-		'Asia/Jakarta',
-	]);*/
-	//moment.tz.link('America/Los_Angeles|US/Pacific|Asia/Jakarta');
+const isNumeric = str => parseFloat(str) === parseFloat(str);
 
+function moment_format(datestr) {
+	if (isNumeric(datestr)) {
+		return moment(datestr)
+			.tz('Asia/Jakarta')
+			.format(pattern.value || '');
+	}
+	if (typeof datestr === 'string') {
+		datestr = new Date(datestr);
+	}
 	return moment(datestr)
 		.tz('Asia/Jakarta')
 		.format(pattern.value || '');
 }
 
 function update() {
-	idate.value = new Date().getTime();
+	idate.value = new Date().toString();
 	const formatted = moment_format(idate.value);
 	result.textContent = formatted;
 }
