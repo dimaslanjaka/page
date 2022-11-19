@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const { join } = require('path');
 
 const buildDir = join(__dirname, 'build');
+const ignores = [buildDir, "**/node_modules/**"];
 
 function copy(done) {
 	const finish = () => done();
@@ -18,7 +19,7 @@ function copy(done) {
 				'package.json',
 			],
 			{
-				cwd: __dirname,
+				cwd: __dirname, ignore: ignores
 			},
 		)
 		.pipe(gulp.dest(buildDir));
