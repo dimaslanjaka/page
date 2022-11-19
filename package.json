@@ -28,7 +28,8 @@
   },
   "scripts": {
     "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
-    "prod": "npm install --omit=dev"
+    "prod": "npm install --omit=dev",
+    "update": "npx npm-check-updates -u"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",

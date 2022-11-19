@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const { join } = require('path');
 
 const buildDir = join(__dirname, 'build');
-const ignores = [buildDir, "**/node_modules/**"];
+const ignores = [buildDir, '**/node_modules/**'];
 
 function copy(done) {
 	const finish = () => done();
@@ -19,24 +19,27 @@ function copy(done) {
 				'package.json',
 			],
 			{
-				cwd: __dirname, ignore: ignores
+				cwd: __dirname,
+				ignore: ignores,
 			},
 		)
-		.pipe(gulp.dest(buildDir));
-
-	gulp
-		.src(['assets/**/*'], {
-			cwd: __dirname,
-		})
-		.pipe(gulp.dest(join(buildDir, 'assets')))
-		.once('end', finish);
+		.pipe(gulp.dest(buildDir))
+		.once('end', function () {
+			gulp
+				.src(['assets/**/*'], {
+					cwd: __dirname,
+				})
+				.pipe(gulp.dest(join(buildDir, 'assets')))
+				.once('end', finish);
+		});
 }
 
 gulp.task('pull', async function () {
 	const github = new git(buildDir);
-	await github.setremote('https://github.com/dimaslanjaka/page.git')
-	await github.setbranch('gh-pages')
-	await github.pull(['origin', 'gh-pages']);
+	await github.setremote('https://github.com/dimaslanjaka/page.git');
+	await github.setbranch('gh-pages');
+	//await github.pull(['origin', 'gh-pages']);
+	await github.reset('gh-pages');
 });
 
 gulp.task('copy', gulp.series('pull', copy));
