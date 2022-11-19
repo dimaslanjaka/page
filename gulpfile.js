@@ -34,7 +34,9 @@ function copy(done) {
 					cwd: __dirname,
 				})
 				.pipe(gulp.dest(join(buildDir, 'assets')))
-				.once('end', finish);
+				.once('end', function () {
+					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(finish);
+				});
 		});
 }
 
