@@ -9,12 +9,12 @@ function copy(done) {
 	gulp
 		.src(
 			[
-				'safelink.html',
-				'moment-timezone.html',
-				'index.html',
-				'bot-detect.{html,js}',
-				'cookies.html',
-				'disqus-comment.html',
+				'safelink.{html,js,css}',
+				'moment-timezone.{html,css,js}',
+				'index.{html,js,css}',
+				'bot-detect.{html,js,css}',
+				'cookies.{html,js,css}',
+				'disqus-comment.{html,js,css}',
 				'package.json',
 			],
 			{
