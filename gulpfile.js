@@ -42,4 +42,12 @@ gulp.task('pull', async function () {
 	await github.reset('gh-pages');
 });
 
+gulp.task('push', async function () {
+	const github = new git(buildDir);
+	await github.setremote('https://github.com/dimaslanjaka/page.git');
+	await github.setbranch('gh-pages');
+	await github.addAndCommit('.', 'update ' + new Date());
+	if (await github.canPush()) await github.push();
+});
+
 gulp.task('copy', gulp.series('pull', copy));
