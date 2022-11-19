@@ -75,7 +75,7 @@ gulp.task('compile', function () {
 		.pipe(gulp.dest(join(__dirname, 'tmp/compile')));
 });
 
-gulp.task('build', gulp.series('copy', 'compile', 'push'));
+gulp.task('build', gulp.series('compile', 'copy', 'push'));
 
 /**
  * Env Nunjucks
