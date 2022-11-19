@@ -33,6 +33,8 @@ function copy(done) {
 
 gulp.task('pull', async function () {
 	const github = new git(buildDir);
+	await github.setremote('https://github.com/dimaslanjaka/page.git')
+	await github.setbranch('gh-pages')
 	await github.pull(['origin', 'gh-pages']);
 });
 

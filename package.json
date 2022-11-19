@@ -30,6 +30,9 @@
     "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
     "prod": "npm install --omit=dev"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/dimaslanjaka/page.git"
+  }
 }
