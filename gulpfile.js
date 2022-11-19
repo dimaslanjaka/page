@@ -59,17 +59,20 @@ gulp.task('copy', gulp.series('pull', copy));
 const env = envNunjucks();
 
 gulp.task('compile', function () {
-	gulp.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk'] }).pipe(
-		through2.obj((file, _enc, next) => {
-			if (file.isDirectory()) return next(null, file);
-			if (file.isNull()) return next();
-			if (file.extname === '.njk') {
-				const template = nunjucks.compile(fs.readFileSync(file.path, 'utf-8'), env);
-				const render = template.render({});
-				fs.writeFileSync(file.path.replace(/.njk$/, '.html'), render);
-			}
-		}),
-	);
+	return gulp
+		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk'] })
+		.pipe(
+			through2.obj((file, _enc, next) => {
+				if (file.isDirectory()) return next(null, file);
+				if (file.isNull()) return next();
+				if (file.extname === '.njk') {
+					const template = nunjucks.compile(fs.readFileSync(file.path, 'utf-8'), env);
+					const render = template.render({});
+					fs.writeFileSync(file.path.replace(/.njk$/, '.html'), render);
+				}
+			}),
+		)
+		.pipe(gulp.dest(join(__dirname, 'tmp/compile')));
 });
 
 gulp.task('build', gulp.series('copy', 'compile', 'push'));
