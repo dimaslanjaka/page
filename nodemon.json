@@ -9,8 +9,7 @@
     "./package.json",
     "./server.js",
     "*.njk",
-    "*.html",
-    "*.js"
+    "./gulpfile.js"
   ],
   "ignore": [
     "*.test.js",
