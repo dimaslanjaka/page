@@ -1,10 +1,14 @@
 const { default: git } = require('git-command-helper');
 const gulp = require('gulp');
-const { join } = require('path');
+const { join, relative } = require('upath');
 const { encodeURL } = require('hexo-util');
 const nunjucks = require('nunjucks');
 const through2 = require('through2');
 const fs = require('fs');
+const terser = require('terser');
+const applySourceMap = require('vinyl-sourcemaps-apply');
+const terserHtml = require('html-minifier-terser');
+const CleanCSS = require('clean-css');
 
 const buildDir = join(__dirname, 'build');
 const ignores = [buildDir, '**/node_modules/**'];
@@ -27,17 +31,111 @@ function copy(done) {
 				ignore: ignores,
 			},
 		)
+		.pipe(minifyPlugin())
 		.pipe(gulp.dest(buildDir))
 		.once('end', function () {
 			gulp
 				.src(['assets/**/*'], {
 					cwd: __dirname,
 				})
+				.pipe(minifyPlugin())
 				.pipe(gulp.dest(join(buildDir, 'assets')))
 				.once('end', function () {
 					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(finish);
 				});
 		});
+}
+
+/**
+ * Minify Assets Plugin
+ * @param {import('./gulpfile').MinifyOptions} options
+ * @returns
+ */
+function minifyPlugin(options = {}) {
+	return through2.obj(async function (chunk, _, next) {
+		if (chunk.isStream() || chunk.isNull() || chunk.isDirectory()) {
+			return next();
+		}
+		const chunkString = chunk.contents.toString('utf8');
+		if (chunk.extname === '.js') {
+			try {
+				const terserOptions = options.js || {};
+				// SourceMap configuration
+				if (chunk.sourceMap) {
+					if (!terserOptions.sourceMap || terserOptions.sourceMap === true) {
+						terserOptions.sourceMap = {};
+					}
+
+					terserOptions.sourceMap.filename = chunk.sourceMap.file;
+				}
+				let build = {};
+
+				// gulp version compatibility
+				if ('sourceMap' in chunk && 'file' in chunk.sourceMap) {
+					build[chunk.sourceMap.file] = chunkString;
+				} else {
+					build = chunkString;
+				}
+
+				// Compressed code (terser5 is asynchronous, terser4 is synchronous)
+				const minifyOutput = await terser.minify(build, terserOptions);
+
+				// Buffer
+				if (minifyOutput.code) {
+					chunk.contents = 'from' in Buffer ? Buffer.from(minifyOutput.code) : new Buffer(minifyOutput.code);
+				}
+
+				// Output source-map
+				if (chunk.sourceMap && minifyOutput.map) {
+					applySourceMap(chunk, minifyOutput.map);
+				}
+			} catch (e) {
+				console.trace(e);
+			}
+		} else if (chunk.extname === '.html') {
+			const terserOptions = options.html || {
+				collapseWhitespace: true,
+				html5: true,
+				removeComments: true,
+				keepClosingSlash: true,
+				minifyCSS: true,
+				minifyJS: true,
+				preserveLineBreaks: true,
+				minifyURLs: true,
+			};
+
+			const minifyOutput = await terserHtml.minify(chunkString, terserOptions);
+
+			// Buffer
+			if (typeof minifyOutput === 'string') {
+				chunk.contents = 'from' in Buffer ? Buffer.from(minifyOutput) : new Buffer(minifyOutput);
+			} else {
+				console.log('[HTML] cannot minify', chunk.relative);
+			}
+		} else if (chunk.extname === '.css') {
+			const content = {
+				[chunk.path]: { styles: chunkString },
+			};
+			const minifyOutput = await new CleanCSS(options.css || {}).minify(content);
+			// Buffer
+			if (typeof minifyOutput.styles === 'string') {
+				chunk.contents = 'from' in Buffer ? Buffer.from(minifyOutput.styles) : new Buffer(minifyOutput.styles);
+			} else {
+				console.log('[CSS] cannot minify', chunk.relative, minifyOutput.errors);
+			}
+
+			if (minifyOutput.sourceMap) {
+				const iMap = JSON.parse(minifyOutput.sourceMap);
+				const oMap = Object.assign({}, iMap, {
+					file: relative(chunk.base, chunk.path),
+					sources: iMap.sources.map(mapSrc => relative(chunk.base, mapSrc)),
+				});
+				applySourceMap(chunk, oMap);
+			}
+		}
+		this.push(chunk);
+		next(null, chunk);
+	});
 }
 
 gulp.task('pull', async function () {
@@ -56,7 +154,7 @@ gulp.task('push', async function () {
 	if (await github.canPush()) await github.push();
 });
 
-gulp.task('copy', gulp.series('pull', copy));
+gulp.task('copy', copy);
 
 const env = envNunjucks();
 
@@ -77,7 +175,7 @@ gulp.task('compile', function () {
 		.pipe(gulp.dest(join(__dirname, 'tmp/compile')));
 });
 
-gulp.task('build', gulp.series('compile', 'copy', 'push'));
+gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
 
 /**
  * Env Nunjucks

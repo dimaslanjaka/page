@@ -8,7 +8,9 @@
     "./tsconfig.json",
     "./package.json",
     "./server.js",
-    "*.njk"
+    "*.njk",
+    "*.html",
+    "*.js"
   ],
   "ignore": [
     "*.test.js",
@@ -19,7 +21,7 @@
     "tests",
     "tmp",
     "temp",
-    "./src/tmp"
+    "**/node_modules/**"
   ],
   "delay": 3000,
   "ext": "ts,js",
