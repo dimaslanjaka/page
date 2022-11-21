@@ -159,8 +159,8 @@ gulp.task('copy', copy);
 
 const env = envNunjucks();
 
-gulp.task('compile', function () {
-	return gulp
+gulp.task('compile', function (done) {
+	gulp
 		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', '_*.njk'] })
 		.pipe(
 			through2.obj((file, _enc, next) => {
@@ -196,7 +196,7 @@ gulp.task('compile', function () {
 				title: 'Index Page',
 				content: `<ul>` + list + `</ul>`,
 			});
-			fs.writeFileSync(join(__dirname, 'index.html'), render);
+			fs.writeFile(join(__dirname, 'index.html'), render, () => done(null));
 		});
 });
 
