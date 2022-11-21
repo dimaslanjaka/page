@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang or 'en' }}">
 
 <head>
 	<meta charset="UTF-8" />
@@ -8,6 +8,11 @@
 	<title>{% block title %}{% endblock %}</title>
 	<link href="https://www.webmanajemen.com/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<link rel="icon" type="image/png" sizes="32x32" href="https://www.webmanajemen.com/favicon-32x32.png" />
+
+	{% if canonical %}
+	<link rel="canonical" href="{{ canonical }}" />
+	<link rel="alternate" href="{{ canonical }}" hreflang="x-default" />
+	{% endif %}
 
 	<link rel="manifest" href="https://www.webmanajemen.com/manifest.json" />
 	<meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />

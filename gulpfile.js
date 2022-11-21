@@ -159,8 +159,6 @@ gulp.task('push', async function () {
 	if (await github.canPush()) await github.push();
 });
 
-gulp.task('copy', copy);
-
 const env = envNunjucks();
 
 gulp.task('compile', function (done) {
@@ -237,7 +235,9 @@ gulp.task('assign-cache', async function (done) {
 		});
 });
 
-gulp.task('build', gulp.series('compile', 'pull', 'copy', 'assign-cache', 'push'));
+gulp.task('copy', gulp.series(copy, 'assign-cache'));
+gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
+gulp.task('default', gulp.series('build'));
 
 /**
  * Env Nunjucks
