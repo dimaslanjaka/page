@@ -121,22 +121,47 @@ var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.r
 // Blink engine detection
 var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-if (typeof jQuery !== 'undefined') {
-	$.ajax({
-		url: 'https://ipapi.co/json/',
-		method: 'get',
-		complete: function (dataip) {
-			if (dataip.responseJSON) {
-				IP = dataip.responseJSON;
-				setDataUser(IP);
-			}
-		},
-	});
-} else {
-	fetch('https://ipapi.co/json/')
-		.then(response => response.json())
+const cloudflare = function () {
+	fetch('https://www.cloudflare.com/cdn-cgi/trace')
+		.then(response => response.text())
+		.then(data => {
+			const userData = data
+				.split('\n')
+				.map(str => {
+					const spl = str.split('=');
+					const key = spl[0];
+					const value = spl[1];
+					//console.log(key, value);
+					if (key.trim().length > 0)
+						return {
+							[key]: value,
+						};
+				})
+				.filter(str => typeof str !== 'undefined')
+				.reduce((prev, next) => ({ ...prev, ...next }), {});
+			return userData;
+		})
 		.then(setDataUser);
-}
+};
+
+const ipApi = function () {
+	if (typeof jQuery !== 'undefined') {
+		$.ajax({
+			url: 'https://ipapi.co/json/',
+			method: 'get',
+			complete: function (dataip) {
+				if (dataip.responseJSON) {
+					IP = dataip.responseJSON;
+					setDataUser(IP);
+				}
+			},
+		});
+	} else {
+		fetch('https://ipapi.co/json/')
+			.then(response => response.json())
+			.then(setDataUser);
+	}
+};
 
 function setDataUser(IP) {
 	data_analystic = {
