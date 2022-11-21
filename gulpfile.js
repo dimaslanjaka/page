@@ -41,7 +41,9 @@ function copy(done) {
 				.pipe(minifyPlugin())
 				.pipe(gulp.dest(join(buildDir, 'assets')))
 				.once('end', function () {
-					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(finish);
+					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
+						fs.writeFile(join(buildDir, '.nojekyll'), '', () => finish());
+					});
 				});
 		});
 }
@@ -101,7 +103,6 @@ function minifyPlugin(options = {}) {
 				minifyCSS: true,
 				minifyJS: true,
 				preserveLineBreaks: true,
-				minifyURLs: true,
 			};
 
 			const minifyOutput = await terserHtml.minify(chunkString, terserOptions);

@@ -28,6 +28,7 @@ const bs = browserSync.create().init({
 app.use(require('connect-browser-sync')(bs));
 
 app.use(express.static(__dirname));
+app.use('/page', express.static(__dirname));
 
 app.listen(4000, function () {
 	console.log('http://localhost:4000');
