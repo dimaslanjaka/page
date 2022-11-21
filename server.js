@@ -5,11 +5,24 @@ const _fs = require('fs');
 const _path = require('path');
 require('./gulpfile');
 
-GulpClient.series('compile')(function () {
+const compileNJK = GulpClient.series('compile');
+
+compileNJK(function () {
 	const app = express();
 	const bs = browserSync.create().init({
 		logSnippet: false,
-		files: __dirname,
+		files: [
+			__dirname,
+			{
+				match: ['**/*.njk'],
+				fn: function (event, file) {
+					/** Custom event handler **/
+					console.log('[browser-sync]', event, file);
+					compileNJK(null);
+				},
+			},
+		],
+		cors: true,
 	});
 	app.use(require('connect-browser-sync')(bs));
 
