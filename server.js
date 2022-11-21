@@ -10,7 +10,10 @@ const env = envNunjucks();
 GulpClient.series('compile')(null);
 
 // build index.html
-const files = readdirSync(__dirname).filter(filename => filename.endsWith('.html'));
+const files = readdirSync(__dirname)
+	.concat(readdirSync(join(__dirname, 'js')))
+	.concat(readdirSync(join(__dirname, 'auto-table-of-contents')))
+	.filter(filename => filename.endsWith('.html'));
 const list = files.map(file => `<li><a href='${file}'>${file}</a></li>`).join('\n');
 const template = nunjucks.compile(readFileSync(join(__dirname, 'server.njk'), 'utf-8'), env);
 const render = template.render({
