@@ -9,9 +9,10 @@ const terser = require('terser');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
+const { default: gulpDom } = require('gulp-dom');
 
 const buildDir = join(__dirname, 'build');
-const ignores = [buildDir, '**/node_modules/**'];
+const ignores = [buildDir, '**/node_modules/**', '**/tmp/**', '**/vendor/**'];
 
 function copy(done) {
 	const finish = () => done();
@@ -198,6 +199,20 @@ gulp.task('compile', function (done) {
 			});
 			fs.writeFile(join(__dirname, 'index.html'), render, () => done(null));
 		});
+});
+
+gulp.task('assign-cache', async function () {
+	const github = new git(__dirname);
+	const commit = await github.latestCommit();
+
+	return gulp
+		.src(['**/*.{html,htm}'], { cwd: buildDir, ignore: ignores })
+		.pipe(
+			gulpDom(function () {
+				//
+			}),
+		)
+		.pipe(gulp.dest(buildDir));
 });
 
 gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
