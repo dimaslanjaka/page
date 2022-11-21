@@ -9,7 +9,11 @@ const terser = require('terser');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
-
+/**
+ * Task running indicators
+ * @type {Record<string, boolean>}
+ */
+const indicators = {};
 const buildDir = join(__dirname, 'build');
 const ignores = [buildDir, '**/node_modules/**', '**/tmp/**', '**/vendor/**'];
 
@@ -160,6 +164,8 @@ gulp.task('copy', copy);
 const env = envNunjucks();
 
 gulp.task('compile', function (done) {
+	if (indicators.compile) return done();
+	indicators.compile = true;
 	gulp
 		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', '_*.njk'] })
 		.pipe(
@@ -196,11 +202,16 @@ gulp.task('compile', function (done) {
 				title: 'Index Page',
 				content: `<ul>` + list + `</ul>`,
 			});
-			fs.writeFile(join(__dirname, 'index.html'), render, () => done(null));
+			fs.writeFile(join(__dirname, 'index.html'), render, () => {
+				indicators.compile = false;
+				done(null);
+			});
 		});
 });
 
-gulp.task('assign-cache', async function () {
+gulp.task('assign-cache', async function (done) {
+	if (indicators.ac) return done();
+	indicators.ac = true;
 	const github = new git(__dirname);
 	const commit = await github.latestCommit();
 
@@ -220,7 +231,10 @@ gulp.task('assign-cache', async function () {
 				callback(null, file);
 			}),
 		)
-		.pipe(gulp.dest(buildDir));
+		.pipe(gulp.dest(buildDir))
+		.once('end', function () {
+			indicators.ac = false;
+		});
 });
 
 gulp.task('build', gulp.series('compile', 'pull', 'copy', 'assign-cache', 'push'));
