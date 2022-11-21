@@ -1,7 +1,7 @@
 const express = require('express');
 const GulpClient = require('gulp');
 const browserSync = require('browser-sync');
-const { readdirSync, readFileSync, writeFileSync } = require('fs');
+const { readdirSync, readFileSync, writeFileSync, statSync } = require('fs');
 const { envNunjucks } = require('./gulpfile');
 const nunjucks = require('nunjucks');
 const { join } = require('path');
@@ -11,14 +11,23 @@ GulpClient.series('compile')(null);
 
 // build index.html
 const files = readdirSync(__dirname)
-	.concat(readdirSync(join(__dirname, 'js')))
-	.concat(readdirSync(join(__dirname, 'auto-table-of-contents')))
-	.filter(filename => filename.endsWith('.html'));
-const list = files.map(file => `<li><a href='${file}'>${file}</a></li>`).join('\n');
-const template = nunjucks.compile(readFileSync(join(__dirname, 'server.njk'), 'utf-8'), env);
+	.map(filename => {
+		return {
+			filename,
+			absolutePath: join(__dirname, filename),
+		};
+	})
+	.filter(o => {
+		const stat = statSync(o.absolutePath);
+		if (stat.isDirectory()) return false;
+
+		return o.filename.endsWith('.html');
+	});
+const list = files.map(file => `<li><a href='${file.filename}'>${file.filename}</a></li>`).join('\n');
+const template = nunjucks.compile(readFileSync(join(__dirname, '_layout.njk'), 'utf-8'), env);
 const render = template.render({
 	title: 'Index Page',
-	contents: `<ul>` + list + `</ul>`,
+	content: `<ul>` + list + `</ul>`,
 });
 
 writeFileSync(join(__dirname, 'index.html'), render);

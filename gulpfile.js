@@ -161,7 +161,7 @@ const env = envNunjucks();
 
 gulp.task('compile', function () {
 	return gulp
-		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', 'server.njk'] })
+		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', '_*.njk'] })
 		.pipe(
 			through2.obj((file, _enc, next) => {
 				if (file.isDirectory() || file.isNull()) return next();
