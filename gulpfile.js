@@ -173,7 +173,31 @@ gulp.task('compile', function () {
 				next();
 			}),
 		)
-		.pipe(gulp.dest(join(__dirname, 'tmp/compile')));
+		.pipe(gulp.dest(join(__dirname, 'tmp/compile')))
+		.once('end', function () {
+			// build index.html
+			const files = fs
+				.readdirSync(__dirname)
+				.map(filename => {
+					return {
+						filename,
+						absolutePath: join(__dirname, filename),
+					};
+				})
+				.filter(o => {
+					const stat = fs.statSync(o.absolutePath);
+					if (stat.isDirectory()) return false;
+
+					return o.filename.endsWith('.html');
+				});
+			const list = files.map(file => `<li><a href='${file.filename}'>${file.filename}</a></li>`).join('\n');
+			const template = nunjucks.compile(fs.readFileSync(join(__dirname, 'index.njk'), 'utf-8'), env);
+			const render = template.render({
+				title: 'Index Page',
+				content: `<ul>` + list + `</ul>`,
+			});
+			fs.writeFileSync(join(__dirname, 'index.html'), render);
+		});
 });
 
 gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
