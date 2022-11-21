@@ -9,7 +9,6 @@ const terser = require('terser');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
-const { default: gulpDom } = require('gulp-dom');
 
 const buildDir = join(__dirname, 'build');
 const ignores = [buildDir, '**/node_modules/**', '**/tmp/**', '**/vendor/**'];
@@ -208,14 +207,18 @@ gulp.task('assign-cache', async function () {
 	return gulp
 		.src(['**/*.{html,htm}'], { cwd: buildDir, ignore: ignores })
 		.pipe(
-			gulpDom(function () {
-				//
+			through2.obj(function (file, _enc, callback) {
+				if (file.isNull()) return callback();
+				if (file.isBuffer()) {
+					file.contents = Buffer.from(file.contents.toString('utf-8').replace('?hash=GEN-HASH', '?hash=' + commit));
+				}
+				callback(null, file);
 			}),
 		)
 		.pipe(gulp.dest(buildDir));
 });
 
-gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
+gulp.task('build', gulp.series('compile', 'pull', 'copy', 'assign-cache', 'push'));
 
 /**
  * Env Nunjucks
