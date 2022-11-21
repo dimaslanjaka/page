@@ -210,7 +210,12 @@ gulp.task('assign-cache', async function () {
 			through2.obj(function (file, _enc, callback) {
 				if (file.isNull()) return callback();
 				if (file.isBuffer()) {
-					file.contents = Buffer.from(file.contents.toString('utf-8').replace('?hash=GEN-HASH', '?hash=' + commit));
+					let content = file.contents.toString('utf-8');
+					const toMatch = '?hash=GEN-HASH';
+					while (content.includes(toMatch)) {
+						content = content.replace(toMatch, '?hash=' + commit);
+					}
+					file.contents = Buffer.from(content);
 				}
 				callback(null, file);
 			}),
