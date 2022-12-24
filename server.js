@@ -4,7 +4,7 @@ const browserSync = require('browser-sync');
 const _fs = require('fs');
 const _path = require('path');
 require('./gulpfile');
-
+const inject = require('connect-browser-sync');
 const compileNJK = GulpClient.series('compile');
 
 compileNJK(function () {
@@ -24,7 +24,8 @@ compileNJK(function () {
 		],
 		cors: true,
 	});
-	app.use(require('connect-browser-sync')(bs));
+
+	app.use(inject(bs));
 
 	app.use(express.static(__dirname));
 	app.use('/page', express.static(__dirname));

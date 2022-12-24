@@ -45,6 +45,10 @@ function copy(done) {
 				.pipe(minifyPlugin())
 				.pipe(gulp.dest(join(buildDir, 'assets')))
 				.once('end', function () {
+					/*if (fs.existsSync(join(buildDir, 'node_modules'))) {
+						fs.rmSync(join(buildDir, 'node_modules'), { force: true, recursive: true });
+					}*/
+					console.log('installing packages...');
 					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
 						fs.writeFile(join(buildDir, '.nojekyll'), '', () => finish());
 					});
@@ -147,8 +151,8 @@ gulp.task('pull', async function () {
 	const github = new git(buildDir);
 	await github.setremote('https://github.com/dimaslanjaka/page.git');
 	await github.setbranch('gh-pages');
-	//await github.pull(['origin', 'gh-pages']);
-	await github.reset('gh-pages');
+	await github.pull(['origin', 'gh-pages', '-X', 'theirs']);
+	//await github.reset('gh-pages');
 });
 
 gulp.task('push', async function () {

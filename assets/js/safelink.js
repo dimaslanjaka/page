@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* global swal, gtag, CryptoJS */
 var H = (function () {
 	return {
 		enc: function (msg_e = '', key = 'dimaslanjaka') {
@@ -51,14 +53,14 @@ $(function () {
 	countdown(function () {
 		var safq = getQuery('url');
 		if (!safq) {
-			var safq = getQuery('u');
+			safq = getQuery('u');
 			if (!safq) {
-				var safq = getQuery('o');
+				safq = getQuery('o');
 			}
 		}
 
 		if (safq) {
-			var safq = decodeURIComponent(safq).replace(/\s+/g, '+');
+			safq = decodeURIComponent(safq).replace(/\s+/g, '+');
 		}
 
 		var saf = false;
@@ -78,7 +80,7 @@ $(function () {
 		log.saf = saf;
 		console.log(log);
 		if (saf) {
-			var saf = decodeURIComponent(saf);
+			saf = decodeURIComponent(saf);
 			var l = parse_url(saf);
 			var link_ =
 				'<h4>Your Link Here</h4> <i class="fas fa-arrow-circle-right mr-1"></i> <a href="' +
@@ -147,6 +149,7 @@ $(function () {
 	}
 });
 
+/*
 function download_script(url, success = false) {
 	var script = document.createElement('script');
 	script.src = url;
@@ -164,6 +167,7 @@ function download_script(url, success = false) {
 	}
 	head.appendChild(script);
 }
+*/
 
 function countdown(callback) {
 	var bar = document.getElementById('progress'),
@@ -193,7 +197,7 @@ function isB64(str) {
 		return null;
 	}
 	var notBase64 = /[^A-Z0-9+\/=]/i;
-	var rg = '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$';
+	//var rg = '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$';
 	var len = str.length;
 	if (!len || len % 4 !== 0 || notBase64.test(str) || !b64DecodeUnicode(str)) {
 		return false;
@@ -236,11 +240,11 @@ function getQuery(name, url = false) {
 	}
 	var parsed = parse_url(url),
 		queries = parsed.search.replace(/^\?/g, '');
-	var url = parsed.protocol + '://' + parsed.host + '/' + parsed.pathname + '?' + queries;
+	url = parsed.protocol + '://' + parsed.host + '/' + parsed.pathname + '?' + queries;
 	if (parsed.hash) {
 		url += '#' + parsed.hash;
 	}
-	var params = new URLSearchParams(queries);
+	//var params = new URLSearchParams(queries);
 
 	name = name.replace(/[\[\]]/g, '\\$&');
 	var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
@@ -258,7 +262,7 @@ function parse_url(href) {
 	return l;
 }
 function isURL(str) {
-	regexp =
+	const regexp =
 		/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
 	if (regexp.test(str) && str.match(/^(https?|ftp)\:?/g)) {
 		return true;
