@@ -216,6 +216,7 @@ gulp.task('compile', function (done) {
 		});
 });
 
+// asign cache
 gulp.task('assign-cache', async function (done) {
 	if (indicators.ac) return done();
 	indicators.ac = true;
@@ -241,6 +242,7 @@ gulp.task('assign-cache', async function (done) {
 		.pipe(gulp.dest(buildDir))
 		.once('end', function () {
 			indicators.ac = false;
+			console.log('used cache parameter', commit);
 		});
 });
 
