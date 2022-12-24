@@ -151,16 +151,21 @@ gulp.task('pull', async function () {
 	const github = new git(buildDir);
 	await github.setremote('https://github.com/dimaslanjaka/page.git');
 	await github.setbranch('gh-pages');
-	await github.pull(['origin', 'gh-pages', '-X', 'theirs']);
+	await github.pull(['-X', 'theirs']);
+	// await github.pull(['origin', 'gh-pages',]);
 	//await github.reset('gh-pages');
 });
 
 gulp.task('push', async function () {
 	const github = new git(buildDir);
-	await github.setremote('https://github.com/dimaslanjaka/page.git');
-	await github.setbranch('gh-pages');
-	await github.addAndCommit('.', 'update ' + new Date());
-	if (await github.canPush()) await github.push();
+	try {
+		await github.add('-A');
+		await github.commit('update ' + new Date());
+	} catch {
+		//
+	}
+	const canPush = await github.canPush();
+	if (canPush) await github.push();
 });
 
 const env = envNunjucks();
