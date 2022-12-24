@@ -17,8 +17,11 @@ const indicators = {};
 const buildDir = join(__dirname, 'build');
 const ignores = [buildDir, '**/node_modules/**', '**/tmp/**', '**/vendor/**'];
 
+/**
+ * copy build
+ * @param {gulp.TaskFunctionCallback} done
+ */
 function copy(done) {
-	const finish = () => done();
 	gulp
 		.src(
 			[
@@ -50,7 +53,10 @@ function copy(done) {
 					}*/
 					console.log('installing packages...');
 					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
-						fs.writeFile(join(buildDir, '.nojekyll'), '', () => finish());
+						fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
+							// assign cache
+							assignCache(done);
+						});
 					});
 				});
 		});
@@ -216,8 +222,7 @@ gulp.task('compile', function (done) {
 		});
 });
 
-// asign cache
-gulp.task('assign-cache', async function (done) {
+async function assignCache(done) {
 	if (indicators.ac) return done();
 	indicators.ac = true;
 	const github = new git(__dirname);
@@ -243,10 +248,11 @@ gulp.task('assign-cache', async function (done) {
 		.once('end', function () {
 			indicators.ac = false;
 			console.log('used cache parameter', commit);
+			if (typeof done === 'function') done();
 		});
-});
+}
 
-gulp.task('copy', gulp.series(copy, 'assign-cache'));
+gulp.task('copy', copy);
 gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
 gulp.task('default', gulp.series('build'));
 
