@@ -5,6 +5,7 @@ const _fs = require('fs');
 const _path = require('path');
 require('./gulpfile');
 const inject = require('connect-browser-sync');
+const { join } = require('path');
 const compileNJK = GulpClient.series('compile');
 
 compileNJK(function () {
@@ -29,6 +30,7 @@ compileNJK(function () {
 
 	app.use(express.static(__dirname));
 	app.use('/page', express.static(__dirname));
+	app.use('/node_modules', express.static(join(__dirname, 'node_modules')));
 
 	app.listen(4000, function () {
 		console.log('http://localhost:4000');
