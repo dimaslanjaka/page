@@ -50,6 +50,8 @@ function decodeStart() {
 			if (value_cookie) {
 				// eslint-disable-next-line no-undef
 				createCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
+			} else {
+				console.log({ value_from_query });
 			}
 		}
 	} else {

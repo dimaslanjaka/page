@@ -35,6 +35,8 @@ function copy(done) {
 				'cookies.{html,js,css}',
 				'disqus-comment.{html,js,css}',
 				'package.json',
+				// copy only css and js from safelink folder
+				'safelink/**/*.{css,js}',
 			],
 			{
 				cwd: __dirname,
