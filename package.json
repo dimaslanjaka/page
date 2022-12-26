@@ -57,10 +57,10 @@
   "scripts": {
     "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
     "prod": "npm install --omit=dev --production",
-    "update": "npx npm-check-updates -u",
+    "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && npx npm-check-updates -u",
     "serve": "node server.js",
     "build": "gulp build",
-    "postinstall": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && node postinstall.js"
+    "postinstall": "node postinstall.js"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
