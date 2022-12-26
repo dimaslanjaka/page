@@ -35,15 +35,13 @@ function copy(done) {
 				'cookies.{html,js,css}',
 				'disqus-comment.{html,js,css}',
 				'package.json',
-				// copy only css and js from safelink folder
-				'safelink/**/*.{css,js}',
 			],
 			{
 				cwd: __dirname,
 				ignore: globalIgnore.concat(
 					...[
-						// scss source (just copy css files)
-						'**/*.scss',
+						// ignore sources
+						'**/*.{scss,njk,php}',
 					],
 				),
 			},
@@ -51,16 +49,23 @@ function copy(done) {
 		.pipe(minifyPlugin())
 		.pipe(gulp.dest(buildDir))
 		.once('end', function () {
+			// copy safelink/**
+			gulp
+				.src(['safelink/**/*.{css,js}'], {
+					cwd: __dirname,
+					ignore: globalIgnore,
+				})
+				.pipe(minifyPlugin())
+				.pipe(gulp.dest(join(buildDir, 'safelink')));
+			// copy assets/**
 			gulp
 				.src(['assets/**/*'], {
 					cwd: __dirname,
+					ignore: globalIgnore,
 				})
 				.pipe(minifyPlugin())
 				.pipe(gulp.dest(join(buildDir, 'assets')))
 				.once('end', function () {
-					/*if (fs.existsSync(join(buildDir, 'node_modules'))) {
-						fs.rmSync(join(buildDir, 'node_modules'), { force: true, recursive: true });
-					}*/
 					console.log('installing packages...');
 					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
 						fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
