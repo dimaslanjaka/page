@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		window.addEventListener('scroll', decodeStart);
 	} else {
 		decodeStart();
+		document.querySelector('#debug').classList.remove('d-none');
 	}
 });
 
@@ -35,35 +36,47 @@ function decodeStart() {
 		// password aes, default = root
 		password: 'unique-password',
 	});
+
 	const parse_safelink = instance.resolveQueryUrl(location.href);
-	const value_safelink = parse_safelink.url || parse_safelink.o || parse_safelink.u;
-	console.log(value_safelink);
-	if (value_safelink) {
-		/**
-		 * @type {import('safelinkify').Nullable<string>}
-		 */
-		const redirect_to = value_safelink.o
-			? value_safelink.o.decode
-			: value_safelink.u
-			? value_safelink.u.decode
-			: value_safelink.base64
-			? value_safelink.base64.decode
-			: null;
-		if (redirect_to) {
-			replaceGoButton(redirect_to);
+	if (parse_safelink) {
+		const value_from_query = parse_safelink.url || parse_safelink.o || parse_safelink.u;
+		if (value_from_query) {
+			/**
+			 * @type {import('safelinkify').Nullable<string>}
+			 */
+			let value_cookie = value_from_query.aes.decode || value_from_query.base64.decode;
+
+			// set cookie value and refresh without parameters
+			if (value_cookie) {
+				// eslint-disable-next-line no-undef
+				createCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
+			}
 		}
+	} else {
+		// get safelink value from cookie
+		// eslint-disable-next-line no-undef
+		const value = getCookie('safelink_value');
+		replaceGoButton(value);
 	}
+}
+
+function refreshWithoutParam() {
+	location.href = location.pathname;
 }
 
 function replaceGoButton(url) {
 	const go = document.querySelector('#go');
-	const a = document.createElement('a');
-	a.href = url;
-	a.rel = 'nofollow noopener noreferer';
-	a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
-	const parse_redirect = parse_url(url);
-	a.textContent = 'goto ' + parse_redirect.host;
-	replaceWith(a, go);
+	go.setAttribute('disabled', 'true');
+	go.textContent = 'Please Wait';
+	setTimeout(() => {
+		const a = document.createElement('a');
+		a.href = url;
+		a.rel = 'nofollow noopener noreferer';
+		a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
+		const parse_redirect = parse_url(url);
+		a.textContent = 'goto ' + parse_redirect.host;
+		replaceWith(a, go);
+	}, 10000);
 }
 
 /**

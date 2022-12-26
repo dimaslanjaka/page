@@ -13,7 +13,8 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
     "requirejs": "^2.3.6",
-    "safelinkify": "https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz"
+    "safelinkify": "https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "@types/clean-css": "^4.2.6",

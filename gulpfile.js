@@ -10,6 +10,8 @@ const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
 const sass = require('node-sass');
+const config = require('./config.json');
+
 /**
  * Task running indicators
  * @type {Record<string, boolean>}
@@ -61,7 +63,11 @@ function copy(done) {
 					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
 						fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
 							// assign cache
-							assignCache(done);
+							assignCache(function () {
+								// copy safelink
+								fs.copyFileSync(join(__dirname, config.safelink), join(__dirname, 'build', 'safelink.html'));
+								done();
+							});
 						});
 					});
 				});
