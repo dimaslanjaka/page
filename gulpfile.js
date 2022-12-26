@@ -9,13 +9,14 @@ const terser = require('terser');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
+const sass = require('node-sass');
 /**
  * Task running indicators
  * @type {Record<string, boolean>}
  */
 const indicators = {};
 const buildDir = join(__dirname, 'build');
-const ignores = [buildDir, '**/node_modules/**', '**/tmp/**', '**/vendor/**'];
+const globalIgnore = [buildDir, '**/node_modules/**', '**/temp/**', '**/vendor/**', '**/tmp/**', '**/build/**'];
 
 /**
  * copy build
@@ -35,7 +36,12 @@ function copy(done) {
 			],
 			{
 				cwd: __dirname,
-				ignore: ignores,
+				ignore: globalIgnore.concat(
+					...[
+						// scss source (just copy css files)
+						'**/*.scss',
+					],
+				),
 			},
 		)
 		.pipe(minifyPlugin())
@@ -179,46 +185,72 @@ const env = envNunjucks();
 gulp.task('compile', function (done) {
 	if (indicators.compile) return done();
 	indicators.compile = true;
+
 	gulp
-		.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', '_*.njk'] })
+		.src('**/*.scss', { cwd: __dirname, ignore: [].concat(globalIgnore) })
 		.pipe(
-			through2.obj((file, _enc, next) => {
-				if (file.isDirectory() || file.isNull()) return next();
-				if (file.extname === '.njk') {
-					const template = nunjucks.compile(fs.readFileSync(file.path, 'utf-8'), env);
-					const render = template.render({});
-					fs.writeFileSync(file.path.replace(/.njk$/, '.html'), render);
+			through2.obj(function (file, _enc, next) {
+				if (file.isNull() || file.isDirectory() || file.isStream()) return next();
+				if (file.isBuffer()) {
+					const scss_content = file.contents.toString('utf-8');
+					try {
+						const result = sass.renderSync({
+							data: scss_content,
+						});
+						file.contents = result.css;
+						file.extname = '.css';
+						console.log('[scss] success compile', file.path);
+						return next(null, file);
+					} catch {
+						console.log('[scss] cannot compile', file.path);
+					}
 				}
 				next();
 			}),
 		)
-		.pipe(gulp.dest(join(__dirname, 'tmp/compile')))
-		.once('end', function () {
-			// build index.html
-			const files = fs
-				.readdirSync(__dirname)
-				.map(filename => {
-					return {
-						filename,
-						absolutePath: join(__dirname, filename),
-					};
-				})
-				.filter(o => {
-					const stat = fs.statSync(o.absolutePath);
-					if (stat.isDirectory()) return false;
+		.pipe(gulp.dest(__dirname))
+		.once('end', () => {
+			gulp
+				.src('**/*.njk', { cwd: __dirname, ignore: ['**/*.content.njk', '_*.njk'].concat(globalIgnore) })
+				.pipe(
+					through2.obj((file, _enc, next) => {
+						if (file.isDirectory() || file.isNull()) return next();
+						if (file.extname === '.njk') {
+							const template = nunjucks.compile(fs.readFileSync(file.path, 'utf-8'), env);
+							const render = template.render({});
+							fs.writeFileSync(file.path.replace(/.njk$/, '.html'), render);
+						}
+						next();
+					}),
+				)
+				.pipe(gulp.dest(join(__dirname, 'tmp/compile')))
+				.once('end', function () {
+					// build index.html
+					const files = fs
+						.readdirSync(__dirname)
+						.map(filename => {
+							return {
+								filename,
+								absolutePath: join(__dirname, filename),
+							};
+						})
+						.filter(o => {
+							const stat = fs.statSync(o.absolutePath);
+							if (stat.isDirectory()) return false;
 
-					return o.filename.endsWith('.html');
+							return o.filename.endsWith('.html');
+						});
+					const list = files.map(file => `<li><a href='${file.filename}'>${file.filename}</a></li>`).join('\n');
+					const template = nunjucks.compile(fs.readFileSync(join(__dirname, 'index.njk'), 'utf-8'), env);
+					const render = template.render({
+						title: 'Index Page',
+						content: `<ul>` + list + `</ul>`,
+					});
+					fs.writeFile(join(__dirname, 'index.html'), render, () => {
+						indicators.compile = false;
+						if (typeof done === 'function') done(null);
+					});
 				});
-			const list = files.map(file => `<li><a href='${file.filename}'>${file.filename}</a></li>`).join('\n');
-			const template = nunjucks.compile(fs.readFileSync(join(__dirname, 'index.njk'), 'utf-8'), env);
-			const render = template.render({
-				title: 'Index Page',
-				content: `<ul>` + list + `</ul>`,
-			});
-			fs.writeFile(join(__dirname, 'index.html'), render, () => {
-				indicators.compile = false;
-				done(null);
-			});
 		});
 });
 
@@ -229,7 +261,7 @@ async function assignCache(done) {
 	const commit = await github.latestCommit();
 
 	return gulp
-		.src(['**/*.{html,htm}'], { cwd: buildDir, ignore: ignores })
+		.src(['**/*.{html,htm}'], { cwd: buildDir, ignore: globalIgnore })
 		.pipe(
 			through2.obj(function (file, _enc, callback) {
 				if (file.isNull()) return callback();
@@ -291,6 +323,19 @@ function envNunjucks(app) {
 			return input.toISOString().substring(0, 10);
 		},
 	);
+	env.addGlobal('css', str => {
+		return `
+<link
+		rel="preload"
+		href="${str}"
+		as="style"
+		onload="this.onload=null;this.rel='stylesheet'"
+	/>
+	<noscript>
+		<link rel="stylesheet" href="${str}" />
+	</noscript>
+		`.trim();
+	});
 	return env;
 }
 

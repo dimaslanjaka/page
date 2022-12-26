@@ -1,8 +1,6 @@
 const express = require('express');
 const GulpClient = require('gulp');
 const browserSync = require('browser-sync');
-const _fs = require('fs');
-const _path = require('path');
 require('./gulpfile');
 const inject = require('connect-browser-sync');
 const { join } = require('path');
@@ -15,10 +13,10 @@ compileNJK(function () {
 		files: [
 			__dirname,
 			{
-				match: ['**/*.njk'],
+				match: ['**/*.njk', '**/*.scss'],
 				fn: function (event, file) {
 					/** Custom event handler **/
-					console.log('[browser-sync]', event, file);
+					console.log('[Browsersync]', event, file);
 					compileNJK(null);
 				},
 			},

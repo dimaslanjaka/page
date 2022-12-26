@@ -12,7 +12,8 @@
     "material-dashboard": "^2.1.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "safelinkify": "https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz"
   },
   "devDependencies": {
     "@types/clean-css": "^4.2.6",
@@ -21,6 +22,7 @@
     "@types/gulp": "^4.0.10",
     "@types/jquery": "^3.5.14",
     "@types/node": "^18.11.17",
+    "@types/node-sass": "^4.11.3",
     "@types/through2": "https://github.com/dimaslanjaka/nodejs-package-types/tarball/through2",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
@@ -38,6 +40,7 @@
     "gulp-dom": "https://github.com/dimaslanjaka/static-blog-generator-hexo/raw/master/packages/gulp-dom/release/gulp-dom.tgz",
     "hexo-util": "^3.0.1",
     "html-minifier-terser": "^7.1.0",
+    "node-sass": "^8.0.0",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/nodejs-package-types.tgz",
     "nodemon": "^2.0.20",
     "npm-check-updates": "^16.6.2",

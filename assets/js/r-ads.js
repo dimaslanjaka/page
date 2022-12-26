@@ -2,10 +2,46 @@
 /* eslint-disable no-global-assign */
 /* global adsbygoogle gtag */
 
-const islocalhost = location.port.length > 0;
+/** scroll to hash */
+const hash = window.location.hash.substring(1).replace(/[=]/gi, '');
+if (hash.length > 0) {
+	const el = document.querySelector(hash);
+	if (el) {
+		const distanceFromTop = el.getBoundingClientRect().top;
+		if (typeof distanceFromTop === 'number')
+			window.scrollTo({
+				top: distanceFromTop,
+				behavior: 'smooth',
+			});
+	}
+}
+
+/* remember scroll position - https://stackoverflow.com/a/65746118 */
+
+window.onbeforeunload = function () {
+	var scrollPos;
+	if (typeof window.pageYOffset != 'undefined') {
+		scrollPos = window.pageYOffset;
+	} else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
+		scrollPos = document.documentElement.scrollTop;
+	} else if (typeof document.body != 'undefined') {
+		scrollPos = document.body.scrollTop;
+	}
+	document.cookie = 'scrollTop=' + scrollPos + 'URL=' + window.location.href;
+};
+
+window.onload = function () {
+	if (document.cookie.includes(window.location.href)) {
+		if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+			var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/);
+			document.documentElement.scrollTop = parseInt(arr[1]);
+			document.body.scrollTop = parseInt(arr[1]);
+		}
+	}
+};
 
 document.addEventListener('DOMContentLoaded', function () {
-	if (!islocalhost) {
+	if (!islocalhost()) {
 		window.addEventListener('scroll', triggerAdsense);
 	} else {
 		triggerAdsense();
@@ -29,13 +65,23 @@ function triggerAdsense(_e) {
 	/**
 	 * debug on localhost
 	 */
-	const log = islocalhost
+	const log = islocalhost()
 		? console.log
 		: function (..._args) {
 				//
 		  };
 
-	log('existing ins', document.querySelectorAll('ins[class*=adsbygoogle]').length);
+	const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
+	log('existing ins', existingIns.length);
+
+	for (let i = 0; i < existingIns.length; i++) {
+		const ins = existingIns[i];
+
+		if (islocalhost()) {
+			log('apply test ad to existing ins', i + 1);
+			ins.setAttribute('data-adtest', 'on');
+		}
+	}
 
 	/**
 	 * do not show ads to these page title
@@ -44,16 +90,6 @@ function triggerAdsense(_e) {
 	if (banned.map(regex => regex.test(document.title)).some(result => result == true)) {
 		// skip showing ads from banned page
 		return;
-	}
-
-	/** Scroll to Hash */
-	const hash = window.location.hash;
-	if (hash.length > 0) {
-		const distanceFromTop = document.querySelector(hash).getBoundingClientRect().top;
-		window.scrollTo({
-			top: distanceFromTop,
-			behavior: 'smooth',
-		});
 	}
 
 	const allAds = [
@@ -119,6 +155,21 @@ function triggerAdsense(_e) {
 		}
 	}
 
+	// find element *[adsense="fill"]
+	const fixedPlacement = Array.from(document.querySelectorAll('[adsense="fill"]'));
+	if (fixedPlacement.length > 0) {
+		for (let i = 0; i < fixedPlacement.length; i++) {
+			const place = fixedPlacement[i];
+			const attr = ads.ads.shift();
+			if (attr) {
+				attr['data-ad-client'] = 'ca-pub-' + ads.pub;
+				const ins = createIns(attr);
+				log('insert ads to adsense="fill"', i + 1);
+				replaceWith(ins, place);
+			}
+		}
+	}
+
 	// find content/article wrapper
 	let findPlaces = Array.from(document.querySelectorAll('article'));
 	if (findPlaces.length === 0) {
@@ -149,29 +200,29 @@ function triggerAdsense(_e) {
 
 	log('total targeted ads places', adsPlaces.length);
 
-	if (adsPlaces.length > 0) {
-		ads.ads.forEach((attr, index) => {
-			attr['data-ad-client'] = 'ca-pub-' + ads.pub;
-			const ins = createIns(attr);
-			let nextOf = adsPlaces.shift(); // get first element and remove it from list
-			while (!nextOf) {
-				// find next when nextOf = null
-				if (adsPlaces.length > 0) {
-					// select next place
-					nextOf = adsPlaces.shift();
-				} else {
-					// if ads places empty, put to any div
-					nextOf = document.querySelector('div');
+	if (adsPlaces.length > 0 && ads.ads.length > 0) {
+		for (let i = 0; i < ads.ads.length; i++) {
+			const attr = ads.ads[i];
+			if (attr) {
+				attr['data-ad-client'] = 'ca-pub-' + ads.pub;
+				const ins = createIns(attr);
+				let nextOf = adsPlaces.shift(); // get first element and remove it from list
+				while (!nextOf) {
+					// find next when nextOf = null
+					if (adsPlaces.length > 0) {
+						// select next place
+						nextOf = adsPlaces.shift();
+					} else {
+						// if ads places empty, put to any div
+						nextOf = document.querySelector('div');
+					}
 				}
+
+				log('add banner', i + 1);
+				insertAfter(ins, nextOf);
 			}
-
-			log('add banner', index + 1);
-			insertAfter(ins, nextOf);
-		});
+		}
 	}
-
-	const allIns = Array.from(document.querySelectorAll('ins'));
-	log('total ins', allIns.length);
 
 	// create pagead
 	const script = document.createElement('script');
@@ -180,9 +231,17 @@ function triggerAdsense(_e) {
 	script.setAttribute('crossorigin', 'anonymous');
 	document.head.appendChild(script);
 
+	const allIns = Array.from(document.querySelectorAll('ins'));
+	log('total ins', allIns.length);
+
 	for (let i = 0; i < allIns.length; i++) {
 		log('apply banner', i + 1);
 		const ins = allIns[i];
+		if (!ins) continue;
+		if (!ins.getAttribute('data-ad-client')) {
+			console.log(ins);
+			continue;
+		}
 		const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
 		const anonclient = adclient.slice(0, 3) + 'xxx' + adclient.slice(adclient.length - 3);
 		const adsid = ins.getAttribute('data-ad-slot');
@@ -203,7 +262,9 @@ function triggerAdsense(_e) {
 	 * @returns
 	 */
 	function createIns(attributes) {
-		//log('creating ins', attributes);
+		if (!attributes['data-ad-client']) {
+			attributes['data-ad-client'] = 'ca-pub-' + ads.pub;
+		}
 		const ins = document.createElement('ins');
 		Object.keys(attributes).forEach(key => {
 			ins.setAttribute(key, attributes[key]);
@@ -214,7 +275,7 @@ function triggerAdsense(_e) {
 		if (!ins.classList.contains('bannerAds')) {
 			ins.classList.add('bannerAds');
 		}
-		if (islocalhost) {
+		if (islocalhost()) {
 			ins.setAttribute('data-adtest', 'on');
 		}
 		return ins;
@@ -313,4 +374,18 @@ function triggerAdsense(_e) {
 	}
 
 	/** FUNC END */
+}
+
+/**
+ * check current script running on localhost
+ * @returns
+ */
+function islocalhost() {
+	// local hostname
+	if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
+	// local network
+	if (location.hostname.startsWith('192.168.')) return true;
+	// port defined
+	if (location.port.length > 0) return true;
+	return false;
 }
