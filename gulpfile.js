@@ -204,8 +204,8 @@ gulp.task('push', async function () {
 		canPush = await github.canPush();
 		if (canPush) await github.push();
 		await delay(1000);
-		console.log(`[${counter}]`, 'Retrying...');
 		counter++;
+		console.log(`[${counter}]`, 'Retrying...');
 	}
 });
 

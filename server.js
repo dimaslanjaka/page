@@ -21,6 +21,7 @@ compileNJK(function () {
 				},
 			},
 		],
+		ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
 		cors: true,
 	});
 
