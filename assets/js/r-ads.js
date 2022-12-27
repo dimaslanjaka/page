@@ -215,7 +215,8 @@ function triggerAdsense(_e) {
 		// log('parent width banner', i + 0, ins.parentElement.offsetWidth);
 
 		if (ins.parentElement.offsetWidth === 0) {
-			// remove banner when width is 0
+			// remove banner when parent width is 0 or display: none
+			log('remove banner', i + 1);
 			ins.remove();
 		} else if (ins.innerHTML.trim().length === 0) {
 			(adsbygoogle = window.adsbygoogle || []).push({});
