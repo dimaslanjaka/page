@@ -14,17 +14,6 @@
 		  };
 
 	document.addEventListener('DOMContentLoaded', function () {
-		// scroll to top by default
-		setTimeout(() => {
-			window.scrollTo(0, 0);
-			setTimeout(() => {
-				window.scrollTo(0, document.body.scrollHeight / 2);
-				setTimeout(() => {
-					window.scrollTo(0, 0);
-				}, 100);
-			}, 300);
-		}, 800);
-
 		// check google translate
 		const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
 		const safelinkURL = 'https://www.webmanajemen.com/page/safelink.html';
@@ -41,6 +30,17 @@
 			decodeStart();
 			document.querySelector('#debug').classList.remove('d-none');
 		}
+
+		// scroll to top by default
+		setTimeout(() => {
+			window.scrollTo(0, 0);
+			setTimeout(() => {
+				window.scrollTo(0, document.body.scrollHeight / 2);
+				setTimeout(() => {
+					window.scrollTo(0, 0);
+				}, 300);
+			}, 300);
+		}, 800);
 	});
 
 	function decodeStart() {

@@ -3,6 +3,10 @@
 
 /// <reference path="./cookie.js" />
 
+/**
+ * ADSENSE FULLY AUTOMATIC
+ */
+
 document.addEventListener('DOMContentLoaded', function () {
 	if (!islocalhost()) {
 		window.addEventListener('scroll', triggerAdsense);
