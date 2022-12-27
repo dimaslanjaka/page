@@ -200,7 +200,14 @@ gulp.task('push', async function () {
 			setTimeout(_ => resolve(), millis);
 		});
 	while (!canPush) {
-		if (counter > 10) break;
+		if (counter > 10) {
+			try {
+				await github.push();
+			} catch {
+				//
+			}
+			break;
+		}
 		canPush = await github.canPush();
 		if (canPush) await github.push();
 		await delay(1000);
