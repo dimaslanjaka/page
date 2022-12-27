@@ -193,9 +193,20 @@ gulp.task('push', async function () {
 	} catch {
 		//
 	}
-	const canPush = await github.canPush();
-	console.log({ canPush });
-	if (canPush) await github.push();
+	let canPush = await github.canPush();
+	let counter = 0;
+	const delay = millis =>
+		new Promise(resolve => {
+			setTimeout(_ => resolve(), millis);
+		});
+	while (!canPush) {
+		if (counter > 10) break;
+		canPush = await github.canPush();
+		if (canPush) await github.push();
+		await delay(1000);
+		console.log(`[${counter}]`, 'Retrying...');
+		counter++;
+	}
 });
 
 const env = envNunjucks();
