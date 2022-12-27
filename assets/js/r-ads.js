@@ -103,17 +103,18 @@ function triggerAdsense(_e) {
 	/**
 	 * @type {typeof allAds[number]}
 	 */
-	let ads = allAds.find(item => item.pub === ca);
-	if (ca.length > 0 && typeof ads === 'object') {
+	let currentSlot = allAds.find(item => item.pub === ca);
+	log('total ads banner', currentSlot.ads.length);
+	if (ca.length > 0 && typeof currentSlot === 'object') {
 		log('cached pub', ca);
 	} else {
-		ads = allAds[0];
+		currentSlot = allAds[0];
 
 		if (location.pathname != '/') {
-			log('caching pub', ads.pub);
+			log('caching pub', currentSlot.pub);
 			setCookie(
 				ck,
-				ads.pub,
+				currentSlot.pub,
 				1,
 				location.pathname,
 				location.hostname,
@@ -127,9 +128,9 @@ function triggerAdsense(_e) {
 	if (fixedPlacement.length > 0) {
 		for (let i = 0; i < fixedPlacement.length; i++) {
 			const place = fixedPlacement[i];
-			const attr = ads.ads.shift();
+			const attr = currentSlot.ads.shift();
 			if (attr) {
-				attr['data-ad-client'] = 'ca-pub-' + ads.pub;
+				attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
 				const ins = createIns(attr);
 				log('insert ads to adsense="fill"', i + 1);
 				replaceWith(ins, place);
@@ -167,11 +168,11 @@ function triggerAdsense(_e) {
 
 	log('total targeted ads places', adsPlaces.length);
 
-	if (adsPlaces.length > 0 && ads.ads.length > 0) {
-		for (let i = 0; i < ads.ads.length; i++) {
-			const attr = ads.ads[i];
+	if (adsPlaces.length > 0 && currentSlot.ads.length > 0) {
+		for (let i = 0; i < currentSlot.ads.length; i++) {
+			const attr = currentSlot.ads[i];
 			if (attr) {
-				attr['data-ad-client'] = 'ca-pub-' + ads.pub;
+				attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
 				const ins = createIns(attr);
 				let nextOf = adsPlaces.shift(); // get first element and remove it from list
 				while (!nextOf) {
@@ -193,7 +194,7 @@ function triggerAdsense(_e) {
 
 	// create pagead
 	const script = document.createElement('script');
-	script.src = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${ads.pub}`;
+	script.src = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub}`;
 	script.async = true;
 	script.setAttribute('crossorigin', 'anonymous');
 	document.head.appendChild(script);
@@ -236,7 +237,7 @@ function triggerAdsense(_e) {
 	 */
 	function createIns(attributes) {
 		if (!attributes['data-ad-client']) {
-			attributes['data-ad-client'] = 'ca-pub-' + ads.pub;
+			attributes['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
 		}
 		const ins = document.createElement('ins');
 		Object.keys(attributes).forEach(key => {
