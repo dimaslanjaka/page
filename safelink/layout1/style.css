@@ -7,7 +7,7 @@ main {
   #main-content #ads-left,
   #main-content #ads-right,
   #main-content #contents {
-    border: 1px solid #c21414;
+    /* border: 1px solid rgb(194, 20, 20); */
     min-height: 600px;
     min-width: 200px; }
   #main-content #contents {
