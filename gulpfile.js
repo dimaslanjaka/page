@@ -185,11 +185,16 @@ gulp.task('push', async function () {
 	const github = new git(buildDir);
 	try {
 		await github.add('-A');
-		await github.commit('update ' + new Date());
+		const url = `${(await github.getremote()).fetch.url.replace(
+			/(.git|\/)$/,
+			'',
+		)}/commit/${await github.latestCommit()}`;
+		await github.commit('update from ' + url);
 	} catch {
 		//
 	}
 	const canPush = await github.canPush();
+	console.log({ canPush });
 	if (canPush) await github.push();
 });
 

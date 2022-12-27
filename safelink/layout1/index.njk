@@ -11,6 +11,18 @@
 <!-- defer bootstrap -->
 {{ css('/node_modules/bootstrap/dist/css/bootstrap.min.css') | safe }}
 {{ css('/page/safelink/layout1/style.css') | safe }}
+
+<script>
+	function controlHyperlink(t) {
+		if (t.href) {
+			console.log('reloading', t.href);
+			location.href = t.href;
+			location.reload();
+		}
+		console.log(t);
+	}
+</script>
+
 <!-- prettier-ignore-start -->
 {% endblock head %}
 <!-- prettier-ignore-end -->
@@ -177,16 +189,12 @@
 				<table class="table">
 					<tr>
 						<td>To Encode</td>
-						<td>
-							<a href="/page/safelink/layout1/?url=https://webmanajemen.com" onclick="location.href=this.href"
-								>?url=https://webmanajemen.com</a
-							>
-						</td>
+						<td><a href="/page/safelink/layout1/?url=https://webmanajemen.com">?url=https://webmanajemen.com</a></td>
 					</tr>
 					<tr>
 						<td>Decode base64</td>
 						<td>
-							<a href="/page/safelink/layout1/?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t" onclick="location.href=this.href"
+							<a href="/page/safelink/layout1/?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"
 								>?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t</a
 							>
 						</td>
@@ -194,9 +202,7 @@
 					<tr>
 						<td>Decode AES</td>
 						<td>
-							<a
-								href="/page/safelink/layout1/?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
-								onclick="location.href=this.href;console.log(this.href);"
+							<a href="/page/safelink/layout1/?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
 								>?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a
 							>
 						</td>
@@ -206,7 +212,7 @@
 						<td>
 							<a
 								href="/page/safelink/layout1/#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
-								onclick="location.href=this.href"
+								onclick="controlHyperlink(this)"
 								>#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a
 							>
 						</td>
