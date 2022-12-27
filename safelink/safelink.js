@@ -6,7 +6,7 @@ if (typeof safelinkURL == 'undefined') {
 	var safelinkURL = sfUrl();
 }
 // redirect when in translate google
-if (location.host != 'translate.googleusercontent.com' && queryURL) {
+if (location.host == 'translate.googleusercontent.com' && queryURL) {
 	location.href = safelinkURL + queryURL;
 }
 

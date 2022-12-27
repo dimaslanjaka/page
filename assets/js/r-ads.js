@@ -212,7 +212,12 @@ function triggerAdsense(_e) {
 		const bg = `https://via.placeholder.com/200x50/FFFFFF/000000/?text=${anonclient}-${anonid}`;
 		ins.style.backgroundImage = `url('${bg}')`;
 		ins.style.backgroundRepeat = 'no-repeat';
-		if (ins.innerHTML.trim().length === 0) {
+		// log('parent width banner', i + 0, ins.parentElement.offsetWidth);
+
+		if (ins.parentElement.offsetWidth === 0) {
+			// remove banner when width is 0
+			ins.remove();
+		} else if (ins.innerHTML.trim().length === 0) {
 			(adsbygoogle = window.adsbygoogle || []).push({});
 		}
 	}

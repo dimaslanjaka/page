@@ -177,12 +177,16 @@
 				<table class="table">
 					<tr>
 						<td>To Encode</td>
-						<td><a href="/page/safelink/layout1/?url=https://webmanajemen.com">?url=https://webmanajemen.com</a></td>
+						<td>
+							<a href="/page/safelink/layout1/?url=https://webmanajemen.com" onclick="location.href=this.href"
+								>?url=https://webmanajemen.com</a
+							>
+						</td>
 					</tr>
 					<tr>
 						<td>Decode base64</td>
 						<td>
-							<a href="/page/safelink/layout1/?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"
+							<a href="/page/safelink/layout1/?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t" onclick="location.href=this.href"
 								>?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t</a
 							>
 						</td>
@@ -190,7 +194,9 @@
 					<tr>
 						<td>Decode AES</td>
 						<td>
-							<a href="/page/safelink/layout1/?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
+							<a
+								href="/page/safelink/layout1/?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
+								onclick="location.href=this.href;console.log(this.href);"
 								>?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a
 							>
 						</td>
@@ -198,7 +204,9 @@
 					<tr>
 						<td>Decode AES using hash</td>
 						<td>
-							<a href="/page/safelink/layout1/#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
+							<a
+								href="/page/safelink/layout1/#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
+								onclick="location.href=this.href"
 								>#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a
 							>
 						</td>

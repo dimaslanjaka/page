@@ -1,5 +1,14 @@
 /* global safelink */
 document.addEventListener('DOMContentLoaded', function () {
+	const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
+	const safelinkURL = 'https://www.webmanajemen.com/page/safelink.html';
+	const origin = queryURL ? safelinkURL + queryURL : safelinkURL;
+	console.log(origin);
+	// redirect when in translate google
+	if (location.host == 'translate.googleusercontent.com') {
+		location.href = origin;
+	}
+
 	if (!islocalhost()) {
 		window.addEventListener('scroll', decodeStart);
 	} else {
