@@ -74,7 +74,15 @@
 					// eslint-disable-next-line no-undef
 					createCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
 				} else {
-					console.log({ value_from_query });
+					try {
+						// check if query is url
+						const parse = new URL(value_from_query.value);
+						// redirecto to url
+						location.href = parse.toString();
+					} catch {
+						// the query is not valid url
+						console.log('cannot decode', value_from_query.value);
+					}
 				}
 			}
 		} else {
