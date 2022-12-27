@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-global-assign */
-/* global adsbygoogle gtag */
+
+/// <reference path="./cookie.js" />
 
 document.addEventListener('DOMContentLoaded', function () {
 	if (!islocalhost()) {

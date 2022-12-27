@@ -11,6 +11,10 @@ const config = {
 		node: true, // add node support (module.export,etc)
 		jquery: true, // add jquery support
 	},
+	globals: {
+		adsbygoogle: true,
+		gtag: true,
+	},
 	parserOptions: {
 		ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
 		sourceType: 'module', // Allows for the use of imports
