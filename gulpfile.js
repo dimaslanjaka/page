@@ -11,7 +11,7 @@ const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
 const sass = require('node-sass');
 const config = require('./config.json');
-const safelinkify = require('safelinkify');
+const { default: safelink } = require('safelinkify/dist/safelink');
 
 /**
  * Task running indicators
@@ -322,8 +322,9 @@ async function assignCache(done) {
 		});
 }
 
+// anonymize link on production
 gulp.task('safelink', function () {
-	const instance = new safelinkify.default.safelink({
+	const instance = new safelink({
 		// exclude patterns (dont anonymize these patterns)
 		exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
 		// url redirector
@@ -365,7 +366,7 @@ gulp.task('safelink', function () {
 });
 
 gulp.task('copy', copy);
-gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
+gulp.task('build', gulp.series('compile', 'pull', 'copy', 'safelink', 'push'));
 gulp.task('default', gulp.series('build'));
 
 /**
