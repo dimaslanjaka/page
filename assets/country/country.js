@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 var isoCountries = {
 	AF: 'Afghanistan',
 	AX: 'Aland Islands',
@@ -2588,7 +2589,7 @@ String.prototype.capitalize = function () {
 
 function getCountryName(countryCode) {
 	countryCode = countryCode.toUpperCase();
-	if (isoCountries.hasOwnProperty(countryCode)) {
+	if (isoCountries[countryCode]) {
 		return isoCountries[countryCode];
 	} else {
 		return countryCode;
@@ -2596,25 +2597,26 @@ function getCountryName(countryCode) {
 }
 
 function getCountryLanguage(countryCode) {
-	if (lang.hasOwnProperty(countryCode)) {
+	if (lang[countryCode]) {
 		return lang[countryCode].name;
 	}
 }
 function getNativeCountryLanguage(countryCode) {
-	if (lang.hasOwnProperty(countryCode)) {
+	if (lang[countryCode]) {
 		return lang[countryCode].nativeName;
 	}
 }
 
 function getCountryCode(countryName) {
-	var isoCountries = swap(isoCountries),
-		countryName = countryName.capitalize();
-	if (isoCountries.hasOwnProperty(countryName)) {
-		return isoCountries[countryName];
+	var isoCountries = swap(isoCountries);
+	let cname = countryName.capitalize();
+	if (isoCountries[cname]) {
+		return isoCountries[cname];
 	} else {
 		return countryName;
 	}
 }
+
 function swap(json) {
 	var ret = {};
 	for (var key in json) {
