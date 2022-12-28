@@ -343,17 +343,12 @@ gulp.task('safelink', function () {
 				// exclude non-website and react production files
 				'**/tmp/**',
 				'**/node_modules/**',
-				'**/monsters/**/*',
-				'**/attendants/**/*',
-				'**/materials/**/*',
-				'**/scenic-spots/**/*',
-				'**/static/**/*',
 			],
 		})
 		.pipe(
 			through2.obj(async (file, _enc, next) => {
-				// drop null
-				if (file.isNull()) return next();
+				// drop null, folder, stream
+				if (file.isNull() || file.isDirectory() || file.isStream()) return next();
 				// do safelinkify
 				const content = String(file.contents);
 				const parsed = await instance.parse(content);
