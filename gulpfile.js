@@ -1,6 +1,6 @@
 const { default: git } = require('git-command-helper');
 const gulp = require('gulp');
-const { join, relative } = require('upath');
+const { join, relative, toUnix } = require('upath');
 const { encodeURL } = require('hexo-util');
 const nunjucks = require('nunjucks');
 const through2 = require('through2');
@@ -11,6 +11,7 @@ const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
 const sass = require('node-sass');
 const config = require('./config.json');
+const safelinkify = require('safelinkify');
 
 /**
  * Task running indicators
@@ -320,6 +321,53 @@ async function assignCache(done) {
 			if (typeof done === 'function') done();
 		});
 }
+
+gulp.task('safelink', function () {
+	const instance = new safelinkify.default.safelink({
+		// exclude patterns (dont anonymize these patterns)
+		exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
+		// url redirector
+		redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+		// debug
+		verbose: false,
+		// encryption type = 'base64' | 'aes'
+		type: 'base64',
+		// password aes, default = root
+		password: 'unique-password',
+	});
+	const destDir = join(__dirname, 'build');
+	return gulp
+		.src(['**/*.html'], {
+			cwd: destDir,
+			ignore: [
+				// exclude non-website and react production files
+				'**/tmp/**',
+				'**/node_modules/**',
+				'**/monsters/**/*',
+				'**/attendants/**/*',
+				'**/materials/**/*',
+				'**/scenic-spots/**/*',
+				'**/static/**/*',
+			],
+		})
+		.pipe(
+			through2.obj(async (file, _enc, next) => {
+				// drop null
+				if (file.isNull()) return next();
+				// do safelinkify
+				const content = String(file.contents);
+				const parsed = await instance.parse(content);
+				if (parsed) {
+					file.contents = Buffer.from(parsed);
+					next(null, file);
+				} else {
+					console.log('cannot parse', toUnix(file.path).replace(toUnix(process.cwd()), ''));
+					next();
+				}
+			}),
+		)
+		.pipe(gulp.dest(destDir));
+});
 
 gulp.task('copy', copy);
 gulp.task('build', gulp.series('compile', 'pull', 'copy', 'push'));
