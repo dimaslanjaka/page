@@ -104,7 +104,7 @@ function triggerAdsense(_e) {
 	 * @type {typeof allAds[number]}
 	 */
 	let currentSlot = allAds.find(item => item.pub === ca);
-	log('total ads banner', currentSlot.ads.length);
+
 	if (ca.length > 0 && typeof currentSlot === 'object') {
 		log('cached pub', ca);
 	} else {
@@ -122,6 +122,8 @@ function triggerAdsense(_e) {
 			);
 		}
 	}
+
+	log('total ads banner', currentSlot.ads.length);
 
 	// find element *[adsense="fill"]
 	const fixedPlacement = Array.from(document.querySelectorAll('[adsense="fill"]'));
