@@ -38,8 +38,8 @@
 				window.scrollTo(0, document.body.scrollHeight / 2);
 				setTimeout(() => {
 					window.scrollTo(0, 0);
-				}, 300);
-			}, 300);
+				}, 800);
+			}, 800);
 		}, 800);
 	});
 

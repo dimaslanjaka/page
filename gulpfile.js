@@ -12,6 +12,34 @@ const CleanCSS = require('clean-css');
 const sass = require('node-sass');
 const config = require('./config.json');
 const { default: safelink } = require('safelinkify/dist/safelink');
+const { spawnAsync } = require('git-command-helper/dist/spawn');
+
+global.minifyPlugin = minifyPlugin;
+const executeFunc = opt => {
+	opt = Object.assign({ input: null, output: null, pipe: null, ignore: [] }, opt);
+	const { input, output, pipe, ignore } = opt;
+	return new Promise(function (resolve) {
+		const fn = global[pipe];
+		if (typeof fn === 'function') {
+			console.log('using pipe');
+			gulp
+				.src(input, {
+					cwd: __dirname,
+					ignore: Array.isArray(ignore)
+						? globalIgnore.concat(...ignore)
+						: typeof ignore === 'string'
+						? globalIgnore.concat(ignore)
+						: globalIgnore,
+				})
+				.pipe(fn.apply(null))
+				.pipe(gulp.dest(output))
+				.once('end', () => resolve(null));
+		} else {
+			console.log('not using pipe');
+			resolve(null);
+		}
+	});
+};
 
 /**
  * Task running indicators
@@ -25,61 +53,22 @@ const globalIgnore = [buildDir, '**/node_modules/**', '**/temp/**', '**/vendor/*
  * copy build
  * @param {gulp.TaskFunctionCallback} done
  */
-function copy(done) {
-	gulp
-		.src(
-			[
-				'safelink.{html,js,css}',
-				'moment-timezone.{html,css,js}',
-				'index.{html,js,css}',
-				'bot-detect.{html,js,css}',
-				'cookies.{html,js,css}',
-				'disqus-comment.{html,js,css}',
-				'package.json',
-			],
-			{
-				cwd: __dirname,
-				ignore: globalIgnore.concat(
-					...[
-						// ignore sources
-						'**/*.{scss,njk,php}',
-					],
-				),
-			},
-		)
-		.pipe(minifyPlugin())
-		.pipe(gulp.dest(buildDir))
-		.once('end', function () {
-			// copy safelink/**
-			gulp
-				.src(['safelink/**/*.{css,js}'], {
-					cwd: __dirname,
-					ignore: globalIgnore,
-				})
-				.pipe(minifyPlugin())
-				.pipe(gulp.dest(join(buildDir, 'safelink')));
-			// copy assets/**
-			gulp
-				.src(['assets/**/*'], {
-					cwd: __dirname,
-					ignore: globalIgnore,
-				})
-				.pipe(minifyPlugin())
-				.pipe(gulp.dest(join(buildDir, 'assets')))
-				.once('end', function () {
-					console.log('installing packages...');
-					git.shell('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
-						fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
-							// assign cache
-							assignCache(function () {
-								// copy safelink
-								fs.copyFileSync(join(__dirname, config.safelink.input), join(__dirname, config.safelink.output));
-								done();
-							});
-						});
-					});
-				});
+async function copy(done) {
+	for (let i = 0; i < config.copy.length; i++) {
+		const o = config.copy[i];
+		await executeFunc(o);
+	}
+	console.log('installing packages...');
+	spawnAsync('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
+		fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
+			// assign cache
+			assignCache(function () {
+				// copy safelink
+				fs.copyFileSync(join(__dirname, config.safelink.input), join(__dirname, config.safelink.output));
+				done();
+			});
 		});
+	});
 }
 
 /**
