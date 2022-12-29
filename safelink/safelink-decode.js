@@ -111,6 +111,11 @@
 		location.href = location.pathname;
 	}
 
+	/**
+	 * delay/sleep in milliseconds
+	 * @param {int} millis
+	 * @returns
+	 */
 	const delay = millis =>
 		new Promise(resolve => {
 			setTimeout(_ => resolve(), millis);
