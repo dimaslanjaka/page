@@ -5,6 +5,7 @@ const { encodeURL } = require('hexo-util');
 const nunjucks = require('nunjucks');
 const through2 = require('through2');
 const fs = require('fs');
+const fsp = require('fs/promises');
 const terser = require('terser');
 const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
@@ -59,16 +60,12 @@ async function copy(done) {
 		await executeFunc(o);
 	}
 	console.log('installing packages...');
-	spawnAsync('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' }).then(function () {
-		fs.writeFile(join(buildDir, '.nojekyll'), '', function () {
-			// assign cache
-			assignCache(function () {
-				// copy safelink
-				fs.copyFileSync(join(__dirname, config.safelink.input), join(__dirname, config.safelink.output));
-				done();
-			});
-		});
-	});
+	await spawnAsync('npm', ['run', 'prod'], { cwd: buildDir, stdio: 'inherit' });
+	await fsp.writeFile(join(buildDir, '.nojekyll'), '');
+	// assign cache
+	await assignCache(); // copy safelink
+	await fsp.copyFile(join(__dirname, config.safelink.input), join(__dirname, config.safelink.output));
+	if (typeof done === 'function') done();
 }
 
 /**
