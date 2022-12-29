@@ -97,19 +97,25 @@
 		location.href = location.pathname;
 	}
 
-	function replaceGoButton(url) {
+	const delay = millis =>
+		new Promise(resolve => {
+			setTimeout(_ => resolve(), millis);
+		});
+	let replacementTriggered = false;
+	async function replaceGoButton(url) {
+		if (replacementTriggered) return;
+		replacementTriggered = true;
 		const go = document.querySelector('#go');
 		go.setAttribute('disabled', 'true');
 		go.textContent = 'Please Wait';
-		setTimeout(() => {
-			const a = document.createElement('a');
-			a.href = url;
-			a.rel = 'nofollow noopener noreferer';
-			a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
-			const parse_redirect = parse_url(url);
-			a.textContent = 'goto ' + parse_redirect.host;
-			replaceWith(a, go);
-		}, 10000);
+		await delay(10000);
+		const a = document.createElement('a');
+		a.href = url;
+		a.rel = 'nofollow noopener noreferer';
+		a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
+		const parse_redirect = parse_url(url);
+		a.textContent = 'goto ' + parse_redirect.host;
+		replaceWith(a, go);
 	}
 
 	/**
@@ -119,7 +125,7 @@
 	 */
 	function replaceWith(newElement, oldElement) {
 		if (!oldElement.parentNode) {
-			console.log(oldElement, 'parent null');
+			log(oldElement, 'parent null');
 			let d = document.createElement('div');
 			d.appendChild(oldElement);
 		} else {
