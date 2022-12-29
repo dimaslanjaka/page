@@ -10,7 +10,7 @@ const applySourceMap = require('vinyl-sourcemaps-apply');
 const terserHtml = require('html-minifier-terser');
 const CleanCSS = require('clean-css');
 const sass = require('node-sass');
-const config = require('./config.json');
+const config = require('./config-parser')(join(__dirname, 'config.jsonc'), join(__dirname, 'config.json'));
 const { default: safelink } = require('safelinkify/dist/safelink');
 const { spawnAsync } = require('git-command-helper/dist/spawn');
 
@@ -21,7 +21,7 @@ const executeFunc = opt => {
 	return new Promise(function (resolve) {
 		const fn = global[pipe];
 		if (typeof fn === 'function') {
-			console.log('using pipe');
+			console.log('using pipe', pipe);
 			gulp
 				.src(input, {
 					cwd: __dirname,

@@ -1,33 +1,34 @@
 {
-  "safelink": {
-    "input": "safelink/layout1/index.html",
-    "output": "build/safelink.html"
-  },
-  "copy": [
-    {
-      "input": "safelink*.{css,js}",
-      "output": "build/safelink",
-      "pipe": "minifyPlugin"
-    },
-    {
-      "input": "assets*",
-      "output": "build/assets",
-      "pipe": "minifyPlugin"
-    },
-    {
-      "input": [
-        "safelink.{html,js,css}",
-        "moment-timezone.{html,css,js}",
-        "index.{html,js,css}",
-        "bot-detect.{html,js,css}",
-        "cookies.{html,js,css}",
-        "disqus-comment.{html,js,css}",
-        "package.json"
-      ],
-      "ignore": [
-        "**/*.{scss,njk,php}"
-      ],
-      "pipe": "minifyPlugin"
-    }
-  ]
+	"safelink": {
+		"input": "safelink/layout1/index.html",
+		"output": "build/safelink.html"
+	},
+	"copy": [
+		{
+			"input": "safelink*.{css,js}",
+			"output": "build/safelink",
+			"pipe": "minifyPlugin"
+		},
+		{
+			"input": "assets*",
+			"output": "build/assets",
+			"pipe": "minifyPlugin"
+		},
+		{
+			"input": [
+				"safelink.{html,js,css}",
+				"moment-timezone.{html,css,js}",
+				"index.{html,js,css}",
+				"bot-detect.{html,js,css}",
+				"cookies.{html,js,css}",
+				"disqus-comment.{html,js,css}",
+				"package.json"
+			],
+			"ignore": [
+				"**/*.{scss,njk,php}"
+			],
+			"pipe": "minifyPlugin",
+			"output": "build"
+		}
+	]
 }
