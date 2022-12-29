@@ -279,8 +279,6 @@ gulp.task('compile', function (done) {
 });
 
 async function assignCache(done) {
-	if (indicators.ac) return done();
-	indicators.ac = true;
 	const github = new git(__dirname);
 	const commit = await github.latestCommit();
 
@@ -302,11 +300,12 @@ async function assignCache(done) {
 		)
 		.pipe(gulp.dest(buildDir))
 		.once('end', function () {
-			indicators.ac = false;
 			console.log('used cache parameter', commit);
 			if (typeof done === 'function') done();
 		});
 }
+
+gulp.task('assign-cache', assignCache);
 
 // anonymize link on production
 gulp.task('safelink', function () {
@@ -352,7 +351,7 @@ gulp.task('safelink', function () {
 });
 
 gulp.task('copy', copy);
-gulp.task('build', gulp.series('compile', 'pull', 'copy', 'safelink', 'push'));
+gulp.task('build', gulp.series('compile', 'pull', 'copy', 'safelink', 'assign-cache', 'push'));
 gulp.task('default', gulp.series('build'));
 
 /**
