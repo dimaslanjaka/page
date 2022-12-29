@@ -1,3 +1,6 @@
 {
-  "safelink": "safelink/layout1/index.html"
+  "safelink": {
+    "input": "safelink/layout1/index.html",
+    "output": "build/safelink.html"
+  }
 }

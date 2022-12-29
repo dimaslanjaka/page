@@ -73,7 +73,7 @@ function copy(done) {
 							// assign cache
 							assignCache(function () {
 								// copy safelink
-								fs.copyFileSync(join(__dirname, config.safelink), join(__dirname, 'build', 'safelink.html'));
+								fs.copyFileSync(join(__dirname, config.safelink.input), join(__dirname, config.safelink.output));
 								done();
 							});
 						});
