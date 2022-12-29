@@ -43,7 +43,21 @@
 		}, 800);
 	});
 
+	/**
+	 * run decode once
+	 */
+	let decodeStarted = false;
+
+	/**
+	 * start decoding safelink
+	 * @returns
+	 */
 	function decodeStart() {
+		if (decodeStarted) {
+			window.removeEventListener(decodeStart);
+			return;
+		}
+		decodeStarted = true;
 		/**
 		 * @type {(typeof import('safelinkify'))['default']}
 		 */
@@ -101,10 +115,8 @@
 		new Promise(resolve => {
 			setTimeout(_ => resolve(), millis);
 		});
-	let replacementTriggered = false;
+
 	async function replaceGoButton(url) {
-		if (replacementTriggered) return;
-		replacementTriggered = true;
 		const go = document.querySelector('#go');
 		go.setAttribute('disabled', 'true');
 		go.textContent = 'Please Wait';
