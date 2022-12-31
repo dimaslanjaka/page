@@ -150,12 +150,18 @@ function triggerAdsense(_e) {
 		findPlaces = Array.from(document.querySelectorAll('#main-content'));
 	}
 	if (findPlaces.length === 0) {
+		// bootstrap wrapper
 		findPlaces = Array.from(document.querySelectorAll('#bootstrap-wrapper'));
+	}
+	if (findPlaces.length === 0) {
+		// typedoc documentation page
+		findPlaces = Array.from(document.querySelectorAll('[class="col-8 col-content"]'));
 	}
 	// fallback search at body
 	if (findPlaces.length === 0) {
 		findPlaces = Array.from(document.querySelectorAll('body'));
 	}
+	
 	// select random place
 	let adsPlaces = findPlaces
 		.map(getAllPlaces)
