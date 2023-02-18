@@ -22,9 +22,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
 <script src="node_modules/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
-<script src="assets/js/r-ads.js"></script>
 {% endblock head %}
 
 {% block content %}
 {% include "./moment-timezone.content.njk" %}
 {% endblock content %}
+
+{% block endbody %}
+<script src="assets/js/r-ads.js?hash=GEN-HASH"></script>
+{% endblock endbody %}

@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 // https://codepen.io/dimaslanjaka/pen/LYegjaV
 
+window['adsense-onload'] = true;
 if (location.host.includes('cdpn')) console.clear();
 const idate = document.querySelector('input#date');
 const pattern = document.querySelector('input#pattern');
