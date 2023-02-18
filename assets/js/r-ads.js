@@ -8,7 +8,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-	if (!islocalhost()) {
+	if (!islocalhost() && !window['adsense-onload']) {
 		window.addEventListener('scroll', triggerAdsense);
 	} else {
 		triggerAdsense();
@@ -161,7 +161,7 @@ function triggerAdsense(_e) {
 	if (findPlaces.length === 0) {
 		findPlaces = Array.from(document.querySelectorAll('body'));
 	}
-	
+
 	// select random place
 	let adsPlaces = findPlaces
 		.map(getAllPlaces)
