@@ -36,13 +36,13 @@
 		"editor.defaultFormatter": "vscode.html-language-features"
 	},
 	"files.exclude": {
-		"**/.git": true,
-		"**/.svn": true,
-		"**/.hg": true,
-		"**/CVS": true,
 		"**/.DS_Store": true,
-		"**/Thumbs.db": true,
+		"**/.git": true,
+		"**/.hg": true,
+		"**/.svn": true,
+		"**/build": false,
+		"**/CVS": true,
 		"**/node_modules": true,
-		"**/build": false
+		"**/Thumbs.db": true
 	}
 }
