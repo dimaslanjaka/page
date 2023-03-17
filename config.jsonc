@@ -23,11 +23,12 @@
 				"bot-detect.{html,js,css}",
 				"cookies.{html,js,css}",
 				"disqus-comment.{html,js,css}",
-				"package.json"
+				"package.json",
+				"rotate.{html,js,css}"
 			],
 			"ignore": [
 				// ignore sources
-				"**/*.{scss,njk,php}"
+				"**/*.{scss,njk,php,ejs,pug}"
 			],
 			"pipe": "minifyPlugin",
 			"output": "build"
