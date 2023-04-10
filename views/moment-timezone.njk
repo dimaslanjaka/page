@@ -1,0 +1,32 @@
+{% set canonical = "https://www.webmanajemen.com/page/moment-timezone.html" %}
+{% set lang = "en" %}
+{% extends '_layout.njk' %}
+
+{% block title %}Moment Timezone Playground{% endblock %}
+
+{% block head %}
+<meta name="description" content="Moment Timezone Online Playground For Free. Support custom format pattern">
+<link rel="alternate" href="https://codepen.io/dimaslanjaka/pen/LYegjaV" />
+<!-- defer stylesheet -->
+<link rel="preload" as="style" href="/page/assets/css/moment-timezone.css"
+  onload="this.onload=null;this.rel='stylesheet'" />
+<noscript>
+  <link rel="stylesheet" href="/page/assets/css/moment-timezone.css">
+</noscript>
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="/page/node_modules/moment/min/moment-with-locales.min.js"></script>
+<script src="/page/node_modules/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+-->
+{% endblock head %}
+
+{% block content %}
+<section>{% include "./moment-timezone.content.njk" %}</section>
+<section>{% include "./moment-timezone.clock.njk" %}</section>
+<section>{% include "./moment-timezone.snippet.njk" %}</section>
+{% endblock content %}
+
+{% block endbody %}
+<script src="/page/assets/js/moment-timezone.js" async></script>
+<script src="//www.webmanajemen.com/r-ads.js?hash=GEN-HASH"></script>
+{% endblock endbody %}

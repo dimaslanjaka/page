@@ -2,27 +2,20 @@
   "$schema": "http://json.schemastore.org/nodemon",
   "exec": "node server.js",
   "watch": [
-    "./webpack.*.js",
     "./tsconfig.json",
     "./package.json",
-    "_layout.njk",
+    "./views/**/*",
     "./server.js",
-    "./gulpfile.js"
+    "./server-core.js",
+    "./src/**/*",
+    "./source/**/*"
   ],
   "ignore": [
     "*.test.js",
-    "*.html",
     ".vscode",
-    ".gitignore",
-    "gh-pages",
-    "dist",
-    "tests",
-    "tmp",
-    "temp",
-    "**/node_modules/**",
-    "**/build/**"
+    "**/node_modules/**"
   ],
   "delay": 3000,
-  "ext": "ts,js",
-  "verbose": true
+  "ext": "*",
+  "verbose": false
 }
