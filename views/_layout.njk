@@ -18,6 +18,13 @@
 	<link rel="manifest" href="https://www.webmanajemen.com/manifest.json" />
 	<meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
 	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+
+	<!-- defer bootstrap -->
+	<link rel="preload" href="/page/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+	<noscript>
+		<link rel="stylesheet" href="/page/assets/css/main.css">
+	</noscript>
+
 	{% block head %}{% endblock %}
 </head>
 

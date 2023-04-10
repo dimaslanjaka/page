@@ -86,3 +86,19 @@ function copyTextToClipboard(text) {
 		},
 	);
 }
+
+// clock
+function clock_update() {
+	var london = moment.tz('Europe/London').format('MMMM Do YYYY, h:mm:ss a');
+	var sydney = moment.tz('Australia/Sydney').format('MMMM Do YYYY, h:mm:ss a');
+	var beijing = moment.tz('Asia/Shanghai').format('MMMM Do YYYY, h:mm:ss a');
+	var tokyo = moment.tz('Asia/Tokyo').format('MMMM Do YYYY, h:mm:ss a');
+	var la = moment.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a');
+
+	document.querySelector('#london').textContent = london;
+	document.querySelector('#sydney').textContent = sydney;
+	document.querySelector('#beijing').textContent = beijing;
+	document.querySelector('#tokyo').textContent = tokyo;
+	document.querySelector('#la').textContent = la;
+}
+setInterval(clock_update, 1000);
