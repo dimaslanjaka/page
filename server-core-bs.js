@@ -1,6 +1,8 @@
 require('ts-node').register({ projectSearchDir: __dirname });
 
 const express = require('express');
+const browserSync = require('browser-sync');
+const inject = require('connect-browser-sync');
 const fs = require('fs-extra');
 const nunjucks = require('nunjucks');
 const path = require('path');
@@ -8,6 +10,25 @@ const { writefile } = require('sbg-utility');
 const sass = require('./src/node-sass-middleware2').default;
 
 const app = express();
+
+// browser-sync start
+const bs = browserSync.create().init({
+	logSnippet: false,
+	files: [
+		//__dirname,
+		{
+			match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
+			fn: function (event, file) {
+				/** Custom event handler **/
+				console.log('[Browsersync]', event, file);
+			},
+		},
+	],
+	ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
+	cors: true,
+});
+app.use(inject(bs));
+// browser-sync ends
 
 // engine start
 // app.engine('html', nunjucks.render);
