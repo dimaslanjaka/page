@@ -16,22 +16,25 @@ if [ -z "$1" ]; then
     exit
 fi
 
-echo "cleaning $1"
+if [ ! -d "$1" ]; then
+  echo "$1 not found"
+  exit
+fi
 
 vowels=( a i u e o A I U E O )
 for letter in {{a..z},{A..Z}}; do
     for vowel in "${vowels[@]}"; do
-      withoutVowel="$1/${letter}*"
-      withVowel="$1/${letter}${vowel}*"
-      echo "deleting ${withoutVowel}"
-      rm -rf $withoutVowel &
-      echo "deleting ${withVowel}"
-      rm -rf $withVowel &
+      toBeDeleted=( "$1/.${letter}*" "$1/${letter}*" "$1/.${letter}${vowel}*" "$1/${letter}${vowel}*" )
+      for fpath in "${toBeDeleted[@]}"; do
+        echo "deleting ${fpath}"
+        rm -rf "$fpath" &
+      done
     done
 done
 
 wait
 
-[[ -d "$1" ]] && rm -rf "$1" &
+echo "cleaning $1"
+rm -rf "$1" &
 
 wait
