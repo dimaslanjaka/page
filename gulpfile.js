@@ -25,3 +25,5 @@ gulp.task('build', async function () {
 		if (script.startsWith('build.')) await import('./' + script);
 	}
 });
+
+module.exports = gulp;
