@@ -15,7 +15,7 @@ const app = express();
 const bs = browserSync.create().init({
 	logSnippet: false,
 	files: [
-		__dirname,
+		//__dirname,
 		{
 			match: ['**/*.njk', '**/*.scss'],
 			fn: function (event, file) {
@@ -56,6 +56,7 @@ app.use(
 app.use(express.static(path.join(__dirname, 'source')));
 app.use('/page', express.static(path.join(__dirname, 'source')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use('/page/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/favicon.ico', async function (_, res) {
 	const read = fs.readFileSync(path.join(__dirname, 'source/page/assets/img/w-icon-25.png'));
 	res.setHeader('content-type', 'image/png');
