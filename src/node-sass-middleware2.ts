@@ -42,7 +42,7 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 
 	return function sassRenderer(req, res, next) {
 		const pathname = new URL('http://' + req.hostname + req.url).pathname;
-		if (!/\.css$/.test(pathname)) {
+		if (!/\.css$/.test(pathname) || upath.extname(pathname) !== '.css') {
 			if (options.debug) console.log('debug', 'skip', pathname, 'nothing to do');
 			return next();
 		}
@@ -52,7 +52,10 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 		const sassPath = upath.join(src, fixedPath.replace(/\.css$/, '.scss'));
 		const sassDir = upath.dirname(sassPath);
 
-		writefile('tmp/dump.log', JSON.stringify({ dest, src, cssPath, sassPath, sassDir }, null, 2));
+		writefile(
+			'tmp/node-sass-middleware/' + pathname + '.log',
+			JSON.stringify({ dest, src, cssPath, sassPath, sassDir }, null, 2),
+		);
 
 		const result = sass.renderSync({
 			file: sassPath,

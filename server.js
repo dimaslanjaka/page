@@ -8,6 +8,7 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 const upath = require('upath');
 const { default: axios } = require('axios');
+const { writefile } = require('sbg-utility');
 const sass = require('./src/node-sass-middleware2').default;
 
 const app = express();
@@ -73,7 +74,8 @@ app.use('/page/:permalink', function (req, res) {
 	const basename = path.basename(permalink, path.extname(permalink));
 	const dirname = path.dirname(permalink);
 	const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
-	console.log({ dirname, basename, realpath });
+	const pathname = new URL('http://' + req.hostname + req.url).pathname;
+	writefile('tmp/node-sass-middleware/' + pathname + '.log', JSON.stringify({ dirname, basename, realpath }, null, 2));
 	res.render(realpath, {}, function (err, html) {
 		if (err) {
 			console.log('fail render', permalink);
