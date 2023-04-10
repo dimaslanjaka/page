@@ -9,8 +9,8 @@
     "prod": "npm install --omit=dev --production",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && npx npm-check-updates -u",
     "serve": "node server.js",
-    "build": "gulp build",
-    "post-install": "node postinstall.js",
+    "build": "gulp --series build page:commit",
+    "postinstall": "node postinstall.js",
     "server-dump": "node server.js &> server.log"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
