@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"esModuleInterop": true,
+		"outDir": "tmp/tsc",
+		"checkJs": false,
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules", "tmp"],
+	"include": ["src/**/*", "source/**/*"]
+}

@@ -1,0 +1,54 @@
+{
+	"terminal.integrated.env.linux": {
+		"PATH": "${env:PATH}:${workspaceFolder}/node_modules/.bin:${workspaceFolder}/bin"
+	},
+	"terminal.integrated.env.windows": {
+		"PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin"
+	},
+	"[javascript]": {
+		"editor.formatOnSave": false
+	},
+	"[typescript]": {
+		"editor.formatOnSave": false
+	},
+	"[css]": {
+		"editor.formatOnSave": false
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.organizeImports": true
+	},
+	"code-runner.clearPreviousOutput": true,
+	"code-runner.runInTerminal": true,
+	"code-runner.saveAllFilesBeforeRun": true,
+	// setup file associations for nunjucks and ejs
+	"files.associations": {
+		"*.njk": "html",
+		"*.ejs": "html"
+	},
+	// setup emmet auto complete for nunjucks and ejs
+	"emmet.includeLanguages": {
+		"ejs": "html",
+		"njk": "html",
+		"nunjucks": "html"
+	},
+	// setup syntax profiles for nunjucks and ejs
+	"emmet.syntaxProfiles": {
+		"njk": "html",
+		"ejs": "html"
+	},
+	"[nunjucks]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"files.exclude": {
+		"**/.DS_Store": true,
+		"**/.git": true,
+		"**/.hg": true,
+		"**/.svn": true,
+		"**/build": false,
+		"**/CVS": true,
+		"**/node_modules": true,
+		"**/Thumbs.db": true
+	}
+}
