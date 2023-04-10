@@ -43,7 +43,7 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 	return function sassRenderer(req, res, next) {
 		const pathname = new URL('http://' + req.hostname + req.url).pathname;
 		if (!/\.css$/.test(pathname) || upath.extname(pathname) !== '.css') {
-			if (options.debug) console.log('debug', 'skip', pathname, 'nothing to do');
+			if (options.debug) console.log('debug', 'skip', pathname);
 			return next();
 		}
 
