@@ -2,11 +2,10 @@
   "$schema": "http://json.schemastore.org/nodemon",
   "exec": "node server.js",
   "watch": [
-    "./webpack.*.js",
     "./tsconfig.json",
     "./package.json",
-    "./views/**/*.njk",
-    "./server*",
+    "**/*.njk",
+    "./server*.js",
     "./gulpfile.js",
     "./src/**/*"
   ],
@@ -21,7 +20,7 @@
     "tmp",
     "temp",
     "**/node_modules/**",
-    "**/build/**"
+    "**/page/**"
   ],
   "delay": 3000,
   "ext": "ts,js",

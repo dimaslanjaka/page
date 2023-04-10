@@ -31,7 +31,7 @@ app.use(inject(bs));
 // browser-sync ends
 
 // engine start
-app.engine('html', nunjucks.render);
+// app.engine('html', nunjucks.render);
 nunjucks.configure('views', {
 	autoescape: true,
 	express: app,
@@ -70,8 +70,8 @@ app.use('/page/:permalink', function (req, res) {
 	const basename = path.basename(permalink, path.extname(permalink));
 	const dirname = path.dirname(permalink);
 	const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
-	const pathname = new URL('http://' + req.hostname + req.url).pathname;
-	writefile('tmp/node-sass-middleware/' + pathname + '.log', JSON.stringify({ dirname, basename, realpath }, null, 2));
+	const pathname = new URL('http://' + req.hostname + req.url).pathname || 'index';
+	writefile('tmp/routes/' + pathname + '.log', JSON.stringify({ dirname, basename, realpath }, null, 2));
 	res.render(realpath, {}, function (err, html) {
 		if (err) {
 			console.log('fail render', permalink);
