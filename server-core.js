@@ -17,7 +17,7 @@ const bs = browserSync.create().init({
 	files: [
 		//__dirname,
 		{
-			match: ['**/*.njk', '**/*.scss'],
+			match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
 			fn: function (event, file) {
 				/** Custom event handler **/
 				console.log('[Browsersync]', event, file);
