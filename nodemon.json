@@ -6,7 +6,7 @@
     "./tsconfig.json",
     "./package.json",
     "./views/**/*.njk",
-    "./server.js",
+    "./server*",
     "./gulpfile.js",
     "./src/**/*"
   ],
@@ -25,5 +25,5 @@
   ],
   "delay": 3000,
   "ext": "ts,js",
-  "verbose": true
+  "verbose": false
 }
