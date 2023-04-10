@@ -1,11 +1,14 @@
+require('ts-node').register({ projectSearchDir: __dirname });
+
 const express = require('express');
 const browserSync = require('browser-sync');
 const inject = require('connect-browser-sync');
-const { mkdirpSync, existsSync, readFileSync } = require('fs-extra');
+const fs = require('fs-extra');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const sass = require('./src/node-sass-middleware');
-
+const upath = require('upath');
+const { default: axios } = require('axios');
+const sass = require('./src/node-sass-middleware2').default;
 
 const app = express();
 
@@ -16,6 +19,9 @@ const bs = browserSync.create().init({
 		__dirname,
 		{
 			match: ['**/*.njk', '**/*.scss'],
+			options: {
+				ignored: ['**/tmp', path.join(__dirname, 'bin'), upath.join(__dirname, 'page/**/*'), '**/node_modules'],
+			},
 			fn: function (event, file) {
 				/** Custom event handler **/
 				console.log('[Browsersync]', event, file);
@@ -38,10 +44,14 @@ nunjucks.configure('views', {
 app.set('view engine', 'html');
 
 app.use(
+	'/page',
 	sass({
-		src: __dirname + '/source', // Input SASS files
-		dest: __dirname + '/page', // Output CSS
+		src: path.join(__dirname, 'source'), // Input SASS source folder
+		dest: path.join(__dirname, 'page'), // Output CSS destination folder
 		debug: true,
+		app,
+		base: '/page',
+		cwd: __dirname,
 	}),
 );
 // engine ends
@@ -51,7 +61,7 @@ app.use(express.static(path.join(__dirname, 'source')));
 app.use('/page', express.static(path.join(__dirname, 'source')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/favicon.ico', async function (_, res) {
-	const read = readFileSync(path.join(__dirname, 'source/assets/img/w-icon-25.png'));
+	const read = fs.readFileSync(path.join(__dirname, 'source/page/assets/img/w-icon-25.png'));
 	res.setHeader('content-type', 'image/png');
 	res.send(read);
 });
@@ -77,6 +87,13 @@ app.use('/page/:permalink', function (req, res) {
 //
 
 // start server
-app.listen(4000, function () {
+const listen = app.listen(4000, function () {
 	console.log('http://localhost:4000');
+});
+listen.on('listening', function () {
+	setTimeout(() => {
+		axios.get('http://127.0.0.1:4000/page/moment-timezone.html').catch(function () {
+			//
+		});
+	}, 3000);
 });
