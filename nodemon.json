@@ -5,7 +5,7 @@
     "./webpack.*.js",
     "./tsconfig.json",
     "./package.json",
-    "_layout.njk",
+    "./views/**/*.njk",
     "./server.js",
     "./gulpfile.js"
   ],
