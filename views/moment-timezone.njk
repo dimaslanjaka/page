@@ -13,16 +13,17 @@
 <noscript>
   <link rel="stylesheet" href="/page/assets/css/moment-timezone.css">
 </noscript>
-
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="/page/node_modules/moment/min/moment-with-locales.min.js"></script>
 <script src="/page/node_modules/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+-->
 {% endblock head %}
 
 {% block content %}
-{% include "./moment-timezone.content.njk" %}
-{% include "./moment-timezone.clock.njk" %}
-{% include "./moment-timezone.snippet.njk" %}
+<section>{% include "./moment-timezone.content.njk" %}</section>
+<section>{% include "./moment-timezone.clock.njk" %}</section>
+<section>{% include "./moment-timezone.snippet.njk" %}</section>
 {% endblock content %}
 
 {% block endbody %}

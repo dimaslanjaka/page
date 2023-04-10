@@ -1,1 +1,15 @@
-{"printWidth":120,"useTabs":true,"semi":true,"singleQuote":true,"trailingComma":"all","bracketSpacing":true,"jsxBracketSameLine":false,"arrowParens":"avoid","prettier.cssEnable":["css","less","sass"]}
+{
+  "printWidth": 120,
+  "useTabs": true,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "prettier.cssEnable": [
+    "css",
+    "less",
+    "sass"
+  ]
+}

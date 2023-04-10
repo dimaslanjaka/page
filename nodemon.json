@@ -4,25 +4,18 @@
   "watch": [
     "./tsconfig.json",
     "./package.json",
-    "**/*.njk",
-    "./server*.js",
-    "./gulpfile.js",
-    "./src/**/*"
+    "./views/**/*",
+    "./server.js",
+    "./server-core.js",
+    "./src/**/*",
+    "./source/**/*"
   ],
   "ignore": [
     "*.test.js",
-    "*.html",
     ".vscode",
-    ".gitignore",
-    "gh-pages",
-    "dist",
-    "tests",
-    "tmp",
-    "temp",
-    "**/node_modules/**",
-    "**/page/**"
+    "**/node_modules/**"
   ],
   "delay": 3000,
-  "ext": "ts,js",
+  "ext": "*",
   "verbose": false
 }
