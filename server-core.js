@@ -5,9 +5,11 @@ const fs = require('fs-extra');
 const nunjucks = require('nunjucks');
 const path = require('path');
 const { writefile } = require('sbg-utility');
+const { default: logger } = require('./src/logger');
 const sass = require('./src/node-sass-middleware2').default;
 const rollup = require('./src/rollup-middleware2').default;
 
+const console = new logger('rollup');
 const app = express();
 
 // engine start

@@ -1,6 +1,7 @@
 import sass from 'node-sass';
 import { writefile } from 'sbg-utility';
 import upath from 'upath';
+import logger from './logger';
 
 export interface sassMiddlewareOptions {
 	[key: string]: any;
@@ -29,6 +30,7 @@ export interface sassMiddlewareOptions {
  */
 export default function sassMiddleware(options: sassMiddlewareOptions): import('express').RequestHandler {
 	options = Object.assign({ cwd: process.cwd(), base: '' }, options);
+	const console = new logger('sass');
 	// Source directory (required)
 	const src =
 		options.src ||

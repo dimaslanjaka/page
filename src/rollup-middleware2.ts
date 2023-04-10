@@ -1,7 +1,10 @@
+import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
 import assert from 'assert';
 import { rollup } from 'rollup';
 import { writefile } from 'sbg-utility';
 import path from 'upath';
+import logger from './logger';
 
 const defaults = {
 	mode: 'compile',
@@ -23,6 +26,7 @@ const defaults = {
 };
 
 export default function rollupMiddleware(options: Partial<typeof defaults>): import('express').RequestHandler {
+	const console = new logger('rollup');
 	const opts = Object.assign({}, defaults, options);
 	assert(opts.src, 'rollup middleware requires src directory.');
 	// Source directory (required)
@@ -45,7 +49,12 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 
 		writefile('tmp/rollup-middleware/' + pathname + '.log', JSON.stringify({ dest, src, jsPath, sourcePath }, null, 2));
 
-		const bundle = await rollup({ input: sourcePath, external: [] });
+		const bundle = await rollup({
+			input: sourcePath,
+			external: [],
+			plugins: [json()],
+			output: { plugins: [terser()] },
+		});
 		const writeBundle = await bundle.write(
 			Object.assign({ format: 'cjs', file: jsPath, sourcemap: false }, <any>options.bundleOpts),
 		);
