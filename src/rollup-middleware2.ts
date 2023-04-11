@@ -10,18 +10,6 @@ import path from 'upath';
 import logger from './logger';
 import { isDev } from './utils';
 
-const globals = {
-	jquery: '$',
-	moment: 'moment',
-	'moment-timezone': 'MomentTimezone',
-	flowbite: 'flowbite',
-	'core-js': 'CoreJS',
-	'highlight.js': 'hljs',
-	axios: 'axios',
-	'markdown-it': 'MarkdownIt',
-	codemirror: 'CodeMirror',
-};
-
 const defaults = {
 	mode: 'compile',
 	bundleExtension: '.bundle',
@@ -63,14 +51,19 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 		const jsPath = path.join(dest, fixedPath);
 		const sourcePath = path.join(src, fixedPath.replace(/\.css$/, '.scss'));
 
+		// skip when not found
+		if (!fs.existsSync(sourcePath)) return next();
+
 		writefile('tmp/rollup-middleware/' + pathname + '.log', JSON.stringify({ dest, src, jsPath, sourcePath }, null, 2));
 
 		const bundleOpt: RollupOptions = {
 			input: sourcePath,
-			external: Object.keys(globals),
+			// external: Object.keys(globals),
+			cache: !isDev(),
 			plugins: [json(), resolve(), commonjs()],
-			output: { plugins: [terser()], file: jsPath, sourcemap: false, format: 'cjs', globals },
+			output: { plugins: [], file: jsPath, sourcemap: false, format: 'iife', name: 'wmi' /*, globals*/ },
 		};
+		if (!isDev()) ((bundleOpt.output as OutputOptions).plugins as any[]).push(terser());
 		const _bundle = await rollup(bundleOpt);
 		const _gen = await _bundle.generate(bundleOpt.output as OutputOptions);
 		res.writeHead(200, {
@@ -78,21 +71,16 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 			'Cache-Control': 'max-age=' + maxAge,
 		});
 		let code = '';
-		if (!isDev) {
-			for (const chunkOrAsset of _gen.output) {
-				if (chunkOrAsset.type === 'asset') {
-					//console.log('Asset', chunkOrAsset);
-				} else {
-					//console.log('Chunk', chunkOrAsset.module);
-					code += chunkOrAsset.code;
-				}
+		for (const chunkOrAsset of _gen.output) {
+			if (chunkOrAsset.type === 'asset') {
+				//console.log('Asset', chunkOrAsset);
+			} else {
+				//console.log('Chunk', chunkOrAsset.module);
+				code += chunkOrAsset.code;
 			}
-			// write minified
-			fs.writeFileSync(jsPath, code);
-		} else {
-			// by default not minified
-			code = fs.readFileSync(jsPath, 'utf-8');
 		}
+		// write compiled
+		fs.writeFileSync(jsPath, code);
 		res.end(code);
 	};
 }

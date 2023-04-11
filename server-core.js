@@ -10,7 +10,7 @@ const { default: logger } = require('./src/logger');
 const sass = require('./src/node-sass-middleware2').default;
 const rollup = require('./src/rollup-middleware2').default;
 
-const console = new logger('rollup');
+const console = new logger('server');
 const app = express();
 
 // engine start
