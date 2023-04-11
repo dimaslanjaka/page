@@ -9,6 +9,9 @@ const { writefile } = require('sbg-utility');
 const { default: logger } = require('./src/logger');
 const sass = require('./src/node-sass-middleware2').default;
 const rollup = require('./src/rollup-middleware2').default;
+const browserSync = require('browser-sync');
+const inject = require('connect-browser-sync');
+const { default: git } = require('git-command-helper');
 
 const console = new logger('server');
 const app = express();
@@ -85,6 +88,25 @@ app.use(
 );
 // engine ends
 
+// browser-sync start
+const bs = browserSync.create().init({
+	logSnippet: false,
+	files: [
+		//__dirname,
+		{
+			match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
+			fn: function (event, file) {
+				/** Custom event handler **/
+				console.log('[Browsersync]', event, file);
+			},
+		},
+	],
+	ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
+	cors: true,
+});
+app.use(inject(bs));
+// browser-sync ends
+
 // server static files
 // app.use(express.static(path.join(__dirname, 'page')));
 app.use('/page/assets', express.static(path.join(__dirname, 'page/assets')));
@@ -97,18 +119,26 @@ app.use('/favicon.ico', async function (_, res) {
 });
 // static files ends
 
+let identifier = 'GEN-HASH';
+
 // dynamic routes
-app.use('/page/:permalink', function (req, res, next) {
+app.use('/page/:permalink', async function (req, res, next) {
+	if (identifier === 'GEN-HASH') {
+		const github = new git(__dirname);
+		identifier = await github.latestCommit();
+	}
+
 	let { permalink } = req.params;
-	if (!permalink.length) permalink = 'index';
+	if (permalink.length === 0) permalink = 'index';
 	let basename = path.basename(permalink, path.extname(permalink));
-	if (!basename.length) basename = 'index';
+	if (basename.length === 0) basename = 'index';
 	const dirname = path.dirname(permalink);
 	const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
-	const pathname = new URL('http://' + req.hostname + req.url).pathname || 'index';
-	writefile('tmp/routes/' + pathname + '.log', JSON.stringify({ dirname, basename, realpath }, null, 2));
+	let pathname = new URL('http://' + req.hostname + req.url).pathname;
+	if (pathname.length === 0) pathname = 'index';
+	writefile('tmp/routes/' + pathname + '.log', JSON.stringify({ identifier, dirname, basename, realpath }, null, 2));
 	if (fs.existsSync(realpath)) {
-		res.render(realpath, {}, function (err, html) {
+		res.render(realpath, { identifier }, function (err, html) {
 			if (err) {
 				console.log('fail render', permalink);
 				res.render('404');
@@ -123,4 +153,4 @@ app.use('/page/:permalink', function (req, res, next) {
 });
 //
 
-module.exports = app;
+module.exports = { app, bs };
