@@ -2,6 +2,9 @@
 // https://codepen.io/dimaslanjaka/pen/LYegjaV
 // data timezone load https://momentjs.com/timezone/docs/#/data-loading/
 // list timezone https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+require('moment/min/moment-with-locales');
+require('moment-timezone/builds/moment-timezone-with-data.min');
+const moment = require('moment-timezone');
 
 window['adsense-onload'] = true;
 if (location.host.includes('cdpn')) console.clear();

@@ -14,61 +14,52 @@ const console = new logger('rollup');
 const app = express();
 
 // engine start
-// app.engine('html', nunjucks.render);
-/**
- * Env Nunjucks
- * @param {import('express').Express} app
- * @returns
- */
-function envNunjucks(app) {
-	const env = new nunjucks.Environment([new nunjucks.FileSystemLoader(__dirname)]);
-	if (typeof app === 'object') {
-		try {
-			nunjucks.configure(__dirname, {
-				autoescape: true,
-				express: app,
-			});
-		} catch {
-			//
-		}
-	}
-	env.addFilter('uriencode', str => {
-		return encodeURL(str);
-	});
-	env.addFilter('noControlChars', str => {
-		return str.replace(/[\x00-\x1F\x7F]/g, ''); // eslint-disable-line no-control-regex
-	});
-	// Extract date from datetime
-	env.addFilter(
-		'formatDate',
-		/**
-		 *
-		 * @param {import('moment-timezone').Moment} input
-		 * @returns
-		 */
-		input => {
-			return input.toISOString().substring(0, 10);
-		},
-	);
-	env.addGlobal('css', str => {
-		return `
-<link
-		rel="preload"
-		href="${str}"
-		as="style"
-		onload="this.onload=null;this.rel='stylesheet'"
-	/>
-	<noscript>
-		<link rel="stylesheet" href="${str}" />
-	</noscript>
-		`.trim();
-	});
-	return env;
-}
-envNunjucks(app);
+const view_path = path.join(__dirname, 'views');
 
+/*const env = new nunjucks.Environment([new nunjucks.FileSystemLoader(view_path)], {
+	autoescape: true,
+	express: app,
+});*/
+const env = nunjucks.configure(view_path, {
+	autoescape: true,
+	express: app,
+});
+env.addFilter('uriencode', str => {
+	return encodeURL(str);
+});
+env.addFilter('noControlChars', str => {
+	return str.replace(/[\x00-\x1F\x7F]/g, ''); // eslint-disable-line no-control-regex
+});
+// Extract date from datetime
+env.addFilter(
+	'formatDate',
+	/**
+	 *
+	 * @param {import('moment-timezone').Moment} input
+	 * @returns
+	 */
+	input => {
+		return input.toISOString().substring(0, 10);
+	},
+);
+env.addGlobal('css', str => {
+	return `
+<link
+	rel="preload"
+	href="${str}"
+	as="style"
+	onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript>
+	<link rel="stylesheet" href="${str}" />
+</noscript>
+	`.trim();
+});
+
+app.engine('html', env.render);
 app.set('view engine', 'html');
 
+// sass middleware
 app.use(
 	'/page',
 	sass({
@@ -81,6 +72,7 @@ app.use(
 	}),
 );
 
+// rollup middleware
 app.use(
 	'/page',
 	rollup({
@@ -107,8 +99,10 @@ app.use('/favicon.ico', async function (_, res) {
 
 // dynamic routes
 app.use('/page/:permalink', function (req, res, next) {
-	const { permalink } = req.params;
-	const basename = path.basename(permalink, path.extname(permalink));
+	let { permalink } = req.params;
+	if (!permalink.length) permalink = 'index';
+	let basename = path.basename(permalink, path.extname(permalink));
+	if (!basename.length) basename = 'index';
 	const dirname = path.dirname(permalink);
 	const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
 	const pathname = new URL('http://' + req.hostname + req.url).pathname || 'index';
@@ -117,7 +111,7 @@ app.use('/page/:permalink', function (req, res, next) {
 		res.render(realpath, {}, function (err, html) {
 			if (err) {
 				console.log('fail render', permalink);
-				res.render('404.njk');
+				res.render('404');
 			} else {
 				console.log('success render', permalink);
 				res.send(html);
