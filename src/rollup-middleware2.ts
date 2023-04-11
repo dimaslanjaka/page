@@ -1,10 +1,26 @@
+import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import assert from 'assert';
-import { rollup } from 'rollup';
+import fs from 'fs-extra';
+import { OutputOptions, rollup, RollupOptions } from 'rollup';
 import { writefile } from 'sbg-utility';
 import path from 'upath';
 import logger from './logger';
+import { isDev } from './utils';
+
+const globals = {
+	jquery: '$',
+	moment: 'moment',
+	'moment-timezone': 'MomentTimezone',
+	flowbite: 'flowbite',
+	'core-js': 'CoreJS',
+	'highlight.js': 'hljs',
+	axios: 'axios',
+	'markdown-it': 'MarkdownIt',
+	codemirror: 'CodeMirror',
+};
 
 const defaults = {
 	mode: 'compile',
@@ -49,24 +65,34 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 
 		writefile('tmp/rollup-middleware/' + pathname + '.log', JSON.stringify({ dest, src, jsPath, sourcePath }, null, 2));
 
-		const bundle = await rollup({
+		const bundleOpt: RollupOptions = {
 			input: sourcePath,
-			external: [],
-			plugins: [json()],
-			output: { plugins: [terser()] },
-		});
-		const writeBundle = await bundle.write(
-			Object.assign({ format: 'cjs', file: jsPath, sourcemap: false }, <any>options.bundleOpts),
-		);
+			external: Object.keys(globals),
+			plugins: [json(), resolve(), commonjs()],
+			output: { plugins: [terser()], file: jsPath, sourcemap: false, format: 'cjs', globals },
+		};
+		const _bundle = await rollup(bundleOpt);
+		const _gen = await _bundle.generate(bundleOpt.output as OutputOptions);
 		res.writeHead(200, {
-			'Content-Type': 'text/css',
+			'Content-Type': 'text/javascript',
 			'Cache-Control': 'max-age=' + maxAge,
 		});
-
-		const results: string[] = [];
-		writeBundle.output.forEach(chunk => {
-			results.push(chunk['code']);
-		});
-		res.end(results.join('\n'));
+		let code = '';
+		if (!isDev) {
+			for (const chunkOrAsset of _gen.output) {
+				if (chunkOrAsset.type === 'asset') {
+					//console.log('Asset', chunkOrAsset);
+				} else {
+					//console.log('Chunk', chunkOrAsset.module);
+					code += chunkOrAsset.code;
+				}
+			}
+			// write minified
+			fs.writeFileSync(jsPath, code);
+		} else {
+			// by default not minified
+			code = fs.readFileSync(jsPath, 'utf-8');
+		}
+		res.end(code);
 	};
 }

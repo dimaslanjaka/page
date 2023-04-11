@@ -2,6 +2,7 @@ import sass from 'node-sass';
 import { writefile } from 'sbg-utility';
 import upath from 'upath';
 import logger from './logger';
+import { isDev } from './utils';
 
 export interface sassMiddlewareOptions {
 	[key: string]: any;
@@ -62,7 +63,7 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 		const result = sass.renderSync({
 			file: sassPath,
 			outFile: cssPath,
-			outputStyle: /dev/i.test(process.env.NODE_ENV) ? 'expanded' : 'compressed',
+			outputStyle: isDev() ? 'expanded' : 'compressed',
 		});
 		if (options.debug) console.log('css written', writefile(cssPath, String(result.css)).file);
 
