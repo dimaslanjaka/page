@@ -71,7 +71,7 @@ document.getElementById('stop-interval').addEventListener('click', function (e) 
 	clearInterval(interval);
 	interval = null;
 });
-
+date_input.addEventListener('change', update_datepicker);
 document.getElementById('copy-moment').addEventListener('click', function (e) {
 	e.preventDefault();
 	copyTextToClipboard(result.textContent.trim());
