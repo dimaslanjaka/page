@@ -52,3 +52,7 @@ function eraseCookie(name) {
 function removeCookie(name) {
 	return eraseCookie(name);
 }
+
+if (typeof module === 'object' && 'exports' in module) {
+	module.exports = { getCookie, removeCookie, eraseCookie, setCookie, createCookieMins };
+}

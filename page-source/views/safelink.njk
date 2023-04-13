@@ -2,14 +2,16 @@
 {% extends '_layout.njk' %}
 <!-- prettier-ignore-end -->
 
+{% set site_title = 'WMI' %}
+
 <!-- prettier-ignore-start -->
-{% block title %}Insurance | layout 1{% endblock %}
+{% block title %}Insurance | {{ site_title }}{% endblock %}
 <!-- prettier-ignore-end -->
 
 {% block head %}
-<meta name="description" content="Insurance layout 1, Loan layout 1, Capital Credit Insurance Layout 1" />
+<meta name="description"
+	content="Insurance {{ site_title }}, Loan {{ site_title }}, Capital Credit Insurance {{ site_title }}" />
 <!-- defer bootstrap -->
-{{ css('/node_modules/bootstrap/dist/css/bootstrap.min.css') | safe }}
 {{ css('/page/assets/css/safelink.css') | safe }}
 
 <script>
@@ -21,6 +23,8 @@
 		}
 		console.log(t);
 	}
+	window['adsense-onload'] = true;
+	window['adsense-debug'] = true;
 </script>
 
 <!-- prettier-ignore-start -->
@@ -336,11 +340,11 @@
 <!-- prettier-ignore-start -->
 {% block endbody %}
 <!-- prettier-ignore-end -->
-<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/node_modules/safelinkify/dist/bundle.min.js"></script>
 <script src="/page/assets/js/cookie.js?hash={{ identifier }}"></script>
-<script src="//www.webmanajemen.com/r-ads.js?hash={{ identifier }}"></script>
-<script src="/page/safelink/safelink-decode.js?hash={{ identifier }}"></script>
+-->
+<script src="/page/assets/js/safelink-decode.js?hash={{ identifier }}"></script>
 <!-- prettier-ignore-start -->
 {% endblock endbody %}
 <!-- prettier-ignore-end -->

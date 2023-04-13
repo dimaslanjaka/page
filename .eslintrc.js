@@ -15,6 +15,7 @@ const config = {
 		adsbygoogle: true,
 		gtag: true,
 		$: true,
+		safelink: true,
 	},
 	parserOptions: {
 		ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
