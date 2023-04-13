@@ -1,5 +1,5 @@
 const { default: axios } = require('axios');
-const app = require('./server-core');
+const { app } = require('./server-core');
 
 // start server
 const listen = app.listen(4000, function () {

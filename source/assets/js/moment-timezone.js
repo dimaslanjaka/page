@@ -2,10 +2,15 @@
 // https://codepen.io/dimaslanjaka/pen/LYegjaV
 // data timezone load https://momentjs.com/timezone/docs/#/data-loading/
 // list timezone https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+// require('moment')
+// require('moment/min/moment-with-locales');
+// require('moment-timezone/builds/moment-timezone-with-data.min');
+// const moment = require('moment-timezone');
 
-window['adsense-onload'] = true;
+const moment = require('moment-timezone');
+
 if (location.host.includes('cdpn')) console.clear();
-const idate = document.querySelector('input#date');
+const date_input = document.querySelector('input#date');
 const pattern = document.querySelector('input#pattern');
 const result = document.querySelector('#moment-result');
 
@@ -25,31 +30,53 @@ function moment_format(datestr) {
 		.format(pattern.value || '');
 }
 
-function update() {
-	idate.value = new Date().toString();
-	const formatted = moment_format(idate.value);
+/**
+ * set datetime-local
+ * @param {HTMLInputElement} element
+ * @param {Date} date
+ */
+function setDateLocalValue(element, date) {
+	/*const new_date = new Date(date.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+	const isoString = new_date.toISOString();
+	const value = isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
+	console.log('set value', { isoString, value });*/
+	const value = moment(date).format('YYYY-MM-DD HH:mm:ss');
+	console.log('set value', { value });
+	element.value = value;
+}
+
+/**
+ * update date input
+ * @param {boolean} force
+ */
+function update_datepicker(force) {
+	// update date picker when empty or forced
+	if (date_input.value.length === 0 || force) setDateLocalValue(date_input, new Date());
+	// format and print result
+	console.log('date value', date_input.value);
+	const formatted = moment_format(date_input.value);
 	result.textContent = formatted;
 }
 
-document.addEventListener('DOMContentLoaded', function (_e) {
-	update(); // update value on-load
-	let interval;
-	document.getElementById('start-interval').addEventListener('click', function (e) {
-		e.preventDefault();
-		if (!interval) interval = setInterval(update, 1000);
-	});
-	document.getElementById('stop-interval').addEventListener('click', function (e) {
-		e.preventDefault();
-		clearInterval(interval);
-		interval = null;
-	});
+update_datepicker(true); // force update value on-load
 
-	document.getElementById('copy-moment').addEventListener('click', function (e) {
-		e.preventDefault();
-		copyTextToClipboard(result.textContent.trim());
-	});
-	pattern.addEventListener('change', update);
+// auto update interval
+let interval;
+document.getElementById('start-interval').addEventListener('click', function (e) {
+	e.preventDefault();
+	if (!interval) interval = setInterval(() => update_datepicker(true), 1000);
 });
+document.getElementById('stop-interval').addEventListener('click', function (e) {
+	e.preventDefault();
+	clearInterval(interval);
+	interval = null;
+});
+date_input.addEventListener('change', update_datepicker);
+document.getElementById('copy-moment').addEventListener('click', function (e) {
+	e.preventDefault();
+	copyTextToClipboard(result.textContent.trim());
+});
+pattern.addEventListener('change', update_datepicker);
 
 function fallbackCopyTextToClipboard(text) {
 	var textArea = document.createElement('textarea');
@@ -91,11 +118,11 @@ function copyTextToClipboard(text) {
 
 // clock
 function clock_update() {
-	var london = moment.tz('Europe/London').format('MMMM Do YYYY, h:mm:ss a');
-	var sydney = moment.tz('Australia/Sydney').format('MMMM Do YYYY, h:mm:ss a');
-	var beijing = moment.tz('Asia/Shanghai').format('MMMM Do YYYY, h:mm:ss a');
-	var tokyo = moment.tz('Asia/Tokyo').format('MMMM Do YYYY, h:mm:ss a');
-	var la = moment.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a');
+	const london = moment.tz('Europe/London').format('MMMM Do YYYY, h:mm:ss a');
+	const sydney = moment.tz('Australia/Sydney').format('MMMM Do YYYY, h:mm:ss a');
+	const beijing = moment.tz('Asia/Shanghai').format('MMMM Do YYYY, h:mm:ss a');
+	const tokyo = moment.tz('Asia/Tokyo').format('MMMM Do YYYY, h:mm:ss a');
+	const la = moment.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a');
 
 	document.querySelector('#london').textContent = london;
 	document.querySelector('#sydney').textContent = sydney;

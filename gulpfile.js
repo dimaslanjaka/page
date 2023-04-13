@@ -3,6 +3,16 @@ const gulp = require('gulp');
 const path = require('path');
 const fs = require('fs-extra');
 
+gulp.task('page:copy', async function () {
+	// copy non-compiled files
+	// copy workflow
+	const w_src = path.join(__dirname, '.github');
+	const w_dest = path.join(__dirname, 'page/.github');
+
+	if (fs.existsSync(w_dest)) fs.rmSync(w_dest, { force: true, recursive: true });
+	await fs.copy(w_src, w_dest, { overwrite: true });
+});
+
 gulp.task('page:commit', async function () {
 	const currentGit = new git(__dirname);
 	const pageGit = new git(path.join(__dirname, 'page'));
@@ -17,6 +27,8 @@ gulp.task('page:commit', async function () {
 	let canPush = await pageGit.canPush();
 	if (canPush) pageGit.push();
 });
+
+gulp.task('page', gulp.series('page:copy', 'page:commit'));
 
 gulp.task('build', async function () {
 	const files = fs.readdirSync(__dirname);

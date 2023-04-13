@@ -7,5 +7,5 @@
 		"resolveJsonModule": true
 	},
 	"exclude": ["node_modules", "tmp"],
-	"include": ["src/**/*", "source/**/*"]
+	"include": ["src/**/*", "source/**/*", "./page"]
 }

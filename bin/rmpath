@@ -24,10 +24,10 @@ fi
 vowels=( a i u e o A I U E O )
 for letter in {{a..z},{A..Z}}; do
     for vowel in "${vowels[@]}"; do
-      toBeDeleted=( "$1/.${letter}*" "$1/${letter}*" "$1/.${letter}${vowel}*" "$1/${letter}${vowel}*" )
+      toBeDeleted=( "$1/.${letter}*" "$1/@${letter}*" "$1/${letter}*" "$1/@${letter}${vowel}*" "$1/.${letter}${vowel}*" "$1/${letter}${vowel}*" )
       for fpath in "${toBeDeleted[@]}"; do
         echo "deleting ${fpath}"
-        rm -rf "$fpath" &
+        rm -rf $fpath or echo "cannot delete $fpath" &
       done
     done
 done
@@ -35,6 +35,6 @@ done
 wait
 
 echo "cleaning $1"
-rm -rf "$1" &
+rm -rf $1 &
 
 wait

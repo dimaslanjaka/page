@@ -1,23 +1,19 @@
+import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import assert from 'assert';
-import { rollup } from 'rollup';
-import { writefile } from 'sbg-utility';
+import fs from 'fs-extra';
+import { OutputOptions, rollup, RollupOptions } from 'rollup';
+import { md5, writefile } from 'sbg-utility';
 import path from 'upath';
 import logger from './logger';
+import { isDev } from './utils';
 
 const defaults = {
-	mode: 'compile',
-	bundleExtension: '.bundle',
 	src: null as string,
 	dest: null as string,
 	cwd: process.cwd(),
-	prefix: null,
-	rebuild: 'deps-change', // or 'never' or 'always'
-	serve: false /* or 'on-compile' or true. 'on-compile' has the benefit
-                   that the bundle which is already in memory will be
-                   written directly into the response */,
-	type: 'javascript',
 	rollupOpts: {},
 	bundleOpts: { format: 'iife' },
 	debug: false,
@@ -47,26 +43,42 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 		const jsPath = path.join(dest, fixedPath);
 		const sourcePath = path.join(src, fixedPath.replace(/\.css$/, '.scss'));
 
+		// skip when not found
+		if (!fs.existsSync(sourcePath)) return next();
+
 		writefile('tmp/rollup-middleware/' + pathname + '.log', JSON.stringify({ dest, src, jsPath, sourcePath }, null, 2));
 
-		const bundle = await rollup({
+		const bundleOpt: RollupOptions = {
 			input: sourcePath,
-			external: [],
-			plugins: [json()],
-			output: { plugins: [terser()] },
-		});
-		const writeBundle = await bundle.write(
-			Object.assign({ format: 'cjs', file: jsPath, sourcemap: false }, <any>options.bundleOpts),
-		);
+			// external: Object.keys(globals),
+			cache: !isDev(),
+			plugins: [json(), resolve(), commonjs()],
+			output: {
+				plugins: [],
+				file: jsPath,
+				sourcemap: false,
+				format: 'umd',
+				name: '_' + md5(pathname) /*, globals*/,
+			},
+		};
+		if (!isDev()) ((bundleOpt.output as OutputOptions).plugins as any[]).push(terser());
+		const _bundle = await rollup(bundleOpt);
+		const _gen = await _bundle.generate(bundleOpt.output as OutputOptions);
 		res.writeHead(200, {
-			'Content-Type': 'text/css',
+			'Content-Type': 'text/javascript',
 			'Cache-Control': 'max-age=' + maxAge,
 		});
-
-		const results: string[] = [];
-		writeBundle.output.forEach(chunk => {
-			results.push(chunk['code']);
-		});
-		res.end(results.join('\n'));
+		let code = '';
+		for (const chunkOrAsset of _gen.output) {
+			if (chunkOrAsset.type === 'asset') {
+				//console.log('Asset', chunkOrAsset);
+			} else {
+				//console.log('Chunk', chunkOrAsset.module);
+				code += chunkOrAsset.code;
+			}
+		}
+		// write compiled
+		fs.writeFileSync(jsPath, code);
+		res.end(code);
 	};
 }
