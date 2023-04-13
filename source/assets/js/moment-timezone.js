@@ -36,15 +36,24 @@ function moment_format(datestr) {
  * @param {Date} date
  */
 function setDateLocalValue(element, date) {
-	date = new Date(date.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
-	const isoString = date.toISOString();
-	element.value = isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
+	/*const new_date = new Date(date.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
+	const isoString = new_date.toISOString();
+	const value = isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
+	console.log('set value', { isoString, value });*/
+	const value = moment(date).format('YYYY-MM-DD HH:mm:ss');
+	console.log('set value', { value });
+	element.value = value;
 }
 
+/**
+ * update date input
+ * @param {boolean} force
+ */
 function update_datepicker(force) {
 	// update date picker when empty or forced
 	if (date_input.value.length === 0 || force) setDateLocalValue(date_input, new Date());
 	// format and print result
+	console.log('date value', date_input.value);
 	const formatted = moment_format(date_input.value);
 	result.textContent = formatted;
 }
@@ -55,7 +64,7 @@ update_datepicker(true); // force update value on-load
 let interval;
 document.getElementById('start-interval').addEventListener('click', function (e) {
 	e.preventDefault();
-	if (!interval) interval = setInterval(update_datepicker, 1000);
+	if (!interval) interval = setInterval(() => update_datepicker(true), 1000);
 });
 document.getElementById('stop-interval').addEventListener('click', function (e) {
 	e.preventDefault();

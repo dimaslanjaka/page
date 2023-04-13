@@ -98,6 +98,7 @@ const bs = browserSync.create().init({
 			fn: function (event, file) {
 				/** Custom event handler **/
 				console.log('[Browsersync]', event, file);
+				browserSync.reload();
 			},
 		},
 	],

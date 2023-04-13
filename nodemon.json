@@ -4,11 +4,9 @@
   "watch": [
     "./tsconfig.json",
     "./package.json",
-    "./views/**/*",
     "./server.js",
     "./server-core.js",
-    "./src/**/*",
-    "./source/**/*"
+    "./src/**/*"
   ],
   "ignore": [
     "*.test.js",
