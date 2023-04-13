@@ -12,6 +12,7 @@ const rollup = require('./src/rollup-middleware2').default;
 const browserSync = require('browser-sync');
 const inject = require('connect-browser-sync');
 const { default: git } = require('git-command-helper');
+const { isDev } = require('./src/utils');
 
 const console = new logger('server');
 const app = express();
@@ -26,6 +27,7 @@ const view_path = path.join(__dirname, 'views');
 const env = nunjucks.configure(view_path, {
 	autoescape: true,
 	express: app,
+	noCache: isDev(),
 });
 env.addFilter('uriencode', str => {
 	return encodeURL(str);
