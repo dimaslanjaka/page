@@ -1,16 +1,16 @@
 {
   "$schema": "http://json.schemastore.org/nodemon",
-  "exec": "cross-env-shell NODE_ENV=development node server.js",
+  "exec": "yarn workspace page-source run start",
   "watch": [
     "./tsconfig.json",
     "./package.json",
-    "./server.js",
-    "./server-core.js",
-    "./src/**/*"
+    "./page-source/server.js",
+    "./page-source/server-core.js",
+    "./page-source/src/**/*"
   ],
   "ignore": [
     "*.test.js",
-    ".vscode",
+    "**/.vscode",
     "**/node_modules/**"
   ],
   "delay": 3000,
