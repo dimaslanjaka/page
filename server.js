@@ -1,12 +1,11 @@
 const { default: axios } = require('axios');
-const { app, bs } = require('./server-core');
+const { app } = require('./server-core');
 
 // start server
 const listen = app.listen(4000, function () {
 	console.log('http://localhost:4000');
 });
 listen.on('listening', function () {
-	bs.reload();
 	const spoof = url =>
 		axios.get(url).catch(function () {
 			//
