@@ -10,7 +10,7 @@
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && npx npm-check-updates -u",
     "serve": "node server.js",
     "build": "gulp --series build page:commit",
-    "postinstall": "node postinstall.js",
+    "post-install": "node postinstall.js --yarn",
     "server-dump": "node server.js &> server.log"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
@@ -76,5 +76,6 @@
     "typescript": "^5.0.4",
     "upath": "^2.0.1",
     "vinyl-sourcemaps-apply": "^0.2.1"
-  }
+  },
+  "packageManager": "yarn@3.5.0"
 }
