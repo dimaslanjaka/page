@@ -29,11 +29,7 @@ gulp.task('page:commit', async function () {
 });
 
 gulp.task('page:build', async function () {
-	const files = fs.readdirSync(__dirname);
-	for (let i = 0; i < files.length; i++) {
-		const script = files[i];
-		if (script.startsWith('build.')) await import('./' + script);
-	}
+	await import('./page-source/build.js');
 });
 
 gulp.task('page', gulp.series('page:build', 'page:copy', 'page:commit'));
