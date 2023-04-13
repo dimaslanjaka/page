@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
+    "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && npx npm-check-updates -u",
     "serve": "node server.js",
