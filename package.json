@@ -9,8 +9,8 @@
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && npx npm-check-updates -u",
-    "serve": "node server.js",
-    "build": "gulp --series build page:commit",
+    "serve": "yarn workspace page-source run serve",
+    "build": "gulp --series page",
     "post-install": "node postinstall.js --yarn",
     "server-dump": "node server.js &> server.log"
   },
