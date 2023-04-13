@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', triggerAdsense);
 let called = false;
 
 /**
+ * debug on localhost
+ */
+const adsense_log =
+	islocalhost() && window['adsense-debug'] === true
+		? console.log
+		: function (..._args) {
+				//
+		  };
+
+/**
  * Trigger adsense
  * @param {Event} _e
  * @returns
@@ -32,23 +42,14 @@ function triggerAdsense(_e) {
 	if (called) return;
 	called = true;
 
-	/**
-	 * debug on localhost
-	 */
-	const log = islocalhost()
-		? console.log
-		: function (..._args) {
-				//
-		  };
-
 	const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
-	log('existing ins', existingIns.length);
+	adsense_log('existing ins', existingIns.length);
 
 	for (let i = 0; i < existingIns.length; i++) {
 		const ins = existingIns[i];
 
 		if (islocalhost()) {
-			log('apply test ad to existing ins', i + 1);
+			adsense_log('apply test ad to existing ins', i + 1);
 			ins.setAttribute('data-adtest', 'on');
 		}
 	}
@@ -109,12 +110,12 @@ function triggerAdsense(_e) {
 	let currentSlot = allAds.find(item => item.pub === ca);
 
 	if (ca.length > 0 && typeof currentSlot === 'object') {
-		log('cached pub', ca);
+		adsense_log('cached pub', ca);
 	} else {
 		currentSlot = allAds[0];
 
 		if (location.pathname != '/') {
-			log('caching pub', currentSlot.pub);
+			adsense_log('caching pub', currentSlot.pub);
 			setCookie(
 				ck,
 				currentSlot.pub,
@@ -126,7 +127,7 @@ function triggerAdsense(_e) {
 		}
 	}
 
-	log('total ads banner', currentSlot.ads.length);
+	adsense_log('total ads banner', currentSlot.ads.length);
 
 	// find element *[adsense="fill"] for render first
 	const fixedPlacement = Array.from(document.querySelectorAll('[adsense="fill"]'));
@@ -137,7 +138,7 @@ function triggerAdsense(_e) {
 			if (attr) {
 				attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
 				const ins = createIns(attr);
-				log('insert ads to adsense="fill"', i + 1);
+				adsense_log('insert ads to adsense="fill"', i + 1);
 				replaceWith(ins, place);
 			}
 		}
@@ -177,7 +178,7 @@ function triggerAdsense(_e) {
 			return 0.5 - Math.random();
 		});
 
-	log('total targeted ads places', adsPlaces.length);
+	adsense_log('total targeted ads places', adsPlaces.length);
 
 	if (adsPlaces.length > 0 && currentSlot.ads.length > 0) {
 		for (let i = 0; i < currentSlot.ads.length; i++) {
@@ -197,7 +198,7 @@ function triggerAdsense(_e) {
 					}
 				}
 
-				log(i + 1, 'add banner', attr['data-ad-slot']);
+				adsense_log(i + 1, 'add banner', attr['data-ad-slot']);
 				insertAfter(ins, nextOf);
 			}
 		}
@@ -211,14 +212,14 @@ function triggerAdsense(_e) {
 	document.head.appendChild(script);
 
 	const allIns = Array.from(document.querySelectorAll('ins'));
-	log('total ins', allIns.length);
+	adsense_log('total ins', allIns.length);
 
 	for (let i = 0; i < allIns.length; i++) {
 		// log('apply banner', i + 1);
 		const ins = allIns[i];
 		if (!ins) continue;
 		if (!ins.getAttribute('data-ad-client')) {
-			console.log(ins);
+			adsense_log(ins);
 			continue;
 		}
 		const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
@@ -233,10 +234,10 @@ function triggerAdsense(_e) {
 		const slot = ins.getAttribute('data-ad-client').trim();
 		if (ins.parentElement.offsetWidth < 250) {
 			// remove banner when parent width is 0 or display: none
-			log(i + 1, 'remove', slot);
+			adsense_log(i + 1, 'remove', slot);
 			ins.remove();
 		} else if (ins.innerHTML.trim().length === 0) {
-			log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
+			adsense_log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
 			// (adsbygoogle = window.adsbygoogle || []).push({});
 			if (!window.adsbygoogle) window.adsbygoogle = [];
 			window.adsbygoogle.push({});
@@ -309,7 +310,7 @@ function triggerAdsense(_e) {
 			path +
 			(domain ? '; domain=' + domain : '') +
 			(secure ? '; secure' : '');
-		log(cookie);
+		adsense_log(cookie);
 		document.cookie = cookie;
 	}
 
@@ -353,7 +354,7 @@ function triggerAdsense(_e) {
 	 */
 	function replaceWith(newElement, oldElement) {
 		if (!oldElement.parentNode) {
-			log(oldElement, 'parent null');
+			adsense_log(oldElement, 'parent null');
 			let d = document.createElement('div');
 			d.appendChild(oldElement);
 		} else {
