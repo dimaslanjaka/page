@@ -28,14 +28,14 @@ gulp.task('page:commit', async function () {
 	if (canPush) pageGit.push();
 });
 
-gulp.task('page', gulp.series('page:copy', 'page:commit'));
-
-gulp.task('build', async function () {
+gulp.task('page:build', async function () {
 	const files = fs.readdirSync(__dirname);
 	for (let i = 0; i < files.length; i++) {
 		const script = files[i];
 		if (script.startsWith('build.')) await import('./' + script);
 	}
 });
+
+gulp.task('page', gulp.series('page:build', 'page:copy', 'page:commit'));
 
 module.exports = gulp;
