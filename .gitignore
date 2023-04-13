@@ -4,3 +4,4 @@ node_modules
 tmp
 config.json
 *.log
+# 5 6 ^ %
