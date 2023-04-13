@@ -1,4 +1,6 @@
+import fs from 'fs-extra';
 import sass from 'node-sass';
+import path from 'path';
 import { writefile } from 'sbg-utility';
 import upath from 'upath';
 import logger from './logger';
@@ -64,6 +66,9 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 			file: sassPath,
 			outFile: cssPath,
 			outputStyle: isDev() ? 'expanded' : 'compressed',
+			includePaths: [path.join(__dirname, '../node_modules'), path.join(__dirname, '../../node_modules')].filter(
+				fs.existsSync,
+			),
 		});
 		if (options.debug) console.log('css written', writefile(cssPath, String(result.css)).file);
 

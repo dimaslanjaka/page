@@ -67,7 +67,7 @@ app.use(
 	'/page',
 	sass({
 		src: path.join(__dirname, 'source'), // Input SASS source folder
-		dest: path.join(__dirname, 'page'), // Output CSS destination folder
+		dest: path.join(__dirname, '../page'), // Output CSS destination folder
 		debug: true,
 		app,
 		base: '/page',
@@ -80,7 +80,7 @@ app.use(
 	'/page',
 	rollup({
 		src: 'source',
-		dest: 'page',
+		dest: '../page',
 		cwd: __dirname,
 		debug: true,
 		//prefix: '/js',
@@ -109,8 +109,8 @@ app.use(inject(bs));
 // browser-sync ends
 
 // server static files
-// app.use(express.static(path.join(__dirname, 'page')));
-app.use('/page/assets', express.static(path.join(__dirname, 'page/assets')));
+// app.use(express.static(path.join(__dirname, '../page')));
+app.use('/page/assets', express.static(path.join(__dirname, '../page/assets')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/page/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/favicon.ico', async function (_, res) {
