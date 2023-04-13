@@ -26,9 +26,15 @@
 {% endblock head %}
 
 {% block content %}
-<section>{% include "./moment-timezone.content.njk" %}</section>
-<section>{% include "./moment-timezone.clock.njk" %}</section>
-<section>{% include "./moment-timezone.snippet.njk" %}</section>
+<div class="text-center">
+  <h1><a href="https://www.webmanajemen.com/page/moment-timezone.html" target="_blank">Moment Timezone
+      Playground</a>
+  </h1>
+  <small class="text-muted">Parse and display dates in any timezone.</small>
+</div>
+<section>{% include "./partials/moment-timezone/date-input.njk" %}</section>
+<section>{% include "./partials/moment-timezone/clock.njk" %}</section>
+<section>{% include "./partials/moment-timezone/snippet.njk" %}</section>
 {% endblock content %}
 
 {% block endbody %}
