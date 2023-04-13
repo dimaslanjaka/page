@@ -66,9 +66,16 @@ export default function sassMiddleware(options: sassMiddlewareOptions): import('
 			file: sassPath,
 			outFile: cssPath,
 			outputStyle: isDev() ? 'expanded' : 'compressed',
-			includePaths: [path.join(__dirname, '../node_modules'), path.join(__dirname, '../../node_modules')].filter(
-				fs.existsSync,
-			),
+			includePaths: [
+				path.join(__dirname, '../node_modules'),
+				path.join(process.cwd(), 'node_modules'),
+				path.join(__dirname, '../../node_modules'),
+			]
+				.filter(fs.existsSync)
+				.map(str => path.resolve(str))
+				.filter(function (elem, index, self) {
+					return index === self.indexOf(elem);
+				}),
 		});
 		if (options.debug) console.log('css written', writefile(cssPath, String(result.css)).file);
 
