@@ -5,23 +5,15 @@ import terser from '@rollup/plugin-terser';
 import assert from 'assert';
 import fs from 'fs-extra';
 import { OutputOptions, rollup, RollupOptions } from 'rollup';
-import { writefile } from 'sbg-utility';
+import { md5, writefile } from 'sbg-utility';
 import path from 'upath';
 import logger from './logger';
 import { isDev } from './utils';
 
 const defaults = {
-	mode: 'compile',
-	bundleExtension: '.bundle',
 	src: null as string,
 	dest: null as string,
 	cwd: process.cwd(),
-	prefix: null,
-	rebuild: 'deps-change', // or 'never' or 'always'
-	serve: false /* or 'on-compile' or true. 'on-compile' has the benefit
-                   that the bundle which is already in memory will be
-                   written directly into the response */,
-	type: 'javascript',
 	rollupOpts: {},
 	bundleOpts: { format: 'iife' },
 	debug: false,
@@ -61,7 +53,13 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
 			// external: Object.keys(globals),
 			cache: !isDev(),
 			plugins: [json(), resolve(), commonjs()],
-			output: { plugins: [], file: jsPath, sourcemap: false, format: 'iife', name: 'wmi' /*, globals*/ },
+			output: {
+				plugins: [],
+				file: jsPath,
+				sourcemap: false,
+				format: 'umd',
+				name: '_' + md5(pathname) /*, globals*/,
+			},
 		};
 		if (!isDev()) ((bundleOpt.output as OutputOptions).plugins as any[]).push(terser());
 		const _bundle = await rollup(bundleOpt);
