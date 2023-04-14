@@ -11,23 +11,41 @@ const moment = require('moment-timezone');
 
 if (location.host.includes('cdpn')) console.clear();
 const date_input = document.querySelector('input#date');
+const date_text = document.querySelector('input#date-text');
+const date_timezone = document.getElementById('date-timezone');
 const pattern = document.querySelector('input#pattern');
 const result = document.querySelector('#moment-result');
 
 const isNumeric = str => parseFloat(str) === parseFloat(str);
 
-function moment_format(datestr) {
-	if (isNumeric(datestr)) {
-		return moment(datestr)
-			.tz('Asia/Jakarta')
-			.format(pattern.value || '');
+/**
+ * moment format
+ * @param {Date|string|number} dateInput
+ * @param {string} custom_pattern
+ * @returns
+ */
+function moment_format(dateInput, custom_pattern, custom_timezone) {
+	/**
+	 * @type {Date}
+	 */
+	let date;
+	if (isNumeric(dateInput)) {
+		date = moment(dateInput).toDate();
 	}
-	if (typeof datestr === 'string') {
-		datestr = new Date(datestr);
+	if (typeof dateInput === 'string') {
+		date = new Date(dateInput);
 	}
-	return moment(datestr)
-		.tz('Asia/Jakarta')
-		.format(pattern.value || '');
+	let value = '';
+	if (typeof custom_pattern === 'string' && custom_pattern.length > 0) {
+		value = custom_pattern;
+	} else if (pattern.value.length > 0) {
+		value = pattern.value;
+	}
+	let timezone = date_timezone.value.trim();
+	if (typeof custom_timezone === 'string' && custom_timezone.length > 0) {
+		timezone = custom_timezone;
+	}
+	return moment(date).tz(timezone).format(value);
 }
 
 /**
@@ -40,43 +58,63 @@ function setDateLocalValue(element, date) {
 	const isoString = new_date.toISOString();
 	const value = isoString.substring(0, ((isoString.indexOf('T') | 0) + 6) | 0);
 	console.log('set value', { isoString, value });*/
-	const value = moment(date).format('YYYY-MM-DD HH:mm:ss');
+	const value = moment_format(date, 'YYYY-MM-DD HH:mm:ss');
 	console.log('set value', { value });
 	element.value = value;
 }
 
-/**
- * update date input
- * @param {boolean} force
- */
-function update_datepicker(force) {
-	// update date picker when empty or forced
-	if (date_input.value.length === 0 || force) setDateLocalValue(date_input, new Date());
-	// format and print result
-	console.log('date value', date_input.value);
-	const formatted = moment_format(date_input.value);
-	result.textContent = formatted;
-}
+// force update date input value on-load
+setDateLocalValue(date_input, new Date());
+const formatted = moment_format(date_input.value);
+result.textContent = formatted;
+date_text.value = formatted;
 
-update_datepicker(true); // force update value on-load
+// update date text when date input changed
+date_input.addEventListener('change', function () {
+	const value = this.value;
+	console.log('date input', value);
+	const formatted = moment_format(value);
+	result.textContent = formatted;
+	date_text.value = formatted;
+});
+
+// update date input when date text changed
+date_text.addEventListener('change', function () {
+	const value = this.value;
+	console.log('date text', value);
+	setDateLocalValue(date_input, moment(value).toDate());
+	const formatted = moment_format(value);
+	result.textContent = formatted;
+});
+
+// pattern changed
+pattern.addEventListener('change', function () {
+	const formatted = moment_format(date_input.value, this.value);
+	result.textContent = formatted;
+});
 
 // auto update interval
 let interval;
 document.getElementById('start-interval').addEventListener('click', function (e) {
 	e.preventDefault();
-	if (!interval) interval = setInterval(() => update_datepicker(true), 1000);
+	if (!interval) {
+		interval = setInterval(function () {
+			const formatted = moment_format(new Date());
+			result.textContent = formatted;
+			date_text.value = formatted;
+			setDateLocalValue(date_input, moment(formatted).toDate());
+		}, 1000);
+	}
 });
 document.getElementById('stop-interval').addEventListener('click', function (e) {
 	e.preventDefault();
 	clearInterval(interval);
 	interval = null;
 });
-date_input.addEventListener('change', update_datepicker);
 document.getElementById('copy-moment').addEventListener('click', function (e) {
 	e.preventDefault();
 	copyTextToClipboard(result.textContent.trim());
 });
-pattern.addEventListener('change', update_datepicker);
 
 function fallbackCopyTextToClipboard(text) {
 	var textArea = document.createElement('textarea');
