@@ -71,19 +71,18 @@ date_text.value = formatted;
 
 // update date text when date input changed
 date_input.addEventListener('change', function () {
-	const value = this.value;
-	console.log('date input', value);
-	const formatted = moment_format(value);
+	const formatted = moment_format(this.value);
+	console.log('date input', { value: this.value, formatted });
+
 	result.textContent = formatted;
 	date_text.value = formatted;
 });
 
 // update date input when date text changed
 date_text.addEventListener('change', function () {
-	const value = this.value;
-	console.log('date text', value);
-	setDateLocalValue(date_input, moment(value).toDate());
-	const formatted = moment_format(value);
+	const formatted = moment_format(this.value);
+	console.log('date text', { value: this.value, formatted });
+	setDateLocalValue(date_input, formatted);
 	result.textContent = formatted;
 });
 
@@ -102,7 +101,7 @@ document.getElementById('start-interval').addEventListener('click', function (e)
 			const formatted = moment_format(new Date());
 			result.textContent = formatted;
 			date_text.value = formatted;
-			setDateLocalValue(date_input, moment(formatted).toDate());
+			setDateLocalValue(date_input, formatted);
 		}, 1000);
 	}
 });
