@@ -4,7 +4,6 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env-shell NODE_ENV=development node server.js",
     "serve": "cross-env-shell NODE_ENV=production node server.js"
   },

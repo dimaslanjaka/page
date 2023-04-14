@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "start": "yarn workspace page-source run start",
     "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
