@@ -91,23 +91,25 @@ app.use(
 // engine ends
 
 // browser-sync start
-const bs = browserSync.create().init({
-	logSnippet: false,
-	files: [
-		//__dirname,
-		{
-			match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
-			fn: function (event, file) {
-				/** Custom event handler **/
-				console.log('[Browsersync]', event, file);
-				browserSync.reload();
+if (isDev()) {
+	const bs = browserSync.create().init({
+		logSnippet: false,
+		files: [
+			//__dirname,
+			{
+				match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
+				fn: function (event, file) {
+					/** Custom event handler **/
+					console.log('[Browsersync]', event, file);
+					browserSync.reload();
+				},
 			},
-		},
-	],
-	ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
-	cors: true,
-});
-app.use(inject(bs));
+		],
+		ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
+		cors: true,
+	});
+	app.use(inject(bs));
+}
 // browser-sync ends
 
 // server static files
@@ -156,4 +158,4 @@ app.use('/page/:permalink', async function (req, res, next) {
 });
 //
 
-module.exports = { app, bs };
+module.exports = { app };
