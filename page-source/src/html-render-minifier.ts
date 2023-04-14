@@ -33,6 +33,10 @@ export default function minifyHtmlMiddleware(options: MinifyMiddlewareOptions): 
 					collapseBooleanAttributes: true,
 					removeAttributeQuotes: true,
 					removeEmptyAttributes: true,
+					minifyJS: true,
+					minifyCSS: true,
+					ignoreCustomFragments: [/{([%#])[^]+?\1}/, /{{[^]+?}}/],
+					trimCustomFragments: true,
 				});
 				res.send(html);
 			});
