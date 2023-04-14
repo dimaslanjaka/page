@@ -13,6 +13,7 @@ const browserSync = require('browser-sync');
 const inject = require('connect-browser-sync');
 const { default: git } = require('git-command-helper');
 const { isDev } = require('./src/utils');
+const { default: minifyHtmlMiddleware } = require('./src/html-render-minifier');
 
 const console = new logger('server');
 const app = express();
@@ -88,6 +89,9 @@ app.use(
 		//prefix: '/js',
 	}),
 );
+
+// minify html middleware
+if (!isDev()) app.use('/page', minifyHtmlMiddleware({ debug: true }));
 // engine ends
 
 // browser-sync start
