@@ -1,4 +1,5 @@
 {
 	"extends": "../tsconfig.json",
-	"include": ["src/**/*", "source/**/*", "./page"]
+	"compilerOptions": { "allowJs": true, "resolveJsonModule": true },
+	"include": ["src/**/*", "source/**/*", "./page", "./source/**/*.json"]
 }
