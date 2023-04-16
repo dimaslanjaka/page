@@ -12,6 +12,8 @@ const rollup = require('./src/rollup-middleware2').default;
 const browserSync = require('browser-sync');
 const inject = require('connect-browser-sync');
 const { default: git } = require('git-command-helper');
+const { isDev } = require('./src/utils');
+const { default: minifyHtmlMiddleware } = require('./src/html-render-minifier');
 
 const console = new logger('server');
 const app = express();
@@ -26,6 +28,7 @@ const view_path = path.join(__dirname, 'views');
 const env = nunjucks.configure(view_path, {
 	autoescape: true,
 	express: app,
+	noCache: isDev(),
 });
 env.addFilter('uriencode', str => {
 	return encodeURL(str);
@@ -67,7 +70,7 @@ app.use(
 	'/page',
 	sass({
 		src: path.join(__dirname, 'source'), // Input SASS source folder
-		dest: path.join(__dirname, 'page'), // Output CSS destination folder
+		dest: path.join(__dirname, '../page'), // Output CSS destination folder
 		debug: true,
 		app,
 		base: '/page',
@@ -80,37 +83,42 @@ app.use(
 	'/page',
 	rollup({
 		src: 'source',
-		dest: 'page',
+		dest: '../page',
 		cwd: __dirname,
 		debug: true,
 		//prefix: '/js',
 	}),
 );
+
+// minify html middleware
+if (!isDev()) app.use('/page', minifyHtmlMiddleware({ debug: true }));
 // engine ends
 
 // browser-sync start
-const bs = browserSync.create().init({
-	logSnippet: false,
-	files: [
-		//__dirname,
-		{
-			match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
-			fn: function (event, file) {
-				/** Custom event handler **/
-				console.log('[Browsersync]', event, file);
-				browserSync.reload();
+if (isDev()) {
+	const bs = browserSync.create().init({
+		logSnippet: false,
+		files: [
+			//__dirname,
+			{
+				match: ['views/**/*.njk', 'source/**/*.scss', 'source/**/*.js'],
+				fn: function (event, file) {
+					/** Custom event handler **/
+					console.log('[Browsersync]', event, file);
+					browserSync.reload();
+				},
 			},
-		},
-	],
-	ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
-	cors: true,
-});
-app.use(inject(bs));
+		],
+		ignore: ['**/.git*', '**/tmp/**', '**/build/**'],
+		cors: true,
+	});
+	app.use(inject(bs));
+}
 // browser-sync ends
 
 // server static files
-// app.use(express.static(path.join(__dirname, 'page')));
-app.use('/page/assets', express.static(path.join(__dirname, 'page/assets')));
+// app.use(express.static(path.join(__dirname, '../page')));
+app.use('/page/assets', express.static(path.join(__dirname, '../page/assets')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/page/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/favicon.ico', async function (_, res) {
@@ -154,4 +162,4 @@ app.use('/page/:permalink', async function (req, res, next) {
 });
 //
 
-module.exports = { app, bs };
+module.exports = { app };

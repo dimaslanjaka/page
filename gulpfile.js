@@ -13,6 +13,10 @@ gulp.task('page:copy', async function () {
 	await fs.copy(w_src, w_dest, { overwrite: true });
 });
 
+const sleep = milliseconds => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
+
 gulp.task('page:commit', async function () {
 	const currentGit = new git(__dirname);
 	const pageGit = new git(path.join(__dirname, 'page'));
@@ -24,16 +28,13 @@ gulp.task('page:commit', async function () {
 	} catch {
 		//
 	}
+	await sleep(700);
 	let canPush = await pageGit.canPush();
 	if (canPush) pageGit.push();
 });
 
 gulp.task('page:build', async function () {
-	const files = fs.readdirSync(__dirname);
-	for (let i = 0; i < files.length; i++) {
-		const script = files[i];
-		if (script.startsWith('build.')) await import('./' + script);
-	}
+	await import('./page-source/build.js');
 });
 
 gulp.task('page', gulp.series('page:build', 'page:copy', 'page:commit'));

@@ -1,24 +1,21 @@
 <div class="container">
-  <div class="text-center">
-    <h1><a href="https://www.webmanajemen.com/page/moment-timezone.html" target="_blank">Moment Timezone
-        Playground</a>
-    </h1>
-    <small class="text-muted">Parse and display dates in any timezone.</small>
-  </div>
-
   <div class="row">
     <div class="col-md-6">
       <label for="date">Date Input</label>
-      <input type="datetime-local" value="2013-10-24T20:36:00" id="date" class="form-control mb-2" step="1" />
+      <input type="datetime-local" value="2013-10-24T20:36:00+0700" id="date" class="form-control mb-2" step="1" />
+      <input type="text" name="" id="date-text" class="form-control mb-2">
     </div>
     <div class="col-md-6">
       <label for="pattern">Format Pattern</label>
       <input type="text" class="form-control mb-2" placeholder="LLLL" id="pattern">
+      <input type="text" name="" id="date-timezone" value="Asia/Jakarta" class="form-control mb-2">
     </div>
     <div class="col-6">
-      <button id="start-interval" class="btn btn-sm btn-warning">start interval</button>
-      <button id="stop-interval" class="btn btn-sm btn-danger">stop interval</button>
-      <button id="copy-moment" class="btn btn-sm btn-success">Copy</button>
+      <div class="btn-group" role="group" aria-label="date input control">
+        <button id="start-interval" class="btn btn-sm btn-warning">start interval</button>
+        <button id="stop-interval" class="btn btn-sm btn-danger">stop interval</button>
+        <button id="copy-moment" class="btn btn-sm btn-success">Copy</button>
+      </div>
     </div>
     <div class="col-md-6">
       <span class="mr-2">Result:</span> <span id="moment-result"></span>

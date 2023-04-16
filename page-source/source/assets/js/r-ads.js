@@ -379,3 +379,7 @@ function islocalhost() {
 	if (location.port.length > 0) return true;
 	return false;
 }
+
+if (typeof module === 'object' && 'exports' in module) {
+	module.exports = { islocalhost, triggerAdsense };
+}

@@ -11,6 +11,7 @@ listen.on('listening', function () {
 			//
 		});
 	setTimeout(() => {
+		spoof('http://127.0.0.1:4000/page/assets/css/main.css');
 		spoof('http://127.0.0.1:4000/page/moment-timezone.html');
 		spoof('http://127.0.0.1:4000/page/assets/js/moment-timezone.js');
 		spoof('http://127.0.0.1:4000/page/assets/css/moment-timezone.css');

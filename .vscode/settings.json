@@ -50,5 +50,7 @@
 		"**/CVS": true,
 		"**/node_modules": true,
 		"**/Thumbs.db": true
-	}
+	},
+	"eslint.packageManager": "yarn",
+	"npm.packageManager": "yarn"
 }

@@ -1,6 +1,6 @@
-/* global safelink */
-
 'use strict';
+
+const safelink = require('safelinkify/dist/bundle.min.js');
 
 (function (window) {
 	/**

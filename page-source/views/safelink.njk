@@ -2,14 +2,16 @@
 {% extends '_layout.njk' %}
 <!-- prettier-ignore-end -->
 
+{% set site_title = 'WMI' %}
+
 <!-- prettier-ignore-start -->
-{% block title %}Insurance | layout 1{% endblock %}
+{% block title %}Insurance | {{ site_title }}{% endblock %}
 <!-- prettier-ignore-end -->
 
 {% block head %}
-<meta name="description" content="Insurance layout 1, Loan layout 1, Capital Credit Insurance Layout 1" />
+<meta name="description"
+	content="Insurance {{ site_title }}, Loan {{ site_title }}, Capital Credit Insurance {{ site_title }}" />
 <!-- defer bootstrap -->
-{{ css('/node_modules/bootstrap/dist/css/bootstrap.min.css') | safe }}
 {{ css('/page/assets/css/safelink.css') | safe }}
 
 <script>
@@ -21,6 +23,8 @@
 		}
 		console.log(t);
 	}
+	window['adsense-onload'] = true;
+	window['adsense-debug'] = true;
 </script>
 
 <!-- prettier-ignore-start -->
@@ -39,31 +43,6 @@
 				data-ad-format="auto" data-full-width-responsive="true"></ins>
 		</div>
 		<div id="contents">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-						aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav">
-							<li class="nav-item">
-								<a class="nav-link" href="https://webmanajemen.com">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="https://webmanajemen.com/docs">Docs</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="https://webmanajemen.com/about">About Us</a>
-							</li>
-							<li class="nav-item">
-								<a href="#" aria-current="page" class="nav-link active">Outbound Page</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
 
 			<h1>What is a basic contract in insurance?</h1>
 			<small>Verify Links | Insurance Loans Site Information Health</small>
@@ -284,26 +263,26 @@
 				<table class="table">
 					<tr>
 						<td>To Encode</td>
-						<td><a href="/page/safelink/layout1/?url=https://webmanajemen.com">?url=https://webmanajemen.com</a></td>
+						<td><a href="/page/safelink.html?url=https://webmanajemen.com">?url=https://webmanajemen.com</a></td>
 					</tr>
 					<tr>
 						<td>Decode base64</td>
 						<td>
 							<a
-								href="/page/safelink/layout1/?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t">?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t</a>
+								href="/page/safelink.html?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t">?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t</a>
 						</td>
 					</tr>
 					<tr>
 						<td>Decode AES</td>
 						<td>
 							<a
-								href="/page/safelink/layout1/?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=">?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a>
+								href="/page/safelink.html?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=">?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a>
 						</td>
 					</tr>
 					<tr>
 						<td>Decode AES using hash</td>
 						<td>
-							<a href="/page/safelink/layout1/#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
+							<a href="/page/safelink.html#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
 								onclick="controlHyperlink(this)">#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=</a>
 						</td>
 					</tr>
@@ -336,11 +315,11 @@
 <!-- prettier-ignore-start -->
 {% block endbody %}
 <!-- prettier-ignore-end -->
-<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/node_modules/safelinkify/dist/bundle.min.js"></script>
 <script src="/page/assets/js/cookie.js?hash={{ identifier }}"></script>
-<script src="//www.webmanajemen.com/r-ads.js?hash={{ identifier }}"></script>
-<script src="/page/safelink/safelink-decode.js?hash={{ identifier }}"></script>
+-->
+<script src="/page/assets/js/safelink-decode.js?hash={{ identifier }}"></script>
 <!-- prettier-ignore-start -->
 {% endblock endbody %}
 <!-- prettier-ignore-end -->

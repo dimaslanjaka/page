@@ -3,7 +3,6 @@ const config = require('./config');
 const { writefile } = require('sbg-utility');
 const terserHtml = require('html-minifier-terser');
 const { default: _git } = require('git-command-helper');
-const _gulp = require('./gulpfile');
 
 const routes = config.routes;
 
