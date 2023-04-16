@@ -7,7 +7,7 @@
 // require('moment-timezone/builds/moment-timezone-with-data.min');
 // const moment = require('moment-timezone');
 
-const moment = require('moment-timezone');
+const { moment } = require('./full-timezone-list');
 
 if (location.host.includes('cdpn')) console.clear();
 const date_input = document.querySelector('input#date');
