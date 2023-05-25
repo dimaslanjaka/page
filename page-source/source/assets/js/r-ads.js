@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', triggerAdsense);
  */
 let called = false;
 
+/** Option */
+if (!window.adsense_option) window.adsense_option = {};
+
 /**
  * debug on localhost
  */
@@ -235,7 +238,7 @@ function triggerAdsense(_e) {
 		if (ins.parentElement.offsetWidth < 250) {
 			// remove banner when parent width is 0 or display: none
 			adsense_log(i + 1, 'remove', slot);
-			ins.remove();
+			if (window.adsense_option.remove) ins.remove();
 		} else if (ins.innerHTML.trim().length === 0) {
 			adsense_log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
 			// (adsbygoogle = window.adsbygoogle || []).push({});
