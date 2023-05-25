@@ -13,7 +13,7 @@ const CleanCSS = require('clean-css');
 const sass = require('node-sass');
 const config = require('./config');
 const { default: safelink } = require('safelinkify/dist/safelink');
-const { spawnAsync } = require('git-command-helper/dist/spawn');
+const { spawnAsync } = require('cross-spawn');
 const path = require('path');
 
 global.minifyPlugin = minifyPlugin;
@@ -352,8 +352,8 @@ gulp.task('safelink', function () {
 });
 
 gulp.task('copy', copy);
-gulp.task('build', gulp.series('compile', 'pull', 'copy', 'safelink', 'assign-cache', 'push'));
-gulp.task('default', gulp.series('build'));
+// gulp.task('build', gulp.series('compile', 'pull', 'copy', 'safelink', 'assign-cache', 'push'));
+// gulp.task('default', gulp.series('build'));
 
 gulp.task('page:commit', async function () {
 	const currentGit = new git(__dirname);
