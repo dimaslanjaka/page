@@ -38,6 +38,6 @@ gulp.task('page:build', async function () {
 });
 
 gulp.task('page', gulp.series('page:build', 'page:copy', 'page:commit'));
-gulp.task('build', gulp.series('page'));
-gulp.task('default', gulp.series('page'));
+// gulp.task('build', gulp.series('page'));
+// gulp.task('default', gulp.series('page'));
 module.exports = gulp;
