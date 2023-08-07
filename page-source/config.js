@@ -1,3 +1,6 @@
+/**
+ * config for build
+ */
 module.exports = {
 	routes: [
 		{
@@ -7,6 +10,10 @@ module.exports = {
 		{
 			src: 'http://localhost:4000/page/safelink.html',
 			dest: '__dirname/../page/safelink.html',
+		},
+		{
+			src: 'http://localhost:4000/page/cookies.html',
+			dest: '__dirname/../page/cookies.html',
 		},
 	],
 };
