@@ -174,10 +174,10 @@ function getCookie(name) {
 				.substring(2, 7 + 2),
 			1,
 		);
-	} else {
-		document.querySelector('span#sid').textContent = getCookie('___current_id');
-		document.getElementById('unique-id').textContent = getCookie('___current_id');
 	}
+
+	document.querySelector('span#sid').textContent = getCookie('___current_id');
+	document.getElementById('unique-id').textContent = getCookie('___current_id');
 
 	const tbl = document.querySelector('table#cookies');
 	const tbody = tbl.querySelector('tbody');

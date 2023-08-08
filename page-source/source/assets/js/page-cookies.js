@@ -16,10 +16,16 @@
 	});
 
 	// get unique id
-	if (!getCookie('unique-id')) {
-		setCookie('unique-id', Math.random().toString(36).substring(2, 15), 90);
+	if (!getCookie('___current_id')) {
+		setCookie(
+			'___current_id',
+			Math.random()
+				.toString(36)
+				.substring(2, 7 + 2),
+			1,
+		);
 	}
-	document.getElementById('uniqueHash').textContent = getCookie('unique-id');
+	document.getElementById('uniqueHash').textContent = getCookie('___current_id');
 
 	$('#deleteAllCookie').on('click', function (e) {
 		e.preventDefault();
