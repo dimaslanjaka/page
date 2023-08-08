@@ -22,7 +22,7 @@
 			Math.random()
 				.toString(36)
 				.substring(2, 7 + 2),
-			1,
+			3,
 		);
 	}
 	document.getElementById('uniqueHash').textContent = getCookie('___current_id');
