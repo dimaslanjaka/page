@@ -4,8 +4,26 @@
 
 {% block head %}
 <style>
+  body {
+    --table-width: 100%;
+    /* Or any value, this will change dinamically */
+  }
+
+  tbody {
+    display: block;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: var(--table-width);
+    table-layout: fixed;
+  }
+
   td {
-    word-wrap: anywhere;
+    word-wrap: break-word;
   }
 
   ol.breadcrumb li {
@@ -56,7 +74,7 @@
   <div class="row">
     <div class="col-12 col-lg-6">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped table-bordered">
           <tr>
             <td>Selenium</td>
             <td><span id="selenium">Message Result</span></td>
@@ -82,7 +100,7 @@
     </div>
 
     <div class="col-12 col-lg-6">
-      <table id="cookies" class="table">
+      <table id="cookies" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Cookie Key</th>
