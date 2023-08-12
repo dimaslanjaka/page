@@ -25,7 +25,8 @@ runBotDetection()
 						document.getElementById('sel-gateway').textContent = data.gateway.toUpperCase();
 					});
 				});
-			const conInf = () =>
+			const tableCon = document.getElementById('con-headers').querySelector('tbody');
+			const fetchHeaders = () =>
 				fetch('https://httpbin.org/headers')
 					.then(response => response.json())
 					.then(data => {
@@ -58,7 +59,6 @@ runBotDetection()
 							}
 						});
 
-						const tableCon = document.getElementById('con-headers').querySelector('tbody');
 						for (const key in data.headers) {
 							// skip headers
 							if (['host'].includes(key.toLowerCase())) continue;
@@ -75,43 +75,44 @@ runBotDetection()
 								tableCon.appendChild(tr);
 							}
 						}
-						return tableCon;
-					})
-					.then(tableCon => {
-						fetch('http://ip-api.com/json/').then(response => {
-							response.text().then(function (data) {
-								try {
-									const parse = JSON.parse(data);
-									const mapText = { lat: 'Latitude', lon: 'Longitude', query: 'IP' };
-									if ('status' in parse && parse.status == 'success') {
-										for (const key in parse) {
-											if (Object.hasOwnProperty.call(parse, key)) {
-												const value = parse[key];
-												const tr = document.createElement('tr');
-												const hkey = document.createElement('td');
-												const hval = document.createElement('td');
-
-												if (mapText[key]) {
-													hkey.textContent = mapText[key];
-													hkey.setAttribute('id', 'con-' + mapText[key].toLowerCase());
-												} else {
-													hkey.textContent = key;
-													hkey.setAttribute('id', 'con-' + key.toLowerCase());
-												}
-												hval.textContent = value;
-												tr.appendChild(hkey);
-												tr.appendChild(hval);
-												tableCon.appendChild(tr);
-											}
-										}
-									}
-								} catch (_e) {
-									//
-								}
-							});
-						});
 					});
-			trace().then(conInf);
+
+			const fetchGeoIp = () =>
+				fetch('http://ip-api.com/json/').then(response => {
+					response.text().then(function (data) {
+						try {
+							const parse = JSON.parse(data);
+							const mapText = { lat: 'Latitude', lon: 'Longitude', query: 'IP' };
+							if ('status' in parse && parse.status == 'success') {
+								for (const key in parse) {
+									if (Object.hasOwnProperty.call(parse, key)) {
+										const value = parse[key];
+										const tr = document.createElement('tr');
+										const hkey = document.createElement('td');
+										const hval = document.createElement('td');
+
+										if (mapText[key]) {
+											hkey.textContent = mapText[key];
+											hkey.setAttribute('id', 'con-' + mapText[key].toLowerCase());
+										} else {
+											hkey.textContent = key;
+											hkey.setAttribute('id', 'con-' + key.toLowerCase());
+										}
+										hval.textContent = value;
+										tr.appendChild(hkey);
+										tr.appendChild(hval);
+										tableCon.appendChild(tr);
+									}
+								}
+							}
+						} catch (_e) {
+							//
+						}
+					});
+				});
+
+			// execute
+			trace().then(fetchHeaders).then(fetchGeoIp);
 		}
 	});
 
