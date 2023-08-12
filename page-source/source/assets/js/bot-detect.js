@@ -1,145 +1,191 @@
-console.clear();
+/*console.clear();*/
 let logdiv = document.getElementById('selenium');
-let test = runBotDetection();
-logdiv.innerHTML = test;
+runBotDetection()
+	.then(result => {
+		logdiv.innerHTML = result;
+	})
+	.then(() => {
+		if (typeof fetch != 'undefined') {
+			const trace = () =>
+				fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => {
+					response.text().then(function (data) {
+						data = data
+							.trim()
+							.split('\n')
+							.reduce(function (obj, pair) {
+								pair = pair.split('=');
+								return (obj[pair[0]] = pair[1]), obj;
+							}, {});
+						//console.log(data);
+						document.getElementById('ip').textContent = data.ip;
+						document.getElementById('ua').textContent = data.uag;
+					});
+				});
+			const conInf = () =>
+				fetch('https://httpbin.org/headers')
+					.then(response => response.json())
+					.then(data => {
+						//console.log(data.headers);
+						const headers = [
+							'HTTP_VIA',
+							'HTTP_X_FORWARDED_FOR',
+							'HTTP_FORWARDED_FOR',
+							'HTTP_X_FORWARDED',
+							'HTTP_FORWARDED',
+							'HTTP_CLIENT_IP',
+							'HTTP_FORWARDED_FOR_IP',
+							'VIA',
+							'X_FORWARDED_FOR',
+							'FORWARDED_FOR',
+							'X_FORWARDED',
+							'FORWARDED',
+							'CLIENT_IP',
+							'FORWARDED_FOR_IP',
+							'HTTP_PROXY_CONNECTION',
+						];
+						headers.forEach(function (header) {
+							// proxy detection
+							const isProxy = header in data.headers;
+							document.getElementById('isProxy').innerText = isProxy;
+							const theProxy = document.getElementById('theProxy');
+							if (theProxy) {
+								if (!isProxy) {
+									theProxy.innerText = 'No Proxy';
+								} else {
+									theProxy.innerText += data.headers[header] || '';
+								}
+							}
+						});
 
-if (typeof fetch != 'undefined') {
-	fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => {
-		response.text().then(function (data) {
-			data = data
-				.trim()
-				.split('\n')
-				.reduce(function (obj, pair) {
-					pair = pair.split('=');
-					return (obj[pair[0]] = pair[1]), obj;
-				}, {});
-			//console.log(data);
-			document.getElementById('ip').textContent = data.ip;
-			document.getElementById('ua').textContent = data.uag;
-		});
+						const tableCon = document.getElementById('con-headers').querySelector('tbody');
+						for (const key in data.headers) {
+							// skip headers
+							if (['host'].includes(key.toLowerCase())) continue;
+							// print header
+							if (Object.hasOwnProperty.call(data.headers, key)) {
+								const value = data.headers[key];
+								const tr = document.createElement('tr');
+								const hkey = document.createElement('td');
+								const hval = document.createElement('td');
+								hkey.textContent = key;
+								hval.textContent = value;
+								tr.appendChild(hkey);
+								tr.appendChild(hval);
+								tableCon.appendChild(tr);
+							}
+						}
+						return tableCon;
+					})
+					.then(tableCon => {
+						fetch('http://ip-api.com/json/').then(response => {
+							response.text().then(function (data) {
+								try {
+									const parse = JSON.parse(data);
+									const mapText = { lat: 'Latitude', lon: 'Longitude', query: 'IP' };
+									if ('status' in parse && parse.status == 'success') {
+										for (const key in parse) {
+											if (Object.hasOwnProperty.call(parse, key)) {
+												const value = parse[key];
+												const tr = document.createElement('tr');
+												const hkey = document.createElement('td');
+												const hval = document.createElement('td');
+
+												if (mapText[key]) {
+													hkey.textContent = mapText[key];
+													hkey.setAttribute('id', 'con-' + mapText[key].toLowerCase());
+												} else {
+													hkey.textContent = key;
+													hkey.setAttribute('id', 'con-' + key.toLowerCase());
+												}
+												hval.textContent = value;
+												tr.appendChild(hkey);
+												tr.appendChild(hval);
+												tableCon.appendChild(tr);
+											}
+										}
+									}
+								} catch (_e) {
+									//
+								}
+							});
+						});
+					});
+			trace().then(conInf);
+		}
 	});
 
-	fetch('https://httpbin.org/headers')
-		.then(response => response.json())
-		.then(data => {
-			console.log(data.headers);
-			const headers = [
-				'HTTP_VIA',
-				'HTTP_X_FORWARDED_FOR',
-				'HTTP_FORWARDED_FOR',
-				'HTTP_X_FORWARDED',
-				'HTTP_FORWARDED',
-				'HTTP_CLIENT_IP',
-				'HTTP_FORWARDED_FOR_IP',
-				'VIA',
-				'X_FORWARDED_FOR',
-				'FORWARDED_FOR',
-				'X_FORWARDED',
-				'FORWARDED',
-				'CLIENT_IP',
-				'FORWARDED_FOR_IP',
-				'HTTP_PROXY_CONNECTION',
-			];
-			headers.forEach(function (header) {
-				// proxy detection
-				const isProxy = header in data.headers;
-				document.getElementById('isProxy').innerText = isProxy;
-				const theProxy = document.getElementById('theProxy');
-				if (theProxy) {
-					if (!isProxy) {
-						theProxy.innerText = 'No Proxy';
-					} else {
-						theProxy.innerText += data.headers[header] || '';
-					}
-				}
-			});
-
-			const tableCon = document.getElementById('con-headers').querySelector('tbody');
-			for (const key in data.headers) {
-				// skip headers
-				if (['host'].includes(key.toLowerCase())) continue;
-				// print header
-				if (Object.hasOwnProperty.call(data.headers, key)) {
-					const value = data.headers[key];
-					const tr = document.createElement('tr');
-					const hkey = document.createElement('td');
-					const hval = document.createElement('td');
-					hkey.textContent = key;
-					hval.textContent = value;
-					tr.appendChild(hkey);
-					tr.appendChild(hval);
-					tableCon.appendChild(tr);
-				}
-			}
-		});
-}
-
+/**
+ * detect selenium
+ * @returns {Promise<boolean>}
+ */
 function runBotDetection() {
-	const documentDetectionKeys = [
-		'__webdriver_evaluate',
-		'__selenium_evaluate',
-		'__webdriver_script_function',
-		'__webdriver_script_func',
-		'__webdriver_script_fn',
-		'__fxdriver_evaluate',
-		'__driver_unwrapped',
-		'__webdriver_unwrapped',
-		'__driver_evaluate',
-		'__selenium_unwrapped',
-		'__fxdriver_unwrapped',
-	];
-	const windowDetectionKeys = [
-		'_phantom',
-		'__nightmare',
-		'_selenium',
-		'callPhantom',
-		'callSelenium',
-		'_Selenium_IDE_Recorder',
-	];
-	for (const windowDetectionKey in windowDetectionKeys) {
-		const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
-		if (window[windowDetectionKeyValue] || windowDetectionKeyValue in window) {
-			return true;
+	return new Promise(resolve => {
+		const documentDetectionKeys = [
+			'__webdriver_evaluate',
+			'__selenium_evaluate',
+			'__webdriver_script_function',
+			'__webdriver_script_func',
+			'__webdriver_script_fn',
+			'__fxdriver_evaluate',
+			'__driver_unwrapped',
+			'__webdriver_unwrapped',
+			'__driver_evaluate',
+			'__selenium_unwrapped',
+			'__fxdriver_unwrapped',
+		];
+		const windowDetectionKeys = [
+			'_phantom',
+			'__nightmare',
+			'_selenium',
+			'callPhantom',
+			'callSelenium',
+			'_Selenium_IDE_Recorder',
+		];
+		for (const windowDetectionKey in windowDetectionKeys) {
+			const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
+			if (window[windowDetectionKeyValue] || windowDetectionKeyValue in window) {
+				return resolve(true);
+			}
 		}
-	}
-	for (const documentDetectionKey in documentDetectionKeys) {
-		const documentDetectionKeyValue = documentDetectionKeys[documentDetectionKey];
-		if (window['document'][documentDetectionKeyValue] || documentDetectionKeyValue in document) {
-			return true;
+		for (const documentDetectionKey in documentDetectionKeys) {
+			const documentDetectionKeyValue = documentDetectionKeys[documentDetectionKey];
+			if (window['document'][documentDetectionKeyValue] || documentDetectionKeyValue in document) {
+				return resolve(true);
+			}
 		}
-	}
-	for (const documentKey in window['document']) {
-		if (documentKey.match(/\$[a-z]dc_/) && window['document'][documentKey]['cache_']) {
-			return true;
+		for (const documentKey in window['document']) {
+			if (documentKey.match(/\$[a-z]dc_/) && window['document'][documentKey]['cache_']) {
+				return resolve(true);
+			}
 		}
-	}
-	if (
-		window['external'] &&
-		window['external'].toString() &&
-		window['external'].toString()['indexOf']('Sequentum') !== -1
-	)
-		return true;
-	if (window['document']['documentElement']['getAttribute']('selenium')) return true;
-	if (window['document']['documentElement']['getAttribute']('webdriver')) return true;
-	if (window['document']['documentElement']['getAttribute']('driver')) return true;
-	if (window.document.documentElement.getAttribute('webdriver')) {
-		return true;
-	}
-	if ('callPhantom' in window || '_phantom' in window) {
-		if (window.callPhantom || window._phantom) {
-			return true;
+		if (
+			window['external'] &&
+			window['external'].toString() &&
+			window['external'].toString()['indexOf']('Sequentum') !== -1
+		)
+			return resolve(true);
+		if (window['document']['documentElement']['getAttribute']('selenium')) return resolve(true);
+		if (window['document']['documentElement']['getAttribute']('webdriver')) return resolve(true);
+		if (window['document']['documentElement']['getAttribute']('driver')) return resolve(true);
+		if (window.document.documentElement.getAttribute('webdriver')) {
+			return resolve(true);
 		}
-	}
-	if ('webdriver' in navigator) {
-		if (navigator.webdriver == true) {
-			return true;
+		if ('callPhantom' in window || '_phantom' in window) {
+			if (window.callPhantom || window._phantom) {
+				return resolve(true);
+			}
 		}
-	}
-	if ('userAgentData' in navigator) {
-		const udata = JSON.stringify(navigator.userAgentData);
-		return udata.includes('Not=A?Brand');
-	}
-	return false;
+		if ('webdriver' in navigator) {
+			if (navigator.webdriver == true) {
+				return resolve(true);
+			}
+		}
+		if ('userAgentData' in navigator) {
+			const udata = JSON.stringify(navigator.userAgentData);
+			return resolve(udata.includes('Not=A?Brand'));
+		}
+		return resolve(false);
+	});
 }
 
 /**
