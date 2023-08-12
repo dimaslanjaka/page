@@ -14,8 +14,8 @@ if (typeof fetch != 'undefined') {
 					return (obj[pair[0]] = pair[1]), obj;
 				}, {});
 			//console.log(data);
-			document.getElementById('ip').innerText = data.ip;
-			document.getElementById('ua').innerText = data.uag;
+			document.getElementById('ip').textContent = data.ip;
+			document.getElementById('ua').textContent = data.uag;
 		});
 	});
 
