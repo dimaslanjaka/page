@@ -85,6 +85,8 @@ runBotDetection()
 							const mapText = { lat: 'Latitude', lon: 'Longitude', query: 'IP' };
 							if ('status' in parse && parse.status == 'success') {
 								for (const key in parse) {
+									// skip keys
+									if (['status'].includes(key)) continue;
 									if (Object.hasOwnProperty.call(parse, key)) {
 										const value = parse[key];
 										const tr = document.createElement('tr');
