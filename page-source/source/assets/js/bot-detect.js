@@ -43,8 +43,14 @@ if (typeof fetch != 'undefined') {
 			headers.forEach(function (header) {
 				const isProxy = header in data.headers;
 				document.getElementById('isProxy').innerText = isProxy;
-				document.getElementById('proxy').innerText = data.headers[header] || '';
-				if (!isProxy) document.getElementById('proxy').remove();
+				const theProxy = document.getElementById('theProxy');
+				if (theProxy) {
+					if (!isProxy) {
+						theProxy.innerText = 'No Proxy';
+					} else {
+						theProxy.innerText += data.headers[header] || '';
+					}
+				}
 			});
 		});
 }
@@ -129,7 +135,7 @@ function getCookies() {
 	const index = Object.keys(cookies).sort(function (a, b) {
 		return a === b ? 0 : a < b ? -1 : 1;
 	});
-	console.log(index);
+	// console.log(index);
 
 	return cookies;
 }
