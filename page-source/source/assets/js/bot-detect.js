@@ -17,8 +17,8 @@ runBotDetection()
 								return (obj[pair[0]] = pair[1]), obj;
 							}, {});
 						//console.log(data);
-						document.getElementById('ip').textContent = data.ip;
-						document.getElementById('ua').textContent = data.uag;
+						document.getElementById('sel-ip').textContent = data.ip;
+						document.getElementById('sel-ua').textContent = data.uag;
 					});
 				});
 			const conInf = () =>
@@ -46,14 +46,11 @@ runBotDetection()
 						headers.forEach(function (header) {
 							// proxy detection
 							const isProxy = header in data.headers;
-							document.getElementById('isProxy').innerText = isProxy;
-							const theProxy = document.getElementById('theProxy');
-							if (theProxy) {
-								if (!isProxy) {
-									theProxy.innerText = 'No Proxy';
-								} else {
-									theProxy.innerText += data.headers[header] || '';
-								}
+							const pInfo = document.getElementById('sel-proxyInfo');
+							if (!isProxy) {
+								pInfo.innerHTML = 'No Proxy';
+							} else {
+								pInfo.innerHTML += (data.headers[header] || '') + '<br/>';
 							}
 						});
 
