@@ -22,7 +22,7 @@ if (typeof fetch != 'undefined') {
 	fetch('https://httpbin.org/headers')
 		.then(response => response.json())
 		.then(data => {
-			//console.log(data.headers);
+			console.log(data.headers);
 			const headers = [
 				'HTTP_VIA',
 				'HTTP_X_FORWARDED_FOR',
@@ -41,6 +41,7 @@ if (typeof fetch != 'undefined') {
 				'HTTP_PROXY_CONNECTION',
 			];
 			headers.forEach(function (header) {
+				// proxy detection
 				const isProxy = header in data.headers;
 				document.getElementById('isProxy').innerText = isProxy;
 				const theProxy = document.getElementById('theProxy');
@@ -52,6 +53,24 @@ if (typeof fetch != 'undefined') {
 					}
 				}
 			});
+
+			const tableCon = document.getElementById('con-headers').querySelector('tbody');
+			for (const key in data.headers) {
+				// skip headers
+				if (['host'].includes(key.toLowerCase())) continue;
+				// print header
+				if (Object.hasOwnProperty.call(data.headers, key)) {
+					const value = data.headers[key];
+					const tr = document.createElement('tr');
+					const hkey = document.createElement('td');
+					const hval = document.createElement('td');
+					hkey.textContent = key;
+					hval.textContent = value;
+					tr.appendChild(hkey);
+					tr.appendChild(hval);
+					tableCon.appendChild(tr);
+				}
+			}
 		});
 }
 
