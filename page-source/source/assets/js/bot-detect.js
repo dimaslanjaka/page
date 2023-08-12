@@ -19,6 +19,7 @@ runBotDetection()
 						//console.log(data);
 						document.getElementById('sel-ip').textContent = data.ip;
 						document.getElementById('sel-ua').textContent = data.uag;
+						document.getElementById('sel-country').textContent = data.loc;
 					});
 				});
 			const conInf = () =>
