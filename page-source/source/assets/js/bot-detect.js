@@ -8,8 +8,8 @@ runBotDetection()
 		if (typeof fetch != 'undefined') {
 			const trace = () =>
 				fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => {
-					response.text().then(function (data) {
-						data = data
+					response.text().then(function (response) {
+						const data = response
 							.trim()
 							.split('\n')
 							.reduce(function (obj, pair) {
@@ -20,6 +20,9 @@ runBotDetection()
 						document.getElementById('sel-ip').textContent = data.ip;
 						document.getElementById('sel-ua').textContent = data.uag;
 						document.getElementById('sel-country').textContent = data.loc;
+						document.getElementById('sel-warp').textContent = data.warp.toUpperCase();
+						document.getElementById('sel-rbi').textContent = data.rbi.toUpperCase();
+						document.getElementById('sel-gateway').textContent = data.gateway.toUpperCase();
 					});
 				});
 			const conInf = () =>
