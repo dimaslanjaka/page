@@ -70,6 +70,13 @@ runBotDetection()
 								const hval = document.createElement('td');
 								hkey.textContent = key;
 								hval.textContent = value;
+								const hasVpnHeaders = ['X-Amzn-Trace-Id'].map(str => str.toLowerCase()).includes(key.toLowerCase());
+								if (hasVpnHeaders) {
+									hkey.classList.add('text-danger');
+									hval.classList.add('text-danger');
+									tr.classList.add('border', 'border-danger');
+									tr.setAttribute('title', 'your connection contains external service');
+								}
 								tr.appendChild(hkey);
 								tr.appendChild(hval);
 								tableCon.appendChild(tr);
