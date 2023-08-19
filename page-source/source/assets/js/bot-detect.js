@@ -1,10 +1,12 @@
 /*console.clear();*/
 let logdiv = document.getElementById('selenium');
+let proxyInfo = document.getElementById('sel-proxyInfo');
 runBotDetection()
 	.then(result => {
 		logdiv.innerHTML = result;
 	})
 	.then(() => {
+		if (!proxyInfo) proxyInfo = document.getElementById('sel-proxyInfo');
 		if (typeof fetch != 'undefined') {
 			const trace = () =>
 				fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => {
@@ -51,11 +53,10 @@ runBotDetection()
 						headers.forEach(function (header) {
 							// proxy detection
 							const isProxy = header in data.headers;
-							const pInfo = document.getElementById('sel-proxyInfo');
 							if (!isProxy) {
-								pInfo.innerHTML = 'No Proxy';
+								proxyInfo.innerHTML = 'No Proxy';
 							} else {
-								pInfo.innerHTML += (data.headers[header] || '') + '<br/>';
+								proxyInfo.innerHTML += (data.headers[header] || '') + '<br/>';
 							}
 						});
 
@@ -76,6 +77,16 @@ runBotDetection()
 									hval.classList.add('text-danger');
 									tr.classList.add('border', 'border-danger');
 									tr.setAttribute('title', 'your connection contains external service');
+									const texts = [proxyInfo.textContent.replace('No Proxy', '').trim(), 'External Service ' + key]
+										// trim string
+										.map(str => str.trim())
+										// filter empty string
+										.filter(str => str.length > 0)
+										// remove duplicated string
+										.filter(function (value, index, array) {
+											return array.indexOf(value) === index;
+										});
+									proxyInfo.innerHTML = texts.join('<br/>');
 								}
 								tr.appendChild(hkey);
 								tr.appendChild(hval);
