@@ -1,4 +1,0 @@
-[submodule "packages/safelinkify"]
-	path = packages/safelinkify
-	url = https://github.com/dimaslanjaka/safelink.git
-	branch = monorepo
