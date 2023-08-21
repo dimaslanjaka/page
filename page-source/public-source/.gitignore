@@ -8,6 +8,8 @@
 **/.yarn/unplug*
 **/node_modules/*/*.html
 **/node_modules/*/**/*.html
+**/node_modules/*/*.scss
+**/node_modules/*/**/*.scss
 **/node_modules/*/*.md
 **/node_modules/*/**/*.md
 **/node_modules/*/*.d.ts
@@ -16,3 +18,9 @@
 **/node_modules/*/**/*/LICENSE*
 **/node_modules/.bin
 **/node_modules/@types
+**/node_modules/*/.eslint*
+**/node_modules/*/**/.eslint*
+**/node_modules/*/.jshint*
+**/node_modules/*/**/.jshint*
+**/node_modules/hexo-*
+**/node_modules/binary-collection*

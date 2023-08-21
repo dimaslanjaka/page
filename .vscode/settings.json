@@ -48,7 +48,8 @@
 		"**/.svn": true,
 		"**/build": false,
 		"**/CVS": true,
-		"**/node_modules": true,
+		"node_modules": true,
+		"page-source/node_modules": true,
 		"**/Thumbs.db": true
 	},
 	"eslint.packageManager": "yarn",

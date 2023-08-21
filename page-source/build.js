@@ -1,6 +1,6 @@
 const { default: axios } = require('axios');
 const config = require('./config');
-const { writefile, path } = require('sbg-utility');
+const { writefile, path, fs } = require('sbg-utility');
 const terserHtml = require('html-minifier-terser');
 const { default: _git } = require('git-command-helper');
 const jsdom = require('jsdom').JSDOM;
@@ -19,6 +19,9 @@ async function build() {
 		writefile(path.join(process.cwd(), route.dest), minified);
 	}
 	// _gulp.series('page:commit')();
+
+	// copy public-source into ../page
+	await fs.copy(path.join(__dirname, 'public-source'), path.join(__dirname, '../page'), { overwrite: true });
 }
 
 build();
