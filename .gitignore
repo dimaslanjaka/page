@@ -1,0 +1,11 @@
+/node_modules
+/build
+/page
+tmp
+config.json
+*.log
+# 5 6 ^ %
+
+**/.yarn/*
+!**/.yarn/releases
+!**/.yarn/plugins

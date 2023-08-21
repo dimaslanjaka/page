@@ -1,0 +1,73 @@
+{
+  "name": "wmi-page",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "yarn workspace page-source run start",
+    "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
+    "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
+    "prod": "cd page && npm install --omit=dev --production",
+    "update:postinstall": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js",
+    "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
+    "update": "yarn run update:ncu",
+    "serve": "yarn workspace page-source run serve",
+    "build": "gulp --series page",
+    "post-install": "node postinstall.js --yarn",
+    "server-dump": "node server.js &> server.log",
+    "clone": "git clone -b gh-pages https://github.com/dimaslanjaka/page page"
+  },
+  "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/dimaslanjaka/page.git"
+  },
+  "packageManager": "yarn@3.6.2",
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "git-command-helper": "^2.0.1",
+    "gulp": "^4.0.2",
+    "nodemon": "^3.0.1",
+    "npm-check-updates": "^16.10.12",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "workspaces": [
+    "packages/safelinkify",
+    "page-source"
+  ],
+  "engines": {
+    "node": "^14"
+  },
+  "resolutions": {
+    "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz",
+    "hexo": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz",
+    "hexo-asset-link": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-asset-link.tgz",
+    "hexo-cli": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-cli.tgz",
+    "hexo-front-matter": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-front-matter.tgz",
+    "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-log.tgz",
+    "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-util.tgz",
+    "warehouse": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/warehouse.tgz",
+    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/tarball/pre-release",
+    "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/tarball/pre-release",
+    "static-blog-generator": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/static-blog-generator/release/static-blog-generator.tgz",
+    "instant-indexing": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/instant-indexing/release/instant-indexing.tgz",
+    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/b9d2e7bfa/packages/sbg-utility/release/sbg-utility.tgz",
+    "sbg-api": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/sbg-api/release/sbg-api.tgz",
+    "sbg-cli": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/sbg-cli/release/sbg-cli.tgz",
+    "sbg-server": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/sbg-server/release/sbg-server.tgz",
+    "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/a2e797bc27975cba20ef4c87547841e6341bfcf4/release/nodejs-package-types.tgz",
+    "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/0f213ec/release/hexo-post-parser.tgz",
+    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/raw/ff4b648/release/cross-spawn.tgz",
+    "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/ae51725/release/git-command-helper.tgz",
+    "@types/git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/ae51725/release/git-command-helper.tgz"
+  }
+}

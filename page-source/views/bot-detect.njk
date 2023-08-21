@@ -1,0 +1,177 @@
+{% set canonical = "https://www.webmanajemen.com/page/bot-detect.html" %}
+{% set lang = "en" %}
+{% extends '_layout.njk' %}
+
+{% block head %}
+<style>
+  body {
+    --table-width: 100%;
+    /* Or any value, this will change dinamically */
+  }
+
+  tbody {
+    display: block;
+    /*max-height: 500px;
+    overflow-y: auto;*/
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: var(--table-width);
+    table-layout: fixed;
+  }
+
+  td {
+    word-wrap: break-word;
+  }
+
+  ol.breadcrumb li {
+    display: inline;
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+  }
+</style>
+{% endblock head %}
+
+{% block title %}Javascript Bot Detector Tools - WMI{% endblock title %}
+
+{% block content %}
+<main class="container">
+  <div class="row">
+    <div class="mb-3 col-md-12">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb" id="BreadcrumbList">
+        <li class="me-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="https://webmanajemen.com"> <span itemprop="name">Homepage</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+        ›
+        <li class="me-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="https://webmanajemen.com/page"> <span itemprop="name">Page</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        ›
+        <li class="me-1" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="https://www.webmanajemen.com/page/bot-detect">
+            <span itemprop="name">Selenium Checker</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+      </ol>
+    </div>
+
+    <div class="text-center col-md-12">
+      <h1>is iam bot ?</h1>
+      <p>
+        <a href="https://www.webmanajemen.com/page/bot-detect"
+          target="_blank">https://www.webmanajemen.com/page/bot-detect</a>
+        -
+        <a href="https://codepen.io/dimaslanjaka/pen/OJpQBzJ" rel="nofollow noopener noreferrer" target="_blank">Source
+          Code</a> - <span id="sid"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="row">
+        <h3>Cloudflare Trace</h3>
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="cloudflare-tracer">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr title="is using selenium?">
+                  <th>Selenium</th>
+                  <td><span id="selenium">Message Result</span></td>
+                </tr>
+                <tr title="your ip address">
+                  <th>IP</th>
+                  <td id="sel-ip"></td>
+                </tr>
+                <tr>
+                  <th>Country</th>
+                  <td id="sel-country">-</td>
+                </tr>
+                <tr title="your useragent">
+                  <th>UA</th>
+                  <td id="sel-ua"></td>
+                </tr>
+                <tr title="your proxy">
+                  <th>Proxy</th>
+                  <td id="sel-proxyInfo"></td>
+                </tr>
+                <tr title="is using cloudflare warp">
+                  <th>WARP</th>
+                  <td id="sel-warp">OFF</td>
+                </tr>
+                <tr title="is using cloudflare gateway">
+                  <th>GATEWAY</th>
+                  <td id="sel-gate">OFF</td>
+                </tr>
+                <tr title="is using cloudflare Remote Browser Isolation">
+                  <th>RBI</th>
+                  <td id="sel-rbi"></td>
+                </tr>
+                <tr title="current page id">
+                  <th>ID</th>
+                  <td><span id="unique-id">undefined</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3>Your Connection Informations</h3>
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="con-headers">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <table id="cookies" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Cookie Key</th>
+            <th>Cookie Value</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="col-12">
+      <table class="table" id="navigator">
+        <thead>
+          <tr>
+            <th>Navigator Key</th>
+            <th>Navigator Value</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!--<script src="https://raw.githack.com/dimaslanjaka/page/master/bot-detect.js?v=1"></script>-->
+{% endblock content %}
+
+{% block endbody %}
+<script src="/page/assets/js/bot-detect.js?v=2"></script>
+{% endblock endbody %}
