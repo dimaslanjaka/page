@@ -71,7 +71,7 @@ app.use(
 	sass({
 		src: path.join(__dirname, 'source'), // Input SASS source folder
 		dest: path.join(__dirname, '../page'), // Output CSS destination folder
-		debug: true,
+		debug: false,
 		app,
 		base: '/page',
 		cwd: __dirname,
@@ -85,13 +85,13 @@ app.use(
 		src: 'source',
 		dest: '../page',
 		cwd: __dirname,
-		debug: true,
+		debug: false,
 		//prefix: '/js',
 	}),
 );
 
 // minify html middleware
-if (!isDev()) app.use('/page', minifyHtmlMiddleware({ debug: true }));
+if (!isDev()) app.use('/page', minifyHtmlMiddleware({ debug: false }));
 // engine ends
 
 // browser-sync start
