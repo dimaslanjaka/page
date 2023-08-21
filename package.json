@@ -23,7 +23,7 @@
   "repository": {
     "url": "https://github.com/dimaslanjaka/page.git"
   },
-  "packageManager": "yarn@3.5.0",
+  "packageManager": "yarn@3.6.2",
   "devDependencies": {
     "@types/node": "^20.2.3",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
