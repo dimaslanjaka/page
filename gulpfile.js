@@ -58,6 +58,7 @@ gulp.task('page:clean', function () {
 					'**/.package-lock.json',
 					'**/execa',
 					'**/sbg-*',
+					'**/@types',
 					'**/rmdir'
 				],
 				{
