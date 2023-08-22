@@ -38,6 +38,7 @@ jobs:
           ref: master
           repository: dimaslanjaka/page
           token: '${{ secrets.ACCESS_TOKEN }}'
+          submodules: recursive
       - uses: actions/checkout@v3
         name: checkout gh-pages
         with:
@@ -45,6 +46,22 @@ jobs:
           path: page
           repository: dimaslanjaka/page
           token: '${{ secrets.ACCESS_TOKEN }}'
+      - uses: actions/cache@v3
+        id: cache
+        name: init cache
+        with:
+          path: |
+            ./tmp
+            ./node_modules
+            ./packages/safelinkify/node_modules
+            **/.yarn
+          key: ${{ runner.os }}-${{ env.node_version }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.node_version }}
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
       - run: yarn install
       - run: gulp page:clean
       - run: |
