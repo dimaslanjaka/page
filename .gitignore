@@ -1,4 +1,5 @@
 /node_modules
+/page-source/node_modules
 /build
 /page
 tmp
