@@ -7991,6 +7991,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "minimatch@npm:9.0.3"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: 253487976bf485b612f16bf57463520a14f512662e592e95c571afdab1442a6a6864b6c88f248ce6fc4ff0b6de04ac7aa6c8bb51e868e99d1d65eb0658a708b5
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:~3.0.2":
   version: 3.0.8
   resolution: "minimatch@npm:3.0.8"
@@ -12949,6 +12958,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     git-command-helper: ^2.0.1
     gulp: ^4.0.2
+    minimatch: ^9.0.3
     nodemon: ^3.0.1
     npm-check-updates: ^16.10.12
     npm-run-all: ^4.1.5
