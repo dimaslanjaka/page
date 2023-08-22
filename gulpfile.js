@@ -1,7 +1,7 @@
 const { default: git } = require('git-command-helper');
 const gulp = require('gulp');
-const path = require('path');
-const fs = require('fs-extra');
+const { fs, path } = require('sbg-utility');
+const Bluebird = require('bluebird');
 
 gulp.task('page:copy', async function () {
 	// copy non-compiled files
@@ -37,7 +37,21 @@ gulp.task('page:build', async function () {
 	await import('./page-source/build.js');
 });
 
-gulp.task('page', gulp.series('page:build', 'page:copy', 'page:commit'));
+gulp.task('page:clean', function () {
+	return new Promise(resolve => {
+		const base = path.join(__dirname, 'page');
+		const paths = ['node_modules/binary-collections', 'node_modules/cross-spawn', 'node_modules/@expo']
+			.map(str => path.join(base, str))
+			.filter(fs.existsSync);
+		Bluebird.all(paths)
+			.each(str => fs.rmSync(str, { recursive: true, force: true }))
+			.then(() => {
+				resolve(null);
+			});
+	});
+});
+
+gulp.task('page', gulp.series('page:build', 'page:copy', 'page:clean', 'page:commit'));
 // gulp.task('build', gulp.series('page'));
 // gulp.task('default', gulp.series('page'));
 module.exports = gulp;
