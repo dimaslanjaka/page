@@ -43,6 +43,7 @@ jobs:
           rm -rf tmp
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
+        if: ${{ success() }}
         with:
           # Upload entire repository
           path: '.'
