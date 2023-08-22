@@ -1,4 +1,4 @@
-name: Post Update
+name: Page cleaner
 
 on:
   push:
