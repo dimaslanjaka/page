@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const { fs, path } = require('sbg-utility');
 const Bluebird = require('bluebird');
 const glob = require('glob');
+const pagepkg = require('./page/package.json');
 
 gulp.task('page:copy', async function () {
 	// copy non-compiled files
@@ -41,6 +42,7 @@ gulp.task('page:build', async function () {
 gulp.task('page:clean', function () {
 	return new Promise(resolve => {
 		const base = path.join(__dirname, 'page');
+		const devPagePkg = Object.keys(pagepkg.devDependencies).map(str => '**/' + str + '/**');
 		const unusedFilesInNodeModules = Bluebird.all(
 			glob.glob(
 				[
@@ -48,6 +50,7 @@ gulp.task('page:clean', function () {
 					'**/*.html',
 					'**/*.d.ts',
 					'**/.eslint*',
+					'**/eslintrc*',
 					'**/nodejs-package-types',
 					'**/git-command-helper',
 					'**/hexo-*',
@@ -59,8 +62,10 @@ gulp.task('page:clean', function () {
 					'**/execa',
 					'**/sbg-*',
 					'**/@types',
-					'**/rmdir'
-				],
+					'**/@eslint',
+					'**/@typescript',
+					'**/rmdir',
+				].concat(devPagePkg),
 				{
 					cwd: path.join(base, 'node_modules'),
 				},
