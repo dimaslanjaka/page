@@ -46,6 +46,7 @@ gulp.task('page:clean', function () {
 				[
 					'**/*.md',
 					'**/*.html',
+					'**/*.d.ts',
 					'**/.eslint*',
 					'**/nodejs-package-types',
 					'**/hexo-*',
@@ -54,6 +55,9 @@ gulp.task('page:clean', function () {
 					'**/binary-collections',
 					'**/deepmerge-ts',
 					'**/.package-lock.json',
+					'**/execa',
+					'**/sbg-*',
+					'**/rmdir'
 				],
 				{
 					cwd: path.join(base, 'node_modules'),
