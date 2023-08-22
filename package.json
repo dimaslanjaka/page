@@ -1,5 +1,5 @@
 {
-  "name": "wmi-page",
+  "name": "wmi-page-monorepo",
   "version": "1.0.2",
   "description": "",
   "main": "index.js",
@@ -43,7 +43,8 @@
   },
   "workspaces": [
     "packages/safelinkify",
-    "page-source"
+    "page-source",
+    "page"
   ],
   "engines": {
     "node": "^14"
