@@ -2,6 +2,7 @@ const { default: git } = require('git-command-helper');
 const gulp = require('gulp');
 const { fs, path } = require('sbg-utility');
 const Bluebird = require('bluebird');
+const glob = require('glob');
 
 gulp.task('page:copy', async function () {
 	// copy non-compiled files
@@ -40,14 +41,29 @@ gulp.task('page:build', async function () {
 gulp.task('page:clean', function () {
 	return new Promise(resolve => {
 		const base = path.join(__dirname, 'page');
-		const paths = ['node_modules/binary-collections', 'node_modules/cross-spawn', 'node_modules/@expo']
-			.map(str => path.join(base, str))
-			.filter(fs.existsSync);
-		Bluebird.all(paths)
-			.each(str => fs.rmSync(str, { recursive: true, force: true }))
-			.then(() => {
-				resolve(null);
-			});
+		const unusedFilesInNodeModules = Bluebird.all(
+			glob.glob(
+				[
+					'**/*.md',
+					'**/*.html',
+					'**/.eslint*',
+					'**/hexo-*',
+					'**/cross-spawn',
+					'**/@expo',
+					'binary-collections',
+					'.package-lock.json',
+				],
+				{
+					cwd: path.join(base, 'node_modules'),
+				},
+			),
+		)
+			.map(str => path.join(base, 'node_modules', str))
+			.each(str => fs.rmSync(str, { recursive: true, force: true }));
+
+		Bluebird.all(unusedFilesInNodeModules).finally(() => {
+			resolve(null);
+		});
 	});
 });
 
