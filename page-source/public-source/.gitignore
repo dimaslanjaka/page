@@ -7,22 +7,6 @@
 **/.yarn/version*
 **/.yarn/unplug*
 /node_modules/*
-
-!/node_modules/aes-js/
-!/node_modules/ansi-colors/
-!/node_modules/axios/
-!/node_modules/axios-cache-interceptor/
-!/node_modules/bootstrap/
-!/node_modules/crypto-js/
-!/node_modules/jquery/
-!/node_modules/material-dashboard/
-!/node_modules/moment/
-!/node_modules/moment-timezone/
-!/node_modules/requirejs/
-!/node_modules/safelinkify/
-!/node_modules/toastr/
-!/node_modules/highlight.js/
-
 **/node_modules/*/*.html
 **/node_modules/*/**/*.html
 **/node_modules/*/*.scss
@@ -41,3 +25,19 @@
 **/node_modules/*/**/.jshint*
 **/node_modules/*/bower.json
 **/node_modules/*/**/bower.json
+# auto generate start
+!/node_modules/aes-js/
+!/node_modules/ansi-colors/
+!/node_modules/axios/
+!/node_modules/axios-cache-interceptor/
+!/node_modules/bootstrap/
+!/node_modules/crypto-js/
+!/node_modules/jquery/
+!/node_modules/material-dashboard/
+!/node_modules/moment/
+!/node_modules/moment-timezone/
+!/node_modules/requirejs/
+!/node_modules/safelinkify/
+!/node_modules/toastr/
+!/node_modules/highlight.js/
+# auto generate ends

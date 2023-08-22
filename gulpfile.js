@@ -48,6 +48,8 @@ gulp.task('page:clean', function () {
 				[
 					'**/*.md',
 					'**/*.html',
+					'**/*.flow',
+					'**/bower.json',
 					'**/*.d.ts',
 					'**/.eslint*',
 					'**/eslintrc*',
