@@ -41,6 +41,7 @@ jobs:
           rm -rf .vscode
           rm -rf .github
           rm -rf tmp
+          rm -rf bin
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         if: ${{ success() }}
