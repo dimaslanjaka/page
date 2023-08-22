@@ -49,6 +49,7 @@ gulp.task('page:clean', function () {
 					'**/*.d.ts',
 					'**/.eslint*',
 					'**/nodejs-package-types',
+					'**/git-command-helper',
 					'**/hexo-*',
 					'**/cross-spawn',
 					'**/@expo',
