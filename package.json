@@ -16,7 +16,7 @@
     "build": "gulp --series page",
     "post-install": "node postinstall.js --yarn",
     "server-dump": "node server.js &> server.log",
-    "clone": "git clone -b gh-pages https://github.com/dimaslanjaka/page page"
+    "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
