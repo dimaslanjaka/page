@@ -19,5 +19,9 @@ module.exports = {
 			src: 'http://localhost:4000/page/bot-detect.html',
 			dest: 'page/bot-detect.html',
 		},
+		{
+			src: 'http://localhost:4000/page/highlight-js.html',
+			dest: 'page/highlight-js.html',
+		}
 	],
 };
