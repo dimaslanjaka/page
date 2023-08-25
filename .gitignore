@@ -10,3 +10,4 @@ config.json
 **/.yarn/*
 !**/.yarn/releases
 !**/.yarn/plugins
+.env
