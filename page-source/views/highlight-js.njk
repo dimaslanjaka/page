@@ -1,0 +1,36 @@
+{% extends "_layout.njk" %}
+
+{% block head %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+{% endblock head %}
+
+{% block content %}
+<pre><code data-highlight="true">function Shape2D(){
+  this.name = 'Shape 2D';
+}</code></pre>
+<pre><code class="ss" data-highlight="false">
+function Triangle(base,height){
+    this.name = 'Triangle';
+    this.base = base;
+    this.height = height;
+    this.getArea = function(){return this.base*this.height/2;};
+}
+</code></pre>
+
+<h2>without <code>data-highlight</code> attribute</h2>
+
+<pre><code class="language-sql">CREATE USER 'dimaslanjaka'@'%' IDENTIFIED VIA mysql_native_password USING '***';GRANT ALL PRIVILEGES ON *.* TO 'dimaslanjaka'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `dimaslanjaka\_%`.* TO 'dimaslanjaka'@'%';
+</code></pre>
+
+<pre><code>
+function Shape(){
+  // this is a comment
+  this.name = 'Shape';
+  this.toString = function(){return this.name;};
+}
+</code></pre>
+{% endblock content %}
+
+{% block endbody %}
+<script src="/page/assets/js/highlight.js"></script>
+{% endblock endbody %}
