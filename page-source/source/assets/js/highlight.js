@@ -33,7 +33,8 @@ function loadHljs() {
   scr.src =
     "//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js";
   scr.onload = initHljs;
-  document.querySelectorAll("script").item(0).appendChild(scr);
+  const referenceNode = document.querySelectorAll("script").item(0);
+  referenceNode.parentNode.insertBefore(scr, referenceNode.nextSibling);
 }
 
 function initHljs() {
