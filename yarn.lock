@@ -906,6 +906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/google.accounts@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@types/google.accounts@npm:0.0.9"
+  checksum: 51d897dffabec354d36363ff03e44cf8c0e2387526149b7eb3296d885e429c45520cb6060a1f8c9b209d1236f1e8a2c22f9f8354876120832c2e0e198a921f9b
+  languageName: node
+  linkType: hard
+
 "@types/gtag.js@npm:^0.0.12":
   version: 0.0.12
   resolution: "@types/gtag.js@npm:0.0.12"
@@ -13518,6 +13525,7 @@ __metadata:
   resolution: "wmi-page-monorepo@workspace:."
   dependencies:
     "@types/bluebird": ^3.5.38
+    "@types/google.accounts": ^0.0.9
     "@types/node": ^20.2.3
     "@typescript-eslint/eslint-plugin": ^5.59.7
     "@typescript-eslint/parser": ^5.59.7
