@@ -14,7 +14,7 @@ const inject = require("connect-browser-sync");
 const { default: git } = require("git-command-helper");
 const { isDev } = require("./src/utils");
 const { default: minifyHtmlMiddleware } = require("./src/html-render-minifier");
-import terser from "@rollup/plugin-terser";
+const terser = require("@rollup/plugin-terser")
 
 const console = new logger("server");
 const app = express();
