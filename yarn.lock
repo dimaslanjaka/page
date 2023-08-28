@@ -904,6 +904,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/gapi@npm:^0.0.44":
+  version: 0.0.44
+  resolution: "@types/gapi@npm:0.0.44"
+  checksum: 72f01d266e374383e40f2a2007b3bdbde048f665e945593fcf9ada09c0272bef8306915032c7ec644669a538b81797384554fec79e5ea337f91da0315689b693
+  languageName: node
+  linkType: hard
+
 "@types/glob-stream@npm:*":
   version: 6.1.2
   resolution: "@types/glob-stream@npm:6.1.2"
@@ -13988,6 +13995,7 @@ __metadata:
   resolution: "wmi-page-monorepo@workspace:."
   dependencies:
     "@types/bluebird": ^3.5.38
+    "@types/gapi": ^0.0.44
     "@types/google.accounts": ^0.0.9
     "@types/node": ^20.2.3
     "@typescript-eslint/eslint-plugin": ^6.4.1
