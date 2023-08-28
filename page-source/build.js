@@ -5,7 +5,7 @@ const terserHtml = require('html-minifier-terser');
 const { default: _git } = require('git-command-helper');
 const jsdom = require('jsdom').JSDOM;
 
-async function build() {
+async function buildPage() {
 	const routes = config.routes;
 	for (let i = 0; i < routes.length; i++) {
 		const route = routes[i];
@@ -24,4 +24,8 @@ async function build() {
 	await fs.copy(path.join(__dirname, 'public-source'), path.join(__dirname, '../page'), { overwrite: true });
 }
 
-build();
+if (require.main === module) {
+	buildPage();
+}
+
+module.exports = { buildPage };
