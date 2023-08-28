@@ -4,6 +4,7 @@ const { fs, path } = require('sbg-utility');
 const Bluebird = require('bluebird');
 const glob = require('glob');
 const pagepkg = require('./page/package.json');
+const { buildPage } = require('./page-source/build');
 
 gulp.task('page:copy', async function () {
 	// copy non-compiled files
@@ -35,9 +36,7 @@ gulp.task('page:commit', async function () {
 	if (canPush) pageGit.push();
 });
 
-gulp.task('page:build', async function () {
-	await import('./page-source/build.js');
-});
+gulp.task('page:build', buildPage);
 
 gulp.task('page:clean', function () {
 	return new Promise(resolve => {
