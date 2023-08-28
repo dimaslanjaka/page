@@ -1,4 +1,5 @@
-const prettier = require('./.prettierrc');
+const prettier = require('./.prettierrc.json');
+
 /**
  * @type {import('eslint').ESLint.ConfigData}
  */
