@@ -16,7 +16,10 @@
   }
 });*/
 
-document.addEventListener('DOMContentLoaded', triggerAdsense);
+if (!/(localhost|127.0.0.1):?/gim.test(window.location.host)) {
+  // run only non-localhost
+  document.addEventListener('DOMContentLoaded', triggerAdsense);
+}
 
 /**
  * Prevent Duplicate
