@@ -2,7 +2,33 @@
 
 
 {% block content %}
-<script>setInterval(() => location.reload(), 4000)</script>
+<!--<script>setInterval(() => location.reload(), 4000)</script>-->
+<main class="container">
+  <div>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <td>{{ identifier if identifier else '' }}</td>
+      </tr>
+      <tr>
+        <th>permalink</th>
+        <td>{{ permalink if permalink else '' }}</td>
+      </tr>
+      <tr>
+        <th>pathname</th>
+        <td>{{ pathname if pathname else '' }}</td>
+      </tr>
+      <tr>
+        <th>dirname</th>
+        <td>{{ dirname if dirname else '' }}</td>
+      </tr>
+      <tr>
+        <th>realpath</th>
+        <td>{{ realpath if realpath else '' }}</td>
+      </tr>
+    </table>
+  </div>
+</main>
 {% endblock content %}
 
 {% block endbody %}

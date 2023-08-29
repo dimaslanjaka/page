@@ -129,7 +129,7 @@ app.use('/favicon.ico', async function (_, res) {
 let identifier = 'GEN-HASH';
 
 // dynamic routes
-app.use('/page/:permalink', async function (req, res, next) {
+app.use('/page/:permalink', async function (req, res) {
   if (identifier === 'GEN-HASH') {
     const github = new git(__dirname);
     identifier = await github.latestCommit();
@@ -143,19 +143,21 @@ app.use('/page/:permalink', async function (req, res, next) {
   const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
   let pathname = new URL('http://' + req.hostname + req.url).pathname;
   if (pathname.length === 0) pathname = 'index';
-  writefile('tmp/routes/' + pathname + '.log', JSON.stringify({ identifier, dirname, basename, realpath }, null, 2));
+  const viewData = { identifier, dirname, basename, realpath, permalink };
+  writefile('tmp/routes/' + pathname + '.log', JSON.stringify(viewData, null, 2));
+  const notfoundlayout = path.join(__dirname, 'views/404.njk');
   if (fs.existsSync(realpath)) {
     res.render(realpath, { identifier }, function (err, html) {
       if (err) {
         console.log('fail render', permalink);
-        res.render('404');
+        res.render(notfoundlayout, viewData);
       } else {
         console.log('success render', permalink);
         res.send(html);
       }
     });
   } else {
-    next();
+    res.render(notfoundlayout, viewData);
   }
 });
 //
