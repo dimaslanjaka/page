@@ -140,14 +140,18 @@ app.use('/page/:permalink', async function (req, res) {
   let basename = path.basename(permalink, path.extname(permalink));
   if (basename.length === 0) basename = 'index';
   const dirname = path.dirname(permalink);
-  const realpath = path.join(__dirname, 'views', dirname, basename + '.njk');
+  let viewPath = path.join(__dirname, 'views', dirname, basename + '.njk');
   let pathname = new URL('http://' + req.hostname + req.url).pathname;
   if (pathname.length === 0) pathname = 'index';
-  const viewData = { identifier, dirname, basename, realpath, permalink };
+  if (!fs.existsSync(viewPath)) {
+    // resolve real view when first view not exist
+    viewPath = path.join(__dirname, 'views', req.originalUrl.replace(/\/page\//, '').replace(/.html$/, '.njk'));
+  }
+  const viewData = { identifier, dirname, basename, viewPath, permalink };
   writefile('tmp/routes/' + pathname + '.log', JSON.stringify(viewData, null, 2));
   const notfoundlayout = path.join(__dirname, 'views/404.njk');
-  if (fs.existsSync(realpath)) {
-    res.render(realpath, { identifier }, function (err, html) {
+  if (fs.existsSync(viewPath)) {
+    res.render(viewPath, { identifier }, function (err, html) {
       if (err) {
         console.log('fail render', permalink);
         res.render(notfoundlayout, viewData);
