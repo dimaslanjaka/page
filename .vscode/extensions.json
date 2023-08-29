@@ -1,0 +1,6 @@
+{
+  "recommendations": [
+    "ginfuru.better-nunjucks",
+    "dbaeumer.vscode-eslint"
+  ]
+}
