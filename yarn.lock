@@ -342,6 +342,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@maxim_mazurok/gapi.client.analytics-v3@npm:latest":
+  version: 0.0.20190807
+  resolution: "@maxim_mazurok/gapi.client.analytics-v3@npm:0.0.20190807"
+  dependencies:
+    "@types/gapi.client": "*"
+    "@types/gapi.client.discovery": "*"
+  checksum: a7d78bb02d106d981b6066f9578616352f2f97cfe9eb9b604d986a9c13f73dc2a53ab4ee05cbdeaeb5cf6284b7ac601b2934640647dc104e3fbee2c015626279
+  languageName: node
+  linkType: hard
+
+"@maxim_mazurok/gapi.client.discovery-v1@npm:latest":
+  version: 0.0.20200806
+  resolution: "@maxim_mazurok/gapi.client.discovery-v1@npm:0.0.20200806"
+  dependencies:
+    "@types/gapi.client": "*"
+    "@types/gapi.client.discovery": "*"
+  checksum: eb8c465a104fa0106727653bcbb5bf567186201a43c717265ec9db9f5661456105f02846ea5bd3f33bd9fc294919bbeeca2177198bd7b36d2ec11fda9152c43c
+  languageName: node
+  linkType: hard
+
 "@mozilla/readability@npm:^0.4.2":
   version: 0.4.4
   resolution: "@mozilla/readability@npm:0.4.4"
@@ -922,6 +942,31 @@ __metadata:
   dependencies:
     "@types/gapi": "*"
   checksum: 6eba0f30ff8789fbc1bc33ed6fc7f65ca013b860a4174d73b48f7994e5f889ad8db128ff0e2cd034913ead1a84505ba8d0eff9a4fdf9956b44e69dd55710e3a7
+  languageName: node
+  linkType: hard
+
+"@types/gapi.client.analytics@npm:^3.0.9":
+  version: 3.0.9
+  resolution: "@types/gapi.client.analytics@npm:3.0.9"
+  dependencies:
+    "@maxim_mazurok/gapi.client.analytics-v3": latest
+  checksum: 51c69ca602deea1ecc75d625f779d93702005585e36f92e02324a510e08fa2e8c7ca4f56c912620a43289c1e8ec34826ab879b5590775508fd468ca313091ad1
+  languageName: node
+  linkType: hard
+
+"@types/gapi.client.discovery@npm:*":
+  version: 1.0.9
+  resolution: "@types/gapi.client.discovery@npm:1.0.9"
+  dependencies:
+    "@maxim_mazurok/gapi.client.discovery-v1": latest
+  checksum: 1add6faeef210985fd25e9782a6377a6334ec22df0c27794158eb67df751551d5ea71f9deb25a6d4943bf9d9bb65af38af0a504cb186baf46ee0ddf80a488ab6
+  languageName: node
+  linkType: hard
+
+"@types/gapi.client@npm:*":
+  version: 1.0.5
+  resolution: "@types/gapi.client@npm:1.0.5"
+  checksum: 2e85b381b45e290de13052e108e4281c0966065db085c3b4294cd801c9425f8ad37b38f76f6a1f404a963fa326564bed953db3352c933c4f417fa209ff4d3c0c
   languageName: node
   linkType: hard
 
@@ -14225,6 +14270,7 @@ __metadata:
     "@types/bluebird": ^3.5.38
     "@types/gapi": ^0.0.44
     "@types/gapi.auth2": ^0.0.57
+    "@types/gapi.client.analytics": ^3.0.9
     "@types/google.accounts": ^0.0.9
     "@types/node": ^20.2.3
     "@typescript-eslint/eslint-plugin": ^6.4.1
