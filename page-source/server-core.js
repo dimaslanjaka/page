@@ -145,7 +145,17 @@ app.use('/page/:permalink', async function (req, res) {
   if (pathname.length === 0) pathname = 'index';
   if (!fs.existsSync(viewPath)) {
     // resolve real view when first view not exist
-    viewPath = path.join(__dirname, 'views', req.originalUrl.replace(/\/page\//, '').replace(/.html$/, '.njk'));
+    viewPath = path.join(
+      __dirname,
+      'views',
+      req.originalUrl
+        // remove /page/
+        .replace(/\/page\//, '')
+        // remove url parameters
+        .split('?')[0]
+        // replace .html to .njk
+        .replace(/.html$/, '.njk'),
+    );
   }
   const viewData = { identifier, dirname, basename, viewPath, permalink };
   writefile('tmp/routes/' + pathname + '.log', JSON.stringify(viewData, null, 2));
