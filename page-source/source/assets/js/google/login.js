@@ -8,7 +8,8 @@ let g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
 const queryString = window.location.search;
 const urlParameters = new URLSearchParams(queryString);
 const value = urlParameters.get('clear');
-if (value !== null) g_credential = {};
+const needClean = value !== null;
+if (needClean) g_credential = {};
 // GSI initializer options
 GOOGLE_CONFIG.callback = handleCredResp;
 
@@ -49,9 +50,15 @@ async function handleCredResp(response) {
   handleCredentialResponse(response, function () {
     //console.log('credential', { g_credential }, { response });
 
+    // redirect to page
     const redirecto = urlParameters.get('redirect');
     if (redirecto) {
       window.location.replace(redirecto);
+    }
+
+    // clean needed
+    if (needClean) {
+      window.location.replace(window.location.href.split('?')[0]);
     }
 
     // change profile card
