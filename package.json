@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.38",
     "@types/gapi": "^0.0.44",
+    "@types/gapi.auth2": "^0.0.57",
     "@types/google.accounts": "^0.0.9",
     "@types/node": "^20.2.3",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
@@ -75,8 +76,10 @@
     "@types/git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/ae51725/release/git-command-helper.tgz"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.0",
     "bluebird": "^3.7.2",
     "dotenv": "^16.3.1",
+    "googleapis": "^126.0.1",
     "minimatch": "^9.0.3"
   }
 }
