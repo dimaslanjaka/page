@@ -45,7 +45,7 @@ async function handleCredentialResponse(response, callback) {
   // determine expires time
   g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
   // handle google one tap jwt login
-  if ('credential' in response) {
+  if ('credential' in response && typeof response.credential === 'string') {
     g_credential['credential'] = {};
     // parse jwt token
     const parse = parseJwt(response.credential);
