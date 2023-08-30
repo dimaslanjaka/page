@@ -4,11 +4,12 @@
 
 /**
  * get page views by path
- * @param {{ startDate: string, endDate: string, value: string }} value
+ * @param {{ startDate?: string, endDate?: string, value: string, viewId: string, [key:string]: any }} value
  * @returns
  */
-const byPath = ({ startDate, endDate, value }) => {
+const byPath = ({ startDate, endDate, value, viewId }) => {
   return {
+    viewId,
     dimensions: [{ name: 'pagePath' }],
     metrics: [{ name: 'screenPageViews' }],
     dateRanges: [{ startDate: startDate || 'yesterday', endDate: endDate || 'today' }],
