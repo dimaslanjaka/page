@@ -30,7 +30,7 @@ let g_credential = getLocalCredential();
 /**
  * Global token handler
  * @param {Record<string,any>} response
- * @param {(...arg: any) => any} [callback]
+ * @param {(g_credential: Record<string,any>) => any} [callback]
  * @returns
  */
 async function handleCredentialResponse(response, callback) {
