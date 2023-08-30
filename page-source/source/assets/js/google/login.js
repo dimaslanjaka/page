@@ -1,4 +1,4 @@
-const { GOOGLE_CONFIG } = require('./constants');
+const { GOOGLE_CONFIG, handleCredentialResponse, getLocalCredential } = require('./constants');
 
 // key to save credential for offline usage
 const KEY_LOCALSTORAGE = 'google_credential';
@@ -10,7 +10,7 @@ const urlParameters = new URLSearchParams(queryString);
 const value = urlParameters.get('clear');
 if (value !== null) g_credential = {};
 // GSI initializer options
-GOOGLE_CONFIG.callback = handleCredentialResponse;
+GOOGLE_CONFIG.callback = handleCredResp;
 
 (function () {
   document.getElementById('logout').addEventListener('click', function () {
@@ -29,7 +29,7 @@ GOOGLE_CONFIG.callback = handleCredentialResponse;
     ...GOOGLE_CONFIG,
     //login_hint: 'credential' in g_credential ? g_credential.credential.email : null,
     prompt: 'consent', // '' | 'none' | 'consent' | 'select_account'
-    callback: handleCredentialResponse, // your function to handle the response after login. 'access_token' will be returned as property on the response
+    callback: handleCredResp, // your function to handle the response after login. 'access_token' will be returned as property on the response
   });
   // render profile card
   updateProfileCard();
@@ -40,53 +40,28 @@ GOOGLE_CONFIG.callback = handleCredentialResponse;
 })();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function handleCredentialResponse(response) {
+async function handleCredResp(response) {
   const tokenDebugger = document.getElementById('tokenResponse');
   if (!response) {
-    return (tokenDebugger.textContent = 'response is null');
+    tokenDebugger.textContent = 'response is null';
+    return;
   }
-  // handle credential responses
-  for (let key in response) {
-    g_credential[key] = response[key];
-  }
-  // determine expires time
-  g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
-  // handle google one tap jwt login
-  if ('credential' in response) {
-    g_credential['credential'] = {};
-    // parse jwt token
-    const parse = parseJwt(response.credential);
-    for (let key in parse) {
-      g_credential['credential'][key] = parse[key];
+  handleCredentialResponse(response, function () {
+    //console.log('credential', { g_credential }, { response });
+
+    const redirecto = urlParameters.get('redirect');
+    if (redirecto) {
+      window.location.replace(redirecto);
     }
-  } else if ('access_token' in response) {
-    // fetch user profile
-    await fetch('https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + response.access_token)
-      .then(res => res.json())
-      .then(response => {
-        g_credential['credential'] = {};
-        for (let key in response) {
-          g_credential['credential'][key] = response[key];
-        }
-      });
-  }
 
-  //console.log('credential', { g_credential }, { response });
-
-  // save credential to local storage
-  window.localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(g_credential));
-
-  const redirecto = urlParameters.get('redirect');
-  if (redirecto) {
-    window.location.replace(redirecto);
-  }
-
-  // change profile card
-  updateProfileCard();
+    // change profile card
+    updateProfileCard();
+  });
 }
 
 function updateProfileCard() {
   const tokenDebugger = document.getElementById('tokenResponse');
+  g_credential = getLocalCredential();
   if ('credential' in g_credential === false) {
     return (tokenDebugger.innerHTML = 'UNAUTHORIZED');
   }
@@ -107,23 +82,4 @@ function updateProfileCard() {
 
   // print debug
   tokenDebugger.textContent = JSON.stringify(g_credential, null, 2);
-}
-
-/**
- * parse JWT response
- * @param {string} token
- * @returns
- */
-function parseJwt(token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split('')
-      .map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join(''),
-  );
-  return JSON.parse(jsonPayload);
 }
