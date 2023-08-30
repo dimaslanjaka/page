@@ -1,7 +1,5 @@
-const { GOOGLE_CONFIG, handleCredentialResponse, getLocalCredential } = require('./constants');
+const { GOOGLE_CONFIG, handleCredentialResponse, getLocalCredential, KEY_LOCALSTORAGE } = require('./constants');
 
-// key to save credential for offline usage
-const KEY_LOCALSTORAGE = 'google_credential';
 // last login credential
 let g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
 // clear
@@ -9,7 +7,10 @@ const queryString = window.location.search;
 const urlParameters = new URLSearchParams(queryString);
 const value = urlParameters.get('clear');
 const needClean = value !== null;
-if (needClean) g_credential = {};
+if (needClean) {
+  g_credential = {};
+  localStorage.removeItem(KEY_LOCALSTORAGE);
+}
 // GSI initializer options
 GOOGLE_CONFIG.callback = handleCredResp;
 
