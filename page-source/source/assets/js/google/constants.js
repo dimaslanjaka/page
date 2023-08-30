@@ -99,11 +99,29 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+/**
+ * generate oauth url
+ * @param {string} [redirect_uri]
+ * @returns
+ */
+function generateAuthUrl(redirect_uri) {
+  return (
+    'https://accounts.google.com/o/oauth2/v2/auth?' +
+    'client_id=' +
+    GOOGLE_CONFIG.client_id +
+    '&redirect_uri=' +
+    (redirect_uri || window.location.href) +
+    '&response_type=token' +
+    '&scope=https://www.googleapis.com/auth/analytics.readonly'
+  );
+}
+
 module.exports = {
   GOOGLE_SCOPES,
   GOOGLE_CONFIG,
   handleCredentialResponse,
   parseJwt,
+  generateAuthUrl,
   getLocalCredential,
   KEY_LOCALSTORAGE,
 };
