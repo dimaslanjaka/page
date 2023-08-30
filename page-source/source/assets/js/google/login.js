@@ -10,6 +10,7 @@ const needClean = value !== null;
 if (needClean) {
   g_credential = {};
   localStorage.removeItem(KEY_LOCALSTORAGE);
+  window.location.replace(window.location.href.split('?')[0]);
 }
 // GSI initializer options
 GOOGLE_CONFIG.callback = handleCredResp;
@@ -55,11 +56,6 @@ async function handleCredResp(response) {
     const redirecto = urlParameters.get('redirect');
     if (redirecto) {
       window.location.replace(redirecto);
-    }
-
-    // clean needed
-    if (needClean) {
-      window.location.replace(window.location.href.split('?')[0]);
     }
 
     // change profile card
