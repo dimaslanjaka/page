@@ -4,8 +4,8 @@ const KEY_LOCALSTORAGE = 'google_credential';
 let g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
 // clear
 const queryString = window.location.search;
-const parameters = new URLSearchParams(queryString);
-const value = parameters.get('clear');
+const urlParameters = new URLSearchParams(queryString);
+const value = urlParameters.get('clear');
 if (value !== null) g_credential = {};
 // GSI initializer options
 const initOpt = {
@@ -68,6 +68,9 @@ async function handleCredentialResponse(response) {
   for (let key in response) {
     g_credential[key] = response[key];
   }
+  // determine expires time
+  g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
+  // handle google one tap jwt login
   if ('credential' in response) {
     g_credential['credential'] = {};
     // parse jwt token
@@ -92,25 +95,33 @@ async function handleCredentialResponse(response) {
   // save credential to local storage
   window.localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(g_credential));
 
+  const redirecto = urlParameters.get('redirect');
+  if (redirecto) {
+    window.location.replace(redirecto);
+  }
+
   // change profile card
   updateProfileCard();
 }
 
 function updateProfileCard() {
+  const tokenDebugger = document.getElementById('tokenResponse');
+  if ('credential' in g_credential === false) {
+    return (tokenDebugger.innerHTML = 'UNAUTHORIZED');
+  }
   const wrapper = document.getElementById('profileWrapper');
   const img = wrapper.querySelector('.card-img-top');
   img.setAttribute('src', g_credential.credential.picture);
   const fullName = `${g_credential.credential.given_name} ${g_credential.credential.family_name}`;
   img.setAttribute('alt', `${fullName}`);
   wrapper.querySelector('.card-title').innerHTML = fullName;
-  const isExpired = Date.now() >= g_credential.credential.exp * 1000;
+  const isExpired = Date.now() >= g_credential._expires_in;
   document.getElementById('gEmail').textContent = g_credential.credential.email;
   document.getElementById('isExpired').innerHTML = isExpired
     ? '<span class="text-danger">true</span>'
     : '<span class="text-success">false</span>';
 
   // print debug
-  const tokenDebugger = document.getElementById('tokenResponse');
   tokenDebugger.textContent = JSON.stringify(g_credential, null, 2);
 }
 
