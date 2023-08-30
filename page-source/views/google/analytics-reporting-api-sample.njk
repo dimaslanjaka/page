@@ -34,11 +34,6 @@
       };
 
       gapi.auth.authorize(g_credential, function (response) {
-        for (let key in response) {
-          g_credential[key] = response[key];
-        }
-        // save credential to local storage
-        window.localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(g_credential));
         var authButton = document.getElementById('auth-button');
         if (response.error) {
           authButton.hidden = false;
@@ -62,6 +57,8 @@
       if (response.result.items && response.result.items.length) {
         // Get the first Google Analytics account.
         var firstAccountId = response.result.items[0].id;
+
+        console.log('all accounts', response.result.items)
 
         // Query for properties.
         queryProperties(firstAccountId);
