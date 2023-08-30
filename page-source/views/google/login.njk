@@ -1,0 +1,76 @@
+{% set canonical = "https://www.webmanajemen.com/page/google/login.html" %}
+{% set lang = "en" %}
+{% extends '../_layout.njk' %}
+
+{% block head %}
+<style>
+  #tokenResponse {
+    overflow: scroll;
+  }
+
+  #profileWrapper .card-img-top {
+    width: 60%;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  #profileWrapper .card {
+    width: 30rem;
+    padding: 1.5em 0.5em 0.5em;
+    text-align: center;
+    border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  #profileWrapper .card-title {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  #profileWrapper .btn-primary {
+    border-radius: 2em;
+    padding: 0.5em 1.5em;
+  }
+</style>
+<meta rel="alternate" url="https://codepen.io/dimaslanjaka/pen/yLGePVj" />
+{% endblock head %}
+
+{% block content %}
+<main class="container">
+
+  <section>
+    <div class="mb-2" id="profileWrapper">
+      <div class="card">
+        <img src="https://codingyaar.com/wp-content/uploads/bootstrap-profile-card-image.jpg" class="card-img-top"
+          alt="..." onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';">
+        <div class="card-body">
+          <h5 class="card-title">Coding Yaar</h5>
+          <table class="table">
+            <tr>
+              <td>Email</td>
+              <td id="gEmail"></td>
+            </tr>
+            <tr>
+              <td>Is token expired</td>
+              <td id="isExpired"></td>
+            </tr>
+          </table>
+          <a href="#" class="btn btn-primary" id="changeAccount">Change Account</a>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-danger btn-small d-none" id="logout">Logout</button>
+  </section>
+
+  <section>
+    <pre><code id="tokenResponse"></code></pre>
+  </section>
+</main>
+{% endblock content %}
+
+{% block endbody %}
+<script src="https://accounts.google.com/gsi/client"></script>
+<script src="/page/assets/js/google/login.js"></script>
+{% endblock endbody %}
