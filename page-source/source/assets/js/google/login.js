@@ -1,3 +1,5 @@
+const { GOOGLE_CONFIG } = require('./constants');
+
 // key to save credential for offline usage
 const KEY_LOCALSTORAGE = 'google_credential';
 // last login credential
@@ -8,28 +10,7 @@ const urlParameters = new URLSearchParams(queryString);
 const value = urlParameters.get('clear');
 if (value !== null) g_credential = {};
 // GSI initializer options
-const initOpt = {
-  apiKey: 'AIzaSyA7A6yPL2V8OBGh-DsQ1spG0suJfe5ZJaw',
-  response_type: 'token',
-  access_type: 'offline',
-  // auto select account
-  auto_select: false,
-  prompt: 'select_account',
-  // google client id
-  client_id: '974269993480-30i5epi0r6a9uiafq3rkpgsjuooe2t3q.apps.googleusercontent.com',
-  // handle callback response
-  callback: handleCredentialResponse,
-  // cookie origin
-  state_cookie_domain: window.location.origin,
-  // scope library
-  scope: [
-    'https://www.googleapis.com/auth/analytics.readonly',
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-    'https://www.googleapis.com/auth/contacts.readonly',
-    'https://www.googleapis.com/auth/plus.login',
-  ].join(' '),
-};
+GOOGLE_CONFIG.callback = handleCredentialResponse;
 
 (function () {
   document.getElementById('logout').addEventListener('click', function () {
@@ -38,14 +19,14 @@ const initOpt = {
 
   // initialize google account
   google.accounts.id.initialize({
-    ...initOpt,
+    ...GOOGLE_CONFIG,
     allowed_parent_origin: true,
   });
   // prevent UX dead loop
   google.accounts.id.disableAutoSelect();
   // initialize token client
   const tokenClient = google.accounts.oauth2.initTokenClient({
-    ...initOpt,
+    ...GOOGLE_CONFIG,
     //login_hint: 'credential' in g_credential ? g_credential.credential.email : null,
     prompt: 'consent', // '' | 'none' | 'consent' | 'select_account'
     callback: handleCredentialResponse, // your function to handle the response after login. 'access_token' will be returned as property on the response
