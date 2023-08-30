@@ -115,7 +115,10 @@ function updateProfileCard() {
   const fullName = `${g_credential.credential.given_name} ${g_credential.credential.family_name}`;
   img.setAttribute('alt', `${fullName}`);
   wrapper.querySelector('.card-title').innerHTML = fullName;
-  const isExpired = Date.now() >= g_credential._expires_in;
+  const isExpired =
+    'exp' in g_credential.credential
+      ? Date.now() >= g_credential.credential.exp * 1000
+      : Date.now() >= g_credential._expires_in;
   document.getElementById('gEmail').textContent = g_credential.credential.email;
   document.getElementById('isExpired').innerHTML = isExpired
     ? '<span class="text-danger">true</span>'
