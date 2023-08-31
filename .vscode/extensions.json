@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "ginfuru.better-nunjucks",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig"
   ]
 }
