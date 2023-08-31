@@ -1,0 +1,54 @@
+<!-- prettier-ignore-start -->
+{% set canonical = "https://www.webmanajemen.com/page/google/login.html" %} {% set lang = "en" %} {% extends
+'../_layout.njk' %}
+<!-- prettier-ignore-end -->
+
+{% block head %}
+<style>
+  pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
+</style>
+
+<!-- prettier-ignore-start -->
+{% endblock head %} {% block content %}
+<!-- prettier-ignore-end -->
+
+<main class="container">
+  <section>
+    <div class="d-flex justify-content-between">
+      <div><button id="authBtn" class="btn btn-sm btn-primary">Obtain New Access Token</button></div>
+      <div><button id="revokeBtn" class="btn btn-sm btn-danger">Revoke access token</button></div>
+      <div><div id="userInfo"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>pathname</th>
+          <th>views</th>
+        </tr>
+      </thead>
+      <tbody id="renderResult">
+      </tbody>
+    </table>
+  </section>
+
+  <pre><code id="query-output"></code></pre>
+</main>
+
+<!-- prettier-ignore-start -->
+{% endblock content %} {% block endbody %}
+<!-- prettier-ignore-end -->
+
+<script src="https://accounts.google.com/gsi/client"></script>
+<script src="https://apis.google.com/js/client.js"></script>
+<script src="/page/assets/js/google/analytics-all.js"></script>
+{% endblock endbody %}
