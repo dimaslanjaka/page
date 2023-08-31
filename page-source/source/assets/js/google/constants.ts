@@ -13,7 +13,7 @@ export const GOOGLE_CONFIG = {
   auto_select: false,
   prompt: 'select_account',
   // google client id
-  client_id: '974269993480-30i5epi0r6a9uiafq3rkpgsjuooe2t3q.apps.googleusercontent.com',
+  client_id: '974269993480-0e6vhfl8j688jal91o6c93eh90cg88o2.apps.googleusercontent.com',
   // handle callback response
   //callback: handleCredentialResponse,
   // cookie origin
