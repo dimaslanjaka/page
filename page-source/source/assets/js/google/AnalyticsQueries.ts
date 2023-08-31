@@ -33,10 +33,15 @@ export class AnalyticsQueries {
 
   /**
    * get page views by path
-   * @param {{ startDate?: string, endDate?: string, value: string, viewId: string, [key:string]: any }} value
+   * @param value
    * @returns
    */
-  static byPath = ({ startDate = 'today', endDate = 'today', value, viewId = 'ga:159996509' } = {}) => {
+  static byPath = ({
+    startDate = 'today',
+    endDate = 'today',
+    value = undefined as string,
+    viewId = 'ga:159996509',
+  } = {}) => {
     return {
       dateRanges: [
         {
