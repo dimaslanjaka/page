@@ -46,7 +46,7 @@ export async function handleCredentialResponse(response, callback?) {
   g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
   // handle google one tap jwt login
   if ('credential' in response && typeof response.credential === 'string') {
-    g_credential['credential'] = {};
+    g_credential['credential'] = {} as (typeof g_credential)['credential'];
     // parse jwt token
     const parse = parseJwt(response.credential);
     for (const key in parse) {
@@ -57,7 +57,7 @@ export async function handleCredentialResponse(response, callback?) {
     await fetch('https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + response.access_token)
       .then(res => res.json())
       .then(response => {
-        g_credential['credential'] = {};
+        g_credential['credential'] = {} as (typeof g_credential)['credential'];
         for (const key in response) {
           g_credential['credential'][key] = response[key];
         }
@@ -73,11 +73,32 @@ export async function handleCredentialResponse(response, callback?) {
   return g_credential;
 }
 
+interface LocalCredential {
+  [key: string]: any;
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  authuser: string;
+  prompt: string;
+  _expires_in: number;
+  credential: {
+    sub: string;
+    name: string;
+    given_name: string;
+    family_name: string;
+    picture: string;
+    email: string;
+    email_verified: boolean;
+    locale: string;
+  };
+}
+
 /**
  * get saved credential in local storage
  * @returns
  */
-export function getLocalCredential(): { [key: string]: any; access_token?: string } {
+export function getLocalCredential(): LocalCredential {
   return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
 }
 
