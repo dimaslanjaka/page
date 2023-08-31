@@ -2,6 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 import assert from 'assert';
 import fs from 'fs-extra';
 import { OutputOptions, rollup, RollupOptions } from 'rollup';
@@ -52,7 +53,12 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
       input: sourcePath,
       // external: Object.keys(globals),
       cache: !isDev(),
-      plugins: [json(), resolve(), commonjs()],
+      plugins: [
+        json(),
+        resolve(),
+        commonjs(),
+        typescript({ compilerOptions: { lib: ['es5', 'es6', 'dom'], target: 'es5' } }),
+      ],
       output: {
         plugins: [],
         file: jsPath,
