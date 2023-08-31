@@ -1,11 +1,11 @@
-const GOOGLE_SCOPES = [
+export const GOOGLE_SCOPES = [
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/userinfo.profile',
   'https://www.googleapis.com/auth/contacts.readonly',
   'https://www.googleapis.com/auth/plus.login',
 ];
-const GOOGLE_CONFIG = {
+export const GOOGLE_CONFIG = {
   apiKey: 'AIzaSyA7A6yPL2V8OBGh-DsQ1spG0suJfe5ZJaw',
   response_type: 'token',
   access_type: 'offline',
@@ -23,23 +23,23 @@ const GOOGLE_CONFIG = {
 };
 
 // key to save credential for offline usage
-const KEY_LOCALSTORAGE = 'google_credential';
+export const KEY_LOCALSTORAGE = 'google_credential';
 // last login credential
-let g_credential = getLocalCredential();
+const g_credential = getLocalCredential();
 
 /**
  * Global token handler
- * @param {Record<string,any>} response
- * @param {(g_credential: Record<string,any>) => any} [callback]
+ * @param response
+ * @param callback
  * @returns
  */
-async function handleCredentialResponse(response, callback) {
+export async function handleCredentialResponse(response, callback?) {
   if (!response) {
     console.error('token response is null');
     return;
   }
   // handle credential responses
-  for (let key in response) {
+  for (const key in response) {
     g_credential[key] = response[key];
   }
   // determine expires time
@@ -49,7 +49,7 @@ async function handleCredentialResponse(response, callback) {
     g_credential['credential'] = {};
     // parse jwt token
     const parse = parseJwt(response.credential);
-    for (let key in parse) {
+    for (const key in parse) {
       g_credential['credential'][key] = parse[key];
     }
   } else if ('access_token' in response) {
@@ -58,7 +58,7 @@ async function handleCredentialResponse(response, callback) {
       .then(res => res.json())
       .then(response => {
         g_credential['credential'] = {};
-        for (let key in response) {
+        for (const key in response) {
           g_credential['credential'][key] = response[key];
         }
       });
@@ -75,21 +75,21 @@ async function handleCredentialResponse(response, callback) {
 
 /**
  * get saved credential in local storage
- * @returns {{ [key:string]: any; access_token?: string; }}
+ * @returns
  */
-function getLocalCredential() {
+export function getLocalCredential(): { [key: string]: any; access_token?: string } {
   return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
 }
 
 /**
  * parse JWT response
- * @param {string} token
+ * @param token
  * @returns
  */
-function parseJwt(token) {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(
+export function parseJwt(token: string) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
     atob(base64)
       .split('')
       .map(function (c) {
@@ -105,7 +105,7 @@ function parseJwt(token) {
  * @param {string} [redirect_uri]
  * @returns
  */
-function generateAuthUrl(redirect_uri) {
+export function generateAuthUrl(redirect_uri) {
   return (
     'https://accounts.google.com/o/oauth2/v2/auth?' +
     'client_id=' +
@@ -116,13 +116,3 @@ function generateAuthUrl(redirect_uri) {
     '&scope=https://www.googleapis.com/auth/analytics.readonly'
   );
 }
-
-module.exports = {
-  GOOGLE_SCOPES,
-  GOOGLE_CONFIG,
-  handleCredentialResponse,
-  parseJwt,
-  generateAuthUrl,
-  getLocalCredential,
-  KEY_LOCALSTORAGE,
-};
