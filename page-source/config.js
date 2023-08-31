@@ -25,7 +25,7 @@ module.exports = {
     },
     {
       src: 'http://localhost:4000/page/safelink/layout1/',
-			dest: 'page/safelink/layout1/index.html'
+      dest: 'page/safelink/layout1/index.html',
     },
   ],
 };
