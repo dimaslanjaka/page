@@ -9,7 +9,7 @@ export class AnalyticsQueries {
    * @param {{ [key:string]: any; startDate: string, endDate: string; viewId: string; }} param0
    * @returns
    */
-  static getAllPagePathsWithView = ({ startDate, endDate, viewId }) => {
+  static getAllPagePathsWithView = ({ startDate = 'today', endDate = 'today', viewId = 'ga:159996509' } = {}) => {
     return {
       dateRanges: [
         {
@@ -22,7 +22,7 @@ export class AnalyticsQueries {
           name: 'ga:pagePath',
         },
       ],
-      viewId: viewId || 'ga:159996509',
+      viewId,
       metrics: [
         {
           expression: 'ga:pageviews',
@@ -36,7 +36,7 @@ export class AnalyticsQueries {
    * @param {{ startDate?: string, endDate?: string, value: string, viewId: string, [key:string]: any }} value
    * @returns
    */
-  static byPath = ({ startDate, endDate, value, viewId }) => {
+  static byPath = ({ startDate = 'today', endDate = 'today', value, viewId = 'ga:159996509' } = {}) => {
     return {
       dateRanges: [
         {
