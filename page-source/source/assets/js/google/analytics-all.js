@@ -117,11 +117,13 @@ function displayResults(response) {
   if ('result' in response) {
     formattedJson = JSON.stringify(response.result, null, 2);
 
-    const tbody = document.getElementById('renderResult');
-    const queryResult = response.result.reports[0].data.rows;
-    for (let i = 0; i < queryResult.length; i++) {
-      const result = queryResult[i];
-      tbody.appendChild(createTr(result.dimensions[0], result.metrics[0].values[0]));
+    if (response.result.reports) {
+      const tbody = document.getElementById('renderResult');
+      const queryResult = response.result.reports[0].data.rows;
+      for (let i = 0; i < queryResult.length; i++) {
+        const result = queryResult[i];
+        tbody.appendChild(createTr(result.dimensions[0], result.metrics[0].values[0]));
+      }
     }
   } else {
     formattedJson = JSON.stringify(response, null, 2);
