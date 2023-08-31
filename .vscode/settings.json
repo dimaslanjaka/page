@@ -9,6 +9,10 @@
 		"editor.formatOnSave": false
 	},
 	"[typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true,
+			"source.organizeImports": true
+		},
 		"editor.formatOnSave": false
 	},
 	"[css]": {
@@ -16,7 +20,7 @@
 	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
-		"source.organizeImports": true
+		"source.organizeImports": false
 	},
 	"code-runner.clearPreviousOutput": true,
 	"code-runner.runInTerminal": true,
