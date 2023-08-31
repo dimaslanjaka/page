@@ -11,25 +11,21 @@ export class AnalyticsQueries {
    */
   static getAllPagePathsWithView = ({ startDate, endDate, viewId }) => {
     return {
-      reportRequests: [
+      dateRanges: [
         {
-          dateRanges: [
-            {
-              startDate,
-              endDate,
-            },
-          ],
-          dimensions: [
-            {
-              name: 'ga:pagePath',
-            },
-          ],
-          viewId: viewId || 'ga:159996509',
-          metrics: [
-            {
-              expression: 'ga:pageviews',
-            },
-          ],
+          startDate,
+          endDate,
+        },
+      ],
+      dimensions: [
+        {
+          name: 'ga:pagePath',
+        },
+      ],
+      viewId: viewId || 'ga:159996509',
+      metrics: [
+        {
+          expression: 'ga:pageviews',
         },
       ],
     };
@@ -42,34 +38,30 @@ export class AnalyticsQueries {
    */
   static byPath = ({ startDate, endDate, value, viewId }) => {
     return {
-      reportRequests: [
+      dateRanges: [
         {
-          dateRanges: [
+          startDate,
+          endDate,
+        },
+      ],
+      dimensions: [
+        {
+          name: 'ga:pagePath',
+        },
+      ],
+      viewId: viewId || 'ga:159996509',
+      metrics: [
+        {
+          expression: 'ga:pageviews',
+        },
+      ],
+      dimensionFilterClauses: [
+        {
+          filters: [
             {
-              startDate,
-              endDate,
-            },
-          ],
-          dimensions: [
-            {
-              name: 'ga:pagePath',
-            },
-          ],
-          viewId: viewId || 'ga:159996509',
-          metrics: [
-            {
-              expression: 'ga:pageviews',
-            },
-          ],
-          dimensionFilterClauses: [
-            {
-              filters: [
-                {
-                  dimensionName: 'ga:pagePath',
-                  operator: 'IN_LIST' /*EXACT*/,
-                  expressions: [value],
-                },
-              ],
+              dimensionName: 'ga:pagePath',
+              operator: 'IN_LIST' /*EXACT*/,
+              expressions: [value],
             },
           ],
         },
