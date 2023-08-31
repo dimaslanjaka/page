@@ -77,3 +77,5 @@ export class AnalyticsQueries {
     };
   };
 }
+
+export default AnalyticsQueries;
