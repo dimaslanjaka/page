@@ -70,11 +70,12 @@ async function handleCredentialResponse(response, callback) {
   window.localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(g_credential));
 
   if (typeof callback === 'function') callback(g_credential);
+  return g_credential;
 }
 
 /**
  * get saved credential in local storage
- * @returns
+ * @returns {{ [key:string]: any; access_token?: string; }}
  */
 function getLocalCredential() {
   return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
