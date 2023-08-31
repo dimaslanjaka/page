@@ -1,5 +1,5 @@
 {
 	"extends": "./tsconfig.base.json",
-	"include": ["./page/package.json", "./gulpfile*", "./page-source", "get-production-package.js"],
-	"exclude": ["**/node_modules/**"]
+	"include": ["./page/package.json", "./gulpfile*", "./page-source", "./*.js", "./*.ts"],
+	"exclude": ["**/node_modules/**", "./page/**/*", "**/dist/**"]
 }
