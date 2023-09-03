@@ -11,3 +11,4 @@ config.json
 !**/.yarn/releases
 !**/.yarn/plugins
 .env
+/dist
