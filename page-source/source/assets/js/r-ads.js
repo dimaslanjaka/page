@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-global-assign */
+import * as cookies from './cookie.js';
 
-// <reference path="./cookie.js" />
 // 5 6 ^ %
 
 /**
@@ -109,7 +109,7 @@ function triggerAdsense(_e) {
   // cookie key
   const ck = 'currentAds';
   // select previous ads id from cookie
-  const ca = getCookie(ck);
+  const ca = cookies.getCookie(ck);
   /**
    * @type {typeof allAds[number]}
    */
@@ -330,27 +330,6 @@ function triggerAdsense(_e) {
         return 0.5 - Math.random();
       })
       .filter(el => el !== null);
-  }
-
-  /**
-   * get cookie by name
-   * @param {string} cname
-   * @returns
-   */
-  function getCookie(cname) {
-    let name = cname + '=';
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return '';
   }
 
   /**
