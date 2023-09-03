@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"command": "node server.js",
+			"command": "yarn start",
 			"name": "run server",
 			"request": "launch",
 			"type": "node-terminal"
