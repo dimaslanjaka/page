@@ -5,7 +5,7 @@
   "main": "build.js",
   "scripts": {
     "start": "cross-env-shell NODE_ENV=development node server.js",
-    "serve": "cross-env-shell NODE_ENV=production node server.js",
+    "serve": "rm -rf tmp .rollup.cache && cross-env-shell NODE_ENV=production node server.js",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x jsdom"
   },
   "keywords": [],
