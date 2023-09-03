@@ -1,5 +1,20 @@
 {
 	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "outDir": "tmp/tsc",
+    "checkJs": false,
+    "composite": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": false
+  },
 	"include": ["./page/package.json", "./gulpfile*", "./page-source", "./*.js", "./*.ts"],
 	"exclude": ["**/node_modules/**", "./page/**/*", "**/dist/**"]
 }
