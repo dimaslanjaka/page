@@ -20,6 +20,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "requirejs": "^2.3.6",
+    "safelinkify": "*",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
@@ -41,6 +42,7 @@
     "@types/nunjucks": "^3.2.2",
     "@types/through2": "https://github.com/dimaslanjaka/nodejs-package-types/tarball/through2",
     "ansi-colors": "^4.1.3",
+    "binary-collections": "*",
     "browser-sync": "^2.29.3",
     "clean-css": "^5.3.2",
     "connect-browser-sync": "^2.1.0",
@@ -59,7 +61,7 @@
     "rollup": "^3.23.0",
     "sbg-utility": "^1.1.3",
     "terser": "^5.19.3",
-    "typescript": "*",
+    "typescript": "4.9.5",
     "upath": "^2.0.1",
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
