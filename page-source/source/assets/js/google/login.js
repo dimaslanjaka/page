@@ -1,4 +1,5 @@
 const { GOOGLE_CONFIG, handleCredentialResponse, getLocalCredential, KEY_LOCALSTORAGE } = require('./constants');
+const { firebaseAuthGoogle } = require('./firebase');
 
 // last login credential
 let g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
@@ -37,8 +38,11 @@ GOOGLE_CONFIG.callback = handleCredResp;
   // render profile card
   updateProfileCard();
 
-  document.getElementById('changeAccount').addEventListener('click', function () {
+  document.getElementById('loginGoogle').addEventListener('click', function () {
     tokenClient.requestAccessToken();
+  });
+  document.getElementById('loginFirebase').addEventListener('click', function () {
+    firebaseAuthGoogle();
   });
 })();
 
