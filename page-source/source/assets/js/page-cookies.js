@@ -1,3 +1,5 @@
+import * as cookies from './cookie';
+
 (function () {
   // save cookie
   $('#create').on('submit', function (e) {
@@ -11,13 +13,13 @@
       console.log(data[key]);
       obj[data[key].split('=')[0]] = data[key].split('=')[1];
     }
-    setCookie(`cookie_${obj.name}`, obj.value, 60);
+    cookies.setCookie(`cookie_${obj.name}`, obj.value, 60);
     //console.log(obj);
   });
 
   // get unique id
-  if (!getCookie('___current_id')) {
-    setCookie(
+  if (!cookies.getCookie('___current_id')) {
+    cookies.setCookie(
       '___current_id',
       Math.random()
         .toString(36)
@@ -25,11 +27,11 @@
       3,
     );
   }
-  document.getElementById('uniqueHash').textContent = getCookie('___current_id');
+  document.getElementById('uniqueHash').textContent = cookies.getCookie('___current_id');
 
   $('#deleteAllCookie').on('click', function (e) {
     e.preventDefault();
-    deleteAllCookies();
+    cookies.deleteAllCookies();
   });
 
   // console.clear();
@@ -65,29 +67,6 @@ function getCookies() {
   return cookies;
 }
 
-function setCookie(cname, cvalue, minutes) {
-  var d = new Date();
-  d.setTime(d.getTime() + minutes * 60 * 1000);
-  var expires = 'expires=' + d.toUTCString();
-  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
-}
-
-function getCookie(cname) {
-  var name = cname + '=';
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return '';
-}
-
 function localStorageAvailable() {
   var test = 'test';
   try {
@@ -96,16 +75,5 @@ function localStorageAvailable() {
     return true;
   } catch (e) {
     return false;
-  }
-}
-
-function deleteAllCookies() {
-  var cookies = document.cookie.split(';');
-
-  for (var i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    var eqPos = cookie.indexOf('=');
-    var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
   }
 }
