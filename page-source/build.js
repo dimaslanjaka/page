@@ -16,7 +16,7 @@ async function buildPage() {
     const bsScript = window.document.querySelector('script#__bs_script__');
     if (bsScript) bsScript.remove();
     const html = dom.serialize();
-    const minified = await terserHtml.minify(html, { collapseWhitespace: true });
+    const minified = await terserHtml.minify(html, { collapseWhitespace: true, minifyJS: true, minifyCSS: true });
     writefile(path.join(process.cwd(), route.dest), minified);
   }
   // _gulp.series('page:commit')();
