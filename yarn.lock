@@ -14313,6 +14313,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.0
     git-command-helper: ^2.0.1
+    glob: ^10.3.4
     googleapis: ^126.0.1
     gulp: ^4.0.2
     minimatch: ^9.0.3
