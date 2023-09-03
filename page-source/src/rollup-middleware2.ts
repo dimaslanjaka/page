@@ -10,6 +10,7 @@ import { md5, writefile } from 'sbg-utility';
 import path from 'upath';
 import logger from './logger';
 import { isDev } from './utils';
+import { dependencies } from '../package.json';
 
 const defaults = {
   src: null as string,
@@ -53,6 +54,7 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
       input: sourcePath,
       // external: Object.keys(globals),
       cache: !isDev(),
+      external: Object.keys(dependencies),
       plugins: [
         json(),
         resolve(),
@@ -60,6 +62,7 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
         typescript({ compilerOptions: { lib: ['es5', 'es6', 'dom'], target: 'es5' } }),
       ],
       output: {
+        globals: { jquery: '$' },
         plugins: [],
         file: jsPath,
         sourcemap: false,
@@ -67,6 +70,7 @@ export default function rollupMiddleware(options: Partial<typeof defaults>): imp
         name: '_' + md5(pathname) /*, globals*/,
       },
     };
+    // put minifier
     if (!isDev()) ((bundleOpt.output as OutputOptions).plugins as any[]).push(terser());
     const _bundle = await rollup(bundleOpt);
     const _gen = await _bundle.generate(bundleOpt.output as OutputOptions);
