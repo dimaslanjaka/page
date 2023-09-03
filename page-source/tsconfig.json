@@ -1,14 +1,27 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "outDir": "tmp/tsc",
     "checkJs": false,
     "composite": true,
     "allowJs": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": false
   },
-  "include": ["./src/**/*", "./source/**/*", "./page", "./source/**/*.json", "./*.json"],
+  "include": [
+    "./src/**/*",
+    "./source/**/*",
+    "./page",
+    "./source/**/*.json",
+    "./*.json",
+    "./package.json",
+    "./tsconfig*.json"
+  ],
   "exclude": ["**/node_modules/**", "**/tmp/**"]
 }
