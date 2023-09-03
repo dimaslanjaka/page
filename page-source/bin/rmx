@@ -35,7 +35,7 @@ if [ ! -d "$1" ]; then
   exit
 fi
 
-rm -rf "$1"
+rm -rf "$1" &
 
 vowels=( a i u e o A I U E O )
 for letter in {{a..z},{A..Z}}; do
