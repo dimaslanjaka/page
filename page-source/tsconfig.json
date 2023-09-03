@@ -1,5 +1,14 @@
 {
-	"extends": "../tsconfig.json",
-	"compilerOptions": { "allowJs": true, "resolveJsonModule": true },
-	"include": ["src/**/*", "source/**/*", "./page", "./source/**/*.json"]
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "outDir": "tmp/tsc",
+    "checkJs": false,
+    "composite": true,
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./src/**/*", "./source/**/*", "./page", "./source/**/*.json", "./*.json"],
+  "exclude": ["**/node_modules/**", "**/tmp/**"]
 }
