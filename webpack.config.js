@@ -67,4 +67,15 @@ module.exports = {
   resolve: {
     extensions: ['.*', '.ts', '.js', '.jsx'],
   },
+  /**
+   * [Docs](https://webpack.js.org/configuration/dev-server/)
+   * @type {import('webpack-dev-server').Configuration}
+   */
+  devServer: {
+    //static: path.resolve(__dirname, './public'),
+    historyApiFallback: true, // enable react-dom-router support
+    hot: true, // hot reloading
+    port: 4000,
+    open: false,
+  },
 };
