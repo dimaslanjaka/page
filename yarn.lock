@@ -2918,7 +2918,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
   checksum: 5b43b8b15415e1f298243165f1d44390403bb2bd42e662bca3b5b5633fdd39c938e91b7fce3a9483699db0f7a715d08cef220c121f723a634972fdf596aec980
@@ -12395,7 +12395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.1":
+"prop-types@npm:^15.6.1, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -15967,6 +15967,7 @@ __metadata:
     "@types/google.accounts": ^0.0.9
     "@types/node": ^20.2.3
     "@types/node-sass": ^4.11.4
+    "@types/prop-types": ^15
     "@types/react": ^18
     "@types/react-dom": ^18
     "@types/webpack-node-externals": ^3
@@ -15994,6 +15995,7 @@ __metadata:
     npm-check-updates: ^16.10.12
     path-browserify: ^1.0.1
     prettier: ^3.0.3
+    prop-types: ^15.8.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-hot-loader: ^4.13.0
