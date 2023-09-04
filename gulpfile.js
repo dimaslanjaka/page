@@ -25,6 +25,7 @@ gulp.task('page:commit', async function () {
   const pageGit = new git(path.join(__dirname, 'page'));
   const currentHash = await currentGit.latestCommit();
   try {
+    await pageGit.reset();
     await pageGit.add('-A');
     const url = `${(await currentGit.getremote()).fetch.url.replace(/(.git|\/)$/, '')}/commit/${currentHash}`;
     await pageGit.commit('update from ' + url);
