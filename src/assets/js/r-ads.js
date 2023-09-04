@@ -15,8 +15,16 @@ const cookies = require('./cookie');
   }
 });*/
 
-if (!/(localhost|127.0.0.1):?/gim.test(window.location.host)) {
-  // run only non-localhost
+/**
+ * do not show ads to these page title
+ */
+const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
+  .map(regex => regex.test(document.title))
+  .some(result => result == true);
+
+if (!/(localhost|127.0.0.1):?/gim.test(window.location.host) && !banned) {
+  // skip showing ads on non-domain host
+  // skip showing ads from banned page
   document.addEventListener('DOMContentLoaded', triggerAdsense);
 }
 
@@ -32,7 +40,7 @@ if (!window.adsense_option) window.adsense_option = {};
  * debug on localhost
  */
 const adsense_log =
-  islocalhost() && window['adsense-debug'] === true
+  islocalhost() || window['adsense-debug'] === true
     ? console.log
     : function (..._args) {
         //
@@ -81,7 +89,7 @@ let currentSlot = [];
 
 /**
  * Trigger adsense
- * @param {Event} _e
+ * @param {Event?} _e
  * @returns
  */
 function triggerAdsense(_e) {
@@ -98,15 +106,6 @@ function triggerAdsense(_e) {
       adsense_log('apply test ad to existing ins', i + 1);
       ins.setAttribute('data-adtest', 'on');
     }
-  }
-
-  /**
-   * do not show ads to these page title
-   */
-  const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi];
-  if (banned.map(regex => regex.test(document.title)).some(result => result == true)) {
-    // skip showing ads from banned page
-    return;
   }
 
   // select ads
@@ -232,8 +231,11 @@ function triggerAdsense(_e) {
   script.src = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub}`;
   script.async = true;
   script.setAttribute('crossorigin', 'anonymous');
+  script.onload = onloadAds;
   document.head.appendChild(script);
+}
 
+function onloadAds() {
   const allIns = Array.from(document.querySelectorAll('ins'));
   adsense_log('total ins', allIns.length);
 
