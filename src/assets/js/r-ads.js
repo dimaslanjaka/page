@@ -22,7 +22,7 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
   .map(regex => regex.test(document.title))
   .some(result => result == true);
 
-if (!/(localhost|127.0.0.1):?/gim.test(window.location.host) && !banned) {
+if (!islocalhost() && !banned) {
   // skip showing ads on non-domain host
   // skip showing ads from banned page
   document.addEventListener('DOMContentLoaded', triggerAdsense);
@@ -340,13 +340,7 @@ function replaceWith(newElement, oldElement) {
  * @returns
  */
 function islocalhost() {
-  // local hostname
-  if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
-  // local network
-  if (location.hostname.startsWith('192.168.')) return true;
-  // port defined
-  if (location.port.length > 0) return true;
-  return false;
+  return /(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?/gim.test(window.location.host);
 }
 
 if (typeof module === 'object' && 'exports' in module) {
