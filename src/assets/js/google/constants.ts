@@ -73,7 +73,7 @@ export async function handleCredentialResponse(response, callback?) {
   return g_credential;
 }
 
-interface LocalCredential {
+export interface LocalCredential {
   [key: string]: any;
   access_token: string;
   token_type: string;
