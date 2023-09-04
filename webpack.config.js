@@ -67,7 +67,8 @@ module.exports = {
       net: false,
       tls: false,
       child_process: false,
-      jsdom: false,
+      prismjs: false,
+      perf_hooks: false,
     },
   },
   output: {
