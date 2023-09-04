@@ -106,8 +106,8 @@ export function getLocalCredential(): LocalCredential {
  * save credential in local storage
  * @param obj
  */
-export function setLocalCredential(obj: Record<string, any>) {
-  localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(obj));
+export function setLocalCredential(obj: Record<string, any>, merge = false) {
+  localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(merge ? Object.assign(getLocalCredential(), obj) : obj));
 }
 
 /**
