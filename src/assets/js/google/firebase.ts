@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, Auth, signInWithPopup } from 'firebase/auth';
+import * as firebase from 'firebase/app';
+import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup } from 'firebase/auth';
 import { md5 } from 'sbg-utility';
 import { GOOGLE_SCOPES, getLocalCredential } from './constants';
 
@@ -25,7 +25,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-const app = initializeApp(firebaseConfig);
+const app = !firebase.getApps().length ? firebase.initializeApp(firebaseConfig) : firebase.getApp();
 
 // Initialize Firebase Authentication and get a reference to the service
 let auth: Auth;
