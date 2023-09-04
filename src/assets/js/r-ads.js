@@ -38,6 +38,47 @@ const adsense_log =
         //
       };
 
+const allAds = [
+  {
+    name: 'kiki',
+    pub: '2188063137129806',
+    ads: [
+      {
+        style: 'display: block; text-align: center',
+        'data-ad-layout': 'in-article',
+        'data-ad-format': 'fluid',
+        'data-ad-slot': '5634823028',
+      },
+      {
+        style: 'display: block; text-align: center',
+        'data-ad-layout': 'in-article',
+        'data-ad-format': 'fluid',
+        'data-ad-slot': '8481296455',
+      },
+      {
+        style: 'display:block',
+        'data-ad-slot': '2667720583',
+        'data-ad-format': 'auto',
+        'data-full-width-responsive': 'true',
+      },
+      {
+        style: 'display:block',
+        'data-ad-format': 'fluid',
+        'data-ad-layout-key': '-gw-3+1f-3d+2z',
+        'data-ad-slot': '6979059162',
+      },
+    ],
+  },
+].sort(function () {
+  // shuffle
+  return 0.5 - Math.random();
+});
+
+/**
+ * @type {typeof allAds[number]}
+ */
+let currentSlot = [];
+
 /**
  * Trigger adsense
  * @param {Event} _e
@@ -68,42 +109,6 @@ function triggerAdsense(_e) {
     return;
   }
 
-  const allAds = [
-    {
-      name: 'kiki',
-      pub: '2188063137129806',
-      ads: [
-        {
-          style: 'display: block; text-align: center',
-          'data-ad-layout': 'in-article',
-          'data-ad-format': 'fluid',
-          'data-ad-slot': '5634823028',
-        },
-        {
-          style: 'display: block; text-align: center',
-          'data-ad-layout': 'in-article',
-          'data-ad-format': 'fluid',
-          'data-ad-slot': '8481296455',
-        },
-        {
-          style: 'display:block',
-          'data-ad-slot': '2667720583',
-          'data-ad-format': 'auto',
-          'data-full-width-responsive': 'true',
-        },
-        {
-          style: 'display:block',
-          'data-ad-format': 'fluid',
-          'data-ad-layout-key': '-gw-3+1f-3d+2z',
-          'data-ad-slot': '6979059162',
-        },
-      ],
-    },
-  ].sort(function () {
-    // shuffle
-    return 0.5 - Math.random();
-  });
-
   // select ads
   // cookie key
   const ck = 'currentAds';
@@ -112,7 +117,7 @@ function triggerAdsense(_e) {
   /**
    * @type {typeof allAds[number]}
    */
-  let currentSlot = allAds.find(item => item.pub === ca);
+  currentSlot = allAds.find(item => item.pub === ca);
 
   if (ca.length > 0 && typeof currentSlot === 'object') {
     adsense_log('cached pub', ca);
@@ -121,7 +126,7 @@ function triggerAdsense(_e) {
 
     if (location.pathname != '/') {
       adsense_log('caching pub', currentSlot.pub);
-      setCookie(
+      cookies.setCookie(
         ck,
         currentSlot.pub,
         1,
@@ -259,109 +264,72 @@ function triggerAdsense(_e) {
       // (adsbygoogle = window.adsbygoogle || []).push({});
       if (!window.adsbygoogle) window.adsbygoogle = [];
       window.adsbygoogle.push({});
-      console.log(ins.getAttribute('data-ad-status'));
     }
   }
+}
 
-  /** FUNC START */
-
-  /**
-   * create ins
-   * @param {Record<string,any>} attributes
-   * @returns
-   */
-  function createIns(attributes) {
-    if (!attributes['data-ad-client']) {
-      attributes['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
-    }
-    const ins = document.createElement('ins');
-    Object.keys(attributes).forEach(key => {
-      ins.setAttribute(key, attributes[key]);
-    });
-    if (!ins.classList.contains('adsbygoogle')) {
-      ins.classList.add('adsbygoogle');
-    }
-    if (!ins.classList.contains('bannerAds')) {
-      ins.classList.add('bannerAds');
-    }
-    if (islocalhost()) {
-      ins.setAttribute('data-adtest', 'on');
-    }
-    return ins;
+/**
+ * create ins
+ * @param {Record<string,any>} attributes
+ * @returns
+ */
+function createIns(attributes) {
+  if (!attributes['data-ad-client']) {
+    attributes['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
   }
-
-  /**
-   * insert next other
-   * @param {HTMLElement} newNode
-   * @param {HTMLElement|undefined} referenceNode insert after this element
-   */
-  function insertAfter(newNode, referenceNode) {
-    if (referenceNode) {
-      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    }
+  const ins = document.createElement('ins');
+  Object.keys(attributes).forEach(key => {
+    ins.setAttribute(key, attributes[key]);
+  });
+  if (!ins.classList.contains('adsbygoogle')) {
+    ins.classList.add('adsbygoogle');
   }
-
-  /**
-   * Create detailed cookie
-   * @param {string} name
-   * @param {string} value
-   * @param {number} expires
-   * @param {string} path
-   * @param {string} domain
-   * @param {boolean} secure
-   */
-  function setCookie(name, value, expires, path, domain, secure) {
-    let exp = '';
-    if (expires) {
-      const d = new Date();
-      d.setTime(d.getTime() + parseInt(expires) * 24 * 60 * 60 * 1000); // days
-      exp = '; expires=' + d.toGMTString(); // toGMTString | toUTCString
-    }
-    if (!path) {
-      path = '/';
-    }
-    const cookie =
-      name +
-      '=' +
-      encodeURIComponent(value) +
-      exp +
-      '; path=' +
-      path +
-      (domain ? '; domain=' + domain : '') +
-      (secure ? '; secure' : '');
-    adsense_log(cookie);
-    document.cookie = cookie;
+  if (!ins.classList.contains('bannerAds')) {
+    ins.classList.add('bannerAds');
   }
-
-  /**
-   * get all ads places
-   * @param {Element|Document} from
-   */
-  function getAllPlaces(from) {
-    return Array.from(from.querySelectorAll('h1,h2,h3,h4,h5,pre,header,hr,br,table,blockquote'))
-      .sort(function () {
-        return 0.5 - Math.random();
-      })
-      .filter(el => el !== null);
+  if (islocalhost()) {
+    ins.setAttribute('data-adtest', 'on');
   }
+  return ins;
+}
 
-  /**
-   * Replace elements with new
-   * @param {HTMLElement} newElement
-   * @param {HTMLElement} oldElement
-   */
-  function replaceWith(newElement, oldElement) {
-    if (!oldElement.parentNode) {
-      adsense_log(oldElement, 'parent null');
-      let d = document.createElement('div');
-      d.appendChild(oldElement);
-    } else {
-      //log(oldElement.parentNode.tagName);
-      oldElement.parentNode.replaceChild(newElement, oldElement);
-    }
+/**
+ * insert next other
+ * @param {HTMLElement} newNode
+ * @param {HTMLElement|undefined} referenceNode insert after this element
+ */
+function insertAfter(newNode, referenceNode) {
+  if (referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
+}
 
-  /** FUNC END */
+/**
+ * get all ads places
+ * @param {Element|Document} from
+ */
+function getAllPlaces(from) {
+  return Array.from(from.querySelectorAll('h1,h2,h3,h4,h5,pre,header,hr,br,table,blockquote'))
+    .sort(function () {
+      return 0.5 - Math.random();
+    })
+    .filter(el => el !== null);
+}
+
+/**
+ * Replace elements with new
+ * @param {HTMLElement} newElement
+ * @param {HTMLElement} oldElement
+ */
+function replaceWith(newElement, oldElement) {
+  if (!oldElement.parentNode) {
+    adsense_log(oldElement, 'parent null');
+    let d = document.createElement('div');
+    d.appendChild(oldElement);
+  } else {
+    //log(oldElement.parentNode.tagName);
+    oldElement.parentNode.replaceChild(newElement, oldElement);
+  }
 }
 
 /**
