@@ -18115,6 +18115,7 @@ __metadata:
     "@types/babel__preset-env": ^7
     "@types/bluebird": ^3.5.38
     "@types/bootstrap": ^5
+    "@types/crypto-js": ^4.1.1
     "@types/gapi": ^0.0.44
     "@types/gapi.auth2": ^0.0.57
     "@types/gapi.client.analytics-v3": ^0.0.1
@@ -18133,6 +18134,7 @@ __metadata:
     bluebird: ^3.7.2
     bootstrap: ^5.3.1
     crypto-browserify: ^3.12.0
+    crypto-js: ^4.1.1
     css-loader: ^6.8.1
     dotenv: ^16.3.1
     eslint: ^8.48.0
