@@ -2,7 +2,7 @@
 
 import * as firebase from 'firebase/app';
 import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup } from 'firebase/auth';
-import { md5 } from 'sbg-utility';
+import { md5 } from 'sbg-utility/dist/utils/hash';
 import { GOOGLE_SCOPES, getLocalCredential } from './constants';
 
 // TODO: Add SDKs for Firebase products that you want to use
