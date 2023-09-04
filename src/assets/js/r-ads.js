@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-global-assign */
-import * as cookies from './cookie.js';
+//import * as cookies from './cookie.js';
+const cookies = require('./cookie');
 
 // 5 6 ^ %
 
@@ -109,7 +108,7 @@ function triggerAdsense(_e) {
   // cookie key
   const ck = 'currentAds';
   // select previous ads id from cookie
-  const ca = cookies.getCookie(ck);
+  const ca = cookies.getCookie(ck) || [];
   /**
    * @type {typeof allAds[number]}
    */
