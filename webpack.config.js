@@ -1,6 +1,7 @@
 const { path, fs } = require('sbg-utility');
 const ResolveTypeScriptPlugin = require('resolve-typescript-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -62,13 +63,14 @@ module.exports = {
       path: require.resolve('path-browserify'),
       fs: false,
       process: false,
+      // url: require.resolve('url/'),
     },
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [new NodePolyfillPlugin(), new MiniCssExtractPlugin()],
   /**
    * [Docs](https://webpack.js.org/configuration/dev-server/)
    * @type {import('webpack-dev-server').Configuration}
