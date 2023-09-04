@@ -1,28 +1,37 @@
-const { path, fs } = require('sbg-utility');
-const ResolveTypeScriptPlugin = require('resolve-typescript-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const path = require('path');
+const fs = require('fs');
 
-/** @type {import('webpack').Configuration} */
 module.exports = {
-  entry: path.resolve(__dirname, './src/index.js'),
-  // config .browserlistrc
-  target: 'browserslist',
+  // The entry point file described above
+  entry: './src/index.js',
+  // The location of the build folder described above
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  // Optional and for development only. This provides the ability to
+  // map the built code back to the original source format when debugging.
+  devtool: 'eval-source-map',
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules|.test.(ts|js)$/,
       },
       {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+      {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -57,50 +66,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.*', '.ts', '.js', '.jsx'],
-    plugins: [new ResolveTypeScriptPlugin()],
-    fallback: {
-      crypto: require.resolve('crypto-browserify'),
-      path: require.resolve('path-browserify'),
-      upath: require.resolve('path-browserify'),
-      fs: false,
-      process: false,
-      os: false,
-      net: false,
-      tls: false,
-      child_process: false,
-      prismjs: false,
-      perf_hooks: false,
-      'fs-extra': false,
-      'hexo-util': false,
-      'fs.realpath': 'false',
-    },
   },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
-  },
-  plugins: [new NodePolyfillPlugin(), new MiniCssExtractPlugin()],
-  /**
-   * [Docs](https://webpack.js.org/configuration/dev-server/)
-   * @type {import('webpack-dev-server').Configuration}
-   */
-  devServer: {
-    //static: path.resolve(__dirname, './public'),
-    historyApiFallback: true,
-    hot: false, // disable hot reloading
-    compress: true,
-    allowedHosts: 'all',
-    port: 4000,
-    open: false,
-  },
-  //externals: [nodeExternals()],
-  watch: false,
-  watchOptions: {
-    poll: 10000, // Check for changes every second
-    aggregateTimeout: 1000, // delay for compile
-    ignored: /node_modules/,
-  },
-  // Optional and for development only. This provides the ability to
-  // map the built code back to the original source format when debugging.
-  devtool: 'eval-source-map',
 };
