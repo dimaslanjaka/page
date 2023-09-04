@@ -56,6 +56,6 @@
 		"page-source/node_modules": true,
 		"**/Thumbs.db": true
 	},
-	"eslint.packageManager": "yarn",
-	"npm.packageManager": "yarn"
+	"npm.packageManager": "yarn",
+	"typescript.tsdk": "./node_modules/typescript/lib"
 }
