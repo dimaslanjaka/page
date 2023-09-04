@@ -6,7 +6,13 @@
 	"configurations": [
 		{
 			"command": "yarn start",
-			"name": "run server",
+			"name": "webpack server",
+			"request": "launch",
+			"type": "node-terminal"
+		},
+		{
+			"command": "yarn vite:start",
+			"name": "vite server",
 			"request": "launch",
 			"type": "node-terminal"
 		}
