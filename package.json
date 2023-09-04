@@ -87,10 +87,18 @@
     "webpack-node-externals": "^3.0.0"
   },
   "workspaces": [
-    "packages/*"
+    "packages/safelinkify",
+    "packages/sbg-utility/packages/sbg-utility"
   ],
   "engines": {
     "node": "^14"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "net": false,
+    "tls": false
   },
   "resolutions": {
     "jsdom": "^21",
