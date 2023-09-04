@@ -2,6 +2,8 @@
   "recommendations": [
     "ginfuru.better-nunjucks",
     "dbaeumer.vscode-eslint",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "formulahendry.code-runner",
+    "esbenp.prettier-vscode"
   ]
 }
