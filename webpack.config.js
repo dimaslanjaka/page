@@ -1,8 +1,13 @@
-const path = require('path');
+const { path, fs } = require('sbg-utility');
 const webpack = require('webpack');
+const ResolveTypeScriptPlugin = require('resolve-typescript-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
+  // config .browserlistrc
+  target: 'browserslist',
   module: {
     rules: [
       {
@@ -10,26 +15,73 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+        exclude: /node_modules|.test.(ts|js)$/,
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          {
+            loader: 'sass-loader',
+            options: {
+              // Prefer `dart-sass`
+              implementation: require('node-sass'),
+              sassOptions: {
+                includePaths: [
+                  path.join(__dirname, '../node_modules'),
+                  path.join(process.cwd(), 'node_modules'),
+                  path.join(__dirname, '../../node_modules'),
+                ]
+                  .filter(fs.existsSync)
+                  .map(str => path.resolve(str))
+                  .filter(function (elem, index, self) {
+                    return index === self.indexOf(elem);
+                  }),
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.ts', '.js', '.jsx'],
+    plugins: [new ResolveTypeScriptPlugin()],
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      path: require.resolve('path-browserify'),
+      fs: false,
+      process: false,
+    },
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  // https://webpack.js.org/configuration/dev-server/
+  plugins: [new webpack.HotModuleReplacementPlugin(), new MiniCssExtractPlugin()],
   /**
+   * [Docs](https://webpack.js.org/configuration/dev-server/)
    * @type {import('webpack-dev-server').Configuration}
    */
   devServer: {
-    static: path.resolve(__dirname, './public'),
+    //static: path.resolve(__dirname, './public'),
+    historyApiFallback: true,
     hot: true,
     compress: true,
     allowedHosts: 'all',
     port: 4000,
     open: false,
   },
+  //externals: [nodeExternals()],
 };

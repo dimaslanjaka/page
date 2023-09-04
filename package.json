@@ -11,7 +11,10 @@
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "update": "yarn run update:ncu",
     "build": "webpack --mode production",
-    "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page"
+    "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
+    "vite:start": "vite",
+    "vite:build": "tsc && vite build",
+    "vite:serve": "vite preview"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
@@ -19,12 +22,16 @@
     "url": "https://github.com/dimaslanjaka/page.git"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bluebird": "^3.7.2",
+    "bootstrap": "^5.3.1",
     "dotenv": "^16.3.1",
+    "firebase": "^10.3.1",
     "glob": "^10.3.4",
     "minimatch": "^9.0.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
@@ -33,11 +40,13 @@
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/bluebird": "^3.5.38",
+    "@types/bootstrap": "^5",
     "@types/gapi": "^0.0.44",
     "@types/gapi.auth2": "^0.0.57",
     "@types/gapi.client.analytics": "^3.0.9",
     "@types/google.accounts": "^0.0.9",
     "@types/node": "^20.2.3",
+    "@types/node-sass": "^4.11.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/webpack-node-externals": "^3",
@@ -55,6 +64,7 @@
     "gulp": "^4.0.2",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
+    "node-sass": "^9.0.0",
     "npm-check-updates": "^16.10.12",
     "path-browserify": "^1.0.1",
     "prettier": "^3.0.3",

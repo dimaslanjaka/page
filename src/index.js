@@ -2,9 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
-const title = 'My Minimal React Webpack Babel Setup';
-
-ReactDOM.render(<App title={title} />, document.getElementById('app'));
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('app'),
+);
 
 if (module.hot && module.hot.accept) module.hot.accept();
