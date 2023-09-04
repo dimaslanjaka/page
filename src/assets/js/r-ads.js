@@ -242,9 +242,10 @@ function onloadAds() {
   for (let i = 0; i < allIns.length; i++) {
     // log('apply banner', i + 1);
     const ins = allIns[i];
-    if (!ins) continue;
-    if (!ins.getAttribute('data-ad-client')) {
-      adsense_log(ins);
+    if (!ins) {
+      continue;
+    } else if (!ins.getAttribute('data-ad-client')) {
+      adsense_log('no data-ad-client', ins);
       continue;
     }
     const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
