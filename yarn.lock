@@ -3202,9 +3202,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hexo@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz":
+"@types/hexo@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo.tgz":
   version: 7.0.0-rc2
-  resolution: "@types/hexo@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz"
+  resolution: "@types/hexo@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo.tgz"
   dependencies:
     abbrev: ^2.0.0
     archy: ^1.0.0
@@ -3232,7 +3232,7 @@ __metadata:
     warehouse: ^5.0.0
   bin:
     hexo: ./bin/hexo
-  checksum: b9646390394151096a426dddd2a99ffa50273f7dfada02be91dbec39383da71cd04148a19811d228ee94e6791763bbfdb9971a1aa3740c013c5ca9cf8cb276fc
+  checksum: a71a2baabd805787c4a322ecb7d41ad8a4638c2e48d7e0a8d2c9455c0c42ea76e572665c0f34858dd3c8337e72b96af0f6550e335ff957d7b8f6373e85124f70
   languageName: node
   linkType: hard
 
@@ -9187,18 +9187,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hexo-log@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-log.tgz":
-  version: 4.0.1
-  resolution: "hexo-log@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-log.tgz"
+"hexo-log@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-log.tgz":
+  version: 4.1.0
+  resolution: "hexo-log@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-log.tgz"
   dependencies:
     picocolors: ^1.0.0
-  checksum: f73e7ee1854b9e85616b34d36087e858cd2a79da81b84dbb2f2f1a61bf089f273aebbd64c61b34cb8f10a5ae79b3334f7c157668e9793620ea7add4dfab19b38
+  checksum: 58b22ca9948f6b35e94e32953e0ad440b38bcde2beab3b66226ea3620c202e1bc6e64b8fbdfe2dd07c301cbb11177ba2d46973d398487f7ff03cd6bb5026b857
   languageName: node
   linkType: hard
 
-"hexo-util@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-util.tgz":
+"hexo-util@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-util.tgz":
   version: 3.1.0
-  resolution: "hexo-util@https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-util.tgz"
+  resolution: "hexo-util@https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-util.tgz"
   dependencies:
     camel-case: ^4.1.2
     cross-spawn: ^7.0.3
@@ -9207,7 +9207,7 @@ __metadata:
     htmlparser2: ^9.0.0
     prismjs: ^1.29.0
     strip-indent: ^3.0.0
-  checksum: 32a24f6ed946f4d0e910cc6339408fa2a3522354e3e76f5034872ce9cd7a568fa8b8ba04317b181c7591793648632ed96ee7712934ddfa9753ca4efbc086e84f
+  checksum: 3cc7e73e7c29ac39dbd497f19d9db9341838261b0e0cfa6db9c3519325343d32324a6c2fc20c306440e928ba0335d7a6eec7eb2822f3aa2a10020046bc203fda
   languageName: node
   linkType: hard
 
@@ -15130,7 +15130,7 @@ __metadata:
     "@types/fs-extra": ^11.0.1
     "@types/gulp": ^4
     "@types/gulp-cache": ^0.4.6
-    "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/ec2ed736/releases/hexo.tgz"
+    "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo.tgz"
     "@types/jsdom": 21
     "@types/micromatch": ^4.0.2
     "@types/node": ^20.3.1
@@ -15171,7 +15171,7 @@ __metadata:
     ts-jest: ^29.1.0
     ts-node: ^10.9.1
     tslib: ^2.5.2
-    typescript: ^5.2.2
+    typescript: 4.9.5
     upath: ^2.0.1
     yaml: ^2.3.1
   languageName: unknown
@@ -16945,16 +16945,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "typescript@npm:5.2.2"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 7912821dac4d962d315c36800fe387cdc0a6298dba7ec171b350b4a6e988b51d7b8f051317786db1094bd7431d526b648aba7da8236607febb26cf5b871d2d3c
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
@@ -16962,16 +16952,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
-  version: 5.2.2
-  resolution: "typescript@patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 0f4da2f15e6f1245e49db15801dbee52f2bbfb267e1c39225afdab5afee1a72839cd86000e65ee9d7e4dfaff12239d28beaf5ee431357fcced15fb08583d72ca
   languageName: node
   linkType: hard
 

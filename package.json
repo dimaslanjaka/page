@@ -104,9 +104,9 @@
   "resolutions": {
     "jsdom": "^21",
     "@types/node": "^14",
-    "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz",
-    "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-log.tgz",
-    "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-util.tgz",
+    "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo.tgz",
+    "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-log.tgz",
+    "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/638a594/releases/hexo-util.tgz",
     "instant-indexing": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/instant-indexing/release/instant-indexing.tgz",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/a2e797bc27975cba20ef4c87547841e6341bfcf4/release/nodejs-package-types.tgz",
     "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/0f213ec/release/hexo-post-parser.tgz",
