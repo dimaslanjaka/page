@@ -18160,6 +18160,7 @@ __metadata:
     react-router-dom: ^6.15.0
     resolve-typescript-plugin: ^2.0.1
     sass-loader: ^13.3.2
+    sbg-utility: "*"
     style-loader: ^3.3.3
     ts-loader: ^9.4.4
     ts-node: ^10.9.1
