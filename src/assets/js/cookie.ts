@@ -2,18 +2,18 @@
  * Create detailed cookie
  * @param name
  * @param value
- * @param expires expires day
- * @param path
- * @param domain
- * @param secure
+ * @param expires expires in day
+ * @param path set on spesific path
+ * @param domain set on spesific domain
+ * @param secure set secured cookie (https only)
  */
 export function setCookie(
   name: string,
   value: string | number | boolean,
-  expires: any,
-  path: string,
+  expires: number,
+  path: string | string,
   domain: string,
-  secure: any,
+  secure: boolean,
 ) {
   let exp = '';
   if (expires) {
