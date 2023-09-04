@@ -190,9 +190,10 @@ function triggerAdsense(_e) {
       const attr = currentSlot.ads[i];
       if (attr) {
         attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
-        const ins = createIns(attr);
+
         let nextOf = adsPlaces.shift(); // get first element and remove it from list
-        while (!nextOf) {
+        // iterate adsPlaces
+        while (adsPlaces.length > 0) {
           // find next when nextOf = null
           if (adsPlaces.length > 0) {
             // select next place
@@ -203,8 +204,20 @@ function triggerAdsense(_e) {
           }
         }
 
-        adsense_log(i + 1, 'add banner', attr['data-ad-slot']);
-        insertAfter(ins, nextOf);
+        if (nextOf) {
+          adsense_log(i + 1, 'add banner', attr['data-ad-slot']);
+          const prevEl = nextOf.previousElementSibling || {};
+          const nextEl = nextOf.nextElementSibling || {};
+          if (prevEl.tagName === 'INS' || nextEl.tagName === 'INS' || nextOf.tagName == 'INS') {
+            // push back the ads
+            currentSlot.ads.push(attr);
+            // skip on same ins
+            // prevent banner side on side
+            continue;
+          }
+          const ins = createIns(attr);
+          insertAfter(ins, nextOf);
+        }
       }
     }
   }
@@ -246,6 +259,7 @@ function triggerAdsense(_e) {
       // (adsbygoogle = window.adsbygoogle || []).push({});
       if (!window.adsbygoogle) window.adsbygoogle = [];
       window.adsbygoogle.push({});
+      console.log(ins.getAttribute('data-ad-status'));
     }
   }
 
