@@ -1,0 +1,59 @@
+#profileWrapper {
+  .card-img-top {
+    max-width: 60%;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .card {
+    max-width: 30rem;
+    padding: 1.5em 0.5em 0.5em;
+    text-align: center;
+    border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-title {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  .btn-primary {
+    border-radius: 2em;
+    padding: 0.5em 1.5em;
+  }
+}
+
+.firebaseIcon {
+  background-image: url("//cdn.icon-icons.com/icons2/2699/PNG/512/firebase_logo_icon_171157.png");
+}
+
+.googleIcon {
+  background-image: url("//static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png");
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 27px 27px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.iconButton:hover {
+  background-color: #303030;
+}
+
+.iconButton:active {
+  background-color: #606060;
+}
+
+button.iconButton::-moz-focus-inner {
+  border: 0;
+}
