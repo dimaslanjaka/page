@@ -2986,6 +2986,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1":
+  version: 1.26.0
+  resolution: "@types/prismjs@npm:1.26.0"
+  checksum: cd5e7a6214c1f4213ec512a5fcf6d8fe37a56b813fc57ac95b5ff5ee074742bfdbd2f2730d9fd985205bf4586728e09baa97023f739e5aa1c9735a7c1ecbd11a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*, @types/prop-types@npm:^15":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -15803,6 +15810,7 @@ __metadata:
     "@types/google.accounts": ^0.0.9
     "@types/node": ^20.2.3
     "@types/node-sass": ^4.11.4
+    "@types/prismjs": ^1
     "@types/prop-types": ^15
     "@types/react": ^18
     "@types/react-dom": ^18
@@ -15833,6 +15841,7 @@ __metadata:
     npm-check-updates: ^16.10.12
     path-browserify: ^1.0.1
     prettier: ^3.0.3
+    prismjs: ^1.29.0
     prop-types: ^15.8.1
     react: ^17.0.2
     react-dom: ^17.0.2
