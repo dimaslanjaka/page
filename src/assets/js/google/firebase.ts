@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 
+import Bluebird from 'bluebird';
 import * as firebase from 'firebase/app';
 import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup } from 'firebase/auth';
 import { md5 } from '../utils/md5';
@@ -49,37 +50,40 @@ export function firebaseRegister(email: string, password: null | string = null) 
  * @param force force change account
  */
 export function firebaseAuthGoogle(force = false) {
-  const provider = new GoogleAuthProvider();
-  provider.addScope(GOOGLE_SCOPES.join(' '));
-  if (String(getLocalCredential()?.credential?.email).includes('@') && !force) {
-    // login existing user
-    provider.setCustomParameters({
-      login_hint: getLocalCredential().credential.email,
-    });
-    auth = getAuth(app);
-  } else {
-    if (!auth) auth = getAuth(app);
-  }
+  return new Bluebird((resolve, reject) => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope(GOOGLE_SCOPES.join(' '));
+    if (String(getLocalCredential()?.credential?.email).includes('@') && !force) {
+      // login existing user
+      provider.setCustomParameters({
+        login_hint: getLocalCredential().credential.email,
+      });
+      auth = getAuth(app);
+    } else {
+      if (!auth) auth = getAuth(app);
+    }
 
-  signInWithPopup(auth, provider)
-    .then(result => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      //console.log({ token, user });
-      setLocalCredential({ token, ...user });
-    })
-    .catch(error => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log({ errorCode, errorMessage, email, credential });
-    });
+    signInWithPopup(auth, provider)
+      .then(result => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        //console.log({ token, user });
+        setLocalCredential({ token, ...user, credential });
+        resolve(getLocalCredential());
+      })
+      .catch(error => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        reject({ errorCode, errorMessage, email, credential });
+      });
+  });
 }
