@@ -53,6 +53,12 @@ const config = {
         caughtErrorsIgnorePattern: '^_',
       },
     ], // enable typescript-eslint unused-vars and allow unused vars start with underscore (_)
+    'sort-imports': [
+      'warn',
+      {
+        ignoreDeclarationSort: true,
+      },
+    ],
     '@typescript-eslint/no-explicit-any': 'off', // allow any types
     '@typescript-eslint/no-this-alias': [
       // rules for this binding
