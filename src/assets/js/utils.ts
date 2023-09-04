@@ -12,7 +12,10 @@ import Bluebird from 'bluebird';
 export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = url.replace(/(^\w+:|^)/, window.location.protocol);
+    const corsUrl = 'https://crossorigin.me/' + url;
+    // skip duplicate
+    if (document.querySelector(`script[src="${corsUrl}"]`)) return resolve();
+    script.src = corsUrl.replace(/(^\w+:|^)/, window.location.protocol);
     //console.log({ src: script.src });
     script.async = true;
     script.defer = true;
@@ -22,3 +25,13 @@ export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
     document.head.appendChild(script);
   });
 }
+
+export const loadScript = (src: string) =>
+  new Bluebird((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) return resolve(null);
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve(null);
+    script.onerror = err => reject(err);
+    document.body.appendChild(script);
+  });
