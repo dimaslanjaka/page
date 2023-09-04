@@ -5,17 +5,12 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "yarn workspace page-source run start",
-    "ci": "yarn install --production=true --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
+    "start": "webpack-dev-server --no-open --mode development --config webpack.config.js",
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
-    "update:postinstall": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "update": "yarn run update:ncu",
-    "serve": "rm -rf tmp && yarn workspace page-source run serve",
-    "build": "gulp --series page",
-    "post-install": "node postinstall.js --yarn",
-    "server-dump": "node server.js &> server.log",
+    "build": "webpack --mode production",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
@@ -23,49 +18,69 @@
   "repository": {
     "url": "https://github.com/dimaslanjaka/page.git"
   },
-  "packageManager": "yarn@3.6.2",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "dotenv": "^16.3.1",
+    "glob": "^10.3.4",
+    "minimatch": "^9.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@types/babel__core": "^7",
+    "@types/babel__preset-env": "^7",
     "@types/bluebird": "^3.5.38",
     "@types/gapi": "^0.0.44",
     "@types/gapi.auth2": "^0.0.57",
     "@types/gapi.client.analytics": "^3.0.9",
     "@types/google.accounts": "^0.0.9",
     "@types/node": "^20.2.3",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/webpack-node-externals": "^3",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
+    "babel-loader": "^8.2.3",
+    "binary-collections": "^1.0.3",
+    "crypto-browserify": "^3.12.0",
+    "css-loader": "^6.8.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "file-loader": "^6.2.0",
     "git-command-helper": "^2.0.1",
     "gulp": "^4.0.2",
-    "nodemon": "^3.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
     "npm-check-updates": "^16.10.12",
-    "npm-run-all": "^4.1.5",
+    "path-browserify": "^1.0.1",
     "prettier": "^3.0.3",
+    "react-hot-loader": "^4.13.0",
+    "resolve-typescript-plugin": "^2.0.1",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
     "typescript": "4.9.5",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4",
+    "webpack-node-externals": "^3.0.0"
   },
   "workspaces": [
-    "packages/safelinkify",
-    "page-source",
     "page"
   ],
   "engines": {
     "node": "^14"
   },
   "resolutions": {
+    "@types/node": "^14",
     "@types/hexo": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz",
-    "hexo": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo.tgz",
-    "hexo-asset-link": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-asset-link.tgz",
-    "hexo-cli": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-cli.tgz",
-    "hexo-front-matter": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-front-matter.tgz",
     "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-log.tgz",
     "hexo-util": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/hexo-util.tgz",
-    "warehouse": "https://github.com/dimaslanjaka/hexo/raw/71c10678/releases/warehouse.tgz",
-    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/tarball/pre-release",
-    "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/tarball/pre-release",
     "static-blog-generator": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/static-blog-generator/release/static-blog-generator.tgz",
     "instant-indexing": "https://github.com/dimaslanjaka/static-blog-generator/raw/3d352a6c2fa9217d57b8e049c40563c0a2ab41de/packages/instant-indexing/release/instant-indexing.tgz",
     "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/b9d2e7bfa/packages/sbg-utility/release/sbg-utility.tgz",
@@ -78,12 +93,5 @@
     "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/ae51725/release/git-command-helper.tgz",
     "@types/git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/ae51725/release/git-command-helper.tgz"
   },
-  "dependencies": {
-    "@google-cloud/local-auth": "^3.0.0",
-    "bluebird": "^3.7.2",
-    "dotenv": "^16.3.1",
-    "glob": "^10.3.4",
-    "googleapis": "^126.0.1",
-    "minimatch": "^9.0.3"
-  }
+  "packageManager": "yarn@3.6.2"
 }

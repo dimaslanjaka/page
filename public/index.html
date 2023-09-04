@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Belajar Penggunaan Webpack 4 pada ReactJs</title>
+  <link rel="manifest" href="https://www.webmanajemen.com/manifest.json" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+
+  <!-- defer bootstrap -->
+  <link rel="preload" href="/page/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" href="/page/assets/css/main.css">
+  </noscript>
+
+  <!-- defer font awesome -->
+  <link rel="preload"
+    href="https://rawcdn.githack.com/dimaslanjaka/Web-Manajemen/db450d8f53108bee7c7bfbee3dc0e8e7a142e07c/css/all.css"
+    as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://rawcdn.githack.com/dimaslanjaka/Web-Manajemen/db450d8f53108bee7c7bfbee3dc0e8e7a142e07c/css/all.css">
+  </noscript>
+</head>
+
+<body class="container">
+  <div id="app"></div>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-106238155-1"></script>
+  <script src="./bundle.js"></script>
+</body>
+
+</html>
