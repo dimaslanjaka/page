@@ -15,3 +15,13 @@ pre {
   word-wrap: break-word;
   max-width: 100%;
 }
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+
+/* hide unfilled ads */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
