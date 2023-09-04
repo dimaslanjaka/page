@@ -46,7 +46,7 @@
     "@types/bootstrap": "^5",
     "@types/gapi": "^0.0.44",
     "@types/gapi.auth2": "^0.0.57",
-    "@types/gapi.client.analytics": "^3.0.9",
+    "@types/gapi.client.analytics-v3": "^0.0.1",
     "@types/google.accounts": "^0.0.9",
     "@types/node": "^20.2.3",
     "@types/node-sass": "^4.11.4",
