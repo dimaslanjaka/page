@@ -61,6 +61,7 @@ module.exports = {
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       path: require.resolve('path-browserify'),
+      upath: require.resolve('path-browserify'),
       fs: false,
       process: false,
       os: false,
@@ -69,6 +70,7 @@ module.exports = {
       child_process: false,
       prismjs: false,
       perf_hooks: false,
+      'fs-extra': false,
     },
   },
   output: {
