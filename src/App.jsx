@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
 
