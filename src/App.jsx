@@ -1,13 +1,14 @@
 import React from 'react';
 import { Home } from './route/Home';
-import { About } from './route/About';
+import { Login } from './route/Login';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
-import './assets/js/main';
+import { loadMainScript } from './assets/js/main';
 
 class App extends React.Component {
   componentDidMount() {
     //document.title = 'dfsdfsdfsd';
+    loadMainScript();
   }
 
   render() {
@@ -16,7 +17,7 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
+            <Route path="login" element={<Login />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
@@ -115,8 +116,6 @@ function Layout() {
           </div>
         </div>
       </nav>
-
-      <hr />
 
       <div className="container">
         {/* An <Outlet> renders whatever child route is currently active,
