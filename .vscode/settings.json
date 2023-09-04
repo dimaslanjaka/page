@@ -6,17 +6,28 @@
 		"PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin"
 	},
 	"[javascript]": {
-		"editor.formatOnSave": false
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"[typescript]": {
 		"editor.codeActionsOnSave": {
 			"source.fixAll": true,
 			"source.organizeImports": true
 		},
+		"editor.defaultFormatter": "vscode.typescript-language-features",
 		"editor.formatOnSave": false
 	},
 	"[css]": {
-		"editor.formatOnSave": false
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[jsonc]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[json]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "vscode.json-language-features"
 	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll": true,
