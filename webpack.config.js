@@ -71,6 +71,8 @@ module.exports = {
       prismjs: false,
       perf_hooks: false,
       'fs-extra': false,
+      'hexo-util': false,
+      'fs.realpath': 'false',
     },
   },
   output: {
