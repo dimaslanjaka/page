@@ -14,7 +14,8 @@
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
-    "vite:serve": "vite preview"
+    "vite:serve": "vite preview",
+    "postinstall": "yarn workspaces foreach --no-private run build"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
@@ -95,9 +96,9 @@
   },
   "browser": {
     "fs": false,
-    "path": false,
-    "os": false,
     "net": false,
+    "os": false,
+    "path": false,
     "tls": false
   },
   "resolutions": {
