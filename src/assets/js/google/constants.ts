@@ -103,6 +103,14 @@ export function getLocalCredential(): LocalCredential {
 }
 
 /**
+ * save credential in local storage
+ * @param obj
+ */
+export function setLocalCredential(obj: Record<string, any>) {
+  localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(obj));
+}
+
+/**
  * parse JWT response
  * @param token
  * @returns
