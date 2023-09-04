@@ -1,5 +1,4 @@
 const { path, fs } = require('sbg-utility');
-const webpack = require('webpack');
 const ResolveTypeScriptPlugin = require('resolve-typescript-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -69,7 +68,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin()],
   /**
    * [Docs](https://webpack.js.org/configuration/dev-server/)
    * @type {import('webpack-dev-server').Configuration}
@@ -77,11 +76,17 @@ module.exports = {
   devServer: {
     //static: path.resolve(__dirname, './public'),
     historyApiFallback: true,
-    hot: true,
+    hot: false, // disable hot reloading
     compress: true,
     allowedHosts: 'all',
     port: 4000,
     open: false,
   },
   //externals: [nodeExternals()],
+  watch: false,
+  watchOptions: {
+    poll: 10000, // Check for changes every second
+    aggregateTimeout: 1000, // delay for compile
+    ignored: /node_modules/,
+  },
 };
