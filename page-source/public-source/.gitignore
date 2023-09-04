@@ -25,6 +25,10 @@
 **/node_modules/*/**/.jshint*
 **/node_modules/*/bower.json
 **/node_modules/*/**/bower.json
+**/cross-spawn/**
+**/nodejs-package-types/**
+**/*.tsbuildinfo
+**/*.wiki
 # auto generate start
 !/node_modules/aes-js/
 !/node_modules/ansi-colors/
