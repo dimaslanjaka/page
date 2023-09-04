@@ -56,14 +56,18 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.ts', '.js', '.jsx'],
+    extensions: ['.*', '.ts', '.js', '.jsx'],
     plugins: [new ResolveTypeScriptPlugin()],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       path: require.resolve('path-browserify'),
       fs: false,
       process: false,
-      // url: require.resolve('url/'),
+      os: false,
+      net: false,
+      tls: false,
+      child_process: false,
+      jsdom: false,
     },
   },
   output: {
