@@ -4,7 +4,7 @@ import Bluebird from 'bluebird';
 import * as firebase from 'firebase/app';
 import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup } from 'firebase/auth';
 import { md5 } from '../utils/md5';
-import { GOOGLE_SCOPES, getLocalCredential, setLocalCredential } from './constants';
+import { GOOGLE_SCOPES, getLocalCredential } from './constants';
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -72,8 +72,8 @@ export function firebaseAuthGoogle(force = false) {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         //console.log({ token, user });
-        setLocalCredential({ token, ...user, credential });
-        resolve(getLocalCredential());
+
+        resolve({ token, ...user, credential });
       })
       .catch(error => {
         // Handle Errors here.
