@@ -36,7 +36,7 @@ function Layout() {
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" id="navbar-top">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" href="/page">
             <img
               src="//www.webmanajemen.com/favicon.ico"
               alt="Logo"
@@ -45,7 +45,7 @@ function Layout() {
               className="d-inline-block align-text-top"
             />
             {/*WMI*/}
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -161,7 +161,7 @@ function NoMatch() {
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to="/page">Go to the home page</Link>
       </p>
     </div>
   );
