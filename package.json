@@ -31,6 +31,8 @@
     "firebase": "^10.3.1",
     "glob": "^10.3.4",
     "minimatch": "^9.0.3",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "net": "^1.0.2",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "prismjs": "^1.29.0",
