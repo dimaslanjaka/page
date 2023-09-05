@@ -69,5 +69,5 @@
 	},
 	"npm.packageManager": "yarn",
 	"typescript.tsdk": "./node_modules/typescript/lib",
-	"debug.javascript.autoAttachFilter": "onlyWithFlag"
+	"debug.javascript.autoAttachFilter": "disabled"
 }
