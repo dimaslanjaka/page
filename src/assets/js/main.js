@@ -1,5 +1,5 @@
 const Bluebird = require('bluebird');
-const { randomStr, copyTextToClipboard } = require('./utils/clipboard');
+const { randomStr, copyTextToClipboard } = require('../../utils/clipboard');
 
 async function loadMainScript() {
   await import('./analystic');
