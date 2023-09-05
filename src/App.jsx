@@ -41,10 +41,10 @@ function Layout() {
               src="//www.webmanajemen.com/favicon.ico"
               alt="Logo"
               width="30"
-              height="24"
+              height="30"
               className="d-inline-block align-text-top"
             />
-            <span>WMI</span>
+            {/*WMI*/}
           </a>
           <button
             className="navbar-toggler"
