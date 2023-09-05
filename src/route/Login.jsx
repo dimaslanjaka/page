@@ -6,15 +6,12 @@ import {
   KEY_LOCALSTORAGE,
   getLocalCredential,
   handleCredentialResponse,
-} from '../assets/js/google/constants.js';
+  isTokenExpired,
+} from '../assets/js/google/constants';
 import { loadScript } from '../assets/js/utils';
+import { firebaseAuthGoogle } from '../assets/js/google/firebase';
 
 export class Login extends React.Component {
-  /**
-   * @type {import('../assets/js/google/constants').LocalCredential}
-   */
-  g_credential = {};
-
   componentDidMount() {
     document.title = 'Login page - WMI';
     loadScript('https://accounts.google.com/gsi/client').then(this.start.bind(this));
@@ -45,8 +42,8 @@ export class Login extends React.Component {
                   </tbody>
                 </table>
                 <div className="btn-group">
-                  <button title="Login Google" className="iconButton googleIcon" id="loginGoogle"></button>
-                  <button title="Login Firebase" className="iconButton firebaseIcon" id="loginFirebase"></button>
+                  <button title="Login Google" className="btn iconButton googleIcon" id="loginGoogle"></button>
+                  <button title="Login Firebase" className="btn iconButton firebaseIcon" id="loginFirebase"></button>
                 </div>
               </div>
             </div>
@@ -67,8 +64,6 @@ export class Login extends React.Component {
   }
 
   start() {
-    // last login credential
-    this.g_credential = getLocalCredential();
     // clear
     const queryString = window.location.search;
     const urlParameters = new URLSearchParams(queryString);
@@ -100,9 +95,12 @@ export class Login extends React.Component {
     document.getElementById('loginGoogle').addEventListener('click', function () {
       tokenClient.requestAccessToken();
     });
+    const self = this;
     document.getElementById('loginFirebase').addEventListener('click', function () {
-      // firebaseAuthGoogle();
+      firebaseAuthGoogle().then(self.handleCredResp);
     });
+
+    updateProfileCard();
   }
 
   handleCredResp(response) {
@@ -123,7 +121,30 @@ export class Login extends React.Component {
       }
 
       // change profile card
-      // updateProfileCard();
+      updateProfileCard();
     });
+  }
+}
+
+function updateProfileCard() {
+  const g_credential = getLocalCredential();
+  document.getElementById('tokenResponse').textContent =
+    Object.keys(g_credential).length > 0 ? JSON.stringify(g_credential, null, 2) : 'UNAUTHORIZED';
+  if ('credential' in g_credential) {
+    const wrapper = document.getElementById('profileWrapper');
+    const img = wrapper.querySelector('.card-img-top');
+    if ('picture' in g_credential.credential) {
+      img.setAttribute('src', g_credential.credential.picture);
+    }
+    if ('given_name' in g_credential.credential) {
+      const fullName = `${g_credential.credential.given_name} ${g_credential.credential.family_name}`;
+      img.setAttribute('alt', `${fullName}`);
+      wrapper.querySelector('.card-title').innerHTML = fullName;
+    }
+
+    document.getElementById('gEmail').textContent = g_credential.credential.email;
+    document.getElementById('isExpired').innerHTML = isTokenExpired(g_credential)
+      ? '<span class="text-danger">true</span>'
+      : '<span class="text-success">false</span>';
   }
 }
