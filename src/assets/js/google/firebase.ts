@@ -14,7 +14,7 @@ import { GOOGLE_SCOPES, getLocalCredential } from './constants';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyAgqIgI7JIDqnB7mI05Q1E1CzgWqwnzX5M',
   authDomain: 'android-008.firebaseapp.com',
   projectId: 'android-008',
@@ -27,13 +27,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-const app = !firebase.getApps().length ? firebase.initializeApp(firebaseConfig) : firebase.getApp();
+export const firebaseApp = !firebase.getApps().length ? firebase.initializeApp(firebaseConfig) : firebase.getApp();
 
 // Initialize Firebase Authentication and get a reference to the service
 let auth: Auth;
 
 export function firebaseRegister(email: string, password: null | string = null) {
-  if (!auth) auth = getAuth(app);
+  if (!auth) auth = getAuth(firebaseApp);
   createUserWithEmailAndPassword(auth, email, password || md5(email).substring(0, 8))
     .then(userCredential => {
       // Signed in
@@ -58,9 +58,9 @@ export function firebaseAuthGoogle(force = false) {
       provider.setCustomParameters({
         login_hint: getLocalCredential().credential.email,
       });
-      auth = getAuth(app);
+      auth = getAuth(firebaseApp);
     } else {
-      if (!auth) auth = getAuth(app);
+      if (!auth) auth = getAuth(firebaseApp);
     }
 
     signInWithPopup(auth, provider)
