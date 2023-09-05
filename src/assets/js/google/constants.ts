@@ -1,3 +1,6 @@
+import { getAuth } from 'firebase/auth';
+import { firebaseApp } from './firebase';
+
 export const GOOGLE_SCOPES = [
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/userinfo.email',
@@ -46,7 +49,12 @@ export async function handleCredentialResponse(
     g_credential[key] = response[key];
   }
   // determine expires time
-  g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
+  if (g_credential.expires_in) {
+    g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
+  } else {
+    const auth = await getAuth(firebaseApp).currentUser.getIdTokenResult();
+    g_credential._expires_in = new Date(auth.expirationTime).getTime();
+  }
 
   if ('credential' in response && response.credential) {
     if (typeof response.credential === 'string') {
@@ -126,7 +134,7 @@ export function getLocalCredential(): LocalCredential {
  * @param obj
  */
 export function setLocalCredential(obj: Record<string, any>, merge = false) {
-  localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(merge ? Object.assign(getLocalCredential(), obj) : obj));
+  localStorage.setItem(KEY_LOCALSTORAGE, JSON.stringify(merge ? Object.assign(g_credential, obj) : obj));
 }
 
 /**
