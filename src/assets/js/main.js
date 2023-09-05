@@ -1,15 +1,15 @@
+const Bluebird = require('bluebird');
 const { randomStr, copyTextToClipboard } = require('./utils/clipboard');
 
-function loadMainScript() {
-  require('./analystic');
-  require('bootstrap/dist/js/bootstrap.bundle.js');
-  require('./r-ads');
-  initClipBoard();
+async function loadMainScript() {
+  await import('./analystic');
+  await import('bootstrap/dist/js/bootstrap.bundle.js');
+  await import('./r-ads');
+  await initClipBoard();
 }
 
 function initClipBoard() {
-  const Bluebird = require('bluebird');
-  Bluebird.all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
+  return Bluebird.all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
     if (!codeBlock.getAttribute('id')) {
       codeBlock.setAttribute('id', randomStr(4));
     }
