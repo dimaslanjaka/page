@@ -19,7 +19,7 @@ module.exports = {
     : {
         // shared utility
         shared: {
-          import: ['bluebird', 'crypto-js'],
+          import: ['bluebird', 'crypto-js', 'moment', 'moment-timezone'],
         },
         // main script
         bundle: {
@@ -29,6 +29,11 @@ module.exports = {
         // all imported firebase module
         firebase: {
           import: ['firebase/app', 'firebase/auth'],
+          dependOn: 'shared',
+        },
+        // other external module utility
+        modules: {
+          import: ['safelinkify'],
           dependOn: 'shared',
         },
         // internal/local utility
