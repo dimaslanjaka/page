@@ -34,7 +34,7 @@ class App extends React.Component {
 function Layout() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-fixed-top">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" id="navbar-top">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img
