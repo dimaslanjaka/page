@@ -7,6 +7,39 @@ const devMode = /dev/i.test(process.env.NODE_ENV);
 const ASSET_PATH = '/page';
 
 /**
+ * @type {HtmlWebpackPlugin.Options[]}
+ */
+const routes = [
+  {
+    title: 'Login page - WMI',
+    filename: 'login.html',
+    template: path.resolve(__dirname, 'src', 'main.html'), // source html layout
+  },
+  {
+    title: 'Home page - WMI',
+    filename: 'index.html', // create index.html
+    template: path.resolve(__dirname, 'src', 'main.html'), // source html layout
+  },
+];
+
+function createHtml() {
+  return routes.map(
+    option =>
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {
+            filename: 'index.html', // create index.html
+            template: path.resolve('src', 'main.html'), // source html layout
+            publicPath: ASSET_PATH, // base directory from root domain
+            minify: devMode === false, // minify on production
+          },
+          option,
+        ),
+      ),
+  );
+}
+
+/**
  * @type {import('webpack').Configuration}
  */
 module.exports = {
@@ -32,10 +65,10 @@ module.exports = {
           dependOn: 'shared',
         },
         // other external module utility
-        modules: {
+        /*customModule: {
           import: ['safelinkify'],
           dependOn: 'shared',
-        },
+        },*/
         // internal/local utility
         internal: {
           import: ['./src/utils/index.ts'],
@@ -147,11 +180,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
     }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html', // create index.html
-      template: path.resolve('src', 'main.html'), // source html layout
-      publicPath: ASSET_PATH, // base directory from root domain
-    }),
+    ...createHtml(),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
