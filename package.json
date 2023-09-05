@@ -10,7 +10,7 @@
     "prod": "cd page && npm install --omit=dev --production",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "update": "yarn run update:ncu",
-    "build": "webpack --mode production",
+    "build": "rm -rf dist && webpack --mode production",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
