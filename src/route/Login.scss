@@ -23,18 +23,32 @@
     font-size: 1.5em;
   }
 
-  .btn-primary {
+  /*.btn-primary {
     border-radius: 2em;
     padding: 0.5em 1.5em;
-  }
+  }*/
 }
 
 .firebaseIcon {
   background-image: url("//cdn.icon-icons.com/icons2/2699/PNG/512/firebase_logo_icon_171157.png");
+  border-radius: 0px 5px 5px 0px !important;
+  border-color: #ffcb2b !important;
+  border-left-color: transparent !important;
+  &:hover {
+    background-color: #ffcb2b !important;
+    color: white !important;
+  }
 }
 
 .googleIcon {
   background-image: url("//static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png");
+  border-radius: 5px 0px 0px 5px !important;
+  border-color: #5290F5 !important;
+  border-right-color: transparent !important;
+  &:hover {
+    color: white !important;
+    background-color: #5290F5 !important;
+  }
 }
 
 .iconButton {
@@ -44,18 +58,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 27px 27px;
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-}
-
-.iconButton:hover {
-  background-color: #303030;
-}
-
-.iconButton:active {
-  background-color: #606060;
+  padding: 14px 28px !important;
+  cursor: pointer !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 button.iconButton::-moz-focus-inner {
