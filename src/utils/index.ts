@@ -1,3 +1,5 @@
+import CryptoJS from 'crypto-js';
+
 export const isIe =
   navigator.userAgent.toLowerCase().indexOf('msie') != -1 || navigator.userAgent.toLowerCase().indexOf('trident') != -1;
 
@@ -32,3 +34,5 @@ export const randomStr = (len = 8) =>
   Math.random()
     .toString(36)
     .substring(2, len + 2);
+
+export const md5 = (str: string) => CryptoJS.MD5(str).toString();

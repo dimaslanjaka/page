@@ -3,7 +3,7 @@
 import Bluebird from 'bluebird';
 import * as firebase from 'firebase/app';
 import { Auth, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup } from 'firebase/auth';
-import { md5 } from '../../../utils/md5';
+import { md5 } from '../../../utils';
 import { GOOGLE_SCOPES, getLocalCredential } from './constants';
 
 // TODO: Add SDKs for Firebase products that you want to use

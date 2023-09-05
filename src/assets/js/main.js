@@ -1,5 +1,5 @@
-const Bluebird = require('bluebird');
-const { randomStr, copyTextToClipboard } = require('../../utils/clipboard');
+import { all } from 'bluebird';
+import { copyTextToClipboard, randomStr } from '../../utils';
 
 async function loadMainScript() {
   await import('./analystic');
@@ -9,7 +9,7 @@ async function loadMainScript() {
 }
 
 function initClipBoard() {
-  return Bluebird.all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
+  return all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
     if (!codeBlock.getAttribute('id')) {
       codeBlock.setAttribute('id', randomStr(4));
     }
