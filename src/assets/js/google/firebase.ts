@@ -53,15 +53,17 @@ export function firebaseAuthGoogle(force = false) {
   return new Bluebird((resolve, reject) => {
     const provider = new GoogleAuthProvider();
     provider.addScope(GOOGLE_SCOPES.join(' '));
-    if (String(getLocalCredential()?.credential?.email).includes('@') && !force) {
-      // login existing user
-      provider.setCustomParameters({
-        login_hint: getLocalCredential().credential.email,
-      });
-      auth = getAuth(firebaseApp);
-    } else {
-      if (!auth) auth = getAuth(firebaseApp);
+    const credential = getLocalCredential().credential;
+    if (typeof credential !== 'string' && 'email' in credential) {
+      if (credential.email && String(credential?.email).includes('@') && !force) {
+        // login existing user
+        provider.setCustomParameters({
+          login_hint: credential.email,
+        });
+        auth = getAuth(firebaseApp);
+      }
     }
+    if (!auth) auth = getAuth(firebaseApp);
 
     signInWithPopup(auth, provider)
       .then(result => {

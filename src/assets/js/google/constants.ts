@@ -28,7 +28,7 @@ export const GOOGLE_CONFIG = {
 // key to save credential for offline usage
 export const KEY_LOCALSTORAGE = 'google_credential';
 // last login credential
-const g_credential = getLocalCredential();
+let g_credential = getLocalCredential();
 
 /**
  * Global token handler
@@ -87,15 +87,17 @@ export async function handleCredentialResponse(
 
 /**
  * is current user token expired
- * @param credential credential object, default using global g_credential
+ * @param desiredCredential credential object, default using global g_credential
  * @returns
  */
-export function isTokenExpired(credential?: LocalCredential) {
-  if (!credential) credential = g_credential;
-  if (credential.credential.exp) {
-    return Date.now() >= credential.credential.exp * 1000;
-  } else if ('_expires_in' in credential) {
-    return Date.now() >= credential._expires_in;
+export function isTokenExpired(desiredCredential?: LocalCredential) {
+  if (!desiredCredential) desiredCredential = g_credential;
+  if (desiredCredential.credential && typeof desiredCredential.credential !== 'string') {
+    if (desiredCredential.credential.exp) {
+      return Date.now() >= desiredCredential.credential.exp * 1000;
+    } else if ('_expires_in' in desiredCredential) {
+      return Date.now() >= desiredCredential._expires_in;
+    }
   }
   return false;
 }
@@ -112,29 +114,143 @@ export async function fetchUserInfo(access_token: string) {
 }
 
 export interface LocalCredential {
-  [key: string]: any;
+  token: string;
+  providerId: string;
+  proactiveRefresh: {
+    user: {
+      uid: string;
+      email: string;
+      emailVerified: boolean;
+      displayName: string;
+      isAnonymous: boolean;
+      photoURL: string;
+      providerData: Array<{
+        providerId: string;
+        uid: string;
+        displayName: string;
+        email: string;
+        phoneNumber: any;
+        photoURL: string;
+      }>;
+      stsTokenManager: {
+        refreshToken: string;
+        accessToken: string;
+        expirationTime: number;
+      };
+      createdAt: string;
+      lastLoginAt: string;
+      apiKey: string;
+      appName: string;
+    };
+    isRunning: boolean;
+    timerId: any;
+    errorBackoff: number;
+  };
+  reloadUserInfo: {
+    localId: string;
+    email: string;
+    displayName: string;
+    photoUrl: string;
+    emailVerified: boolean;
+    providerUserInfo: Array<{
+      providerId: string;
+      displayName: string;
+      photoUrl: string;
+      federatedId: string;
+      email: string;
+      rawId: string;
+    }>;
+    validSince: string;
+    lastLoginAt: string;
+    createdAt: string;
+    lastRefreshAt: string;
+  };
+  reloadListener: any;
+  uid: string;
+  auth: {
+    apiKey: string;
+    authDomain: string;
+    appName: string;
+    currentUser: {
+      uid: string;
+      email: string;
+      emailVerified: boolean;
+      displayName: string;
+      isAnonymous: boolean;
+      photoURL: string;
+      providerData: Array<{
+        providerId: string;
+        uid: string;
+        displayName: string;
+        email: string;
+        phoneNumber: any;
+        photoURL: string;
+      }>;
+      stsTokenManager: {
+        refreshToken: string;
+        accessToken: string;
+        expirationTime: number;
+      };
+      createdAt: string;
+      lastLoginAt: string;
+      apiKey: string;
+      appName: string;
+    };
+  };
+  stsTokenManager: {
+    refreshToken: string;
+    accessToken: string;
+    expirationTime: number;
+  };
+  /** firebase token */
+  accessToken: string;
+  displayName: string;
+  email: string;
+  emailVerified: boolean;
+  phoneNumber: any;
+  photoURL: string;
+  isAnonymous: boolean;
+  tenantId: any;
+  providerData: Array<{
+    providerId: string;
+    uid: string;
+    displayName: string;
+    email: string;
+    phoneNumber: any;
+    photoURL: string;
+  }>;
+  metadata: {
+    createdAt: string;
+    lastLoginAt: string;
+  };
+  credential:
+    | string
+    | {
+        sub: string;
+        name: string;
+        given_name: string;
+        family_name: string;
+        picture: string;
+        email: string;
+        email_verified: boolean;
+        locale: string;
+        exp?: number;
+      };
+  tokenInfo: {
+    idToken: string;
+    accessToken: string;
+    pendingToken: any;
+    providerId: string;
+    signInMethod: string;
+  };
+  _expires_in: number;
+  /** google api/GSI token */
   access_token: string;
   token_type: string;
   expires_in: number;
   scope: string;
   authuser: string;
   prompt: string;
-  _expires_in: number;
-  credential: {
-    sub: string;
-    name: string;
-    given_name: string;
-    family_name: string;
-    picture: string;
-    email: string;
-    email_verified: boolean;
-    locale: string;
-    exp?: number;
-  };
-  tokenInfo?: {
-    accessToken: string;
-    idToken: string;
-  };
 }
 
 /**
@@ -142,7 +258,8 @@ export interface LocalCredential {
  * @returns
  */
 export function getLocalCredential(): LocalCredential {
-  return JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
+  if (!g_credential) g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
+  return g_credential;
 }
 
 /**
