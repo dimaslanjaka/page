@@ -47,6 +47,9 @@ export const Home = () => {
               <i class="fa-solid fa-arrow-right-to-bracket fa-size-large"></i>
               <h3>Login</h3>
               <p>User portal to use any features</p>
+              <Link to="/page/login" className="btn btn-sm btn-custom">
+                <i class="fa-thin fa-arrow-right"></i>
+              </Link>
             </div>
             <div class="col-xs-6 col-md-3">
               <i class="fa-sharp fa-solid fa-clock fa-size-large"></i>
