@@ -83,9 +83,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     // dev server filename bundle.js
     // unique chunk filename generation only for production
-    filename: devMode ? 'bundle.js' : '[name].[contenthash].js',
+    filename: devMode ? 'runtime/bundle.js' : 'runtime/[name].[contenthash].js',
     // unique chunk filename generation
-    chunkFilename: `[name].[contenthash].js`,
+    chunkFilename: `runtime/[name].[contenthash].js`,
     // base directory from root domain
     publicPath: ASSET_PATH,
   },
