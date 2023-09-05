@@ -17,7 +17,7 @@ class App extends React.Component {
         <Routes>
           <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/page/login" element={<Login />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
@@ -66,9 +66,9 @@ function Layout() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
+                <Link to="login" className="nav-link">
+                  Login
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
