@@ -12,13 +12,18 @@ const ASSET_PATH = '/page';
 const routes = [
   {
     title: 'Login page - WMI',
-    filename: 'login.html',
+    filename: 'login.html', // filename
     template: path.resolve(__dirname, 'src', 'main.html'), // source html layout
   },
   {
     title: 'Home page - WMI',
-    filename: 'index.html', // create index.html
-    template: path.resolve(__dirname, 'src', 'main.html'), // source html layout
+    filename: 'index.html',
+    template: path.resolve(__dirname, 'src', 'main.html'),
+  },
+  {
+    title: '404 - WMI',
+    filename: '404.html',
+    template: path.resolve(__dirname, 'src', 'main.html'),
   },
 ];
 
