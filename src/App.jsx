@@ -34,9 +34,7 @@ class App extends React.Component {
 function Layout() {
   return (
     <div>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-fixed-top">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img
@@ -122,6 +120,38 @@ function Layout() {
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
       <Outlet />
+
+      <div className="container">
+        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div className="col-md-4 d-flex align-items-center">
+            <a href="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <i className="fab fa-boostrap"></i>
+            </a>
+            <span className="mb-3 mb-md-0 text-muted">© {new Date().getFullYear()} Company, Inc</span>
+          </div>
+
+          <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li className="ms-3">
+              <a
+                className="text-muted"
+                href={`https://wa.me/+6285655667573?text=${encodeURIComponent('Hi, Webmaster WMI')}`}
+              >
+                <i className="fab fa-whatsapp"></i>
+              </a>
+            </li>
+            <li className="ms-3">
+              <a className="text-muted" href="https://github.com/dimaslanjaka">
+                <i className="fab fa-github"></i>
+              </a>
+            </li>
+            <li className="ms-3">
+              <a className="text-muted" href="https://fb.me/dimaslanjaka1">
+                <i className="fab fa-facebook"></i>
+              </a>
+            </li>
+          </ul>
+        </footer>
+      </div>
     </div>
   );
 }
