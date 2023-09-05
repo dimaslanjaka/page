@@ -2,7 +2,3 @@
 	path = packages/safelinkify
 	url = https://github.com/dimaslanjaka/safelink.git
 	branch = monorepo
-[submodule "packages/sbg-utility"]
-	path = packages/sbg-utility
-	url = https://github.com/dimaslanjaka/static-blog-generator
-	branch = sbg-utility
