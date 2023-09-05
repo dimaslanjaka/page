@@ -41,13 +41,18 @@ module.exports = {
    * The location of the build folder
    */
   output: {
+    // output directory
     path: path.resolve(__dirname, 'dist'),
+    // dev server filename bundle.js
+    // unique chunk filename generation only for production
     filename: devMode ? 'bundle.js' : '[name].[contenthash].js',
+    // unique chunk filename generation
     chunkFilename: `[name].[contenthash].js`,
+    // base directory from root domain
     publicPath: ASSET_PATH,
   },
   /**
-   * Prevent duplication, but disable chunk generation on dev mode
+   * Prevent duplication, but disable unique filename chunk generation on dev mode
    * [docs](https://webpack.js.org/guides/code-splitting/#prevent-duplication)
    */
   optimization: devMode
@@ -138,9 +143,9 @@ module.exports = {
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
     }),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve('src', 'main.html'),
-      publicPath: ASSET_PATH,
+      filename: 'index.html', // create index.html
+      template: path.resolve('src', 'main.html'), // source html layout
+      publicPath: ASSET_PATH, // base directory from root domain
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
