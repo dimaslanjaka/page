@@ -85,6 +85,21 @@ export async function handleCredentialResponse(
   return g_credential;
 }
 
+/**
+ * is current user token expired
+ * @param credential credential object, default using global g_credential
+ * @returns
+ */
+export function isTokenExpired(credential?: LocalCredential) {
+  if (!credential) credential = g_credential;
+  if (credential.credential.exp) {
+    return Date.now() >= credential.credential.exp * 1000;
+  } else if ('_expires_in' in credential) {
+    return Date.now() >= credential._expires_in;
+  }
+  return false;
+}
+
 export async function fetchUserInfo(access_token: string) {
   await fetch('https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + access_token)
     .then(res => res.json())
@@ -114,6 +129,7 @@ export interface LocalCredential {
     email: string;
     email_verified: boolean;
     locale: string;
+    exp?: number;
   };
   tokenInfo?: {
     accessToken: string;
