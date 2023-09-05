@@ -1,7 +1,7 @@
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from '../../utils';
 
-async function loadMainScript() {
+export async function loadMainScript() {
   await import('./analystic');
   await import('bootstrap/dist/js/bootstrap.bundle.js');
   await import('./r-ads');
@@ -42,6 +42,7 @@ function initClipBoard() {
   });
 }
 
+/*
 if (typeof require != 'undefined' && typeof module != 'undefined' && require.main === module) {
   // load script
   loadMainScript();
@@ -50,3 +51,4 @@ if (typeof require != 'undefined' && typeof module != 'undefined' && require.mai
 if (typeof module === 'object' && 'exports' in module) {
   module.exports = { loadMainScript };
 }
+*/
