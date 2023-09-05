@@ -123,6 +123,26 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset', // <-- Assets module - asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024, // 8kb
+          },
+        },
+        generator: {
+          //If emitting file, the file path is
+          filename: 'runtime/fonts/[hash][ext][query]',
+        },
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource', // <-- Assets module - asset/resource
+        generator: {
+          filename: 'runtime/images/[hash][ext][query]',
+        },
+      },
+      {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
         exclude: /node_modules|.test.(ts|js)$/,
@@ -189,8 +209,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
+      filename: 'runtime/css/[name].[contenthash].css',
+      chunkFilename: 'runtime/css/[id].[contenthash].css',
     }),
   ],
   /**
