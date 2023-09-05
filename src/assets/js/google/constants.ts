@@ -33,7 +33,10 @@ const g_credential = getLocalCredential();
  * @param callback
  * @returns
  */
-export async function handleCredentialResponse(response, callback?) {
+export async function handleCredentialResponse(
+  response: Record<string, any>,
+  callback?: { (): void; (arg0: LocalCredential): void },
+) {
   if (!response) {
     console.error('token response is null');
     return;
@@ -44,24 +47,25 @@ export async function handleCredentialResponse(response, callback?) {
   }
   // determine expires time
   g_credential._expires_in = g_credential.expires_in * 1000 + new Date().getTime();
-  // handle google one tap jwt login
-  if ('credential' in response && typeof response.credential === 'string') {
-    g_credential['credential'] = {} as (typeof g_credential)['credential'];
-    // parse jwt token
-    const parse = parseJwt(response.credential);
-    for (const key in parse) {
-      g_credential['credential'][key] = parse[key];
+
+  if ('credential' in response && response.credential) {
+    if (typeof response.credential === 'string') {
+      // handle google one tap jwt login
+      g_credential['credential'] = {} as (typeof g_credential)['credential'];
+      // parse jwt token
+      const parse = parseJwt(response.credential);
+      for (const key in parse) {
+        g_credential['credential'][key] = parse[key];
+      }
+    } else if ('accessToken' in response.credential) {
+      // apply tokenInfo property
+      g_credential.tokenInfo = response.credential;
+      // fetch user profile
+      await fetchUserInfo(response.credential.accessToken);
     }
   } else if ('access_token' in response) {
     // fetch user profile
-    await fetch('https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + response.access_token)
-      .then(res => res.json())
-      .then(response => {
-        g_credential['credential'] = {} as (typeof g_credential)['credential'];
-        for (const key in response) {
-          g_credential['credential'][key] = response[key];
-        }
-      });
+    await fetchUserInfo(response.access_token);
   }
 
   //console.log('credential', { g_credential }, { response });
@@ -71,6 +75,17 @@ export async function handleCredentialResponse(response, callback?) {
 
   if (typeof callback === 'function') callback(g_credential);
   return g_credential;
+}
+
+export async function fetchUserInfo(access_token: string) {
+  await fetch('https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + access_token)
+    .then(res => res.json())
+    .then(response => {
+      g_credential['credential'] = {} as (typeof g_credential)['credential'];
+      for (const key in response) {
+        g_credential['credential'][key] = response[key];
+      }
+    });
 }
 
 export interface LocalCredential {
@@ -91,6 +106,10 @@ export interface LocalCredential {
     email: string;
     email_verified: boolean;
     locale: string;
+  };
+  tokenInfo?: {
+    accessToken: string;
+    idToken: string;
   };
 }
 
@@ -131,10 +150,10 @@ export function parseJwt(token: string) {
 
 /**
  * generate oauth url
- * @param {string} [redirect_uri]
+ * @param redirect_uri
  * @returns
  */
-export function generateAuthUrl(redirect_uri) {
+export function generateAuthUrl(redirect_uri?: string) {
   return (
     'https://accounts.google.com/o/oauth2/v2/auth?' +
     'client_id=' +
