@@ -8,12 +8,33 @@ const { buildPage } = require('./page-source/build');
 
 gulp.task('page:copy', async function () {
   // copy non-compiled files
-  // copy workflow
-  const w_src = path.join(__dirname, '.github');
-  const w_dest = path.join(__dirname, 'page/.github');
 
-  if (fs.existsSync(w_dest)) fs.rmSync(w_dest, { force: true, recursive: true });
-  await fs.copy(w_src, w_dest, { overwrite: true });
+  const option = [
+    // copy workflow
+    {
+      src: path.join(__dirname, '.github'),
+      dest: path.join(__dirname, 'page/.github'),
+    },
+    // copy dist
+    {
+      src: path.join(__dirname, 'dist'),
+      dest: path.join(__dirname, 'page'),
+    },
+  ];
+
+  // delete bundled react folder
+  const runtimeFolder = path.join(__dirname, 'page/runtime');
+  if (fs.existsSync(runtimeFolder)) {
+    await fs.rm(runtimeFolder, { recursive: true, force: true });
+  }
+
+  await Bluebird.all(option).each(item => {
+    // delete destination path except root path
+    if (fs.existsSync(item.dest) && item.dest !== path.join(__dirname, 'page')) {
+      fs.rmSync(item.dest, { force: true, recursive: true });
+    }
+    return fs.copy(item.src, item.dest, { overwrite: true });
+  });
 });
 
 const sleep = milliseconds => {
