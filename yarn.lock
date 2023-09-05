@@ -13173,7 +13173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safelinkify@^1.1.18, safelinkify@workspace:packages/safelinkify":
+"safelinkify@*, safelinkify@^1.1.18, safelinkify@workspace:packages/safelinkify":
   version: 0.0.0-use.local
   resolution: "safelinkify@workspace:packages/safelinkify"
   dependencies:
@@ -15865,6 +15865,7 @@ __metadata:
     react-hot-loader: ^4.13.0
     react-router-dom: ^6.15.0
     resolve-typescript-plugin: ^2.0.1
+    safelinkify: "*"
     sass-loader: ^13.3.2
     sbg-utility: "*"
     style-loader: ^3.3.3
