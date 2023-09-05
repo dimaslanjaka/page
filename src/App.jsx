@@ -17,7 +17,8 @@ class App extends React.Component {
         <Routes>
           <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/page/login" element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="safelink" element={<Login />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
@@ -117,12 +118,10 @@ function Layout() {
         </div>
       </nav>
 
-      <div className="container">
-        {/* An <Outlet> renders whatever child route is currently active,
+      {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 }
