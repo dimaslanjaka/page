@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * image with fallback
+ */
 export class Image extends Component {
   constructor(props) {
     super(props);
