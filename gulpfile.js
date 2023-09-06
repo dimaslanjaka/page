@@ -5,6 +5,8 @@ const Bluebird = require('bluebird');
 const glob = require('glob');
 const pagepkg = require('./page/package.json');
 const { buildPage } = require('./page-source/build');
+const safelinkify = require('safelinkify');
+const through2 = require('through2');
 
 gulp.task('page:copy', async function () {
   // copy non-compiled files
@@ -34,6 +36,42 @@ gulp.task('page:copy', async function () {
       fs.rmSync(item.dest, { force: true, recursive: true });
     }
     return fs.copy(item.src, item.dest, { overwrite: true });
+  });
+
+  // safelinkify external url
+  await new Promise((resolve, reject) => {
+    const cwd = path.join(__dirname, 'dist');
+    const dest = path.join(__dirname, 'page');
+    gulp
+      .src('**/*.html', { cwd })
+      .on('end', () => resolve(null))
+      .on('error', reject)
+      .pipe(
+        through2.obj(async (vinyl, _enc, callback) => {
+          if (vinyl.isNull() || vinyl.isStream()) return callback(); // skip null and stream object
+          const safelink = new safelinkify.safelink({
+            // exclude patterns (dont anonymize these patterns)
+            exclude: [
+              /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/,
+              /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/,
+            ],
+            // url redirector
+            redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+            // debug
+            verbose: false,
+            // encryption type = 'base64' | 'aes'
+            type: 'base64',
+            // password aes, default = root
+            password: 'unique-password',
+          });
+          let str = Buffer.from(vinyl.contents).toString();
+          str = await safelink.parse(str);
+          vinyl.contents = Buffer.from(str);
+          if (this.push) this.push(vinyl); // emit this file
+          callback(null, vinyl); // emit new data
+        }),
+      )
+      .pipe(gulp.dest(dest));
   });
 });
 
