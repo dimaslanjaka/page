@@ -54,7 +54,7 @@ export function firebaseAuthGoogle(force = false) {
     const provider = new GoogleAuthProvider();
     provider.addScope(GOOGLE_SCOPES.join(' '));
     const credential = getLocalCredential().credential;
-    if (typeof credential !== 'string' && 'email' in credential) {
+    if (credential && typeof credential !== 'string' && typeof credential.email === 'string') {
       if (credential.email && String(credential?.email).includes('@') && !force) {
         // login existing user
         provider.setCustomParameters({
