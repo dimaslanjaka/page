@@ -1,0 +1,10 @@
+#!/usr/bin/env -S bash -e
+
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+  -keyout cert/webmanajemen.com.key -out cert/webmanajemen.com.crt -extensions san -config \
+  <(echo "[req]";
+    echo distinguished_name=req;
+    echo "[san]";
+    echo subjectAltName=DNS:webmanajemen.com,DNS:agc.webmanajemen.comDNS:adsense.webmanajemen.com,DNS:developer.webmanajemen.com,DNS:www.webmanajemen.com,DNS:api.webmanajemen.com,IP:10.0.0.1,IP:127.0.0.1
+    ) \
+  -subj "/CN=webmanajemen.com"
