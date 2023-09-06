@@ -40,14 +40,14 @@ export class Link extends React.Component {
     if (typeof dest === 'string') {
       if (this.isValidHttpUrl(dest)) {
         const result = this.sf.parseUrl(dest);
-        console.log('external url', dest, '->', result);
+        //console.log('external url', dest, '->', result);
         this.setState({
           result: result,
           finish: true,
           type: 'external',
         });
       } else {
-        console.log('internal url', dest);
+        //console.log('internal url', dest);
         this.setState({
           result: dest,
           finish: true,
