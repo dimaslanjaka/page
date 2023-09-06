@@ -144,7 +144,7 @@ function updateProfileCard() {
 
     document.getElementById('gEmail').textContent = g_credential.credential.email;
     document.getElementById('isExpired').innerHTML = isTokenExpired(g_credential)
-      ? '<span class="text-danger">true</span>'
-      : '<span class="text-success">false</span>';
+      ? '<span className="text-danger">true</span>'
+      : '<span className="text-success">false</span>';
   }
 }
