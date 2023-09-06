@@ -32,12 +32,12 @@ export function Layout() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" href="/page">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="login" className="nav-link">
+                <Link to="/page/login" className="nav-link">
                   Login
                 </Link>
               </li>
@@ -88,10 +88,12 @@ export function Layout() {
         </div>
       </nav>
 
-      {/* An <Outlet> renders whatever child route is currently active,
+      <div style={{ marginTop: '4em' }}>
+        {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
-      <Outlet />
+        <Outlet />
+      </div>
 
       <div className="container">
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
