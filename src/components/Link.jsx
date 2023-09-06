@@ -11,11 +11,6 @@ export class Link extends React.Component {
   sf;
   constructor(props) {
     super(props);
-    this.state = {
-      result: undefined,
-      finish: false,
-      type: 'internal',
-    };
     this.sf = new safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [
@@ -31,51 +26,34 @@ export class Link extends React.Component {
       // password aes, default = root
       password: 'unique-password',
     });
-    this.parseLink = this.parseLink.bind(this);
-  }
-
-  parseLink() {
-    const { href, to } = this.props;
-    const dest = href || to;
-    if (typeof dest === 'string') {
-      if (this.isValidHttpUrl(dest)) {
-        const result = this.sf.parseUrl(dest);
-        //console.log('external url', dest, '->', result);
-        this.setState({
-          result: result,
-          finish: true,
-          type: 'external',
-        });
-      } else {
-        //console.log('internal url', dest);
-        this.setState({
-          result: dest,
-          finish: true,
-          type: 'internal',
-        });
-      }
-    }
   }
 
   render() {
-    const { result, finish, type } = this.state;
-    const { href, ...props } = this.props;
+    const { href, to, ...props } = this.props;
+    const dest = href || to;
+    let result = dest;
+    let type = 'internal';
+    if (typeof dest === 'string') {
+      if (this.isValidHttpUrl(dest)) {
+        result = this.sf.parseUrl(dest);
+        if (result === dest) {
+          type = 'internal';
+        } else {
+          type = 'external';
+        }
+      }
+    }
 
-    if (!finish && !result) {
-      this.parseLink();
+    if (type === 'external') {
       return (
-        <a href={href} {...props}>
+        <a {...props} href={href} target={type == 'external' ? '_blank' : '_self'}>
           {this.props.children}
         </a>
       );
     }
 
     return (
-      <OriginalLink
-        to={typeof result == 'string' && result.length > 0 ? result : href}
-        {...props}
-        target={type == 'external' ? '_blank' : '_self'}
-      >
+      <OriginalLink {...props} to={dest} target={type == 'external' ? '_blank' : '_self'}>
         {this.props.children}
       </OriginalLink>
     );
