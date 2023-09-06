@@ -1,8 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import './assets/css/main.scss';
-import { Link } from './components/Link';
-import { Image } from './components/Image';
+import { Link } from '../components/Link';
+import { Image } from '../components/Image';
 
 export function Layout() {
   return (
