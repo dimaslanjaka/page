@@ -4335,9 +4335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"binary-collections@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "binary-collections@npm:1.0.3"
+"binary-collections@https://github.com/dimaslanjaka/bin/raw/dbbbb48/releases/bin.tgz":
+  version: 1.0.5
+  resolution: "binary-collections@https://github.com/dimaslanjaka/bin/raw/dbbbb48/releases/bin.tgz"
   dependencies:
     ansi-colors: ^4.1.3
     execa: ^7.1.1
@@ -4346,6 +4346,7 @@ __metadata:
     minimatch: ^9.0.0
     minimist: ^1.2.8
     upath: ^2.0.1
+    yaml: ^2.3.1
   dependenciesMeta:
     ansi-colors:
       optional: true
@@ -4357,6 +4358,7 @@ __metadata:
     git-fix-encoding: bin/git-fix-encoding
     git-fix-encoding.cmd: bin/git-fix-encoding.cmd
     git-reduce-size: bin/git-reduce-size
+    javakill.cmd: bin/javakill.cmd
     kill-process: bin/kill-process
     nodekill: bin/nodekill
     nodekill.cmd: bin/nodekill.cmd
@@ -4366,11 +4368,13 @@ __metadata:
     prod: bin/prod
     rmfind: bin/rmfind
     rmpath: bin/rmpath
+    rmx: bin/rmx
     run-s: lib/npm-run-series.js
     run-series: lib/npm-run-series.js
+    submodule: bin/submodule
     submodule-install: bin/submodule-install
     submodule-remove: bin/submodule-remove
-  checksum: fd1a67a4a34b233ce15e251f9265c0cae6b4c79857bb32c1e1215a3ef4db79ace25f4a99596b0285590a6136e420bd43d476fc13de95138fd3fc0f6d266bbfa0
+  checksum: 6e487464891ca029d7e01b0d424772e901d3b27ad399034e78841839219ba6f2ff5b4b771d90ffb6beaad92816b620e0b61e8aede8b3568d3b20d638f50db048
   languageName: node
   linkType: hard
 
