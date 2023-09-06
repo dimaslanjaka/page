@@ -1,9 +1,11 @@
 import React from 'react';
 import { Home } from './route/Home';
 import { Login } from './route/Login';
-import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { loadMainScript } from './assets/js/main';
+import { Link } from './components/Link';
+import { Image } from './components/Image';
 
 class App extends React.Component {
   componentDidMount() {
@@ -37,7 +39,7 @@ function Layout() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" id="navbar-top">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/page">
-            <img
+            <Image
               src="//www.webmanajemen.com/favicon.ico"
               alt="Logo"
               width="30"
@@ -60,9 +62,9 @@ function Layout() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" href="#">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to="login" className="nav-link">
@@ -70,7 +72,7 @@ function Layout() {
                 </Link>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
@@ -78,32 +80,32 @@ function Layout() {
                   aria-expanded="false"
                 >
                   Dropdown
-                </a>
+                </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" href="#">
                       Something else here
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
+                <Link className="nav-link disabled" aria-disabled="true">
                   Disabled
-                </a>
+                </Link>
               </li>
             </ul>
             <form className="d-flex" role="search">
@@ -124,27 +126,27 @@ function Layout() {
       <div className="container">
         <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
           <div className="col-md-4 d-flex align-items-center">
-            <a href="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <Link href="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
               <i className="fab fa-boostrap"></i>
-            </a>
+            </Link>
             <span className="mb-3 mb-md-0 text-muted">© {new Date().getFullYear()} WMI, Inc</span>
           </div>
 
           <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li className="ms-3">
-              <a className="text-muted" href={`https://wa.me/+6285655667573?text=${encodeURI('Hi, Webmaster WMI')}`}>
+              <Link className="text-muted" href={`https://wa.me/+6285655667573?text=${encodeURI('Hi, Webmaster WMI')}`}>
                 <i className="fab fa-whatsapp"></i>
-              </a>
+              </Link>
             </li>
             <li className="ms-3">
-              <a className="text-muted" href="https://github.com/dimaslanjaka">
+              <Link className="text-muted" href="https://github.com/dimaslanjaka">
                 <i className="fab fa-github"></i>
-              </a>
+              </Link>
             </li>
             <li className="ms-3">
-              <a className="text-muted" href="https://fb.me/dimaslanjaka1">
+              <Link className="text-muted" href="https://fb.me/dimaslanjaka1">
                 <i className="fab fa-facebook"></i>
-              </a>
+              </Link>
             </li>
           </ul>
         </footer>
