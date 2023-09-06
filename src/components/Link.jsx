@@ -12,9 +12,9 @@ export class Link extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      href: props.href || props.to,
       result: undefined,
       finish: false,
+      type: 'internal',
     };
     this.sf = new safelink({
       // exclude patterns (dont anonymize these patterns)
@@ -44,20 +44,22 @@ export class Link extends React.Component {
         this.setState({
           result: result,
           finish: true,
+          type: 'external',
         });
       } else {
         console.log('internal url', dest);
         this.setState({
           result: dest,
           finish: true,
+          type: 'internal',
         });
       }
     }
   }
 
   render() {
-    const { result, finish } = this.state;
-    const { result: _1, finish: _2, href, ...props } = this.props;
+    const { result, finish, type } = this.state;
+    const { href, ...props } = this.props;
 
     if (!finish && !result) {
       this.parseLink();
@@ -69,7 +71,11 @@ export class Link extends React.Component {
     }
 
     return (
-      <OriginalLink to={this.isValidHttpUrl(result) ? result : href} {...props}>
+      <OriginalLink
+        to={this.isValidHttpUrl(result) ? result : href}
+        {...props}
+        target={type == 'external' ? '_blank' : '_self'}
+      >
         {this.props.children}
       </OriginalLink>
     );
