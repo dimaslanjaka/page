@@ -221,7 +221,16 @@ module.exports = {
     //static: path.resolve(__dirname, './public'),
     historyApiFallback: true, // enable react-dom-router support
     hot: true, // hot reloading
-    port: 4000,
-    open: false,
+    port: 4000, // dev server port
+    open: false, // open browser
+    host: 'adsense.webmanajemen.com', // local domain by /etc/hosts
+    https: false, // redirect to https
+    server: {
+      type: 'http',
+      options: {
+        key: './cert/localhost.key',
+        cert: './cert/localhost.crt',
+      },
+    },
   },
 };
