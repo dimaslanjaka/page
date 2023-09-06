@@ -5,6 +5,13 @@ import { Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { loadMainScript } from './assets/js/main';
 import { Layout, NoMatch } from './components/Layout';
+/*
+https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
+library.add(fab, faCheckSquare, faCoffee);
+*/
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,6 +27,7 @@ class App extends React.Component {
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="safelink" element={<Login />} />
+            {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
