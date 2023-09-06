@@ -72,7 +72,7 @@ export class Link extends React.Component {
 
     return (
       <OriginalLink
-        to={this.isValidHttpUrl(result) ? result : href}
+        to={typeof result == 'string' && result.length > 0 ? result : href}
         {...props}
         target={type == 'external' ? '_blank' : '_self'}
       >
