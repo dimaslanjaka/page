@@ -4,7 +4,7 @@ import { Login } from './route/Login';
 import { Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { Layout, NoMatch } from './components/Layout';
-import { Safelink } from './route/Safelink';
+import { SafelinkLayout1 } from './route/Safelink/layout1';
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
@@ -31,7 +31,7 @@ class App extends React.Component {
           <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            <Route path="safelink" element={<Safelink />} />
+            <Route path="safelink" element={<SafelinkLayout1 />} />
             {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
 
             {/* Using path="*"" means "match anything", so this route

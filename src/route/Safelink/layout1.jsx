@@ -5,7 +5,7 @@ import { createCookieMins, getCookie } from '../../assets/js/cookie';
 import { SafelinkContents } from '../../components/SafelinkContents';
 import { Adsense } from '../../components/Adsense';
 
-export class Safelink extends React.Component {
+export class SafelinkLayout1 extends React.Component {
   componentDidMount() {
     // check google translate
     const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
