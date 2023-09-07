@@ -25,7 +25,7 @@ const localhost = islocalhost();
  * debug on localhost
  */
 const adsense_log =
-  localhost || window['adsense-debug'] === true
+  localhost || window.adsense_option.debug || window['adsense-debug'] === true || 'port' in location
     ? console.log
     : function (..._args) {
         //
@@ -37,25 +37,25 @@ const allAds = [
     pub: '2188063137129806',
     ads: [
       {
-        style: 'display: block; text-align: center',
+        style: 'display: block !important; text-align: center',
         'data-ad-layout': 'in-article',
         'data-ad-format': 'fluid',
         'data-ad-slot': '5634823028',
       },
       {
-        style: 'display: block; text-align: center',
+        style: 'display: block !important; text-align: center',
         'data-ad-layout': 'in-article',
         'data-ad-format': 'fluid',
         'data-ad-slot': '8481296455',
       },
       {
-        style: 'display:block',
+        style: 'display:block !important',
         'data-ad-slot': '2667720583',
         'data-ad-format': 'auto',
         'data-full-width-responsive': 'true',
       },
       {
-        style: 'display:block',
+        style: 'display:block !important',
         'data-ad-format': 'fluid',
         'data-ad-layout-key': '-gw-3+1f-3d+2z',
         'data-ad-slot': '6979059162',
@@ -239,7 +239,10 @@ function onloadAds() {
     if (!ins) {
       continue;
     } else if (!ins.getAttribute('data-ad-client')) {
-      adsense_log('no data-ad-client', ins);
+      // ins.adsbygoogle-noablate is default adsense hidden element
+      if (!ins.classList.contains('adsbygoogle-noablate')) {
+        adsense_log('no data-ad-client', ins);
+      }
       continue;
     }
     const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
