@@ -52,11 +52,11 @@ export const safelinkInstance = new safelink({
 
 /**
  * parse url to object
- * @param string href
+ * @param href
  * @return HTMLAnchorElement
  * @return Object.query
  */
-export function parse_url(href) {
+export function parse_url(href: string) {
   if (!href) {
     href = location.href;
   }
