@@ -63,9 +63,8 @@ function decodeStart() {
   if (decodeStarted) return;
   // set indicator to true
   decodeStarted = true;
-  const instance = safelinkInstance;
 
-  const parse_safelink = instance.resolveQueryUrl(location.href);
+  const parse_safelink = safelinkInstance.resolveQueryUrl(location.href);
   if (parse_safelink) {
     const value_from_query = parse_safelink.url || parse_safelink.o || parse_safelink.u;
     if (value_from_query) {
