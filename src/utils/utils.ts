@@ -13,6 +13,9 @@ import safelink from 'safelinkify/dist/safelink';
 export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
+    // fix dynamic protocol source
+    if (url.startsWith('//')) url = window.location.protocol + url;
+    // proxying
     if (url.startsWith('http')) url = 'https://crossorigin.me/' + url;
     // skip duplicate
     if (document.querySelector(`script[src="${url}"]`)) return resolve();
