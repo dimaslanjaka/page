@@ -6,8 +6,9 @@ import './assets/css/main.scss';
 import { Layout, NoMatch } from './components/Layout';
 import { Safelink } from './route/Safelink';
 import { all } from 'bluebird';
-import { copyTextToClipboard, loadJS, randomStr } from './utils';
+import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import '../public/page/assets/js/analystic';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -20,7 +21,6 @@ library.add(fab, faCheckSquare, faCoffee);
 class App extends React.Component {
   componentDidMount() {
     // load main script
-    loadJS('/page/assets/js/analystic.js');
     initClipBoard();
   }
 
