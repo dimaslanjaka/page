@@ -232,5 +232,15 @@ module.exports = {
         cert: './cert/localhost.crt',
       },
     },
+    devMiddleware: {
+      index: true,
+      mimeTypes: { phtml: 'text/html' },
+      publicPath: ASSET_PATH,
+      serverSideRender: true,
+      writeToDisk: true,
+      headers: (_req, res, _context) => {
+        res.setHeader('Last-Modified', new Date());
+      },
+    },
   },
 };
