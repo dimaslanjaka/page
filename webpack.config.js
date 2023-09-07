@@ -3,8 +3,11 @@ const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const babelConfig = require('./.babelrc').config;
 const devMode = /dev/i.test(process.env.NODE_ENV);
 const ASSET_PATH = '/page';
+const cacheDirectory = path.join(__dirname, 'tmp/webpack');
+if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
 
 /**
  * @type {HtmlWebpackPlugin.Options[]}
@@ -152,9 +155,13 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
+          options: Object.assign(
+            {
+              cacheDirectory: './tmp/babel',
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+            },
+            babelConfig,
+          ),
         },
       },
       {
@@ -242,5 +249,9 @@ module.exports = {
         res.setHeader('Last-Modified', new Date());
       },
     },
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory,
   },
 };

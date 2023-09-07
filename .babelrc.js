@@ -1,3 +1,9 @@
+const plugins = ['macros', "@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-nullish-coalescing-operator",
+  "@babel/plugin-proposal-optional-chaining"]
+const presets = ['@babel/preset-env', '@babel/preset-react']
+
+module.exports.config = { plugins, presets }
+
 /**
  * babel config
  * @param {import('@babel/core').ConfigAPI} api
@@ -30,9 +36,7 @@ module.exports = function (api) {
   //api.cache.never(); // api.cache(false)
   //api.cache.using(fn); // api.cache(fn)
 
-  const plugins = ['macros', "@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-nullish-coalescing-operator",
-    "@babel/plugin-proposal-optional-chaining"]
-  const presets = ['@babel/preset-env', '@babel/preset-react']
+
   return {
     plugins,
     presets,
