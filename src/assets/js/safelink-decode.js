@@ -1,6 +1,7 @@
 'use strict';
 
 const { getCookie, createCookieMins } = require('./cookie');
+const { islocalhost, parse_query, parse_url, safelinkInstance } = require('./utils');
 
 require('safelinkify');
 
@@ -62,21 +63,7 @@ function decodeStart() {
   if (decodeStarted) return;
   // set indicator to true
   decodeStarted = true;
-  /**
-   * @type {(typeof import('safelinkify'))['default']}
-   */
-  const instance = new safelink({
-    // exclude patterns (dont anonymize these patterns)
-    exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
-    // url redirector
-    redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
-    // debug
-    verbose: false,
-    // encryption type = 'base64' | 'aes'
-    type: 'base64',
-    // password aes, default = root
-    password: 'unique-password',
-  });
+  const instance = safelinkInstance;
 
   const parse_safelink = instance.resolveQueryUrl(location.href);
   if (parse_safelink) {
@@ -153,60 +140,4 @@ function replaceWith(newElement, oldElement) {
     //log(oldElement.parentNode.tagName);
     oldElement.parentNode.replaceChild(newElement, oldElement);
   }
-}
-
-/**
- * parse url to object
- * @param string href
- * @return HTMLAnchorElement
- * @return Object.query
- */
-function parse_url(href) {
-  if (!href) {
-    href = location.href;
-  }
-  var l = document.createElement('a');
-  l.href = href;
-  l.query = parse_query({}, href);
-  return l;
-}
-
-/**
- * Parse Query URL and Hash
- * @param string query
- * @param string search query (?url=xxxx)
- */
-function parse_query(query, search) {
-  if (!search) {
-    search = window.location.search;
-  } else if (/^https?:\/\//i.test(search)) {
-    search = new URL(search).search;
-  }
-  var urlParams = new URLSearchParams(search);
-  var urlp = Object.fromEntries(urlParams);
-  var hash = window.location.hash.substr(1);
-  urlParams = new URLSearchParams(hash);
-  var urlh = Object.fromEntries(urlParams);
-  var urlO = Object.assign(urlh, urlp);
-  if (typeof query == 'function') {
-    return urlO;
-  }
-  if (query && urlO[query]) {
-    return urlO[query];
-  }
-  return false;
-}
-
-/**
- * check current script running on localhost
- * @returns
- */
-function islocalhost() {
-  // local hostname
-  if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
-  // local network
-  if (location.hostname.startsWith('192.168.')) return true;
-  // port defined
-  if (location.port.length > 0) return true;
-  return false;
 }

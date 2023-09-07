@@ -49,3 +49,59 @@ export const safelinkInstance = new safelink({
   // password aes, default = root
   password: 'unique-password',
 });
+
+/**
+ * parse url to object
+ * @param string href
+ * @return HTMLAnchorElement
+ * @return Object.query
+ */
+export function parse_url(href) {
+  if (!href) {
+    href = location.href;
+  }
+  const l = document.createElement('a');
+  l.href = href;
+  l['query'] = parse_query({}, href);
+  return l;
+}
+
+/**
+ * Parse Query URL and Hash
+ * @param string query
+ * @param string search query (?url=xxxx)
+ */
+export function parse_query(query, search) {
+  if (!search) {
+    search = window.location.search;
+  } else if (/^https?:\/\//i.test(search)) {
+    search = new URL(search).search;
+  }
+  let urlParams = new URLSearchParams(search);
+  const urlp = Object.fromEntries(urlParams);
+  const hash = window.location.hash.substr(1);
+  urlParams = new URLSearchParams(hash);
+  const urlh = Object.fromEntries(urlParams);
+  const urlO = Object.assign(urlh, urlp);
+  if (typeof query == 'function') {
+    return urlO;
+  }
+  if (query && urlO[query]) {
+    return urlO[query];
+  }
+  return false;
+}
+
+/**
+ * check current script running on localhost
+ * @returns
+ */
+export function islocalhost() {
+  // local hostname
+  if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
+  // local network
+  if (location.hostname.startsWith('192.168.')) return true;
+  // port defined
+  if (location.port.length > 0) return true;
+  return false;
+}
