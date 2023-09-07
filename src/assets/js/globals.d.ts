@@ -4,7 +4,7 @@ interface Window {
   opr: Record<string, any>;
   safari: Record<string, any>;
   adsense_option: AdsenseOption;
-  adsbygoogle: any[];
+  adsbygoogle: any;
 }
 
 interface AdsenseOption {
