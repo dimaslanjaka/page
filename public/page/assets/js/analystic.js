@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/// <reference path="./globals.d.ts" />
 
 window.dataLayer = window.dataLayer || [];
 let dump, data_analystic, IP;
