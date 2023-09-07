@@ -38,3 +38,14 @@ export const randomStr = (len = 8) =>
 export const md5 = (str: string) => CryptoJS.MD5(str).toString();
 
 export * from './utils';
+
+/**
+ * remove duplicate array items
+ * @param arr
+ * @returns
+ */
+export function arrayDedupe<T extends any[]>(arr: T) {
+  return arr.filter(function (value, index, array) {
+    return array.indexOf(value) === index;
+  });
+}
