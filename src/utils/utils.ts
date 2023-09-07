@@ -13,10 +13,10 @@ import safelink from 'safelinkify/dist/safelink';
 export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
-    const corsUrl = 'https://crossorigin.me/' + url;
+    if (url.startsWith('http')) url = 'https://crossorigin.me/' + url;
     // skip duplicate
-    if (document.querySelector(`script[src="${corsUrl}"]`)) return resolve();
-    script.src = corsUrl.replace(/(^\w+:|^)/, window.location.protocol);
+    if (document.querySelector(`script[src="${url}"]`)) return resolve();
+    script.src = url.replace(/(^\w+:|^)/, window.location.protocol);
     script.async = true;
     script.defer = true;
     script.setAttribute('crossorigin', 'anonymous');
