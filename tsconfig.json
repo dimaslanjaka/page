@@ -13,7 +13,11 @@
     "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": false,
+    "lib": [
+      "DOM",
+      "ES2020"
+    ]
   },
   "include": [
     "./src/**/*",
