@@ -1,6 +1,15 @@
 import Bluebird from 'bluebird';
 import safelink from 'safelinkify/dist/safelink';
 
+export interface LoadJSOpt {
+  proxy?: boolean;
+  async?: boolean;
+  defer?: boolean;
+  onload?: GlobalEventHandlers['onload'];
+  onerror?: GlobalEventHandlers['onerror'];
+  crossOrigin?: string;
+}
+
 /**
  * load js
  * @param url
@@ -10,21 +19,21 @@ import safelink from 'safelinkify/dist/safelink';
  * // or in class React.Component
  * componentDidMount() { loadJS('//host/path/file.js') }
  */
-export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
+export function loadJS(url: string, props: LoadJSOpt) {
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
     // fix dynamic protocol source
     if (url.startsWith('//')) url = window.location.protocol + url;
-    // proxying
-    if (url.startsWith('http')) url = 'https://crossorigin.me/' + url;
+    // proxying when enabled
+    if (url.startsWith('http') && props.proxy) url = 'https://crossorigin.me/' + url;
     // skip duplicate
     if (document.querySelector(`script[src="${url}"]`)) return resolve();
     script.src = url.replace(/(^\w+:|^)/, window.location.protocol);
-    script.async = true;
-    script.defer = true;
-    script.setAttribute('crossorigin', 'anonymous');
-    script.onload = () => resolve(onload);
-    script.onerror = err => reject(err);
+    script.async = props.async || false;
+    script.defer = props.defer || false;
+    script.crossOrigin = props.crossOrigin || 'anonymous';
+    script.onload = () => resolve(props.onload);
+    script.onerror = err => reject(props.onerror || err);
     document.body.appendChild(script);
   });
 }
