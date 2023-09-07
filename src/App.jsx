@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { loadMainScript } from './assets/js/main';
 import { Layout, NoMatch } from './components/Layout';
+import { Safelink } from './route/Safelink';
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -15,7 +16,7 @@ library.add(fab, faCheckSquare, faCoffee);
 
 class App extends React.Component {
   componentDidMount() {
-    //document.title = 'dfsdfsdfsd';
+    // load main script
     loadMainScript();
   }
 
@@ -26,7 +27,7 @@ class App extends React.Component {
           <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            <Route path="safelink" element={<Login />} />
+            <Route path="safelink" element={<Safelink />} />
             {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
 
             {/* Using path="*"" means "match anything", so this route
