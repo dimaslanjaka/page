@@ -1,9 +1,9 @@
 import React from 'react';
 import './Safelink.scss';
-import { delay, parse_query, parse_url, safelinkInstance } from '../utils/utils';
-import { createCookieMins, getCookie } from '../assets/js/cookie';
-import { SafelinkContents } from '../components/SafelinkContents';
-import { Adsense } from '../components/Adsense';
+import { delay, parse_query, parse_url, safelinkInstance } from '../../utils/utils';
+import { createCookieMins, getCookie } from '../../assets/js/cookie';
+import { SafelinkContents } from '../../components/SafelinkContents';
+import { Adsense } from '../../components/Adsense';
 
 export class Safelink extends React.Component {
   componentDidMount() {
