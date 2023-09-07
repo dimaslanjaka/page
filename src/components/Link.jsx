@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as OriginalLink } from 'react-router-dom';
-import { safelinkInstance } from '../assets/js/utils';
+import { safelinkInstance } from '../utils/utils';
 
 /**
  * React Safelink Converter
