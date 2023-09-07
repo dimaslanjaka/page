@@ -3,6 +3,7 @@ import './Safelink.scss';
 import { delay, parse_query, parse_url, safelinkInstance } from '../utils/utils';
 import { createCookieMins, getCookie } from '../assets/js/cookie';
 import { SafelinkContents } from '../components/SafelinkContents';
+import { Adsense } from '../components/Adsense';
 
 export class Safelink extends React.Component {
   componentDidMount() {
@@ -37,26 +38,26 @@ export class Safelink extends React.Component {
         <section id="main-content">
           <div id="ads-left">
             {/*<!-- vertikal kiri -->*/}
-            <ins
+            <Adsense
               className="adsbygoogle"
               style={{ display: 'block' }}
-              data-ad-client="ca-pub-2188063137129806"
-              data-ad-slot="2450061646"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
+              client="ca-pub-2188063137129806"
+              slot="2450061646"
+              format="auto"
+              widthResponsive="true"
+            ></Adsense>
           </div>
           <SafelinkContents />
           <div id="ads-right">
             {/*<!-- vertikal kanan -->*/}
-            <ins
+            <Adsense
               className="adsbygoogle"
               style={{ display: 'block' }}
-              data-ad-client="ca-pub-2188063137129806"
-              data-ad-slot="1136979979"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
+              client="ca-pub-2188063137129806"
+              slot="1136979979"
+              format="auto"
+              widthResponsive="true"
+            ></Adsense>
           </div>
         </section>
       </main>
