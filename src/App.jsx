@@ -4,7 +4,7 @@ import { Login } from './route/Login';
 import { Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { Layout, NoMatch } from './components/Layout';
-import { SafelinkLayout1 } from './route/Safelink/layout1';
+import { SafelinkLayout1 } from './route/safelink/layout1';
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
