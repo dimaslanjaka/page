@@ -21,19 +21,6 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
 /** localhost indicator */
 const localhost = islocalhost();
 
-if (!localhost && !banned) {
-  // skip showing ads on non-domain host
-  // skip showing ads from banned page
-  if (document.readyState !== 'loading') {
-    // fix react
-    document.addEventListener('scroll', triggerAdsense);
-  } else {
-    document.addEventListener('DOMContentLoaded', triggerAdsense);
-  }
-}
-
-console.log('adsense', { banned, localhost, state: document.readyState });
-
 /**
  * debug on localhost
  */
@@ -91,7 +78,7 @@ let currentSlot = [];
  * @returns
  */
 function triggerAdsense(_e) {
-  console.log('adsense start', !called);
+  //console.log('adsense start', !called);
   if (called) return;
   called = true;
 
@@ -235,6 +222,7 @@ function loadJS(src, onload) {
   const script = document.createElement('script');
   script.src = src;
   script.async = true;
+  script.defer = true;
   script.setAttribute('crossorigin', 'anonymous');
   script.onload = onload;
   const firstScript = document.getElementsByTagName('script').item(0);
@@ -393,4 +381,18 @@ function getCookie(name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
+}
+
+/** main */
+
+if (!localhost && !banned) {
+  // skip showing ads on non-domain host
+  // skip showing ads from banned page
+  if (document.readyState !== 'loading') {
+    // fix react
+    // document.addEventListener('scroll', triggerAdsense);
+    triggerAdsense();
+  } else {
+    document.addEventListener('DOMContentLoaded', triggerAdsense);
+  }
 }
