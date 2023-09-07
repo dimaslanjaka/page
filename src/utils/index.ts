@@ -36,3 +36,5 @@ export const randomStr = (len = 8) =>
     .substring(2, len + 2);
 
 export const md5 = (str: string) => CryptoJS.MD5(str).toString();
+
+export * from './utils';
