@@ -32,8 +32,8 @@ export function loadJS(url: string, props: LoadJSOpt) {
     script.async = props.async || false;
     script.defer = props.defer || false;
     script.crossOrigin = props.crossOrigin || 'anonymous';
-    script.onload = () => resolve(props.onload);
-    script.onerror = err => reject(props.onerror || err);
+    script.onload = () => resolve(props.onload?.call(null));
+    script.onerror = err => reject(props.onerror?.call(null) || err);
     document.body.appendChild(script);
   });
 }
