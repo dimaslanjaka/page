@@ -18,11 +18,13 @@ if (!window.adsense_option) window.adsense_option = {};
 const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
   .map(regex => regex.test(document.title))
   .some(result => result == true);
+/** localhost indicator */
+const localhost = islocalhost();
 
-if (!islocalhost() && !banned) {
+if (!localhost && !banned) {
   // skip showing ads on non-domain host
   // skip showing ads from banned page
-  if (document.readyState === 'complete') {
+  if (document.readyState !== 'loading') {
     // fix react
     document.addEventListener('scroll', triggerAdsense);
   } else {
@@ -30,11 +32,13 @@ if (!islocalhost() && !banned) {
   }
 }
 
+console.log('adsense', { banned, localhost, state: document.readyState });
+
 /**
  * debug on localhost
  */
 const adsense_log =
-  islocalhost() || window['adsense-debug'] === true
+  localhost || window['adsense-debug'] === true
     ? console.log
     : function (..._args) {
         //
@@ -97,7 +101,7 @@ function triggerAdsense(_e) {
   for (let i = 0; i < existingIns.length; i++) {
     const ins = existingIns[i];
 
-    if (islocalhost()) {
+    if (localhost) {
       adsense_log('apply test ad to existing ins', i + 1);
       ins.setAttribute('data-adtest', 'on');
     }
@@ -222,15 +226,19 @@ function triggerAdsense(_e) {
   }
 
   // create pagead
+  loadJS(`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub}`, onloadAds);
+
+  //loadJS("//imasdk.googleapis.com/js/sdkloader/ima3.js")
+}
+
+function loadJS(src, onload) {
   const script = document.createElement('script');
-  script.src = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub}`;
+  script.src = src;
   script.async = true;
   script.setAttribute('crossorigin', 'anonymous');
-  script.onload = onloadAds;
+  script.onload = onload;
   const firstScript = document.getElementsByTagName('script').item(0);
-  document.insertBefore(script, firstScript);
-
-  //"//imasdk.googleapis.com/js/sdkloader/ima3.js"
+  firstScript.insertBefore(script, null);
 }
 
 function onloadAds() {
@@ -288,7 +296,7 @@ function createIns(attributes) {
   if (!ins.classList.contains('bannerAds')) {
     ins.classList.add('bannerAds');
   }
-  if (islocalhost()) {
+  if (localhost) {
     ins.setAttribute('data-adtest', 'on');
   }
   return ins;
