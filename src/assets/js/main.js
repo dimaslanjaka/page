@@ -1,19 +1,11 @@
 import { all } from 'bluebird';
-import { copyTextToClipboard, randomStr } from '../../utils';
+import { copyTextToClipboard, loadJS, randomStr } from '../../utils';
 
 export async function loadMainScript() {
-  await import('./analystic');
+  loadJS('/page/assets/js/analystic.js');
   await import('bootstrap/dist/js/bootstrap.bundle.js');
   await initClipBoard();
-  const scripts = Array.from(document.scripts).map(script => script.src);
-  const src = '/page/assets/js/r-ads.js';
-  if (!scripts.includes(src)) {
-    // call adsense
-    const script = document.createElement('script');
-    script.defer = true;
-    script.src = src;
-    document.body.appendChild(script);
-  }
+  //loadJS('/page/assets/js/r-ads.js');
 }
 
 function initClipBoard() {
