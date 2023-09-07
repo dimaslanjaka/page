@@ -7,6 +7,7 @@ import { Layout, NoMatch } from './components/Layout';
 import { Safelink } from './route/Safelink';
 import { all } from 'bluebird';
 import { copyTextToClipboard, loadJS, randomStr } from './utils';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -19,7 +20,8 @@ library.add(fab, faCheckSquare, faCoffee);
 class App extends React.Component {
   componentDidMount() {
     // load main script
-    loadMainScript();
+    loadJS('/page/assets/js/analystic.js');
+    initClipBoard();
   }
 
   render() {
@@ -44,13 +46,6 @@ class App extends React.Component {
 }
 
 export default App;
-
-export async function loadMainScript() {
-  loadJS('/page/assets/js/analystic.js');
-  await import('bootstrap/dist/js/bootstrap.bundle.js');
-  await initClipBoard();
-  //loadJS('/page/assets/js/r-ads.js');
-}
 
 export function initClipBoard() {
   return all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
