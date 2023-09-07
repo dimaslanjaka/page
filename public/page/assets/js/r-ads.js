@@ -1,6 +1,3 @@
-//import * as cookies from './cookie.js';
-const cookies = require('../../../../src/assets/js/cookie');
-
 // 5 6 ^ %
 
 /**
@@ -110,7 +107,7 @@ function triggerAdsense(_e) {
   // cookie key
   const ck = 'currentAds';
   // select previous ads id from cookie
-  const ca = cookies.getCookie(ck) || [];
+  const ca = getCookie(ck) || [];
   /**
    * @type {typeof allAds[number]}
    */
@@ -123,7 +120,7 @@ function triggerAdsense(_e) {
 
     if (location.pathname != '/') {
       adsense_log('caching pub', currentSlot.pub);
-      cookies.setCookie(
+      setCookie(
         ck,
         currentSlot.pub,
         1,
@@ -346,4 +343,46 @@ function islocalhost() {
 
 if (typeof module === 'object' && 'exports' in module) {
   module.exports = { islocalhost, triggerAdsense };
+}
+
+/**
+ * Create detailed cookie
+ * @param name
+ * @param value
+ * @param expires expires in day
+ * @param path set on spesific path
+ * @param domain set on spesific domain
+ * @param secure set secured cookie (https only)
+ */
+function setCookie(name, value, expires, path, domain, secure) {
+  let exp = '';
+  if (expires) {
+    const d = new Date();
+    d.setTime(d.getTime() + parseInt(`${expires}`) * 24 * 60 * 60 * 1000); // days
+    exp = '; expires=' + d.toUTCString(); // toGMTString | toUTCString
+  }
+  if (!path) {
+    path = '/';
+  }
+  const cookie =
+    name +
+    '=' +
+    encodeURIComponent(value) +
+    exp +
+    '; path=' +
+    path +
+    (domain ? '; domain=' + domain : '') +
+    (secure ? '; secure' : '');
+  document.cookie = cookie;
+}
+
+function getCookie(name) {
+  const nameEQ = name + '=';
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
 }
