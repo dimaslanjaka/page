@@ -87,3 +87,8 @@ footer {
 		text-align: center;
 	}
 }
+
+/* hide empty adsense */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+	display: none !important;
+}
