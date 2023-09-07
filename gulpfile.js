@@ -22,6 +22,11 @@ gulp.task('page:copy', async function () {
       src: path.join(__dirname, 'dist'),
       dest: path.join(__dirname, 'page'),
     },
+    // copy static files
+    {
+      src: path.join(__dirname, 'public/page'),
+      dest: path.join(__dirname, 'page'),
+    },
   ];
 
   // delete bundled react folder
