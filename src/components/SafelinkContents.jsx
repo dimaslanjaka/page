@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from './Link';
+import { Adsense } from './Adsense';
 
 export function SafelinkContents() {
   return (
@@ -8,6 +9,14 @@ export function SafelinkContents() {
       <small>Verify Links | Insurance Loans Site Information Health</small>
 
       <blockquote className="text-center">Scrolldown to view your link</blockquote>
+      <Adsense
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        client="ca-pub-2188063137129806"
+        slot="2667720583"
+        format="auto"
+        widthResponsive="true"
+      ></Adsense>
 
       <p>
         As the name suggests, core policies have a "master" or "supervisor" responsible for managing the policy.
