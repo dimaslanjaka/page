@@ -198,7 +198,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.*', '.ts', '.js', '.jsx'],
+    extensions: ['.*', '.ts', '.js', '.jsx', '.tsx'],
   },
   plugins: [
     // This makes it possible for webpack to safely use env vars
