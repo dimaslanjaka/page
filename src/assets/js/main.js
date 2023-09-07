@@ -5,11 +5,15 @@ export async function loadMainScript() {
   await import('./analystic');
   await import('bootstrap/dist/js/bootstrap.bundle.js');
   await initClipBoard();
-  // call adsense
-  const script = document.createElement('script');
-  script.defer = true;
-  script.src = '/page/assets/js/r-ads.js';
-  document.body.appendChild(script);
+  const scripts = Array.from(document.scripts).map(script => script.src);
+  const src = '/page/assets/js/r-ads.js';
+  if (!scripts.includes(src)) {
+    // call adsense
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = src;
+    document.body.appendChild(script);
+  }
 }
 
 function initClipBoard() {
