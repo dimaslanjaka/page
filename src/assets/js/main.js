@@ -4,8 +4,12 @@ import { copyTextToClipboard, randomStr } from '../../utils';
 export async function loadMainScript() {
   await import('./analystic');
   await import('bootstrap/dist/js/bootstrap.bundle.js');
-  await import('./r-ads');
   await initClipBoard();
+  // call adsense
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = '/page/assets/js/r-ads.js';
+  document.body.appendChild(script);
 }
 
 function initClipBoard() {

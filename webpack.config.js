@@ -218,7 +218,7 @@ module.exports = {
    * @type {import('webpack-dev-server').Configuration}
    */
   devServer: {
-    //static: path.resolve(__dirname, './public'),
+    static: './public',
     historyApiFallback: true, // enable react-dom-router support
     hot: true, // hot reloading
     port: 4000, // dev server port

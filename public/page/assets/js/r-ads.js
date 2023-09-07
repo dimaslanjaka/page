@@ -1,5 +1,5 @@
 //import * as cookies from './cookie.js';
-const cookies = require('./cookie');
+const cookies = require('../../../../src/assets/js/cookie');
 
 // 5 6 ^ %
 
@@ -7,13 +7,13 @@ const cookies = require('./cookie');
  * ADSENSE FULLY AUTOMATIC
  */
 
-/*document.addEventListener('DOMContentLoaded', function () {
-  if (!islocalhost()) {
-    window.addEventListener('scroll', triggerAdsense);
-  } else {
-    triggerAdsense();
-  }
-});*/
+/**
+ * Prevent Duplicate
+ */
+let called = false;
+
+/** Option */
+if (!window.adsense_option) window.adsense_option = {};
 
 /**
  * do not show ads to these page title
@@ -25,16 +25,13 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
 if (!islocalhost() && !banned) {
   // skip showing ads on non-domain host
   // skip showing ads from banned page
-  document.addEventListener('DOMContentLoaded', triggerAdsense);
+  if (document.readyState === 'complete') {
+    // fix react
+    document.addEventListener('scroll', triggerAdsense);
+  } else {
+    document.addEventListener('DOMContentLoaded', triggerAdsense);
+  }
 }
-
-/**
- * Prevent Duplicate
- */
-let called = false;
-
-/** Option */
-if (!window.adsense_option) window.adsense_option = {};
 
 /**
  * debug on localhost
@@ -93,6 +90,7 @@ let currentSlot = [];
  * @returns
  */
 function triggerAdsense(_e) {
+  console.log('adsense start', !called);
   if (called) return;
   called = true;
 
@@ -232,7 +230,10 @@ function triggerAdsense(_e) {
   script.async = true;
   script.setAttribute('crossorigin', 'anonymous');
   script.onload = onloadAds;
-  document.head.appendChild(script);
+  const firstScript = document.getElementsByTagName('script').item(0);
+  document.insertBefore(script, firstScript);
+
+  //"//imasdk.googleapis.com/js/sdkloader/ima3.js"
 }
 
 function onloadAds() {

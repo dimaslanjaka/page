@@ -2753,7 +2753,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/crypto-js@npm:^4.1.1":
+"@types/crypto-js@npm:^4.1.1, @types/crypto-js@npm:^4.1.2":
   version: 4.1.2
   resolution: "@types/crypto-js@npm:4.1.2"
   checksum: 9a39c6627186f53a1885647889ee376f5858604316023ff2c8226869ad51c9c57ff49bd730deaa751f729fbf611296896e1392862752c5ae9fadf61c64ef3fd2
@@ -2884,7 +2884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/gulp@npm:^4.0.13":
+"@types/gulp@npm:^4":
   version: 4.0.13
   resolution: "@types/gulp@npm:4.0.13"
   dependencies:
@@ -4237,16 +4237,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios-cache-interceptor@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "axios-cache-interceptor@npm:1.2.0"
+"axios-cache-interceptor@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "axios-cache-interceptor@npm:1.3.0"
   dependencies:
     cache-parser: ^1.2.4
     fast-defer: ^1.1.7
-    object-code: ^1.2.4
+    object-code: ^1.3.0
   peerDependencies:
     axios: ^1
-  checksum: 673d5feb86f35f1d4049e176d9ee16f8cd35fe0caaf4332c5c26f2f8f05b4ba16a4d46ed47eabdd772ab2d169360fcd5a257fa9637ccf4d4cb4b7d3101d6e073
+  checksum: 000138670d97a9bcddf996a4c1b87f186712c9bd4a1ac2ef7a0d49ee1965110923343226596e7419f153945f46ab1aece6fef64aca53836312f3949f4a674aca
   languageName: node
   linkType: hard
 
@@ -11426,7 +11426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-code@npm:^1.2.4":
+"object-code@npm:^1.3.0":
   version: 1.3.0
   resolution: "object-code@npm:1.3.0"
   checksum: bc5e3df85ac54785b3d1d9b8a9b2e168eb5f69e02be3c958fc05aebaa85ec659c55903852bf15ebf44e98053212f88eb7d3a9e28a50f10c4d60d820f80aa8d64
@@ -12209,7 +12209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.0.3":
+"prettier@npm:3, prettier@npm:^3.0.3":
   version: 3.0.3
   resolution: "prettier@npm:3.0.3"
   bin:
@@ -13306,14 +13306,14 @@ __metadata:
     "@tsconfig/node16": ^16.1.1
     "@types/bluebird": ^3.5.38
     "@types/browser-sync": ^2.27.0
-    "@types/crypto-js": ^4.1.1
+    "@types/crypto-js": ^4.1.2
     "@types/ejs": ^3.1.2
-    "@types/gulp": ^4.0.13
+    "@types/gulp": ^4
     "@types/html-minifier-terser": ^7.0.0
     "@types/jquery": ^3.5.18
     "@types/markdown-it": ^13.0.1
     "@types/markdown-it-attrs": ^4.1.0
-    "@types/node": ^20.5.9
+    "@types/node": ^14
     "@types/prettier": ^2.7.3
     "@types/toastr": ^2.1.40
     "@types/undertaker": ^1.2.9
@@ -13322,7 +13322,7 @@ __metadata:
     ansi-colors: ^4.1.3
     article-parser: ^7.2.5
     axios: ^1.5.0
-    axios-cache-interceptor: ^1.2.0
+    axios-cache-interceptor: ^1.3.0
     bluebird: ^3.7.2
     bootstrap: ^5.3.1
     browser-sync: ^2.29.3
@@ -13340,6 +13340,7 @@ __metadata:
     highlight.js: 11.8.0
     hpagent: ^1.2.0
     html-minifier-terser: ^7.2.0
+    is-plain-object: ^5.0.0
     jquery: ^3.7.1
     jsdom: 21
     jsdom-global: ^3.0.2
@@ -13351,22 +13352,23 @@ __metadata:
     markdown-it-mark: ^3.0.1
     markdown-it-sub: ^1.0.0
     markdown-it-sup: ^1.0.0
+    minimatch: ^9.0.3
     moment: ^2.29.4
     moment-timezone: ^0.5.43
     nodemon: ^3.0.1
     npm-check-updates: ^16.13.2
     path-browserify: ^1.0.1
-    prettier: ^3.0.3
+    prettier: 3
     resolve-typescript-plugin: ^2.0.1
     rimraf: ^5.0.1
+    sbg-utility: "*"
     semver: ^7.5.4
     terser-webpack-plugin: ^5.3.9
     toastr: ^2.1.4
     ts-loader: ^9.4.4
     ts-node: ^10.9.1
     typedoc: 0.25.0
-    typedoc-plugin-missing-exports: ^2.1.0
-    typescript: 4.9.5
+    typescript: 5.0.4
     undertaker: ^1.3.0
     upath: ^2.0.1
     webpack: ^5.88.2
@@ -15015,15 +15017,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-missing-exports@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "typedoc-plugin-missing-exports@npm:2.1.0"
-  peerDependencies:
-    typedoc: 0.24.x || 0.25.x
-  checksum: cb9b324c28a68a4ba621f4e3c15ce3b43f75826bdcb09a073aa51c770bbca47b687eb1c0462ba22a09a316573e29c4f9c4f75763b51f8354cce42989dfa68231
-  languageName: node
-  linkType: hard
-
 "typedoc@npm:0.25.0":
   version: 0.25.0
   resolution: "typedoc@npm:0.25.0"
@@ -15050,6 +15043,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:5.0.4":
+  version: 5.0.4
+  resolution: "typescript@npm:5.0.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 82b94da3f4604a8946da585f7d6c3025fff8410779e5bde2855ab130d05e4fd08938b9e593b6ebed165bda6ad9292b230984f10952cf82f0a0ca07bbeaa08172
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
@@ -15057,6 +15060,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@5.0.4#~builtin<compat/typescript>":
+  version: 5.0.4
+  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: d26b6ba97b6d163c55dbdffd9bbb4c211667ebebc743accfeb2c8c0154aace7afd097b51165a72a5bad2cf65a4612259344ff60f8e642362aa1695c760d303ac
   languageName: node
   linkType: hard
 
