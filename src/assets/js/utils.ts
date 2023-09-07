@@ -17,13 +17,12 @@ export function loadJS(url: string, onload?: GlobalEventHandlers['onload']) {
     // skip duplicate
     if (document.querySelector(`script[src="${corsUrl}"]`)) return resolve();
     script.src = corsUrl.replace(/(^\w+:|^)/, window.location.protocol);
-    //console.log({ src: script.src });
     script.async = true;
     script.defer = true;
     script.setAttribute('crossorigin', 'anonymous');
     script.onload = () => resolve(onload);
     script.onerror = err => reject(err);
-    document.head.appendChild(script);
+    document.body.appendChild(script);
   });
 }
 
