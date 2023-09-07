@@ -105,3 +105,13 @@ export function islocalhost() {
   if (location.port.length > 0) return true;
   return false;
 }
+
+/**
+ * delay/sleep in milliseconds
+ * @param millis
+ * @returns
+ */
+export const delay = (millis: number) =>
+  new Bluebird(resolve => {
+    setTimeout(_ => resolve(), millis);
+  });
