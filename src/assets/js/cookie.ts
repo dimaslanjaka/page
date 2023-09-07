@@ -51,7 +51,7 @@ export function createCookieMins(name: string, value: string, minutes: number, p
   });
 }
 
-export function getCookie(name) {
+export function getCookie(name: string) {
   const nameEQ = name + '=';
   const ca = document.cookie.split(';');
   for (let i = 0; i < ca.length; i++) {
