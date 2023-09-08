@@ -37,7 +37,7 @@ export function Layout() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/page/login" className="nav-link">
+                <Link to="/page/google/login" className="nav-link">
                   Login
                 </Link>
               </li>
