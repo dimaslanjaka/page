@@ -1,3 +1,8 @@
 /build
 **/tmp/
 *.min.{js,css,htm,html}
+**/node_modules
+**/dist
+**/tmp
+**/temp
+**/.cache
