@@ -2,3 +2,7 @@
 	path = packages/safelinkify
 	url = https://github.com/dimaslanjaka/safelink.git
 	branch = monorepo
+[submodule "packages/binary-collections"]
+	path = packages/binary-collections
+	url = https://github.com/dimaslanjaka/bin.git
+	branch = master
