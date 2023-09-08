@@ -30,8 +30,10 @@ class App extends React.Component {
         <Routes>
           <Route path="/page" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route path="google/login" element={<Login />} />
+            <Route path="google/login.html" element={<Login />} />
             <Route path="safelink" element={<SafelinkLayout1 />} />
+            <Route path="safelink.html" element={<SafelinkLayout1 />} />
             {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
 
             {/* Using path="*"" means "match anything", so this route

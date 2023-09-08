@@ -28,6 +28,16 @@ const routes = [
     filename: '404.html',
     template: path.resolve(__dirname, 'src', 'main.html'),
   },
+  {
+    title: 'Outbound page - WMI',
+    filename: 'page/safelink.html',
+    template: path.resolve(__dirname, 'src', 'main.html'),
+  },
+  {
+    title: 'Login page - WMI',
+    filename: 'page/google/login.html',
+    template: path.resolve(__dirname, 'src', 'main.html'),
+  },
 ];
 
 function createHtml() {
