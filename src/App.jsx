@@ -8,7 +8,7 @@ import { SafelinkLayout1 } from './route/safelink/layout1';
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
-import '../public/page/assets/js/analystic';
+//import '../public/page/assets/js/analystic';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
