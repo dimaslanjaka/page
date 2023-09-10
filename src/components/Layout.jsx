@@ -58,16 +58,16 @@ export function Layout() {
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
-                      Another action
+                    <Link className="dropdown-item" href="/page/moment-timezone.html">
+                      Moment Timezone Playground
                     </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="#">
-                      Something else here
+                    <Link className="dropdown-item" href="/page/bot-detect.html">
+                      Bot Detection
                     </Link>
                   </li>
                 </ul>
@@ -88,7 +88,7 @@ export function Layout() {
         </div>
       </nav>
 
-      <div style={{ marginTop: '4em' }}>
+      <div style={{ marginTop: '4em' }} id="react-content-wrapper">
         {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
