@@ -60,7 +60,10 @@ const allAds = [
         'data-ad-layout-key': '-gw-3+1f-3d+2z',
         'data-ad-slot': '6979059162',
       },
-    ],
+    ].filter(ads => {
+      // filter the ad slot not exist in dom tree
+      return document.querySelectorAll(`[data-ad-slot="${ads['data-ad-slot']}"]`).length === 0;
+    }),
   },
 ].sort(function () {
   // shuffle
