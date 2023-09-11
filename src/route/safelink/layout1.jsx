@@ -11,7 +11,6 @@ export class SafelinkLayout1 extends React.Component {
     const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
     const safelinkURL = 'https://www.webmanajemen.com/page/safelink.html';
     const origin = queryURL ? safelinkURL + '?url=' + queryURL : safelinkURL;
-    console.log(origin);
     // redirect when in translate google
     if (location.host == 'translate.googleusercontent.com' || location.host.endsWith('translate.goog')) {
       location.href = origin;
