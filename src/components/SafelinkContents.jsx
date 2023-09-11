@@ -294,12 +294,6 @@ export function SafelinkContents() {
           </tbody>
         </table>
       </div>
-
-      <footer className="bg-light text-center text-lg-start">
-        <p>
-          Copyright 2022 &copy; <Link href="https://webmanajemen.com">WMI</Link>
-        </p>
-      </footer>
     </div>
   );
 }
