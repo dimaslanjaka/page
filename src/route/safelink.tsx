@@ -1,7 +1,7 @@
 import React from 'react';
-import { delay, parse_query, parse_url, safelinkInstance } from '../utils';
-import { SafelinkLayout1 } from './safelink/layout1';
 import { createCookieMins, getCookie } from '../assets/js/cookie';
+import { delay, parse_query, parse_url, safelinkInstance } from '../utils';
+import { SafelinkLayout2 } from './safelink/layout2';
 
 export class Safelink extends React.Component {
   componentDidMount() {
@@ -30,7 +30,7 @@ export class Safelink extends React.Component {
   }
 
   render() {
-    return <SafelinkLayout1 />;
+    return <SafelinkLayout2 />;
   }
 }
 
@@ -73,19 +73,21 @@ function refreshWithoutParam() {
   location.href = location.pathname;
 }
 
-async function replaceGoButton(url) {
+async function replaceGoButton(url: string) {
   const go = document.querySelector('#go');
-  go.setAttribute('disabled', 'true');
-  go.textContent = 'Please Wait';
-  await delay(10000);
-  const a = document.createElement('a');
-  a.href = url;
-  a.rel = 'nofollow noopener noreferer';
-  a.target = '_blank';
-  a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
-  const parse_redirect = parse_url(url);
-  a.textContent = 'goto ' + parse_redirect.host;
-  replaceWith(a, go);
+  if (go) {
+    go.setAttribute('disabled', 'true');
+    go.textContent = 'Please Wait';
+    await delay(10000);
+    const a = document.createElement('a');
+    a.href = url;
+    a.rel = 'nofollow noopener noreferer';
+    a.target = '_blank';
+    a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
+    const parse_redirect = parse_url(url);
+    a.textContent = 'goto ' + parse_redirect.host;
+    replaceWith(a, go);
+  }
 }
 
 /**
