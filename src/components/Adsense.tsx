@@ -120,10 +120,10 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     if (!window.adsense_option) window.adsense_option = {};
 
     const allIns = Array.from(document.querySelectorAll('ins')).filter(el => el.getAttribute('data-ad-slot') !== null);
-    console.log(
-      'adsense onload',
-      allIns.map(el => el.getAttribute('data-ad-slot')),
-    );
+    // console.log(
+    //   'adsense onload',
+    //   allIns.map(el => el.getAttribute('data-ad-slot')),
+    // );
 
     for (let i = 0; i < allIns.length; i++) {
       // log('apply banner', i + 1);
