@@ -158,3 +158,15 @@ export function insertAfter(newNode: HTMLElement, referenceNode: HTMLElement | u
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
 }
+
+/**
+ * shuffle array
+ * @param arr
+ * @returns
+ */
+export function array_shuffle<T extends any[]>(arr: T) {
+  return arr.sort(function () {
+    // shuffle
+    return 0.5 - Math.random();
+  });
+}
