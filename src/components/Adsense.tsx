@@ -119,7 +119,7 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     if (!window.adsbygoogle) window.adsbygoogle = [];
     if (!window.adsense_option) window.adsense_option = {};
 
-    const allIns = Array.from(document.querySelectorAll('ins'));
+    const allIns = Array.from(document.querySelectorAll('ins')).filter(el => el.getAttribute('data-ad-slot') !== null);
     console.log(
       'adsense onload',
       allIns.map(el => el.getAttribute('data-ad-slot')),
@@ -156,7 +156,7 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
         }
       } else if (ins.innerHTML.trim().length === 0) {
         console.log('push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
-        //window.adsbygoogle.push({});
+        window.adsbygoogle.push({});
       }
     }
   }
