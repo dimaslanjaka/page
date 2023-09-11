@@ -132,7 +132,26 @@ function triggerAdsense(_e) {
   if (fixedPlacement.length > 0) {
     for (let i = 0; i < fixedPlacement.length; i++) {
       const place = fixedPlacement[i];
-      const attr = currentSlot.ads.shift();
+      let attr = currentSlot.ads.shift();
+      // ad slot empty, break
+      if (!attr) break;
+      let doneFill = false;
+      let hasExisting = document.querySelector(`[data-ad-slot="${attr['data-ad-slot']}"]`);
+      if (hasExisting) {
+        while (!doneFill) {
+          // skip slot empty
+          if (currentSlot.ads.length === 0) {
+            doneFill = true;
+            break;
+          }
+          attr = currentSlot.ads.shift();
+          hasExisting = document.querySelector(`[data-ad-slot="${attr['data-ad-slot']}"]`);
+          if (!hasExisting) {
+            doneFill = true;
+            break;
+          }
+        }
+      }
       if (attr) {
         attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub.replace('ca-pub-', '');
         const ins = createIns(attr);
@@ -267,7 +286,7 @@ function onloadAds() {
     ins.style.backgroundRepeat = 'no-repeat';
     // log('parent width banner', i + 0, ins.parentElement.offsetWidth);
 
-    const slot = ins.getAttribute('data-ad-client').trim();
+    const slot = ins.getAttribute('data-ad-slot').trim();
     if (ins.parentElement.offsetWidth < 250) {
       // remove banner when parent width is 0 or display: none
       adsense_log(i + 1, 'remove', slot);
@@ -276,7 +295,9 @@ function onloadAds() {
       adsense_log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
       // (adsbygoogle = window.adsbygoogle || []).push({});
       if (!window.adsbygoogle) window.adsbygoogle = [];
-      window.adsbygoogle.push({});
+      window.adsbygoogle.push({
+        params: { google_ad_slot: slot },
+      });
     }
   }
 }
@@ -350,7 +371,9 @@ function replaceWith(newElement, oldElement) {
  * @returns
  */
 function islocalhost() {
-  return /(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?/gim.test(window.location.host);
+  return /(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?|adsense.webmanajemen.com/gim.test(
+    window.location.host,
+  );
 }
 
 if (typeof module === 'object' && 'exports' in module) {
