@@ -23,6 +23,10 @@ interface AdsenseProperties {
    * @link https://support.google.com/adsense/answer/1354736?hl=en#zippy=%2Csetting-custom-channels-dynamically
    */
   channel?: string;
+  /** custom ad width in pixel */
+  width?: number;
+  /** custom ad height in pixel */
+  height?: number;
 }
 
 interface AdsenseState extends AdsenseProperties {
@@ -82,6 +86,12 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     if (this.state.channel) {
       // push custom channel
       params.google_ad_channel = this.state.channel;
+    }
+    if (this.state.width) {
+      params.google_ad_width = this.state.width;
+    }
+    if (this.state.height) {
+      params.google_ad_height = this.state.height;
     }
     window.adsbygoogle.push({ params });
   }
