@@ -85,10 +85,12 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
       )[0];
     }
 
-    if (pub)
+    if (pub) {
+      pub = pub.replace('ca-pub-', '');
       loadJS(`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${pub}`, {
         onload: this.onloadAds.bind(this),
       });
+    }
   }
 
   componentDidUpdate(prevProps: Readonly<AdsenseProperties>, prevState: Readonly<AdsenseState>, snapshot?: any): void {
@@ -153,8 +155,8 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
           ins.remove();
         }
       } else if (ins.innerHTML.trim().length === 0) {
-        console.log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
-        window.adsbygoogle.push({});
+        console.log('push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
+        //window.adsbygoogle.push({});
       }
     }
   }
