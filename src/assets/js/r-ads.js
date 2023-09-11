@@ -1,5 +1,6 @@
 // 5 6 ^ %
 
+const { islocalhost, loadJS, replaceWith, insertAfter } = require('../../utils');
 const { getCookie, setCookie } = require('./cookie');
 
 /**
@@ -22,16 +23,6 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
   .some(result => result == true);
 /** localhost indicator */
 const localhost = islocalhost();
-
-/**
- * debug on localhost
- */
-const adsense_log =
-  localhost || window.adsense_option.debug || window['adsense-debug'] === true || 'port' in location
-    ? console.log
-    : function (..._args) {
-        //
-      };
 
 const allAds = [
   {
@@ -83,18 +74,18 @@ let currentSlot = [];
  * @returns
  */
 function triggerAdsense(_e) {
-  //console.log('adsense start', !called);
+  console.log('adsense start', !called);
   if (called) return;
   called = true;
 
   const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
-  adsense_log('existing ins', existingIns.length);
+  console.log('existing ins', existingIns.length);
 
   for (let i = 0; i < existingIns.length; i++) {
     const ins = existingIns[i];
 
     if (localhost) {
-      adsense_log('apply test ad to existing ins', i + 1);
+      console.log('apply test ad to existing ins', i + 1);
       ins.setAttribute('data-adtest', 'on');
     }
   }
@@ -110,12 +101,12 @@ function triggerAdsense(_e) {
   currentSlot = allAds.find(item => item.pub === ca);
 
   if (ca.length > 0 && typeof currentSlot === 'object') {
-    adsense_log('cached pub', ca);
+    console.log('cached pub', ca);
   } else {
     currentSlot = allAds[0];
 
     if (location.pathname != '/') {
-      adsense_log('caching pub', currentSlot.pub);
+      console.log('caching pub', currentSlot.pub);
       setCookie(
         ck,
         currentSlot.pub,
@@ -127,7 +118,7 @@ function triggerAdsense(_e) {
     }
   }
 
-  adsense_log('total ads banner', currentSlot.ads.length);
+  console.log('total ads banner', currentSlot.ads.length);
 
   // find element *[adsense="fill"] for render first
   const fixedPlacement = Array.from(document.querySelectorAll('[adsense="fill"]'));
@@ -157,7 +148,7 @@ function triggerAdsense(_e) {
       if (attr) {
         attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub.replace('ca-pub-', '');
         const ins = createIns(attr);
-        adsense_log('insert ads to adsense="fill"', i + 1);
+        console.log('insert ads to adsense="fill"', i + 1);
         replaceWith(ins, place);
       }
     }
@@ -197,7 +188,7 @@ function triggerAdsense(_e) {
       return 0.5 - Math.random();
     });
 
-  adsense_log('total targeted ads places', adsPlaces.length);
+  console.log('total targeted ads places', adsPlaces.length);
 
   if (adsPlaces.length > 0 && currentSlot.ads.length > 0) {
     for (let i = 0; i < currentSlot.ads.length; i++) {
@@ -219,7 +210,7 @@ function triggerAdsense(_e) {
         }
 
         if (nextOf) {
-          adsense_log(i + 1, 'add banner', attr['data-ad-slot']);
+          console.log(i + 1, 'add banner', attr['data-ad-slot']);
           const prevEl = nextOf.previousElementSibling || {};
           const nextEl = nextOf.nextElementSibling || {};
           if (prevEl.tagName === 'INS' || nextEl.tagName === 'INS' || nextOf.tagName == 'INS') {
@@ -252,20 +243,9 @@ function triggerAdsense(_e) {
   //loadJS("//imasdk.googleapis.com/js/sdkloader/ima3.js")
 }
 
-function loadJS(src, onload) {
-  const script = document.createElement('script');
-  script.src = src;
-  script.async = true;
-  script.defer = true;
-  script.setAttribute('crossorigin', 'anonymous');
-  script.onload = onload;
-  const firstScript = document.getElementsByTagName('script').item(0);
-  firstScript.insertBefore(script, null);
-}
-
 function onloadAds() {
   const allIns = Array.from(document.querySelectorAll('ins'));
-  adsense_log('total ins', allIns.length);
+  console.log('total ins', allIns.length);
 
   for (let i = 0; i < allIns.length; i++) {
     // log('apply banner', i + 1);
@@ -275,7 +255,7 @@ function onloadAds() {
     } else if (!ins.getAttribute('data-ad-client')) {
       // ins.adsbygoogle-noablate is default adsense hidden element
       if (!ins.classList.contains('adsbygoogle-noablate')) {
-        adsense_log('no data-ad-client', ins);
+        console.log('no data-ad-client', ins);
       }
       continue;
     }
@@ -291,10 +271,12 @@ function onloadAds() {
     const slot = ins.getAttribute('data-ad-slot').trim();
     if (ins.parentElement.offsetWidth < 250) {
       // remove banner when parent width is 0 or display: none
-      adsense_log(i + 1, 'remove', slot);
-      if (window.adsense_option.remove) ins.remove();
+      if (window.adsense_option.remove) {
+        console.log(i + 1, 'remove', slot);
+        ins.remove();
+      }
     } else if (ins.innerHTML.trim().length === 0) {
-      adsense_log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
+      console.log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
       // (adsbygoogle = window.adsbygoogle || []).push({});
       if (!window.adsbygoogle) window.adsbygoogle = [];
       window.adsbygoogle.push({
@@ -330,17 +312,6 @@ function createIns(attributes) {
 }
 
 /**
- * insert next other
- * @param {HTMLElement} newNode
- * @param {HTMLElement|undefined} referenceNode insert after this element
- */
-function insertAfter(newNode, referenceNode) {
-  if (referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
-}
-
-/**
  * get all ads places
  * @param {Element|Document} from
  */
@@ -352,39 +323,13 @@ function getAllPlaces(from) {
     .filter(el => el !== null);
 }
 
-/**
- * Replace elements with new
- * @param {HTMLElement} newElement
- * @param {HTMLElement} oldElement
- */
-function replaceWith(newElement, oldElement) {
-  if (!oldElement.parentNode) {
-    adsense_log(oldElement, 'parent null');
-    let d = document.createElement('div');
-    d.appendChild(oldElement);
-  } else {
-    //log(oldElement.parentNode.tagName);
-    oldElement.parentNode.replaceChild(newElement, oldElement);
-  }
-}
-
-/**
- * check current script running on localhost
- * @returns
- */
-function islocalhost() {
-  return /(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?|adsense.webmanajemen.com/gim.test(
-    window.location.host,
-  );
-}
-
 if (typeof module === 'object' && 'exports' in module) {
-  module.exports = { islocalhost, triggerAdsense };
+  module.exports = { triggerAdsense };
 }
 
 /** main */
 
-if (!localhost && !banned) {
+if (!banned) {
   // skip showing ads on non-domain host
   // skip showing ads from banned page
   if (document.readyState !== 'loading') {
@@ -395,3 +340,5 @@ if (!localhost && !banned) {
     document.addEventListener('DOMContentLoaded', triggerAdsense);
   }
 }
+
+console.log('adsense', { localhost, banned, state: document.readyState });

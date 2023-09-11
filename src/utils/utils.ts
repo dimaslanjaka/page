@@ -117,6 +117,8 @@ export function islocalhost() {
   if (location.hostname.startsWith('192.168.')) return true;
   // port defined
   if (location.port.length > 0) return true;
+  // pattern regex
+  if (/(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?/gim.test(window.location.host)) return true;
   return false;
 }
 
@@ -129,3 +131,30 @@ export const delay = (millis: number) =>
   new Bluebird(resolve => {
     setTimeout(_ => resolve(), millis);
   });
+
+/**
+ * Replace elements with new
+ * @param newElement
+ * @param oldElement
+ */
+export function replaceWith(newElement: HTMLElement, oldElement: HTMLElement) {
+  if (!oldElement.parentNode) {
+    console.log(oldElement, 'parent null');
+    const d = document.createElement('div');
+    d.appendChild(oldElement);
+  } else {
+    //log(oldElement.parentNode.tagName);
+    oldElement.parentNode.replaceChild(newElement, oldElement);
+  }
+}
+
+/**
+ * insert next other
+ * @param newNode
+ * @param referenceNode insert after this element
+ */
+export function insertAfter(newNode: HTMLElement, referenceNode: HTMLElement | undefined) {
+  if (referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+}
