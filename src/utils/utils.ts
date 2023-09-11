@@ -11,7 +11,7 @@ export interface LoadJSOpt {
 }
 
 /**
- * load js
+ * load js with prevent duplicated ability
  * @param url
  * @param onload
  * @example
@@ -27,7 +27,11 @@ export function loadJS(url: string, props: LoadJSOpt) {
     // proxying when enabled
     if (url.startsWith('http') && props.proxy) url = 'https://crossorigin.me/' + url;
     // skip duplicate
-    if (document.querySelector(`script[src="${url}"]`)) return resolve();
+    const existingSources = Array.from(document.scripts)
+      .map(el => stripProtocol(el.src))
+      .filter(source => source === stripProtocol(url));
+    if (existingSources.length > 0) return resolve(props.onload?.call(null));
+    if (document.querySelector(`script[src="${url}"]`)) return resolve(props.onload?.call(null));
     script.src = url.replace(/(^\w+:|^)/, window.location.protocol);
     script.async = props.async || false;
     script.defer = props.defer || false;
@@ -37,16 +41,6 @@ export function loadJS(url: string, props: LoadJSOpt) {
     document.body.appendChild(script);
   });
 }
-
-export const loadScript = (src: string) =>
-  new Bluebird((resolve, reject) => {
-    if (document.querySelector(`script[src="${src}"]`)) return resolve(null);
-    const script = document.createElement('script');
-    script.src = src;
-    script.onload = () => resolve(null);
-    script.onerror = err => reject(err);
-    document.body.appendChild(script);
-  });
 
 export const safelinkInstance = new safelink({
   // exclude patterns (dont anonymize these patterns)
@@ -78,11 +72,20 @@ export function parse_url(href: string) {
 }
 
 /**
+ * remove protocol (https?) from url
+ * @param url
+ * @returns
+ */
+export function stripProtocol(url: string) {
+  return url.replace(/(^\w+:|^)\/\//, '');
+}
+
+/**
  * Parse Query URL and Hash
  * @param string query
  * @param string search query (?url=xxxx)
  */
-export function parse_query(query, search) {
+export function parse_query(query: string | Record<string, any>, search: string) {
   if (!search) {
     search = window.location.search;
   } else if (/^https?:\/\//i.test(search)) {
@@ -90,17 +93,17 @@ export function parse_query(query, search) {
   }
   let urlParams = new URLSearchParams(search);
   const urlp = Object.fromEntries(urlParams);
-  const hash = window.location.hash.substr(1);
+  const hash = window.location.hash.substring(1);
   urlParams = new URLSearchParams(hash);
   const urlh = Object.fromEntries(urlParams);
   const urlO = Object.assign(urlh, urlp);
   if (typeof query == 'function') {
     return urlO;
   }
-  if (query && urlO[query]) {
+  if (typeof query === 'string' && urlO[query]) {
     return urlO[query];
   }
-  return false;
+  return undefined;
 }
 
 /**
