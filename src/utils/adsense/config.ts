@@ -1,5 +1,12 @@
 import { array_shuffle } from '../utils';
 
+// initialize window.adsense_option
+if (typeof window !== 'undefined') {
+  if (!window.adsense_option) {
+    window.adsense_option = {};
+  }
+}
+
 /**
  * shuffled all ads
  */
@@ -32,7 +39,59 @@ export const allAds = array_shuffle([
         'data-ad-layout-key': '-gw-3+1f-3d+2z',
         'data-ad-slot': '6979059162',
       },
-    ].filter(ads => {
+    ],
+  },
+]);
+
+export interface ParamsAdsByGoogle {
+  /** data-ad-slot */
+  slot?: string;
+  /** data-ad-client */
+  client?: string;
+  /** custom channel ID
+   * @link https://support.google.com/adsense/answer/1354736?hl=en#zippy=%2Csetting-custom-channels-dynamically
+   */
+  channel?: string;
+  /** custom ad width in pixel */
+  width?: number;
+  /** custom ad height in pixel */
+  height?: number;
+}
+
+/**
+ * build .push params
+ * @param opt
+ * @returns
+ * @example
+ * (adsbygoogle = window.adsbygoogle || []).push({
+ *   params: { google_ad_channel: "channel id number" }
+ * });
+ */
+export function paramBuilder(opt: ParamsAdsByGoogle) {
+  const params = { google_ad_slot: opt.slot, google_ad_client: opt.client } as Record<string, any>;
+  if (opt.channel) {
+    // push custom channel
+    params.google_ad_channel = opt.channel;
+  }
+  if (opt.width) {
+    params.google_ad_width = opt.width;
+  }
+  if (opt.height) {
+    params.google_ad_height = opt.height;
+  }
+  return params;
+}
+
+/**
+ * remove ads when exist in document
+ * @param ads
+ * @returns
+ */
+export function removeDuplicateAds(
+  adsConfig: typeof allAds | (typeof allAds)[number]['ads'],
+): typeof allAds | (typeof allAds)[number]['ads'] {
+  const filter = (item: (typeof allAds)[number]['ads']) =>
+    item.filter(ads => {
       if (typeof document !== 'undefined') {
         // filter the ad slot not exist in dom tree
         return document.querySelectorAll(`[data-ad-slot="${ads['data-ad-slot']}"]`).length === 0;
@@ -40,6 +99,16 @@ export const allAds = array_shuffle([
         // this script running on NodeJS
         return true;
       }
-    }),
-  },
-]);
+    });
+
+  if ('ads' in adsConfig === false) {
+    return (adsConfig as typeof allAds).map(item => {
+      item.ads = filter(item.ads);
+      return item;
+    });
+  } else {
+    return filter(adsConfig as (typeof allAds)[number]['ads']);
+  }
+}
+
+export const getAllAds = () => removeDuplicateAds(allAds);
