@@ -2,7 +2,7 @@
 
 import { array_shuffle, insertAfter, islocalhost, loadJS, replaceWith } from '..';
 import { getCookie, setCookie } from '../../assets/js/cookie';
-import { allAds } from './config';
+import { allAds, paramBuilder } from './config';
 
 /**
  * ADSENSE FULLY AUTOMATIC
@@ -261,7 +261,7 @@ function onloadAds() {
       // (adsbygoogle = window.adsbygoogle || []).push({});
       if (!window.adsbygoogle) window.adsbygoogle = [];
       window.adsbygoogle.push({
-        params: { google_ad_slot: slot },
+        params: paramBuilder({ slot, client: ins.getAttribute('data-ad-client').trim() }),
       });
     }
   }
