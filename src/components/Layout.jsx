@@ -51,7 +51,7 @@ export function Layout() {
                 >
                   Dropdown
                 </Link>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu" style={{ maxWidth: '300px' }}>
                   <li>
                     <Link className="dropdown-item" href="#">
                       Action
