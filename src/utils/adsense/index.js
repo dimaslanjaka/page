@@ -1,7 +1,7 @@
 // 5 6 ^ %
 
-const { islocalhost, loadJS, replaceWith, insertAfter } = require('../../utils');
-const { getCookie, setCookie } = require('./cookie');
+const { islocalhost, loadJS, replaceWith, insertAfter } = require('..');
+const { getCookie, setCookie } = require('../../assets/js/cookie');
 
 /**
  * ADSENSE FULLY AUTOMATIC

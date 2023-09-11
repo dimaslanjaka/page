@@ -1,6 +1,6 @@
 import React from 'react';
 import { arrayDedupe } from '../utils';
-import '../assets/js/r-ads';
+import '../utils/adsense';
 
 interface AdsenseProperties {
   /** data-ad-slot */
