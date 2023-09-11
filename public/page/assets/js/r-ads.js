@@ -134,7 +134,7 @@ function triggerAdsense(_e) {
       const place = fixedPlacement[i];
       const attr = currentSlot.ads.shift();
       if (attr) {
-        attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
+        attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub.replace('ca-pub-', '');
         const ins = createIns(attr);
         adsense_log('insert ads to adsense="fill"', i + 1);
         replaceWith(ins, place);
