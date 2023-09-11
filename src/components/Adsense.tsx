@@ -1,6 +1,6 @@
 import React from 'react';
-import { getCookie, setCookie } from '../assets/js/cookie';
-import { arrayDedupe, loadJS } from '../utils';
+import { arrayDedupe } from '../utils';
+import '../assets/js/r-ads';
 
 interface AdsenseProperties {
   /** data-ad-slot */
@@ -73,24 +73,7 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
 
   componentDidMount(): void {
     if (!window.adsbygoogle) window.adsbygoogle = [] as any;
-
-    //window.adsbygoogle.pauseAdRequests = 1;
-    let pub: string;
-    if (this.state.currentSlot.pub) {
-      pub = this.state.currentSlot.pub;
-    } else {
-      // select client pub from ins
-      pub = arrayDedupe(
-        Array.from(document.querySelectorAll('ins.adsbygoogle')).map(el => el.getAttribute('data-ad-client')),
-      )[0];
-    }
-
-    if (pub) {
-      pub = pub.replace('ca-pub-', '');
-      loadJS(`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${pub}`, {
-        onload: this.onloadAds.bind(this),
-      });
-    }
+    window.adsbygoogle.push({ params: { google_ad_slot: this.state.slot } });
   }
 
   componentDidUpdate(prevProps: Readonly<AdsenseProperties>, prevState: Readonly<AdsenseState>, snapshot?: any): void {
@@ -115,84 +98,5 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     }
 
     return <ins {...props}></ins>;
-  }
-
-  onloadAds() {
-    // fix undefined vars
-    if (!window.adsbygoogle) window.adsbygoogle = [];
-    if (!window.adsense_option) window.adsense_option = {};
-
-    const allIns = Array.from(document.querySelectorAll('ins')).filter(el => el.getAttribute('data-ad-slot') !== null);
-    // console.log(
-    //   'adsense onload',
-    //   allIns.map(el => el.getAttribute('data-ad-slot')),
-    // );
-
-    for (let i = 0; i < allIns.length; i++) {
-      // log('apply banner', i + 1);
-      const ins = allIns[i];
-      if (!ins) {
-        continue;
-      } else if (!ins.getAttribute('data-ad-slot') || !ins.getAttribute('data-ad-client')) {
-        // ins.adsbygoogle-noablate is default adsense hidden element
-        if (!ins.classList.contains('adsbygoogle-noablate')) {
-          console.log('no data-ad-client', ins);
-        }
-        continue;
-      }
-      const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
-      const anonclient = adclient.slice(0, 3) + 'xxx' + adclient.slice(adclient.length - 3);
-      const adsid = ins.getAttribute('data-ad-slot');
-      const anonid = adsid.slice(0, 3) + 'xxx' + adsid.slice(adsid.length - 3);
-      const bg = `//via.placeholder.com/200x50/FFFFFF/000000/?text=${anonclient}-${anonid}`;
-      ins.style.backgroundImage = `url('${bg}')`;
-      ins.style.backgroundRepeat = 'no-repeat';
-      ins.style.minHeight = '50px';
-      // log('parent width banner', i + 0, ins.parentElement.offsetWidth);
-
-      const slot = ins.getAttribute('data-ad-slot').trim();
-      if (ins.parentElement.offsetWidth < 250) {
-        // remove banner when parent width is 0 or display: none
-        if (window.adsense_option.remove) {
-          console.log(i + 1, 'remove', slot);
-          ins.remove();
-        }
-      } else if (ins.innerHTML.trim().length === 0) {
-        console.log('push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
-        window.adsbygoogle.push({});
-      }
-    }
-  }
-
-  randomAds() {
-    // select ads
-    // cookie key
-    const ck = 'currentAds';
-    // select previous ads id from cookie
-    const ca = getCookie(ck) || [];
-    let currentSlot = this.allAds.find(item => item.pub === ca);
-    this.setState({
-      currentSlot,
-    });
-    if (ca.length > 0 && typeof currentSlot === 'object') {
-      console.log('cached pub', ca);
-    } else {
-      currentSlot = this.allAds.sort(function () {
-        // shuffle
-        return 0.5 - Math.random();
-      })[0];
-
-      if (location.pathname != '/') {
-        console.log('caching pub', currentSlot.pub);
-        setCookie(
-          ck,
-          currentSlot.pub,
-          1,
-          location.pathname,
-          location.hostname,
-          location.protocol.includes('https') && location.host === 'www.webmanajemen.com',
-        );
-      }
-    }
   }
 }
