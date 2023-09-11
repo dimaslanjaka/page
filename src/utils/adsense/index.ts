@@ -1,8 +1,8 @@
 // 5 6 ^ %
 
-const { islocalhost, loadJS, replaceWith, insertAfter } = require('..');
-const { getCookie, setCookie } = require('../../assets/js/cookie');
-const { allAds } = require('./config');
+import { array_shuffle, insertAfter, islocalhost, loadJS, replaceWith } from '..';
+import { getCookie, setCookie } from '../../assets/js/cookie';
+import { allAds } from './config';
 
 /**
  * ADSENSE FULLY AUTOMATIC
@@ -24,42 +24,36 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
   .some(result => result == true);
 /** localhost indicator */
 const localhost = islocalhost();
-
-/**
- * @type {typeof allAds[number]}
- */
-let currentSlot = [];
+/** current slot */
+let currentSlot = window.adsense_option.currentSlot;
 
 /**
  * Trigger adsense
- * @param {Event?} _e
+ * @param _e
  * @returns
  */
-function triggerAdsense(_e) {
-  //console.log('adsense start', !called);
+function triggerAdsense(_e?: Event) {
+  // run once
   if (called) return;
   called = true;
 
-  const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
-  console.log('existing ins', existingIns.length);
+  // apply current slot
+  window.adsense_option.currentSlot = getCurrentSlot();
+  fillFixedPosition(window.adsense_option.currentSlot);
+  initializeRandomAds();
+  applyEnviromentAds();
+}
 
-  for (let i = 0; i < existingIns.length; i++) {
-    const ins = existingIns[i];
-
-    if (localhost) {
-      console.log('apply test ad to existing ins', i + 1);
-      ins.setAttribute('data-adtest', 'on');
-    }
-  }
-
+/**
+ * get current page ad slot
+ * @returns
+ */
+export function getCurrentSlot() {
   // select ads
   // cookie key
   const ck = 'currentAds';
   // select previous ads id from cookie
-  const ca = getCookie(ck) || [];
-  /**
-   * @type {typeof allAds[number]}
-   */
+  const ca = getCookie(ck) || '';
   currentSlot = allAds.find(item => item.pub === ca);
 
   if (ca.length > 0 && typeof currentSlot === 'object') {
@@ -79,10 +73,17 @@ function triggerAdsense(_e) {
       );
     }
   }
+  // apply to window.adsense_option.currentSlot
+  window.adsense_option.currentSlot = currentSlot;
+  return currentSlot;
+}
 
-  console.log('total ads banner', currentSlot.ads.length);
+/**
+ * find element *[adsense="fill"] for render first
+ */
+export function fillFixedPosition(currentSlot?: (typeof allAds)[number]) {
+  if (!currentSlot) currentSlot = getCurrentSlot();
 
-  // find element *[adsense="fill"] for render first
   const fixedPlacement = Array.from(document.querySelectorAll('[adsense="fill"]'));
   if (fixedPlacement.length > 0) {
     for (let i = 0; i < fixedPlacement.length; i++) {
@@ -115,7 +116,39 @@ function triggerAdsense(_e) {
       }
     }
   }
+}
 
+/**
+ * initialize background image, height, ad-test to existing `ins` tags
+ */
+export function applyEnviromentAds() {
+  // apply ad testing
+  const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
+  console.log('existing ins', existingIns.length);
+
+  for (let i = 0; i < existingIns.length; i++) {
+    const ins = existingIns[i] as HTMLElement | undefined;
+    if (!ins) continue;
+    if (ins.hasAttribute('data-ad-client')) {
+      // apply background image and height
+      const adclient = ins.getAttribute('data-ad-client')?.replace('ca-pub-', '');
+      const anonclient = adclient.slice(0, 3) + 'xxx' + adclient.slice(adclient.length - 3);
+      const adsid = ins.getAttribute('data-ad-slot');
+      const anonid = adsid.slice(0, 3) + 'xxx' + adsid.slice(adsid.length - 3);
+      const bg = `//via.placeholder.com/200x50/FFFFFF/000000/?text=${anonclient}-${anonid}`;
+      ins.style.backgroundImage = `url('${bg}')`;
+      ins.style.backgroundRepeat = 'no-repeat';
+      ins.style.minHeight = '50px';
+    }
+
+    if (localhost) {
+      console.log('apply test ad to existing ins', ins.getAttribute('data-ad-slot'));
+      ins.setAttribute('data-adtest', 'on');
+    }
+  }
+}
+
+export function initializeRandomAds() {
   // find content/article wrapper
   let findPlaces = Array.from(document.querySelectorAll('article'));
   if (findPlaces.length === 0) {
@@ -139,16 +172,7 @@ function triggerAdsense(_e) {
   }
 
   // select random place
-  let adsPlaces = findPlaces
-    .map(getAllPlaces)
-    .flat(1)
-    .sort(function () {
-      return 0.5 - Math.random();
-    })
-    .filter(el => el !== null)
-    .sort(function () {
-      return 0.5 - Math.random();
-    });
+  const adsPlaces = array_shuffle(findPlaces.map(getAllPlaces).flat(1)).filter(el => el !== null);
 
   console.log('total targeted ads places', adsPlaces.length);
 
@@ -156,7 +180,7 @@ function triggerAdsense(_e) {
     for (let i = 0; i < currentSlot.ads.length; i++) {
       const attr = currentSlot.ads[i];
       if (attr) {
-        attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
+        attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub.replace('ca-pub-', '');
 
         let nextOf = adsPlaces.shift(); // get first element and remove it from list
         // iterate adsPlaces
@@ -173,8 +197,8 @@ function triggerAdsense(_e) {
 
         if (nextOf) {
           console.log(i + 1, 'add banner', attr['data-ad-slot']);
-          const prevEl = nextOf.previousElementSibling || {};
-          const nextEl = nextOf.nextElementSibling || {};
+          const prevEl = nextOf.previousElementSibling || ({} as Element);
+          const nextEl = nextOf.nextElementSibling || ({} as Element);
           if (prevEl.tagName === 'INS' || nextEl.tagName === 'INS' || nextOf.tagName == 'INS') {
             // push back the ads
             currentSlot.ads.push(attr);
@@ -194,9 +218,10 @@ function triggerAdsense(_e) {
     '',
   )}`;
   const existingSources = Array.from(document.scripts).map(el => el.src);
+  //console.log({ existingSources });
   if (!existingSources.some(str => str.includes('pagead/js/adsbygoogle.js'))) {
     // create pagead when not existing page ad
-    loadJS(pageAd, onloadAds);
+    loadJS(pageAd, { onload: onloadAds });
   } else {
     // load callback instead
     onloadAds();
@@ -221,13 +246,7 @@ function onloadAds() {
       }
       continue;
     }
-    const adclient = ins.getAttribute('data-ad-client').replace('ca-pub-', '');
-    const anonclient = adclient.slice(0, 3) + 'xxx' + adclient.slice(adclient.length - 3);
-    const adsid = ins.getAttribute('data-ad-slot');
-    const anonid = adsid.slice(0, 3) + 'xxx' + adsid.slice(adsid.length - 3);
-    const bg = `//via.placeholder.com/200x50/FFFFFF/000000/?text=${anonclient}-${anonid}`;
-    ins.style.backgroundImage = `url('${bg}')`;
-    ins.style.backgroundRepeat = 'no-repeat';
+
     // log('parent width banner', i + 0, ins.parentElement.offsetWidth);
 
     const slot = ins.getAttribute('data-ad-slot').trim();
@@ -250,10 +269,10 @@ function onloadAds() {
 
 /**
  * create ins
- * @param {Record<string,any>} attributes
+ * @param attributes
  * @returns
  */
-function createIns(attributes) {
+function createIns(attributes: Record<string, any>) {
   if (!attributes['data-ad-client']) {
     attributes['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
   }
@@ -275,9 +294,9 @@ function createIns(attributes) {
 
 /**
  * get all ads places
- * @param {Element|Document} from
+ * @param from
  */
-function getAllPlaces(from) {
+function getAllPlaces(from: Element | Document) {
   return Array.from(from.querySelectorAll('h1,h2,h3,h4,h5,pre,header,hr,br,table,blockquote'))
     .sort(function () {
       return 0.5 - Math.random();
@@ -285,22 +304,34 @@ function getAllPlaces(from) {
     .filter(el => el !== null);
 }
 
-if (typeof module === 'object' && 'exports' in module) {
+/*if (typeof module === 'object' && 'exports' in module) {
   module.exports = { triggerAdsense };
-}
+}*/
 
 /** main */
 
-if (!banned) {
-  // skip showing ads on non-domain host
-  // skip showing ads from banned page
-  if (document.readyState !== 'loading') {
-    // fix react
-    // document.addEventListener('scroll', triggerAdsense);
-    triggerAdsense();
-  } else {
-    document.addEventListener('DOMContentLoaded', triggerAdsense);
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (!banned) {
+    // skip showing ads on non-domain host
+    // skip showing ads from banned page
+    if (document.readyState !== 'loading') {
+      // fix react
+      document.addEventListener('scroll', triggerAdsense);
+      //triggerAdsense(undefined);
+    } else {
+      document.addEventListener('DOMContentLoaded', triggerAdsense);
+    }
   }
 }
 
-console.log('adsense', { localhost, banned, state: document.readyState });
+// console.log('adsense', {
+//   localhost,
+//   banned,
+//   state: document.readyState,
+//   react:
+//     window.React ||
+//     window.__REACT_DEVTOOLS_GLOBAL_HOOK__ ||
+//     document.querySelector('[data-reactroot], [data-reactid]') ||
+//     Array.from(document.querySelectorAll('*')).some(e => typeof e['_reactRootContainer'] !== 'undefined') ||
+//     Array.from(document.querySelectorAll('[id]')).some(e => typeof e['_reactRootContainer'] !== 'undefined'),
+// });
