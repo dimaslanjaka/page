@@ -64,7 +64,7 @@ export interface ParamsAdsByGoogle {
  * @returns
  * @example
  * (adsbygoogle = window.adsbygoogle || []).push({
- *   params: { google_ad_channel: "channel id number" }
+ *   params: { \/\* will generate this \*\/ google_ad_channel: "channel id number" }
  * });
  */
 export function paramBuilder(opt: ParamsAdsByGoogle) {
