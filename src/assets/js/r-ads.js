@@ -74,7 +74,7 @@ let currentSlot = [];
  * @returns
  */
 function triggerAdsense(_e) {
-  console.log('adsense start', !called);
+  //console.log('adsense start', !called);
   if (called) return;
   called = true;
 
