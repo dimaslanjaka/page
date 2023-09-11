@@ -85,7 +85,7 @@ export function stripProtocol(url: string) {
  * @param string query
  * @param string search query (?url=xxxx)
  */
-export function parse_query(query: string | Record<string, any>, search: string) {
+export function parse_query(query: string | Record<string, any>, search?: string) {
   if (!search) {
     search = window.location.search;
   } else if (/^https?:\/\//i.test(search)) {
