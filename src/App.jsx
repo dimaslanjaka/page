@@ -4,11 +4,10 @@ import { Login } from './route/Login';
 import { Route, Routes } from 'react-router-dom';
 import './assets/css/main.scss';
 import { Layout, NoMatch } from './components/Layout';
-import { SafelinkLayout1 } from './route/safelink/layout1';
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
-//import '../public/page/assets/js/analystic';
+import { Safelink } from './route/safelink';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -32,8 +31,8 @@ class App extends React.Component {
             <Route index element={<Home />} />
             <Route path="google/login" element={<Login />} />
             <Route path="google/login.html" element={<Login />} />
-            <Route path="safelink" element={<SafelinkLayout1 />} />
-            <Route path="safelink.html" element={<SafelinkLayout1 />} />
+            <Route path="safelink" element={<Safelink />} />
+            <Route path="safelink.html" element={<Safelink />} />
             {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
 
             {/* Using path="*"" means "match anything", so this route
