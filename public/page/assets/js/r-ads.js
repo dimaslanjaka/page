@@ -215,8 +215,18 @@ function triggerAdsense(_e) {
     }
   }
 
-  // create pagead
-  loadJS(`//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub}`, onloadAds);
+  const pageAd = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub.replace(
+    'ca-pub-',
+    '',
+  )}`;
+  const existingSources = Array.from(document.scripts).map(el => el.src);
+  if (!existingSources.some(str => str.includes('pagead/js/adsbygoogle.js'))) {
+    // create pagead when not existing page ad
+    loadJS(pageAd, onloadAds);
+  } else {
+    // load callback instead
+    onloadAds();
+  }
 
   //loadJS("//imasdk.googleapis.com/js/sdkloader/ima3.js")
 }
