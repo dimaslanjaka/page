@@ -132,12 +132,14 @@ export const delay = (millis: number) =>
     setTimeout(_ => resolve(), millis);
   });
 
+export type InstanceHtml = HTMLElement | Element;
+
 /**
  * Replace elements with new
  * @param newElement
  * @param oldElement
  */
-export function replaceWith(newElement: HTMLElement, oldElement: HTMLElement) {
+export function replaceWith(newElement: InstanceHtml, oldElement: InstanceHtml) {
   if (!oldElement.parentNode) {
     console.log(oldElement, 'parent null');
     const d = document.createElement('div');
@@ -153,7 +155,7 @@ export function replaceWith(newElement: HTMLElement, oldElement: HTMLElement) {
  * @param newNode
  * @param referenceNode insert after this element
  */
-export function insertAfter(newNode: HTMLElement, referenceNode: HTMLElement | undefined) {
+export function insertAfter(newNode: InstanceHtml, referenceNode: InstanceHtml | undefined) {
   if (referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   }
