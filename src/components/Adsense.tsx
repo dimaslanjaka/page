@@ -110,6 +110,9 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     if (this.state.widthResponsive) {
       props['data-full-width-responsive'] = this.state.widthResponsive;
     }
+    if (/dev/i.test(process.env.NODE_ENV)) {
+      props['data-adtest'] = 'on';
+    }
 
     return <ins {...props}></ins>;
   }
