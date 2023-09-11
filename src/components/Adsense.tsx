@@ -1,12 +1,9 @@
 import React from 'react';
 import { arrayDedupe } from '../utils';
 import '../utils/adsense';
+import { ParamsAdsByGoogle } from '../utils/adsense/config';
 
-interface AdsenseProperties {
-  /** data-ad-slot */
-  slot?: string;
-  /** data-ad-client */
-  client?: string;
+interface AdsenseProperties extends ParamsAdsByGoogle {
   /** data-ad-format */
   format?: 'fluid' | 'auto' | string;
   /** data-ad-layout */
@@ -19,14 +16,6 @@ interface AdsenseProperties {
   style?: React.CSSProperties;
   /** custom class name */
   className?: string;
-  /** custom channel ID
-   * @link https://support.google.com/adsense/answer/1354736?hl=en#zippy=%2Csetting-custom-channels-dynamically
-   */
-  channel?: string;
-  /** custom ad width in pixel */
-  width?: number;
-  /** custom ad height in pixel */
-  height?: number;
 }
 
 interface AdsenseState extends AdsenseProperties {
@@ -82,18 +71,6 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
 
   componentDidMount(): void {
     if (!window.adsbygoogle) window.adsbygoogle = [] as any;
-    const params = { google_ad_slot: this.state.slot } as Record<string, any>;
-    if (this.state.channel) {
-      // push custom channel
-      params.google_ad_channel = this.state.channel;
-    }
-    if (this.state.width) {
-      params.google_ad_width = this.state.width;
-    }
-    if (this.state.height) {
-      params.google_ad_height = this.state.height;
-    }
-    window.adsbygoogle.push({ params });
   }
 
   componentDidUpdate(prevProps: Readonly<AdsenseProperties>, prevState: Readonly<AdsenseState>, snapshot?: any): void {
@@ -120,4 +97,20 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
 
     return <ins {...props}></ins>;
   }
+}
+
+// initialize adsense="fill" attribute
+declare module 'react' {
+  interface HTMLAttributes<T> extends React.AriaAttributes, React.DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    adsense?: string;
+  }
+}
+
+/**
+ * create div[adsense="fill"]
+ * @returns
+ */
+export function AdsenseFill() {
+  return <div adsense="fill" style={{ minWidth: '50px' }}></div>;
 }
