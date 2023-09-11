@@ -289,6 +289,8 @@ function createIns(attributes: Record<string, any>) {
   if (localhost) {
     ins.setAttribute('data-adtest', 'on');
   }
+  ins.style.minWidth = '250px';
+  ins.style.minHeight = '50px';
   return ins;
 }
 
