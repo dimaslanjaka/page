@@ -8,13 +8,13 @@ import {
   handleCredentialResponse,
   isTokenExpired,
 } from '../assets/js/google/constants';
-import { loadScript } from '../utils/utils';
+import { loadJS } from '../utils/utils';
 import { firebaseAuthGoogle } from '../assets/js/google/firebase';
 
 export class Login extends React.Component {
   componentDidMount() {
     document.title = 'Login page - WMI';
-    loadScript('https://accounts.google.com/gsi/client').then(this.start.bind(this));
+    loadJS('https://accounts.google.com/gsi/client').then(this.start.bind(this));
   }
 
   render() {
