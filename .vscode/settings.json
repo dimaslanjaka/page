@@ -27,6 +27,10 @@
 		"editor.formatOnSave": false,
 		"editor.defaultFormatter": "vscode.css-language-features"
 	},
+	"[scss]": {
+		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"[jsonc]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "vscode.json-language-features"
