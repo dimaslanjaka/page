@@ -1,6 +1,7 @@
 import React from 'react';
 import { delay, parse_query, parse_url, safelinkInstance } from '../utils';
 import { SafelinkLayout1 } from './safelink/layout1';
+import { createCookieMins, getCookie } from '../assets/js/cookie';
 
 export class Safelink extends React.Component {
   componentDidMount() {
@@ -42,10 +43,7 @@ function decodeStart() {
   if (parse_safelink) {
     const value_from_query = parse_safelink.url || parse_safelink.o || parse_safelink.u;
     if (value_from_query) {
-      /**
-       * @type {import('safelinkify').Nullable<string>}
-       */
-      let value_cookie = value_from_query.aes.decode || value_from_query.base64.decode;
+      const value_cookie = value_from_query.aes.decode || value_from_query.base64.decode;
 
       // set cookie value and refresh without parameters
       if (value_cookie) {
@@ -98,7 +96,7 @@ async function replaceGoButton(url) {
 function replaceWith(newElement, oldElement) {
   if (!oldElement.parentNode) {
     console.log(oldElement, 'parent null');
-    let d = document.createElement('div');
+    const d = document.createElement('div');
     d.appendChild(oldElement);
   } else {
     //log(oldElement.parentNode.tagName);
