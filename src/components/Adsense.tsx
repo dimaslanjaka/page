@@ -17,7 +17,12 @@ interface AdsenseProperties {
   widthResponsive?: 'true' | 'false';
   /** style attribute */
   style?: React.CSSProperties;
+  /** custom class name */
   className?: string;
+  /** custom channel ID
+   * @link https://support.google.com/adsense/answer/1354736?hl=en#zippy=%2Csetting-custom-channels-dynamically
+   */
+  channel?: string;
 }
 
 interface AdsenseState extends AdsenseProperties {
@@ -73,7 +78,12 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
 
   componentDidMount(): void {
     if (!window.adsbygoogle) window.adsbygoogle = [] as any;
-    window.adsbygoogle.push({ params: { google_ad_slot: this.state.slot } });
+    const params = { google_ad_slot: this.state.slot } as Record<string, any>;
+    if (this.state.channel) {
+      // push custom channel
+      params.google_ad_channel = this.state.channel;
+    }
+    window.adsbygoogle.push({ params });
   }
 
   componentDidUpdate(prevProps: Readonly<AdsenseProperties>, prevState: Readonly<AdsenseState>, snapshot?: any): void {
@@ -94,6 +104,7 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
       props['data-full-width-responsive'] = this.state.widthResponsive;
     }
     if (/dev/i.test(process.env.NODE_ENV)) {
+      // enable adsense test on development mode
       props['data-adtest'] = 'on';
     }
 
