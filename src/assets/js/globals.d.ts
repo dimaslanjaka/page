@@ -2,6 +2,7 @@ import { allAds } from '../../utils/adsense/config';
 
 declare global {
   interface Window {
+    [key: string]: any;
     dataLayer: Record<string, any>[];
     opera: Record<string, any>;
     opr: Record<string, any>;
