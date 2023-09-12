@@ -1,3 +1,4 @@
+const { spawn } = require('git-command-helper');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -25,14 +26,9 @@ const buildStatic = done => {
   });
 };
 
-const buildSite = done => {
-  webpack(require('./webpack.config'), (err, stats) => {
-    if (err || stats.hasErrors()) {
-      done(err);
-    }
-    // Done processing
-    done(null);
-  });
-};
+const buildSite = done =>
+  spawn('cross-env-shell', ['NODE_ENV=production', 'webpack', '--mode', 'production'])
+    .then(() => done())
+    .catch(done);
 
 module.exports = { buildStatic, buildSite };
