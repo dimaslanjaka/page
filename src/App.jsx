@@ -8,6 +8,7 @@ import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { Safelink } from './route/safelink';
+import { MomentTimezone } from './route/MomentTimezone';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -34,6 +35,8 @@ class App extends React.Component {
             <Route path="safelink" element={<Safelink />} />
             <Route path="safelink.html" element={<Safelink />} />
             {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
+            <Route path="moment-timezone" element={<MomentTimezone />} />
+            <Route path="moment-timezone.html" element={<MomentTimezone />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
