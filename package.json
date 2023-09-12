@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "start": "cross-env-shell NODE_ENV=development webpack-dev-server --no-open --mode development --config webpack.config.js",
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
@@ -85,6 +86,8 @@
     "git-command-helper": "*",
     "gulp": "^4.0.2",
     "html-webpack-plugin": "^5.5.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "mini-css-extract-plugin": "^2.7.6",
     "node-sass": "^9.0.0",
     "npm-check-updates": "^16.10.12",
