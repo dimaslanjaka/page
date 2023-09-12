@@ -15,7 +15,6 @@
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
     "vite:serve": "vite preview",
-    "postinstall": "yarn workspaces foreach --no-private run build",
     "php": "php -S 127.0.0.1:4000"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
