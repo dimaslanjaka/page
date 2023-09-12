@@ -6,7 +6,10 @@ const glob = require('glob');
 const pagepkg = require('./page/package.json');
 const safelinkify = require('safelinkify');
 const through2 = require('through2');
+const { restore } = require('./gulpfile.backup');
 require('./gulpfile.webpack');
+
+const pageGit = new git(path.join(__dirname, 'page'));
 
 gulp.task('page:copy', async function () {
   // copy non-compiled files
@@ -86,10 +89,9 @@ const sleep = milliseconds => {
 
 gulp.task('page:commit', async function () {
   const currentGit = new git(__dirname);
-  const pageGit = new git(path.join(__dirname, 'page'));
   const currentHash = await currentGit.latestCommit();
   try {
-    await pageGit.reset('origin/gh-pages');
+    //await pageGit.reset('gh-pages');
     await pageGit.add('-A');
     const url = `${(await currentGit.getremote()).fetch.url.replace(/(.git|\/)$/, '')}/commit/${currentHash}`;
     await pageGit.commit('update from ' + url);
@@ -145,7 +147,21 @@ gulp.task('page:clean', function () {
   });
 });
 
-gulp.task('page', gulp.series('build:static', 'page:copy', 'page:clean', 'page:commit'));
+gulp.task(
+  'build',
+  gulp.series(
+    // reset to latest commit of remote
+    restore,
+    // build static files
+    'build:static',
+    // copy ./dist to ./page
+    'page:copy',
+    // clean node_modules
+    'page:clean',
+    // commit
+    'page:commit',
+  ),
+);
 // gulp.task('build', gulp.series('page'));
 // gulp.task('default', gulp.series('page'));
 
