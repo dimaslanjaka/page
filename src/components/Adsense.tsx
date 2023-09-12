@@ -79,7 +79,9 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
       'data-ad-client': 'ca-pub-' + this.state.client.replace('ca-pub-', ''),
       'data-ad-format': this.state.format,
       style: { display: 'block', ...this.state.style },
-      className: arrayDedupe(['adsbygoogle'].concat(this.state.className.split(' ')))
+      className: arrayDedupe(['adsbygoogle'].concat((this.state.className || '').split(' ')))
+        //filter empty
+        .filter(str => str.length > 0)
         // rejoin
         .join(' '),
     } as Record<string, any>;
