@@ -1,8 +1,12 @@
 // 5 6 ^ %
 
+// special imports
+import { allAds, paramBuilder } from './config';
+//
+
 import { array_shuffle, insertAfter, islocalhost, loadJS, replaceWith } from '..';
 import { getCookie, setCookie } from '../../assets/js/cookie';
-import { allAds, paramBuilder } from './config';
+
 
 /**
  * ADSENSE FULLY AUTOMATIC
