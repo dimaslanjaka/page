@@ -45,7 +45,7 @@ export * from './utils';
  * @param arr
  * @returns
  */
-export function arrayDedupe<T extends any[]>(arr: T) {
+export function arrayDedupe<T extends any[]>(arr: T): T[] {
   return arr.filter(function (value, index, array) {
     return array.indexOf(value) === index;
   });
