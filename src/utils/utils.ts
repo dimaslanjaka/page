@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird';
-import safelink from 'safelinkify/dist/safelink';
+import * as safelinkify from 'safelinkify';
 
 export interface LoadJSOpt {
   proxy?: boolean;
@@ -42,7 +42,7 @@ export function loadJS(url: string, props: LoadJSOpt) {
   });
 }
 
-export const safelinkInstance = new safelink({
+export const safelinkInstance = new safelinkify.safelink({
   // exclude patterns (dont anonymize these patterns)
   exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
   // url redirector

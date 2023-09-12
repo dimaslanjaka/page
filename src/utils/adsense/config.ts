@@ -1,4 +1,4 @@
-import { array_shuffle } from '../utils';
+import { array_shuffle } from '..';
 
 // initialize window.adsense_option
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

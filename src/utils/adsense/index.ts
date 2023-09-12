@@ -35,7 +35,7 @@ let currentSlot = window.adsense_option.currentSlot;
  * @param _e
  * @returns
  */
-function triggerAdsense(_e?: Event) {
+export function triggerAdsense(_e?: Event) {
   // run once
   if (called) return;
   called = true;
@@ -233,7 +233,7 @@ export function initializeRandomAds() {
   //loadJS("//imasdk.googleapis.com/js/sdkloader/ima3.js")
 }
 
-function onloadAds() {
+export function onloadAds() {
   const allIns = Array.from(document.querySelectorAll('ins'));
   console.log('total ins', allIns.length);
 
@@ -275,7 +275,7 @@ function onloadAds() {
  * @param attributes
  * @returns
  */
-function createIns(attributes: Record<string, any>) {
+export function createIns(attributes: Record<string, any>) {
   if (!attributes['data-ad-client']) {
     attributes['data-ad-client'] = 'ca-pub-' + currentSlot.pub;
   }
