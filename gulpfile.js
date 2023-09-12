@@ -7,6 +7,7 @@ const pagepkg = require('./page/package.json');
 const safelinkify = require('safelinkify');
 const through2 = require('through2');
 const { restore } = require('./gulpfile.backup');
+const { buildStatic } = require('./gulpfile.webpack');
 require('./gulpfile.webpack');
 
 const pageGit = new git(path.join(__dirname, 'page'));
@@ -153,7 +154,7 @@ gulp.task(
     // reset to latest commit of remote
     restore,
     // build static files
-    'build:static',
+    buildStatic,
     // copy ./dist to ./page
     'page:copy',
     // clean node_modules

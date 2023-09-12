@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const gulp = require('gulp');
 
 const config = {
   entry: './src/utils/adsense/index.ts',
@@ -16,7 +15,7 @@ const config = {
   },
 };
 
-gulp.task('build:static', function (done) {
+const buildStatic = done => {
   webpack(config, (err, stats) => {
     if (err || stats.hasErrors()) {
       done(err);
@@ -24,4 +23,16 @@ gulp.task('build:static', function (done) {
     // Done processing
     done(null);
   });
-});
+};
+
+const buildSite = done => {
+  webpack(require('./webpack.config'), (err, stats) => {
+    if (err || stats.hasErrors()) {
+      done(err);
+    }
+    // Done processing
+    done(null);
+  });
+};
+
+module.exports = { buildStatic, buildSite };
