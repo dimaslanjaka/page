@@ -166,6 +166,7 @@ gulp.task(
 
 // remove ./page/\n
 gulp.task('backup', gulp.series(backup));
-// gulp.task('default', gulp.series('page'));
+gulp.task('restore', gulp.series(restore));
+gulp.task('default', gulp.series('build'));
 
 module.exports = gulp;
