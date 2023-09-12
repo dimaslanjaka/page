@@ -7,7 +7,6 @@ import { allAds, paramBuilder } from './config';
 import { array_shuffle, insertAfter, islocalhost, loadJS, replaceWith } from '..';
 import { getCookie, setCookie } from '../../assets/js/cookie';
 
-
 /**
  * ADSENSE FULLY AUTOMATIC
  */
