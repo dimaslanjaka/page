@@ -10,6 +10,18 @@ const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
 
 /**
+ * @type {HtmlWebpackPlugin.Options['meta']}
+ */
+const defaultMeta = {
+  author: 'Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)',
+  description: 'Page - WMI',
+  canonical: {
+    rel: 'canonical',
+    href: 'https://www.webmanajemen.com/page/index.html',
+  },
+};
+
+/**
  * @type {HtmlWebpackPlugin.Options[]}
  */
 const routes = [
@@ -30,15 +42,43 @@ const routes = [
   },
   {
     title: 'Outbound page - WMI',
-    filename: 'page/safelink.html',
+    filename: 'safelink.html',
     template: path.resolve(__dirname, 'src', 'main.html'),
   },
   {
     title: 'Login page - WMI',
-    filename: 'page/google/login.html',
+    filename: 'google/login.html',
     template: path.resolve(__dirname, 'src', 'main.html'),
   },
-];
+  {
+    title: 'Moment Timezone Playground',
+    filename: 'moment-timezone.html',
+    meta: {
+      description: 'Moment Timezone Online Playground For Free. Support custom format pattern',
+      language: {
+        httpEquiv: 'Content-Language',
+        content: 'en_US',
+      },
+      canonical: {
+        rel: 'canonical',
+        href: 'https://www.webmanajemen.com/page/moment-timezone.html',
+      },
+    },
+  },
+].map(o => {
+  // auto add meta key
+  if (!o.meta) o.meta = {};
+  if (!o.meta.canonical) {
+    // auto add meta canonical
+    o.meta.canonical = {
+      rel: 'canonical',
+      href: 'https://www.webmanajemen.com/page/' + o.filename,
+    };
+  }
+  // assign with default meta
+  o.meta = Object.assign(defaultMeta, o.meta || {});
+  return o;
+});
 
 function createHtml() {
   return routes.map(
@@ -84,9 +124,9 @@ module.exports = {
         },
         // other external module utility
         /*customModule: {
-          import: ['safelinkify'],
-          dependOn: 'shared',
-        },*/
+        import: ['safelinkify'],
+        dependOn: 'shared',
+      },*/
         // internal/local utility
         internal: {
           import: ['./src/utils/index.ts'],
