@@ -98,7 +98,8 @@ gulp.task('page:commit', async function () {
   }
   await sleep(700);
   let canPush = await pageGit.canPush();
-  if (canPush) pageGit.push();
+  console.log('is can push', canPush);
+  //if (canPush) pageGit.push();
 });
 
 gulp.task('page:clean', function () {
