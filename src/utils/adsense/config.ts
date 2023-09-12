@@ -1,7 +1,7 @@
 import { array_shuffle } from '../utils';
 
 // initialize window.adsense_option
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (!window.adsense_option) {
     window.adsense_option = {};
   }
