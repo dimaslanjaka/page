@@ -4,9 +4,9 @@ const { fs, path } = require('sbg-utility');
 const Bluebird = require('bluebird');
 const glob = require('glob');
 const pagepkg = require('./page/package.json');
-const { buildPage } = require('./page-source/build');
 const safelinkify = require('safelinkify');
 const through2 = require('through2');
+require('./gulpfile.webpack');
 
 gulp.task('page:copy', async function () {
   // copy non-compiled files
@@ -101,8 +101,6 @@ gulp.task('page:commit', async function () {
   if (canPush) pageGit.push();
 });
 
-gulp.task('page:build', buildPage);
-
 gulp.task('page:clean', function () {
   return new Promise(resolve => {
     const base = path.join(__dirname, 'page');
@@ -146,7 +144,8 @@ gulp.task('page:clean', function () {
   });
 });
 
-gulp.task('page', gulp.series('page:build', 'page:copy', 'page:clean', 'page:commit'));
+gulp.task('page', gulp.series('build:static', 'page:copy', 'page:clean', 'page:commit'));
 // gulp.task('build', gulp.series('page'));
 // gulp.task('default', gulp.series('page'));
+
 module.exports = gulp;
