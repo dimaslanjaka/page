@@ -6,7 +6,7 @@ const glob = require('glob');
 const pagepkg = require('./page/package.json');
 const safelinkify = require('safelinkify');
 const through2 = require('through2');
-const { restore } = require('./gulpfile.backup');
+const { restore, backup } = require('./gulpfile.backup');
 const { buildStatic } = require('./gulpfile.webpack');
 require('./gulpfile.webpack');
 
@@ -163,7 +163,9 @@ gulp.task(
     'page:commit',
   ),
 );
-// gulp.task('build', gulp.series('page'));
+
+// remove ./page/\n
+gulp.task('backup', gulp.series(backup));
 // gulp.task('default', gulp.series('page'));
 
 module.exports = gulp;
