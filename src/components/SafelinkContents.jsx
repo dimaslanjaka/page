@@ -233,13 +233,27 @@ export function SafelinkContents() {
       </table>
 
       <div className="border border-success p-4">
-        <div adsense="fill"></div>
+        <Adsense
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          client="ca-pub-2188063137129806"
+          slot="5369043101"
+          format="auto"
+          widthResponsive="true"
+        ></Adsense>
         <div className="text-center py-1 px-1">
           <button className="btn btn-sm btn-success" id="go">
             Click Here
           </button>
         </div>
-        <div adsense="fill"></div>
+        <Adsense
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          client="ca-pub-2188063137129806"
+          slot="6873696468"
+          format="auto"
+          widthResponsive="true"
+        ></Adsense>
       </div>
 
       {/*<!-- debug localhost -->*/}
