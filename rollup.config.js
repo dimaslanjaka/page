@@ -10,21 +10,27 @@ const polyfill = require('rollup-plugin-polyfill-node');
 const { deepmerge } = require('deepmerge-ts');
 const glob = require('glob');
 const path = require('upath');
+const { writefile } = require('sbg-utility');
 
-const tsOpt = deepmerge(
-  { compilerOptions: tsbase.compilerOptions },
-  { compilerOptions: tsconfig.compilerOptions },
-  {
-    compilerOptions: {
-      module: 'esnext',
-      lib: ['es2020', 'dom'],
-      target: 'es5',
-      allowSyntheticDefaultImports: true,
-      skipLibCheck: true,
-    },
+/**
+ * @type {Parameters<typeof typescript['default']>[0]}
+ */
+const tsOpt = deepmerge(tsbase, tsconfig, {
+  compilerOptions: {
+    module: 'esnext',
+    lib: ['es2020', 'dom'],
+    target: 'es5',
+    allowSyntheticDefaultImports: true,
+    skipLibCheck: true,
   },
-);
-/** @type {import('rollup').RollupOptions} */
+  outputToFilesystem: true,
+});
+if (tsOpt.extends) delete tsOpt.extends;
+
+/**
+ * default options
+ * @type {import('rollup').RollupOptions}
+ */
 const defaultOpt = {
   output: {
     //file: `dist/browser/${outputFileName}`,
@@ -40,20 +46,24 @@ const defaultOpt = {
     // const polyfill = require('rollup-plugin-polyfill-node');
     polyfill(),
     // const resolve = require('@rollup/plugin-node-resolve');
-    resolve({
+    resolve.default({
       // To provide stubbed versions of Node built-ins with plugin rollup-plugin-polyfill-node
       preferBuiltins: false,
       // To instructs the plugin to use the browser module resolutions in package.json and adds 'browser' to exportConditions
       browser: true,
     }),
     // const commonjs = require('@rollup/plugin-commonjs');
-    commonjs(),
+    commonjs.default({
+      include: /node_modules/,
+      requireReturnsDefault: 'auto', // solves default issue
+    }),
     // const { terser } = require('rollup-plugin-terser');
     terser(),
   ],
+  external: ['moment', 'bluebird'],
 };
 
-/** @type {import('rollup').RollupOptions} */
+/** @type {import('rollup').RollupOptions[]} */
 const rollupOpt = glob
   .sync(['**/*.ts', '**/*.js'], {
     cwd: path.join(__dirname, 'public'),
@@ -72,5 +82,7 @@ const rollupOpt = glob
       },
     });
   });
-console.log(rollupOpt);
+
+console.log(writefile('tmp/dump/rollupConfig.json', { rollupOpt, tsOpt }).file);
+
 module.exports = rollupOpt;
