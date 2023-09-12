@@ -13,7 +13,7 @@
     "update": "yarn run update:ncu",
     "build:static": "gulp build:static",
     "build:webpack": "cross-env-shell NODE_ENV=production webpack --mode production",
-    "build": "run-s \"build:**\" && gulp build",
+    "build": "rm -rf dist && run-s \"build:**\" && gulp build",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
