@@ -52,7 +52,7 @@ export const Home = () => {
               </Link>
             </div>
             <div className="col-xs-6 col-md-3">
-              <i className="fa-sharp fa-solid fa-clock fa-size-large"></i>
+              <i className="fa-solid fa-clock fa-size-large"></i>
               <h3>Moment Timezone playground</h3>
               <p>
                 Test, format, interval using <code>moment-timezone</code> module
@@ -69,10 +69,10 @@ export const Home = () => {
               </p>
             </div>
             <div className="col-xs-6 col-md-3">
-              <i className="fa-solid fa-magic fa-size-large"></i>
-              <h3>Lorem ipsum</h3>
+              <i className="fa-light fa-code fa-size-large"></i>
+              <h3>Auto highlight.js</h3>
               <p>
-                Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.
+                Auto 
               </p>
             </div>
           </div>
