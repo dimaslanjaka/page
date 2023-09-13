@@ -6,7 +6,7 @@
 export function querySelector(str: string): HTMLElement | Record<string, any> {
   const select = document.querySelector(str);
   if (!select) {
-    console.error(`document.querySelector("${str}") is null`);
+    console.error(`document.querySelector("${str}") is null, return {}`);
   }
   return select || {};
 }
