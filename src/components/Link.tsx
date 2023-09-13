@@ -1,12 +1,21 @@
 import React from 'react';
-import { LinkProps, Link as OriginalLink } from 'react-router-dom';
+import { Link as OriginalLink } from 'react-router-dom';
 import { isValidHttpUrl, safelinkInstance } from '../utils';
 
-interface LinkProperties extends React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>> {
+interface LinkProperties {
+  [key: string]: any;
   /** target url */
   href?: string;
   /** same as href */
   to?: string;
+  /** open in target tab */
+  target?: string;
+  /** class names */
+  className?: string;
+  /** link title */
+  title?: string;
+  /** rel */
+  rel?: string;
 }
 
 /**
