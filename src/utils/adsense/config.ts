@@ -1,10 +1,9 @@
 import { array_shuffle } from '..';
 
-// initialize window.adsense_option
+// initialize undefined window properties
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  if (!window.adsense_option) {
-    window.adsense_option = {};
-  }
+  if (!window.adsense_option) window.adsense_option = {};
+  if (!window.adsbygoogle) window.adsbygoogle = [];
 }
 
 /**

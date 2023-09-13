@@ -260,9 +260,7 @@ export function onloadAds() {
         ins.remove();
       }
     } else if (ins.innerHTML.trim().length === 0) {
-      console.log(i + 1, slot, 'width', ins.parentElement.offsetWidth);
-      // (adsbygoogle = window.adsbygoogle || []).push({});
-      if (!window.adsbygoogle) window.adsbygoogle = [];
+      console.log('adsbygoogle.push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
       window.adsbygoogle.push({
         params: paramBuilder({ slot, client: ins.getAttribute('data-ad-client').trim() }),
       });
