@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Link } from '../components/Link';
-import { Image } from '../components/Image';
 import { initDropdown } from '../assets/js/bootstrap';
+import { Image } from '../components/Image';
+import { Link } from '../components/Link';
 
 export function Layout() {
   React.useEffect(() => {
@@ -47,16 +47,17 @@ export function Layout() {
                 </Link>
               </li>
               <li className="nav-item dropdown">
-                <Link
+                <a
                   className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  id="navbarDropdown"
                 >
                   Tools
-                </Link>
-                <ul className="dropdown-menu" style={{ maxWidth: '300px' }}>
+                </a>
+                <ul className="dropdown-menu" style={{ maxWidth: '300px' }} aria-labelledby="navbarDropdown">
                   <li>
                     <Link className="dropdown-item" href="/page/cookies">
                       Cookie Manager
