@@ -1,6 +1,14 @@
 import Bluebird from 'bluebird';
 import * as safelinkify from 'safelinkify';
 
+/**
+ * No Operations
+ * @param _
+ */
+export const noop = (..._: any[]) => {
+  //
+};
+
 export interface LoadJSOpt {
   proxy?: boolean;
   async?: boolean;
@@ -22,6 +30,8 @@ export interface LoadJSOpt {
 export function loadJS(url: string, props?: LoadJSOpt) {
   props = Object.assign(props || {}, {
     proxy: false,
+    onload: noop,
+    onerror: noop,
   });
 
   return new Bluebird((resolve, reject) => {
