@@ -62,18 +62,22 @@ export const Home = () => {
               </Link>
             </div>
             <div className="col-xs-6 col-md-3">
-              <i className="fa-solid fa-group fa-size-large"></i>
-              <h3>Lorem ipsum</h3>
+              <i class="fa-regular fa-person-walking-arrow-right fa-size-large"></i>
+              <h3>Outbound Page</h3>
               <p>
-                Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.
+                All external links proxied using outbound page using{' '}
+                <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
               </p>
             </div>
             <div className="col-xs-6 col-md-3">
               <i className="fa-light fa-code fa-size-large"></i>
               <h3>Auto highlight.js</h3>
               <p>
-                Auto 
+                Auto syntax highlighting on <kbd>{`<pre><code>`}</kbd> tag using <kbd>highlight.js</kbd>
               </p>
+              <Link to="/page/highlight-js" className="btn btn-sm btn-custom">
+                <i className="fa-thin fa-arrow-right"></i>
+              </Link>
             </div>
           </div>
         </div>
