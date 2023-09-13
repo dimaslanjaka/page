@@ -1,14 +1,21 @@
+# malfunction keyboard
+# 5 6 ^ %
+
 /node_modules
-/page-source/node_modules
+!/page-source/node_modules/.gitignore
 /build
 /page
 tmp
 config.json
 *.log
-# 5 6 ^ %
+.env
+/dist
 
+# ignore yarn files except patterns
 **/.yarn/*
 !**/.yarn/releases
 !**/.yarn/plugins
-.env
-/dist
+
+# ignore lock files
+yarn.lock
+package-lock.json
