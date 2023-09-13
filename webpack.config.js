@@ -285,7 +285,7 @@ module.exports = {
   devServer: {
     static: './public',
     historyApiFallback: true, // enable react-dom-router support
-    hot: true, // hot reloading
+    hot: false, // hot reloading
     port: 4000, // dev server port
     open: false, // open browser
     host: 'adsense.webmanajemen.com', // local domain by /etc/hosts
