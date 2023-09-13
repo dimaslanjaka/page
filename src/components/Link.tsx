@@ -1,6 +1,6 @@
 import React from 'react';
 import { LinkProps, Link as OriginalLink } from 'react-router-dom';
-import { safelinkInstance } from '../utils/utils';
+import { isValidHttpUrl, safelinkInstance } from '../utils';
 
 interface LinkProperties extends React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>> {
   /** target url */
@@ -25,7 +25,7 @@ export class Link extends React.Component<LinkProperties> {
     let result = dest;
     let type = 'internal';
     if (typeof dest === 'string') {
-      if (this.isValidHttpUrl(dest)) {
+      if (isValidHttpUrl(dest)) {
         result = this.sf.parseUrl(dest);
         if (result === dest) {
           type = 'internal';
@@ -48,17 +48,5 @@ export class Link extends React.Component<LinkProperties> {
         {this.props.children}
       </OriginalLink>
     );
-  }
-
-  isValidHttpUrl(string) {
-    let url;
-
-    try {
-      url = new URL(string);
-    } catch (_) {
-      return false;
-    }
-
-    return url.protocol === 'http:' || url.protocol === 'https:';
   }
 }
