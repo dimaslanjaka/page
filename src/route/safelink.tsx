@@ -1,6 +1,6 @@
 import React from 'react';
 import { createCookieMins, getCookie } from '../assets/js/cookie';
-import { delay, parse_query, parse_url, safelinkInstance } from '../utils';
+import { delay, parse_query, parse_url, querySelector, safelinkInstance } from '../utils';
 import { SafelinkLayout2 } from './safelink/layout2';
 
 export class Safelink extends React.Component {
@@ -74,7 +74,7 @@ function refreshWithoutParam() {
 }
 
 async function replaceGoButton(url: string) {
-  const go = document.querySelector('#go');
+  const go = querySelector('#go');
   if (go) {
     go.setAttribute('disabled', 'true');
     go.textContent = 'Please Wait';

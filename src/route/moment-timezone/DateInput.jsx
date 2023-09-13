@@ -1,14 +1,14 @@
 import React from 'react';
 import { Adsense } from '../../components/Adsense';
 import { moment_format, setDateLocalValue } from './moment-timezone';
-import { copyTextToClipboard } from '../../utils';
+import { copyTextToClipboard, querySelector } from '../../utils';
 
 export function DateInput() {
   React.useEffect(() => {
-    const date_input = document.querySelector('input#date');
-    const date_text = document.querySelector('input#date-text');
-    // const pattern = document.querySelector('input#pattern');
-    const result = document.querySelector('#moment-result');
+    const date_input = querySelector('input#date');
+    const date_text = querySelector('input#date-text');
+    // const pattern = querySelector('input#pattern');
+    const result = querySelector('#moment-result');
     // force update date input value on-load
     setDateLocalValue(date_input, new Date());
     const formatted = moment_format(date_input.value);
@@ -35,8 +35,8 @@ export function DateInput() {
                 // update date text when date input changed
                 const formatted = moment_format(e.target.value);
                 console.log('date input', { value: e.target.value, formatted });
-                const date_text = document.querySelector('input#date-text');
-                const result = document.querySelector('#moment-result');
+                const date_text = querySelector('input#date-text');
+                const result = querySelector('#moment-result');
 
                 result.textContent = formatted;
                 date_text.value = formatted;
@@ -51,8 +51,8 @@ export function DateInput() {
               onChange={function () {
                 // update date input when date text changed
                 const formatted = moment_format(this.value);
-                const date_input = document.querySelector('input#date');
-                const result = document.querySelector('#moment-result');
+                const date_input = querySelector('input#date');
+                const result = querySelector('#moment-result');
                 console.log('date text', { value: this.value, formatted });
                 setDateLocalValue(date_input, formatted);
                 result.textContent = formatted;
@@ -68,8 +68,8 @@ export function DateInput() {
               id="pattern"
               onChange={function (e) {
                 // update result when pattern changed
-                const date_input = document.querySelector('input#date');
-                const result = document.querySelector('#moment-result');
+                const date_input = querySelector('input#date');
+                const result = querySelector('#moment-result');
                 const formatted = moment_format(date_input.value, e.target.value);
                 result.textContent = formatted;
               }}
@@ -90,9 +90,9 @@ export function DateInput() {
                 className="btn btn-sm btn-warning"
                 onClick={function (e) {
                   e.preventDefault();
-                  const date_input = document.querySelector('input#date');
-                  const date_text = document.querySelector('input#date-text');
-                  const result = document.querySelector('#moment-result');
+                  const date_input = querySelector('input#date');
+                  const date_text = querySelector('input#date-text');
+                  const result = querySelector('#moment-result');
                   if (!interval) {
                     interval = setInterval(function () {
                       const formatted = moment_format(new Date());
@@ -121,7 +121,7 @@ export function DateInput() {
                 className="btn btn-sm btn-success"
                 onClick={function (e) {
                   e.preventDefault();
-                  const result = document.querySelector('#moment-result');
+                  const result = querySelector('#moment-result');
                   copyTextToClipboard(result.textContent.trim());
                 }}
               >
