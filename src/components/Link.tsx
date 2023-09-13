@@ -1,14 +1,21 @@
 import React from 'react';
-import { Link as OriginalLink } from 'react-router-dom';
+import { LinkProps, Link as OriginalLink } from 'react-router-dom';
 import { safelinkInstance } from '../utils/utils';
+
+interface LinkProperties extends React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>> {
+  /** target url */
+  href?: string;
+  /** same as href */
+  to?: string;
+}
 
 /**
  * React Safelink Converter
  * * Anonymize external links into page redirector
  */
-export class Link extends React.Component {
+export class Link extends React.Component<LinkProperties> {
   sf = safelinkInstance;
-  constructor(props) {
+  constructor(props: LinkProperties) {
     super(props);
   }
 
