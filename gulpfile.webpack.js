@@ -21,6 +21,14 @@ function createConfig(entry, output) {
     },
     resolve: {
       extensions: ['.ts', '.js'],
+      fallback: {
+        crypto: require.resolve('crypto-browserify'),
+        path: require.resolve('path-browserify'),
+        os: require.resolve('os-browserify'),
+        buffer: require.resolve('buffer/'),
+        constants: require.resolve('constants-browserify'),
+        stream: require.resolve('stream-browserify'),
+      },
     },
     module: {
       rules: [

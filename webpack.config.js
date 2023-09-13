@@ -256,6 +256,14 @@ module.exports = {
   },
   resolve: {
     extensions: ['.*', '.ts', '.js', '.jsx', '.tsx'],
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      path: require.resolve('path-browserify'),
+      os: require.resolve('os-browserify'),
+      buffer: require.resolve('buffer/'),
+      constants: require.resolve('constants-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
   },
   plugins: [
     // This makes it possible for webpack to safely use env vars
