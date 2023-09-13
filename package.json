@@ -12,12 +12,13 @@
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "update": "yarn run update:ncu",
     "build:webpack": "cross-env-shell NODE_ENV=production webpack --mode production",
-    "build": "rm -rf dist && run-s \"build:**\" && gulp build",
+    "build": "yarn run clean && run-s \"build:**\" && gulp build",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
     "vite:serve": "vite preview",
-    "php": "php -S 127.0.0.1:4000"
+    "php": "php -S 127.0.0.1:4000",
+    "clean": "rm -rf dist tmp"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
