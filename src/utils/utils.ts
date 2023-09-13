@@ -19,7 +19,11 @@ export interface LoadJSOpt {
  * // or in class React.Component
  * componentDidMount() { loadJS('//host/path/file.js') }
  */
-export function loadJS(url: string, props: LoadJSOpt) {
+export function loadJS(url: string, props?: LoadJSOpt) {
+  props = Object.assign(props || {}, {
+    proxy: false,
+  });
+
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
     // fix dynamic protocol source
