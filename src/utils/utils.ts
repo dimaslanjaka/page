@@ -28,11 +28,14 @@ export interface LoadJSOpt {
  * componentDidMount() { loadJS('//host/path/file.js') }
  */
 export function loadJS(url: string, props?: LoadJSOpt) {
-  props = Object.assign(props || {}, {
-    proxy: false,
-    onload: noop,
-    onerror: noop,
-  });
+  props = Object.assign(
+    {
+      proxy: false,
+      onload: noop,
+      onerror: noop,
+    },
+    props || {},
+  );
 
   return new Bluebird((resolve, reject) => {
     const script = document.createElement('script');
