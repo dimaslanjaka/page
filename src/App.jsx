@@ -7,18 +7,17 @@ import './assets/css/main.scss';
 // import './assets/js/bootstrap';
 //
 
-import { Home } from './route/Home';
-import { Login } from './route/Login';
+import { all } from 'bluebird';
 import { Route, Routes } from 'react-router-dom';
 import { Layout, NoMatch } from './components/Layout';
-import { all } from 'bluebird';
-import { copyTextToClipboard, randomStr } from './utils';
-import { Safelink } from './route/safelink';
-import { MomentTimezone } from './route/MomentTimezone';
-import { HighlightLayout } from './route/Highlight';
-import { initHljs } from './utils/highlightjs';
-import { loadBootstrapModule } from './assets/js/bootstrap';
 import { BootstrapCheatSheet } from './route/BootstrapCheatSheet';
+import { HighlightLayout } from './route/Highlight';
+import { Home } from './route/Home';
+import { Login } from './route/Login';
+import { MomentTimezone } from './route/MomentTimezone';
+import { Safelink } from './route/safelink';
+import { copyTextToClipboard, randomStr } from './utils';
+import { initHljs } from './utils/highlightjs';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -35,7 +34,7 @@ class App extends React.Component {
     // load highlight.js
     initHljs();
     // load bootstrap
-    loadBootstrapModule();
+    // loadBootstrapModule();
   }
 
   render() {
