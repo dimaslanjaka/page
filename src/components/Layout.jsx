@@ -6,7 +6,7 @@ import { Image } from '../components/Image';
 export function Layout() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top" id="navbar-top">
+      <nav className="navbar navbar-expand-lg fixed-top" id="navbar-top">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/page">
             <Image
