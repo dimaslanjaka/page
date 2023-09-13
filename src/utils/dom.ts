@@ -31,5 +31,5 @@ export function removeElement(e: HTMLElement | Record<string, any> | undefined |
     e.removeChild(child);
     child = e.lastElementChild;
   }
-  e.remove();
+  if (e.remove) e.remove();
 }
