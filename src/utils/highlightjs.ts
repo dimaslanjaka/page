@@ -11,7 +11,7 @@ function startHighlighter(preCode: HTMLElement) {
   // validate hljs for browser
   // if ('hljs' in window === false) return loadHljs();
   // validate hljs for react
-  if ('highlightBlock' in hljs === false) return loadHljs();
+  if ('highlightAll' in hljs === false) return loadHljs();
   // deterimine <code /> tag
   let code = preCode;
   if (preCode.tagName.toLowerCase() === 'pre') {
@@ -35,12 +35,20 @@ function startHighlighter(preCode: HTMLElement) {
   if (code.hasAttribute('data-highlight')) {
     if (code.getAttribute('data-highlight') != 'false') {
       // highlight on data-highlight="true"
-      hljs.highlightBlock(code);
+      highlightElement(code);
       console.log('highlighting', code.id);
     }
   } else {
     // highlight no attribute data-highlight
     // enable highlighting by default
+    highlightElement(code);
+  }
+}
+
+function highlightElement(code: HTMLElement) {
+  if (hljs.highlightElement) {
+    hljs.highlightElement(code);
+  } else {
     hljs.highlightBlock(code);
   }
 }
