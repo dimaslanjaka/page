@@ -261,9 +261,13 @@ export function onloadAds() {
       }
     } else if (ins.innerHTML.trim().length === 0) {
       console.log('adsbygoogle.push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
-      window.adsbygoogle.push({
-        params: paramBuilder({ slot, client: ins.getAttribute('data-ad-client').trim() }),
-      });
+      try {
+        window.adsbygoogle.push({
+          params: paramBuilder({ slot, client: ins.getAttribute('data-ad-client').trim() }),
+        });
+      } catch (_) {
+        console.error('adsbygoogle.push', 'fail', slot);
+      }
     }
   }
 }
