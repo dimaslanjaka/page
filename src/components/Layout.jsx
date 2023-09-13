@@ -49,21 +49,18 @@ export function Layout() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown
+                  Tools
                 </Link>
                 <ul className="dropdown-menu" style={{ maxWidth: '300px' }}>
                   <li>
-                    <Link className="dropdown-item" href="#">
-                      Action
+                    <Link className="dropdown-item" href="/page/cookies">
+                      Cookie Manager
                     </Link>
                   </li>
                   <li>
                     <Link className="dropdown-item" href="/page/moment-timezone.html">
                       Moment Timezone Playground
                     </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
                   </li>
                   <li>
                     <Link className="dropdown-item" href="/page/bot-detect.html">
