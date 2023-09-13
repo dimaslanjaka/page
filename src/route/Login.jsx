@@ -14,7 +14,7 @@ import { firebaseAuthGoogle } from '../assets/js/google/firebase';
 export class Login extends React.Component {
   componentDidMount() {
     document.title = 'Login page - WMI';
-    loadJS('https://accounts.google.com/gsi/client').then(this.start.bind(this));
+    loadJS('//accounts.google.com/gsi/client').then(this.start.bind(this));
   }
 
   render() {
