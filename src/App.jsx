@@ -17,6 +17,7 @@ import { copyTextToClipboard, randomStr } from './utils';
 import { Safelink } from './route/safelink';
 import { MomentTimezone } from './route/MomentTimezone';
 import { HighlightLayout } from './route/Highlight';
+import { initHljs } from './utils/highlightjs';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -30,6 +31,8 @@ class App extends React.Component {
   componentDidMount() {
     // load main script
     initClipBoard();
+    // load highlight.js
+    initHljs();
   }
 
   render() {
