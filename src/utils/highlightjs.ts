@@ -36,7 +36,7 @@ function startHighlighter(preCode: HTMLElement) {
     if (code.getAttribute('data-highlight') != 'false') {
       // highlight on data-highlight="true"
       highlightElement(code);
-      console.log('highlighting', code.id);
+      // console.log('highlighting', code.id);
     }
   } else {
     // highlight no attribute data-highlight
