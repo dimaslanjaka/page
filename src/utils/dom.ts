@@ -17,3 +17,19 @@ export function querySelector(str: string): HTMLElement | Record<string, any> {
  * @returns
  */
 export const getElementById = (id: string) => querySelector('#' + id);
+
+/**
+ * element remover
+ *
+ * remove element with their childs
+ * @param e
+ */
+export function removeElement(e: HTMLElement | Record<string, any> | undefined | null) {
+  if (!e) return;
+  let child = e.lastElementChild;
+  while (child) {
+    e.removeChild(child);
+    child = e.lastElementChild;
+  }
+  e.remove();
+}
