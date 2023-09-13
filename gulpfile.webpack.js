@@ -46,6 +46,10 @@ function createConfig(entry, output) {
   return override;
 }
 
+/**
+ * build static
+ * @param {(...args: any[])=>any} done
+ */
 const buildStatic = done => {
   webpack(
     [
