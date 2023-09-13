@@ -17,6 +17,8 @@ import { Safelink } from './route/safelink';
 import { MomentTimezone } from './route/MomentTimezone';
 import { HighlightLayout } from './route/Highlight';
 import { initHljs } from './utils/highlightjs';
+import { loadBootstrapModule } from './assets/js/bootstrap';
+import { BootstrapCheatSheet } from './route/BootstrapCheatSheet';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -32,6 +34,8 @@ class App extends React.Component {
     initClipBoard();
     // load highlight.js
     initHljs();
+    // load bootstrap
+    loadBootstrapModule();
   }
 
   render() {
@@ -48,6 +52,7 @@ class App extends React.Component {
             <Route path="highlight-js.html" element={<HighlightLayout />} />
             <Route path="moment-timezone" element={<MomentTimezone />} />
             <Route path="moment-timezone.html" element={<MomentTimezone />} />
+            <Route path="bootstrap" element={<BootstrapCheatSheet />} />
 
             {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
