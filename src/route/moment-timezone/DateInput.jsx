@@ -30,6 +30,7 @@ export function DateInput() {
               id="date"
               className="form-control mb-2"
               step="1"
+              name="input-date"
               onChange={function (e) {
                 // update date text when date input changed
                 const formatted = moment_format(e.target.value);
@@ -41,9 +42,10 @@ export function DateInput() {
                 date_text.value = formatted;
               }}
             />
+            <label htmlFor="date-text">Text Input</label>
             <input
               type="text"
-              name=""
+              name="input-text"
               id="date-text"
               className="form-control mb-2"
               onChange={function () {
@@ -72,10 +74,17 @@ export function DateInput() {
                 result.textContent = formatted;
               }}
             />
-            <input type="text" name="" id="date-timezone" defaultValue="Asia/Jakarta" className="form-control mb-2" />
+            <label htmlFor="date-timezone">Timezone</label>
+            <input
+              type="text"
+              name="timezone"
+              id="date-timezone"
+              defaultValue="Asia/Jakarta"
+              className="form-control mb-2"
+            />
           </div>
-          <div className="col-6">
-            <div className="btn-group" role="group" aria-label="date input control">
+          <div className="col-lg-6 col-12">
+            <div className="btn-group d-flex" role="group" aria-label="date input control">
               <button
                 id="start-interval"
                 className="btn btn-sm btn-warning"
@@ -120,7 +129,7 @@ export function DateInput() {
               </button>
             </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6 col-12">
             <span className="mr-2">Result:</span> <span id="moment-result"></span>
           </div>
         </div>
