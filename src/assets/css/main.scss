@@ -2,6 +2,8 @@
 @import 'bootstrap/scss/bootstrap';
 @import '../fonts/index.scss';
 
+// malfunction keyboard 56^%
+
 // @font-face {
 //   font-family: 'Cera Round Pro Bold';
 //   src: url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.eot');
@@ -25,6 +27,10 @@ h5,
 h6,
 tr th {
   font-family: 'Cera Pro Bold', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+i:not([class^='fa-']) {
+  font-family: 'Cera Pro Italic', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 * {
