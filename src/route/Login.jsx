@@ -8,7 +8,7 @@ import {
   handleCredentialResponse,
   isTokenExpired,
 } from '../assets/js/google/constants';
-import { loadJS } from '../utils/utils';
+import { loadJS } from '../utils';
 import { firebaseAuthGoogle } from '../assets/js/google/firebase';
 
 export class Login extends React.Component {
