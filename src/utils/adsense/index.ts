@@ -253,6 +253,7 @@ export function onloadAds() {
     // log('parent width banner', i + 0, ins.parentElement.offsetWidth);
 
     const slot = ins.getAttribute('data-ad-slot').trim();
+    const client = ins.getAttribute('data-ad-client').trim();
     if (ins.parentElement.offsetWidth < 250) {
       // remove banner when parent width is 0 or display: none
       if (window.adsense_option.remove) {
@@ -260,14 +261,21 @@ export function onloadAds() {
         ins.remove();
       }
     } else if (ins.innerHTML.trim().length === 0) {
-      console.log('adsbygoogle.push', i + 1, slot, 'width', ins.parentElement.offsetWidth);
-      try {
-        window.adsbygoogle.push({
-          params: paramBuilder({ slot, client: ins.getAttribute('data-ad-client').trim() }),
-        });
-      } catch (_) {
-        console.error('adsbygoogle.push', 'fail', slot);
-      }
+      console.log('adsbygoogle.push', i + 1, '.' + ins.classList, {
+        slot,
+        client,
+        width: {
+          parent: ins.parentElement.offsetWidth,
+          self: ins.offsetWidth,
+        },
+        height: {
+          parent: ins.parentElement.offsetHeight,
+          self: ins.offsetHeight,
+        },
+      });
+      window.adsbygoogle.push({
+        params: paramBuilder({ slot, client }),
+      });
     }
   }
 }
