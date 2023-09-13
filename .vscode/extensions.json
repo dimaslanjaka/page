@@ -4,6 +4,7 @@
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
     "formulahendry.code-runner",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-rename-tag"
   ]
 }

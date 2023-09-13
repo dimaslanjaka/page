@@ -9,6 +9,7 @@ import { copyTextToClipboard, randomStr } from './utils';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { Safelink } from './route/safelink';
 import { MomentTimezone } from './route/MomentTimezone';
+import { HighlightLayout } from './route/Highlight';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -34,7 +35,8 @@ class App extends React.Component {
             <Route path="google/login.html" element={<Login />} />
             <Route path="safelink" element={<Safelink />} />
             <Route path="safelink.html" element={<Safelink />} />
-            {/*<Route path="fontawesome" element={<FontAwesome />} />*/}
+            <Route path="highlight-js" element={<HighlightLayout />} />
+            <Route path="highlight-js.html" element={<HighlightLayout />} />
             <Route path="moment-timezone" element={<MomentTimezone />} />
             <Route path="moment-timezone.html" element={<MomentTimezone />} />
 

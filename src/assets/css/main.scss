@@ -2,8 +2,6 @@
 
 @import 'bootstrap/scss/bootstrap';
 
-
-
 * {
   word-wrap: break-word;
   max-width: 100%;
@@ -15,7 +13,7 @@
 }
 
 /* hide unfilled ads */
-ins.adsbygoogle[data-ad-status="unfilled"] {
+ins.adsbygoogle[data-ad-status='unfilled'] {
   display: none !important;
 }
 
@@ -24,13 +22,13 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
   border-radius: 0;
   min-width: 55px;
   background: none repeat scroll 0 0 transparent;
-  background-color: #000;
-  color: #f1f2f3 !important;
+  // background-color: #000;
+  // color: #f1f2f3 !important;
   cursor: pointer;
   /* border: 1px solid #bbb;
 	border: 0; */
   border-style: none;
-  font-family: "HELVETICA", sans-serif;
+  font-family: 'HELVETICA', sans-serif;
   font-size: 0.8em;
   font-weight: normal;
   text-align: center;
@@ -56,7 +54,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 	padding: 3px 8px; */
 }
 
-.copy-code-button>span {
+.copy-code-button > span {
   color: #f1f2f3 !important;
 }
 
@@ -67,14 +65,14 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 }
 
 .copy-code-button::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 16px;
   height: 16px;
   margin-right: 3px;
   background-color: white;
   background-size: contain;
-  background-image: url("//static.thenounproject.com/png/4565777-200.png");
+  background-image: url('//static.thenounproject.com/png/4565777-200.png');
   background-repeat: no-repeat;
   position: relative;
   top: 3px;
@@ -102,9 +100,10 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 }
 
 pre {
+  padding-top: 22px;
   position: relative;
-  color: #fff;
-  background-color: #000;
+  // color: #fff;
+  // background-color: #000;
   overflow-x: auto;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
