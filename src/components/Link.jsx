@@ -30,14 +30,14 @@ export class Link extends React.Component {
 
     if (type === 'external') {
       return (
-        <a {...props} href={href} target={type == 'external' ? '_blank' : '_self'}>
+        <a {...props} href={result} target={type == 'external' ? '_blank' : '_self'} data-type={type}>
           {this.props.children}
         </a>
       );
     }
 
     return (
-      <OriginalLink {...props} to={dest} target={type == 'external' ? '_blank' : '_self'}>
+      <OriginalLink {...props} to={dest} target={type == 'external' ? '_blank' : '_self'} data-type={type}>
         {this.props.children}
       </OriginalLink>
     );
