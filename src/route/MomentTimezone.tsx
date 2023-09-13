@@ -1,10 +1,10 @@
 import React from 'react';
 import './MomentTimezone.scss';
-import { Clock } from './moment-timezone/clock';
-import { DateInput } from './moment-timezone/date-input';
-import { FullTimezoneList } from './moment-timezone/full-timezone-list';
 import { momentTimezonePlayground } from './moment-timezone/moment-timezone';
-import { Snippet } from './moment-timezone/snippet';
+import { ClockLive } from './moment-timezone/ClockLive';
+import { Snippet } from './moment-timezone/Snippet';
+import { FullTimezoneList } from './moment-timezone/FullTimezoneList';
+import { DateInput } from './moment-timezone/DateInput';
 
 export function MomentTimezone() {
   React.useEffect(() => {
@@ -31,7 +31,7 @@ export function MomentTimezone() {
 
       <DateInput />
       <Snippet />
-      <Clock />
+      <ClockLive />
       <FullTimezoneList />
     </main>
   );

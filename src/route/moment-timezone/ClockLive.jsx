@@ -1,7 +1,7 @@
 import moment from 'moment-timezone';
 import React from 'react';
 
-export function Clock() {
+export function ClockLive() {
   React.useEffect(() => {
     // clock live
     setInterval(clock_update, 1000);
