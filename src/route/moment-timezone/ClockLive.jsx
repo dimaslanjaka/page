@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import React from 'react';
+import { querySelector } from '../../utils';
 
 export function ClockLive() {
   React.useEffect(() => {
@@ -57,9 +58,9 @@ function clock_update() {
   const tokyo = moment.tz('Asia/Tokyo').format('MMMM Do YYYY, h:mm:ss a');
   const la = moment.tz('America/Los_Angeles').format('MMMM Do YYYY, h:mm:ss a');
 
-  document.querySelector('#london').textContent = london;
-  document.querySelector('#sydney').textContent = sydney;
-  document.querySelector('#beijing').textContent = beijing;
-  document.querySelector('#tokyo').textContent = tokyo;
-  document.querySelector('#la').textContent = la;
+  querySelector('#london').textContent = london;
+  querySelector('#sydney').textContent = sydney;
+  querySelector('#beijing').textContent = beijing;
+  querySelector('#tokyo').textContent = tokyo;
+  querySelector('#la').textContent = la;
 }
