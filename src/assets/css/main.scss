@@ -1,8 +1,20 @@
+// malfunction keyboard 56^%
+
+// define custom vars for bootstrap
+$success: #7952b3;
+$theme-colors: (
+  'info': teal,
+  'danger': rgb(204, 48, 0),
+);
+// load bootstrap
+@import 'bootstrap/scss/bootstrap.scss';
+// load fonts
 @import url('//rawcdn.githack.com/dimaslanjaka/Web-Manajemen/5950c63a3e549a6a33215c1506e5ae7b285eff63/css/all.min.css');
-@import 'bootstrap/scss/bootstrap';
 @import url('../fonts/index.scss');
 
-// malfunction keyboard 56^%
+body {
+  padding: 1.5rem;
+}
 
 // @font-face {
 //   font-family: 'Cera Round Pro Bold';
