@@ -1,14 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { initDropdown } from '../assets/js/bootstrap';
 import { Image } from '../components/Image';
 import { Link } from '../components/Link';
 
 export function Layout() {
-  React.useEffect(() => {
-    initDropdown();
-  });
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg fixed-top" id="navbar-top">
@@ -37,14 +32,14 @@ export function Layout() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" href="/page">
+                <a className="nav-link active" aria-current="page" href="/page">
                   Home
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <Link to="/page/google/login" className="nav-link">
+                <a href="/page/google/login" className="nav-link">
                   Login
-                </Link>
+                </a>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -59,26 +54,26 @@ export function Layout() {
                 </a>
                 <ul className="dropdown-menu" style={{ maxWidth: '300px' }} aria-labelledby="navbarDropdown">
                   <li>
-                    <Link className="dropdown-item" href="/page/cookies">
+                    <a className="dropdown-item" href="/page/cookies">
                       Cookie Manager
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="/page/moment-timezone.html">
+                    <a className="dropdown-item" href="/page/moment-timezone.html">
                       Moment Timezone Playground
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link className="dropdown-item" href="/page/bot-detect.html">
+                    <a className="dropdown-item" href="/page/bot-detect.html">
                       Bot Detection
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link className="nav-link disabled" aria-disabled="true">
+                <a className="nav-link disabled" aria-disabled="true">
                   Disabled
-                </Link>
+                </a>
               </li>
             </ul>
             <form className="d-flex" role="search">
