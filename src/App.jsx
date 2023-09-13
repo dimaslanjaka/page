@@ -1,12 +1,19 @@
+// special
 import React from 'react';
+//
+
+// styling
+//import './assets/fonts/Cera Pro Bold.otf';
+import './assets/css/main.scss';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
+//
+
 import { Home } from './route/Home';
 import { Login } from './route/Login';
 import { Route, Routes } from 'react-router-dom';
-import './assets/css/main.scss';
 import { Layout, NoMatch } from './components/Layout';
 import { all } from 'bluebird';
 import { copyTextToClipboard, randomStr } from './utils';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { Safelink } from './route/safelink';
 import { MomentTimezone } from './route/MomentTimezone';
 import { HighlightLayout } from './route/Highlight';

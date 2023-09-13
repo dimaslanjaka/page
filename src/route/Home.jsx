@@ -62,7 +62,7 @@ export const Home = () => {
               </Link>
             </div>
             <div className="col-xs-6 col-md-3">
-              <i class="fa-regular fa-person-walking-arrow-right fa-size-large"></i>
+              <i className="fa-regular fa-person-walking-arrow-right fa-size-large"></i>
               <h3>Outbound Page</h3>
               <p>
                 All external links proxied using outbound page using{' '}

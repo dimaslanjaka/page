@@ -12,6 +12,9 @@
 # Ensure those won't be messed up with
 *.gif       binary diff
 *.ttf       binary diff
+*.otf       binary diff
+*.woff      binary diff
+*.woff2     binary diff
 *.png       binary diff
 *.jpg       binary diff
 *.ico       binary diff

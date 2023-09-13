@@ -5,6 +5,7 @@
     "editorconfig.editorconfig",
     "formulahendry.code-runner",
     "esbenp.prettier-vscode",
-    "formulahendry.auto-rename-tag"
+    "formulahendry.auto-rename-tag",
+    "stxr.iconfont-preview"
   ]
 }

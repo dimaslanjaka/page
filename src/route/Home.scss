@@ -102,6 +102,8 @@ html {
   }
   p {
     text-align: left;
+    height: 100px;
+    overflow: 'scroll';
   }
 }
 
@@ -119,7 +121,7 @@ html {
 
 .section-title h2::after {
   position: absolute;
-  content: "";
+  content: '';
   background: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
   height: 4px;
   width: 60px;
@@ -133,7 +135,7 @@ html {
 }
 
 .btn-custom {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   text-transform: uppercase;
   color: #fff;
   background-color: #5ca9fb;

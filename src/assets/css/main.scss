@@ -1,9 +1,45 @@
 @import url('//rawcdn.githack.com/dimaslanjaka/Web-Manajemen/5950c63a3e549a6a33215c1506e5ae7b285eff63/css/all.min.css');
 @import 'bootstrap/scss/bootstrap';
 
+@font-face {
+  font-family: 'Cera Round Pro Bold';
+  src: url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.eot');
+  src:
+    url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.eot?#iefix') format('embedded-opentype'),
+    url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.woff') format('woff'),
+    url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.woff2') format('woff2'),
+    url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.ttf') format('truetype'),
+    url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.svg#Cera Round Pro Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cera Pro Bold';
+  src: url('../fonts/Cera\ Pro\ Bold.otf');
+}
+
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('../fonts/Cera\ Pro.otf');
+}
+
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+tr th {
+  font-family: 'Cera Pro Bold', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
 * {
   word-wrap: break-word;
   max-width: 100%;
+  font-family: 'Cera Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 #app {
@@ -93,7 +129,7 @@ ins.adsbygoogle[data-ad-status='unfilled'] {
 .copy-code-button:focus {
   /* Avoid an ugly focus outline on click in Chrome,
        but darken the button for accessibility.
-       See https://stackoverflow.com/a/25298082/1481479 */
+       See //stackoverflow.com/a/25298082/1481479 */
   /* background-color: #E6E6E6; */
   outline: 0;
 }
