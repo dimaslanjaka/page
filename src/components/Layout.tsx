@@ -2,10 +2,26 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Image } from '../components/Image';
 import { Link } from '../components/Link';
+import { querySelector, removeElement } from '../utils';
 
 export function Layout() {
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (!interval) {
+      interval = setInterval(() => {
+        if (document.readyState == 'complete') {
+          removeElement(querySelector('.loader'));
+          clearInterval(interval);
+        }
+      }, 400);
+    }
+  });
+
   return (
     <div>
+      <div className="loader">
+        <div className="sp sp-circle"></div>
+      </div>
       <nav className="navbar navbar-expand-lg fixed-top" id="navbar-top">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/page">
