@@ -3,10 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { loadBootstrapModule } from '../assets/js/bootstrap';
 
 export function BootstrapCheatSheet() {
   React.useEffect(() => {
-    //
+    // load bootstrap module for legacy bootstrap element
+    loadBootstrapModule();
   });
 
   return (
