@@ -73,7 +73,7 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
     if (!window.adsbygoogle) window.adsbygoogle = [] as any;
   }
 
-  render(): React.ReactNode {
+  render() {
     const props = {
       'data-ad-slot': this.state.slot,
       'data-ad-client': 'ca-pub-' + this.state.client.replace('ca-pub-', ''),
