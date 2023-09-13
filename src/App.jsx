@@ -4,7 +4,7 @@ import React from 'react';
 
 // styling
 import './assets/css/main.scss';
-import './assets/js/bootstrap';
+// import './assets/js/bootstrap';
 //
 
 import { Home } from './route/Home';

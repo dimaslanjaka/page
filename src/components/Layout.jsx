@@ -2,8 +2,13 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from '../components/Link';
 import { Image } from '../components/Image';
+import { initDropdown } from '../assets/js/bootstrap';
 
 export function Layout() {
+  React.useEffect(() => {
+    initDropdown();
+  });
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg fixed-top" id="navbar-top">
