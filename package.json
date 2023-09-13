@@ -109,10 +109,6 @@
     "webpack-dev-server": "^4.7.4",
     "webpack-node-externals": "^3.0.0"
   },
-  "workspaces": [
-    "packages/binary-collections",
-    "packages/gch"
-  ],
   "engines": {
     "node": "^14"
   },

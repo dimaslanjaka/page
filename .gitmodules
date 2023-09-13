@@ -1,8 +1,0 @@
-[submodule "packages/binary-collections"]
-	path = packages/binary-collections
-	url = https://github.com/dimaslanjaka/bin.git
-	branch = master
-[submodule "packages/gch"]
-	path = packages/gch
-	url = https://github.com/dimaslanjaka/git-command-helper.git
-	branch = pre-release
