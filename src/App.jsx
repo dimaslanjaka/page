@@ -3,9 +3,9 @@ import React from 'react';
 //
 
 // styling
-//import './assets/fonts/Cera Pro Bold.otf';
+import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/main.scss';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
+//import 'bootstrap/dist/js/bootstrap.bundle.js';
 //
 
 import { Home } from './route/Home';
