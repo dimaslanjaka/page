@@ -44,6 +44,13 @@ export function FullTimezoneList() {
   });
   return (
     <section className="mx-auto p-2">
+      <h2>World-wide timezone</h2>
+      <p>
+        all timezone format for <kbd>moment-timezone</kbd>. But, you need import <kbd>moment-timezone</kbd>
+      </p>
+      <pre>
+        <code className="language-typescript">{`import moment from 'moment-timezone'; // const moment = require('moment-timezone');`}</code>
+      </pre>
       <div className="table-responsive">
         <table className="table" id="table-timezones">
           <thead></thead>
