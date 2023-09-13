@@ -3,9 +3,8 @@ import React from 'react';
 //
 
 // styling
-import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/main.scss';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
+import './assets/js/bootstrap';
 //
 
 import { Home } from './route/Home';
