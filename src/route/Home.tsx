@@ -1,9 +1,9 @@
 import React from 'react';
-import './Home.scss';
 import { Link } from '../components/Link';
+import './Home.scss';
 
 export class Home extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
   }
 
@@ -52,7 +52,7 @@ export class Home extends React.Component {
                 <i className="fa-solid fa-arrow-right-to-bracket fa-size-large"></i>
                 <h3>Login</h3>
                 <p>User portal to use any features</p>
-                <a to="/page/login" className="btn btn-sm btn-custom">
+                <a href="/page/login" className="btn btn-sm btn-custom">
                   <i className="fa-thin fa-arrow-right"></i>
                 </a>
               </div>
@@ -62,7 +62,7 @@ export class Home extends React.Component {
                 <p>
                   Test, format, interval using <code>moment-timezone</code> module
                 </p>
-                <a to="/page/moment-timezone" className="btn btn-sm btn-custom">
+                <a href="/page/moment-timezone" className="btn btn-sm btn-custom">
                   <i className="fa-thin fa-arrow-right"></i>
                 </a>
               </div>
@@ -73,7 +73,7 @@ export class Home extends React.Component {
                   All external links proxied using outbound page using{' '}
                   <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
                 </p>
-                <a to="/page/safelink" className="btn btn-sm btn-custom">
+                <a href="/page/safelink" className="btn btn-sm btn-custom">
                   <i className="fa-thin fa-arrow-right"></i>
                 </a>
               </div>
@@ -83,7 +83,7 @@ export class Home extends React.Component {
                 <p>
                   Auto syntax highlighting on <kbd>{`<pre><code>`}</kbd> tag using <kbd>highlight.js</kbd>
                 </p>
-                <a to="/page/highlight-js" className="btn btn-sm btn-custom">
+                <a href="/page/highlight-js" className="btn btn-sm btn-custom">
                   <i className="fa-thin fa-arrow-right"></i>
                 </a>
               </div>
