@@ -68,6 +68,9 @@ export const Home = () => {
                 All external links proxied using outbound page using{' '}
                 <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
               </p>
+              <Link to="/page/safelinkify" className="btn btn-sm btn-custom">
+                <i className="fa-thin fa-arrow-right"></i>
+              </Link>
             </div>
             <div className="col-xs-6 col-md-3">
               <i className="fa-light fa-code fa-size-large"></i>
