@@ -1,5 +1,6 @@
 import React from 'react';
 import { Adsense, AdsenseFill } from '../../components/Adsense';
+import { Link } from '../../components/Link';
 import { SafelinkContents } from '../../components/SafelinkContents';
 import { array_shuffle, md5 } from '../../utils';
 
@@ -69,9 +70,9 @@ export class SafelinkLayout2 extends React.Component<Record<string, never>, Feed
                       <div className="col-md-8">
                         <div className="card-body">
                           <h5 className="card-title">
-                            <a href={item.link} className="text-decoration-none" target="_blank">
+                            <Link href={item.link} className="text-decoration-none" target="_blank">
                               {item.title}
-                            </a>
+                            </Link>
                           </h5>
                           <p className="card-text">{item.description.substring(0, 70)}</p>
                           <p className="card-text">

@@ -26,9 +26,9 @@ export const Home = () => {
                     Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering
                     php, javascript, jquery, mysql, seo, e-commerce and others.
                   </p>
-                  <a href="#features" className="btn btn-custom btn-lg page-scroll">
+                  <Link href="#features" className="btn btn-custom btn-lg page-scroll">
                     <i className="far fa-chevron-double-down"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

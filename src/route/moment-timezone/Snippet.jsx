@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from '../../components/Link';
 
 export function Snippet() {
   return (
     <section>
       <div className="mx-auto p-2">
         <h2>
-          <a href="#formatting-1">#</a>Formatting
+          <Link href="#formatting-1">#</Link>Formatting
         </h2>
         <div data-js-h3-section-list="">
           <div>
@@ -59,20 +60,20 @@ export function Snippet() {
               </table>
               <p>
                 Used by{' '}
-                <a rel="nofollow noopener" href="http://momentjs.com/docs/#/displaying/">
+                <Link rel="nofollow noopener" href="http://momentjs.com/docs/#/displaying/">
                   Moment.js
-                </a>{' '}
+                </Link>{' '}
                 and{' '}
-                <a rel="nofollow noopener" href="https://date-fns.org/v1.28.5/docs/format">
+                <Link rel="nofollow noopener" href="https://date-fns.org/v1.28.5/docs/format">
                   date-fns/format
-                </a>
+                </Link>
                 . Similar to Java
-                <a
+                <Link
                   rel="nofollow noopener"
                   href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html"
                 >
                   SimpleDateFormat
-                </a>
+                </Link>
                 .
               </p>
             </div>
