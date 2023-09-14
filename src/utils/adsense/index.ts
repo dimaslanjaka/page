@@ -326,7 +326,7 @@ function getAllPlaces(from: Element | Document) {
 /** main */
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  if (!banned) {
+  if (!banned && !localhost) {
     // skip showing ads on non-domain host
     // skip showing ads from banned page
     if (document.readyState !== 'loading') {
