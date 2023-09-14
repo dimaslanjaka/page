@@ -97,6 +97,7 @@ function createHtml() {
       new HtmlWebpackPlugin(
         Object.assign(
           {
+            baseUrl: 'https://www.webmanajemen.com', // site url
             filename: 'index.html', // create index.html
             template: path.resolve('src', 'main.html'), // source html layout
             publicPath: ASSET_PATH, // base directory from root domain
