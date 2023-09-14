@@ -1,7 +1,0 @@
-**/node_modules
-!public-source/node_modules
-!public-source/node_modules/.gitignore
-yarn.lock
-/page
-**/tmp
-**/.rollup.cache

@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "ginfuru.better-nunjucks",
-    "esbenp.prettier-vscode",
-    "k--kato.intellij-idea-keybindings",
-    "dbaeumer.vscode-eslint",
-    "formulahendry.code-runner"
-  ]
-}
