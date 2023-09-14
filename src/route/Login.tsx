@@ -1,6 +1,4 @@
 import React from 'react';
-import './Login.scss';
-import { Image } from '../components/Image';
 import {
   GOOGLE_CONFIG,
   KEY_LOCALSTORAGE,
@@ -8,13 +6,15 @@ import {
   handleCredentialResponse,
   isTokenExpired,
 } from '../assets/js/google/constants';
-import { loadJS } from '../utils';
 import { firebaseAuthGoogle } from '../assets/js/google/firebase';
+import { Image } from '../components/Image';
+import './Login.scss';
 
 export class Login extends React.Component {
+  g_credential: Record<string, any>;
   componentDidMount() {
     document.title = 'Login page - WMI';
-    loadJS('//accounts.google.com/gsi/client').then(this.start.bind(this));
+    this.loadGSI().then(this.start.bind(this));
   }
 
   render() {
@@ -70,7 +70,7 @@ export class Login extends React.Component {
     const value = urlParameters.get('clear');
     const needClean = value !== null;
     if (needClean) {
-      this.g_credential = {};
+      this.g_credential = {} as Record<string, any>;
       localStorage.removeItem(KEY_LOCALSTORAGE);
       window.location.replace(window.location.href.split('?')[0]);
     }
@@ -80,7 +80,7 @@ export class Login extends React.Component {
     // initialize google account
     google.accounts.id.initialize({
       ...GOOGLE_CONFIG,
-      allowed_parent_origin: true,
+      //allowed_parent_origin: true,
     });
     // prevent UX dead loop
     google.accounts.id.disableAutoSelect();
@@ -103,7 +103,7 @@ export class Login extends React.Component {
     updateProfileCard();
   }
 
-  handleCredResp(response) {
+  handleCredResp(response: Record<string, any>) {
     const tokenDebugger = document.getElementById('tokenResponse');
     if (!response) {
       if (tokenDebugger) tokenDebugger.textContent = 'response is null';
@@ -124,6 +124,15 @@ export class Login extends React.Component {
       updateProfileCard();
     });
   }
+
+  loadGSI() {
+    return new Promise(resolve => {
+      const script = document.createElement('script');
+      script.src = '//accounts.google.com/gsi/client';
+      script.onload = resolve;
+      document.getElementsByTagName('head')[0].appendChild(script);
+    });
+  }
 }
 
 function updateProfileCard() {
@@ -133,18 +142,19 @@ function updateProfileCard() {
   if ('credential' in g_credential) {
     const wrapper = document.getElementById('profileWrapper');
     const img = wrapper.querySelector('.card-img-top');
-    if ('picture' in g_credential.credential) {
-      img.setAttribute('src', g_credential.credential.picture);
+    if (typeof g_credential.credential == 'object') {
+      if ('picture' in g_credential.credential) {
+        img.setAttribute('src', g_credential.credential.picture);
+      }
+      if ('given_name' in g_credential.credential) {
+        const fullName = `${g_credential.credential.given_name} ${g_credential.credential.family_name}`;
+        img.setAttribute('alt', `${fullName}`);
+        wrapper.querySelector('.card-title').innerHTML = fullName;
+      }
+      document.getElementById('gEmail').textContent = g_credential.credential.email;
+      document.getElementById('isExpired').innerHTML = isTokenExpired(g_credential)
+        ? '<span className="text-danger">true</span>'
+        : '<span className="text-success">false</span>';
     }
-    if ('given_name' in g_credential.credential) {
-      const fullName = `${g_credential.credential.given_name} ${g_credential.credential.family_name}`;
-      img.setAttribute('alt', `${fullName}`);
-      wrapper.querySelector('.card-title').innerHTML = fullName;
-    }
-
-    document.getElementById('gEmail').textContent = g_credential.credential.email;
-    document.getElementById('isExpired').innerHTML = isTokenExpired(g_credential)
-      ? '<span className="text-danger">true</span>'
-      : '<span className="text-success">false</span>';
   }
 }
