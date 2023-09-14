@@ -14,7 +14,7 @@ export class BotDetect extends React.Component {
 
   render() {
     return (
-      <main className="container">
+      <div className="container">
         <div className="row">
           <div className="mb-3 col-md-12">
             <ol itemScope itemType="https://schema.org/BreadcrumbList" className="breadcrumb" id="BreadcrumbList">
@@ -158,7 +158,7 @@ export class BotDetect extends React.Component {
             </table>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }

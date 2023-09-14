@@ -4,7 +4,7 @@ import './Highlight.scss';
 
 export function HighlightLayout() {
   return (
-    <main className="mx-auto p-2">
+    <div className="mx-auto p-2">
       <h1>Auto highlight.js</h1>
       <p>
         implement auto syntax highlighting using <kbd>highlight.js</kbd>
@@ -125,6 +125,6 @@ function initHljs() {
 // your codes to print here
       `}</code>
       </pre>
-    </main>
+    </div>
   );
 }

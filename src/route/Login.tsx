@@ -19,7 +19,7 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <main>
+      <div>
         <section>
           <div className="mb-2" id="profileWrapper">
             <div className="card">
@@ -59,7 +59,7 @@ export class Login extends React.Component {
             <code id="tokenResponse"></code>
           </pre>
         </section>
-      </main>
+      </div>
     );
   }
 

@@ -14,7 +14,7 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <main>
+      <div>
         <header id="header">
           <div className="intro">
             <img
@@ -91,7 +91,7 @@ export class Home extends React.Component {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }

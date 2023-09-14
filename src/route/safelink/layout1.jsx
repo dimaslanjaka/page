@@ -6,7 +6,7 @@ import { Adsense } from '../../components/Adsense';
 export class SafelinkLayout1 extends React.Component {
   render() {
     return (
-      <main>
+      <div>
         <section id="main-content">
           <div id="ads-left">
             {/*<!-- vertikal kiri -->*/}
@@ -32,7 +32,7 @@ export class SafelinkLayout1 extends React.Component {
             ></Adsense>
           </div>
         </section>
-      </main>
+      </div>
     );
   }
 }

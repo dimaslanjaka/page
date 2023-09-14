@@ -14,7 +14,7 @@ export function MomentTimezone() {
   });
 
   return (
-    <main>
+    <div>
       <section>
         <div className="text-center">
           <h1>
@@ -34,6 +34,6 @@ export function MomentTimezone() {
       <Snippet />
       <ClockLive />
       <FullTimezoneList />
-    </main>
+    </div>
   );
 }

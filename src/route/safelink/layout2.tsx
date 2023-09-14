@@ -54,7 +54,7 @@ export class SafelinkLayout2 extends React.Component<Record<string, never>, Feed
 
   render() {
     return (
-      <main className="container-fluid">
+      <div className="container-fluid">
         <div className="row">
           <div className="col-md-4 d-none d-lg-block">
             {/*get random 10 feeds*/}
@@ -101,7 +101,7 @@ export class SafelinkLayout2 extends React.Component<Record<string, never>, Feed
             ></Adsense>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }
