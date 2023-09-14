@@ -1,10 +1,11 @@
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
 import { randomStr } from '.';
 import { loadJS } from './utils';
 
 // css for browser
 // '//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css'
+// css for local
+// @import 'highlight.js/styles/github-dark.css';
 
 // start highlight pre code
 function startHighlighter(preCode: HTMLElement) {
