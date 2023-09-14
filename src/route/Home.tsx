@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { Link } from '../components/Link';
 import './Home.scss';
@@ -32,7 +33,7 @@ export class Home extends React.Component {
                       php, javascript, jquery, mysql, seo, e-commerce and others.
                     </p>
                     <a href="#features" className="btn btn-custom btn-lg page-scroll">
-                      <i className="far fa-chevron-double-down"></i>
+                      <i className="fa-regular fa-chevron-double-down"></i>
                     </a>
                   </div>
                 </div>

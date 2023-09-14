@@ -4,13 +4,11 @@ import React from 'react';
 
 // styling
 import './assets/css/main.scss';
-// import './assets/js/bootstrap';
 //
 
 import { all } from 'bluebird';
 import { Route, Routes } from 'react-router-dom';
 import { Layout, NoMatch } from './components/Layout';
-import { BootstrapCheatSheet } from './route/BootstrapCheatSheet';
 import { HighlightLayout } from './route/Highlight';
 import { Home } from './route/Home';
 import { Login } from './route/Login';
@@ -18,6 +16,7 @@ import { MomentTimezone } from './route/MomentTimezone';
 import { Safelink } from './route/safelink';
 import { copyTextToClipboard, randomStr } from './utils';
 import { initHljs } from './utils/highlightjs';
+import { UI } from './route/UI';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -39,27 +38,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Routes>
-          <Route path="/page" element={<Layout />}>
+      <main>
+        <Layout>
+          <Routes>
             <Route index element={<Home />} />
-            <Route path="google/login" element={<Login />} />
-            <Route path="google/login.html" element={<Login />} />
-            <Route path="safelink" element={<Safelink />} />
-            <Route path="safelink.html" element={<Safelink />} />
-            <Route path="highlight-js" element={<HighlightLayout />} />
-            <Route path="highlight-js.html" element={<HighlightLayout />} />
-            <Route path="moment-timezone" element={<MomentTimezone />} />
-            <Route path="moment-timezone.html" element={<MomentTimezone />} />
-            <Route path="bootstrap" element={<BootstrapCheatSheet />} />
-
-            {/* Using path="*"" means "match anything", so this route
-                acts like a catch-all for URLs that we don't have explicit
-                routes for. */}
+            <Route path="page" element={<Home />} />
+            <Route path="page/google/login" element={<Login />} />
+            <Route path="page/google/login.html" element={<Login />} />
+            <Route path="page/safelink" element={<Safelink />} />
+            <Route path="page/safelink.html" element={<Safelink />} />
+            <Route path="page/highlight-js" element={<HighlightLayout />} />
+            <Route path="page/highlight-js.html" element={<HighlightLayout />} />
+            <Route path="page/moment-timezone" element={<MomentTimezone />} />
+            <Route path="page/moment-timezone.html" element={<MomentTimezone />} />
+            <Route path="ui" element={<UI />} />
             <Route path="*" element={<NoMatch />} />
-          </Route>
-        </Routes>
-      </React.Fragment>
+          </Routes>
+        </Layout>
+      </main>
     );
   }
 }

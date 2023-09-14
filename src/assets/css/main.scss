@@ -1,15 +1,12 @@
 // malfunction keyboard 56^%
 
-// define custom vars for bootstrap
-$success: #7952b3;
-$theme-colors: (
-  'info': teal,
-  'danger': rgb(204, 48, 0),
-);
-// load bootstrap
-@import 'bootstrap/scss/bootstrap.scss';
+// load UI framework
+@import 'rsuite/dist/rsuite.min.css';
+
 // load fonts
-@import url('//rawcdn.githack.com/dimaslanjaka/Web-Manajemen/5950c63a3e549a6a33215c1506e5ae7b285eff63/css/all.min.css');
+//@import url('//rawcdn.githack.com/dimaslanjaka/Web-Manajemen/5950c63a3e549a6a33215c1506e5ae7b285eff63/css/all.min.css');
+$fa-font-path: '~@fontawesome/fontawesome-svg-core/webfonts';
+@import '@fontawesome/fontawesome-svg-core/scss/all';
 @import url('../fonts/index.scss');
 
 body {
