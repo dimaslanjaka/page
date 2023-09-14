@@ -1,14 +1,18 @@
+export interface querySelectorResult extends Element {
+  [key: string]: any;
+}
+
 /**
  * safe query selector
  * @param str
  * @returns
  */
-export function querySelector(str: string): HTMLElement | Record<string, any> {
+export function querySelector(str: string): querySelectorResult {
   const select = document.querySelector(str);
   if (!select) {
     console.error(`document.querySelector("${str}") is null, return {}`);
   }
-  return select || {};
+  return select || ({} as querySelectorResult);
 }
 
 /**
