@@ -124,16 +124,17 @@ export function parse_query(query: string | Record<string, any>, search?: string
 }
 
 /**
- * check current script running on localhost
+ * check current script running on localhost (localhost, 127.0.0.1, 192.168.*)
+ * * not local domains
  * @returns
  */
 export function islocalhost() {
   // local hostname
-  if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
+  //if (['adsense.webmanajemen.com', 'localhost', '127.0.0.1'].includes(location.hostname)) return true;
   // local network
   if (location.hostname.startsWith('192.168.')) return true;
   // port defined
-  if (location.port.length > 0) return true;
+  //if (location.port.length > 0) return true;
   // pattern regex
   if (/(localhost|127.0.0.1|192.168.[0-9]{1,3}\.[0-9]{1,3}):?/gim.test(window.location.host)) return true;
   return false;
