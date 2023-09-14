@@ -8,7 +8,9 @@ import './assets/css/main.scss';
 
 import { all } from 'bluebird';
 import { Route, Routes } from 'react-router-dom';
-import { Layout, NoMatch } from './components/Layout';
+import { initHljs } from './components/HighlightElement';
+import { NoMatch } from './components/Layout';
+import { RSuiteLayout } from './components/RsuiteLayout';
 import { BotDetect } from './route/BotDetect';
 import { HighlightLayout } from './route/Highlight';
 import { Home } from './route/Home';
@@ -17,7 +19,6 @@ import { MomentTimezone } from './route/MomentTimezone';
 import { UI } from './route/UI';
 import { Safelink } from './route/safelink';
 import { copyTextToClipboard, randomStr } from './utils';
-import { initHljs } from './components/HighlightElement';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -40,7 +41,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <Layout>
+        <RSuiteLayout>
           <Routes>
             <Route index element={<Home />} />
             <Route path="page" element={<Home />} />
@@ -57,7 +58,7 @@ class App extends React.Component {
             <Route path="ui" element={<UI />} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
-        </Layout>
+        </RSuiteLayout>
       </main>
     );
   }
@@ -71,10 +72,10 @@ export function initClipBoard() {
       codeBlock.setAttribute('id', randomStr(4));
     }
 
-    var button = document.createElement('button');
+    const button = document.createElement('button');
     button.className = 'copy-code-button';
     button.type = 'button';
-    var s = codeBlock.innerText;
+    const s = codeBlock.innerText;
     button.setAttribute('data-clipboard-text', s);
     button.innerText = 'Copy';
     // button.setAttribute('title', 'Copiar para a área de transferência');
@@ -82,11 +83,11 @@ export function initClipBoard() {
       const el = document.getElementById(codeBlock.getAttribute('id'));
       copyTextToClipboard(el.textContent.replace(/(Copy|Copied)$/gm, ''), e)
         .then(() => {
-          e.target.textContent = 'Copied';
+          (e.target as Element).textContent = 'Copied';
         })
         .finally(() => {
           window.setTimeout(function () {
-            e.target.textContent = 'Copy';
+            (e.target as Element).textContent = 'Copy';
           }, 2000);
         })
         .catch(console.error);
