@@ -255,7 +255,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.*', '.ts', '.js', '.jsx', '.tsx'],
+    extensions: ['.*', '.ts', '.js', '.jsx', '.tsx', '.json'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       path: require.resolve('path-browserify'),
@@ -288,6 +288,7 @@ module.exports = {
     hot: false, // hot reloading
     port: 4000, // dev server port
     open: false, // open browser
+    compress: true, // enable gzip compression
     host: 'adsense.webmanajemen.com', // local domain by /etc/hosts
     https: false, // redirect to https
     server: {
