@@ -65,6 +65,16 @@ const routes = [
       },
     },
   },
+  {
+    title: 'Selenium checker - bot detector',
+    description: 'Javascript Bot Detector Tools - WMI',
+    meta: {
+      canonical: {
+        rel: 'canonical',
+        href: 'https://www.webmanajemen.com/page/bot-detect.html',
+      },
+    },
+  },
 ].map(o => {
   // auto add meta key
   if (!o.meta) o.meta = {};

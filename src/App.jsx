@@ -17,6 +17,7 @@ import { Safelink } from './route/safelink';
 import { copyTextToClipboard, randomStr } from './utils';
 import { initHljs } from './utils/highlightjs';
 import { UI } from './route/UI';
+import { BotDetect } from './route/BotDetect';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -47,6 +48,8 @@ class App extends React.Component {
             <Route path="page/google/login.html" element={<Login />} />
             <Route path="page/safelink" element={<Safelink />} />
             <Route path="page/safelink.html" element={<Safelink />} />
+            <Route path="page/bot-detect" element={<BotDetect />} />
+            <Route path="page/bot-detect.html" element={<BotDetect />} />
             <Route path="page/highlight-js" element={<HighlightLayout />} />
             <Route path="page/highlight-js.html" element={<HighlightLayout />} />
             <Route path="page/moment-timezone" element={<MomentTimezone />} />

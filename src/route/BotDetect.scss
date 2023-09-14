@@ -1,0 +1,27 @@
+body {
+  --table-width: 100%;
+  /* Or any value, this will change dinamically */
+}
+
+tbody {
+  display: block;
+  /*max-height: 500px;
+  overflow-y: auto;*/
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: var(--table-width);
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: break-word;
+}
+
+ol.breadcrumb li {
+  display: inline;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
+}
