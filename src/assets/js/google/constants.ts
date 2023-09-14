@@ -8,6 +8,16 @@ export const GOOGLE_SCOPES = [
   //'https://www.googleapis.com/auth/contacts.readonly',
   //'https://www.googleapis.com/auth/plus.login',
 ];
+
+export interface googleConfig extends google.accounts.id.IdConfiguration {
+  [key: string]: any;
+  apiKey: string;
+  state_cookie_domain: string;
+  prompt: 'select_account';
+  client_id: string;
+  scope: string;
+}
+
 export const GOOGLE_CONFIG = {
   apiKey: 'AIzaSyA7A6yPL2V8OBGh-DsQ1spG0suJfe5ZJaw',
   response_type: 'token',
@@ -23,7 +33,7 @@ export const GOOGLE_CONFIG = {
   state_cookie_domain: window.location.origin,
   // scope library
   scope: GOOGLE_SCOPES.join(' '),
-};
+} as googleConfig;
 
 // key to save credential for offline usage
 export const KEY_LOCALSTORAGE = 'google_credential';
