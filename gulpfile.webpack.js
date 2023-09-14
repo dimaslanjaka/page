@@ -20,7 +20,7 @@ function createConfig(entry, output) {
       path: path.dirname(output),
     },
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: ['.ts', '.js', '.json'],
       fallback: {
         crypto: require.resolve('crypto-browserify'),
         path: require.resolve('path-browserify'),
