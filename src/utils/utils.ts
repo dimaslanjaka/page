@@ -1,5 +1,6 @@
 import Bluebird from 'bluebird';
 import * as safelinkify from 'safelinkify';
+import { randomStr } from '.';
 
 /**
  * No Operations
@@ -57,6 +58,21 @@ export function loadJS(url: string, props?: LoadJSOpt) {
     script.onerror = err => reject(props.onerror?.call(null) || err);
     document.body.appendChild(script);
   });
+}
+
+/**
+ * load external css
+ * @param url
+ */
+export function loadCSS(url: string) {
+  const head = document.getElementsByTagName('head')[0];
+  const link = document.createElement('link');
+  link.id = 'css-' + randomStr(4);
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = url;
+  link.media = 'all';
+  head.appendChild(link);
 }
 
 export const safelinkInstance = new safelinkify.safelink({
