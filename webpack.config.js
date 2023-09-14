@@ -68,6 +68,7 @@ const routes = [
   {
     title: 'Selenium checker - bot detector',
     description: 'Javascript Bot Detector Tools - WMI',
+    filename: 'bot-detect.html',
     meta: {
       canonical: {
         rel: 'canonical',
