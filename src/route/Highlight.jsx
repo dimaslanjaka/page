@@ -1,6 +1,7 @@
 import React from 'react';
 import { AdsenseFill } from '../components/Adsense';
 import './Highlight.scss';
+import { HighlightElement } from '../components/HighlightElement';
 
 export function HighlightLayout() {
   return (
@@ -10,17 +11,16 @@ export function HighlightLayout() {
         implement auto syntax highlighting using <kbd>highlight.js</kbd>
       </p>
       <h4>Enable Highlighting</h4>
-      <pre>
-        <code data-highlight="true">
-          {`function Shape2D(){
+      <HighlightElement lang="js">
+        {`
+function Shape2D(){
   this.name = 'Shape 2D';
-}`}
-        </code>
-      </pre>
+}
+`}
+      </HighlightElement>
       <h4>Disable Highlighting</h4>
-      <pre>
-        <code className="ss" data-highlight="false">
-          {`
+      <HighlightElement className="ss" data-highlight="false">
+        {`
 function Triangle(base,height){
     this.name = 'Triangle';
     this.base = base;
@@ -28,8 +28,7 @@ function Triangle(base,height){
     this.getArea = function(){return this.base*this.height/2;};
 }
 `}
-        </code>
-      </pre>
+      </HighlightElement>
 
       <AdsenseFill />
 
@@ -61,7 +60,7 @@ function Shape(){
       <h2>Full codes</h2>
       <h3>CSS</h3>
       <pre>
-        <code>{`
+        <code className="language-scss">{`
 @import url('//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css');
 `}</code>
       </pre>
@@ -122,7 +121,9 @@ function initHljs() {
       <h3>HTML</h3>
       <pre>
         <code>{`
+<pre><code class="language-javascript">
 // your codes to print here
+</code></pre>
       `}</code>
       </pre>
     </div>

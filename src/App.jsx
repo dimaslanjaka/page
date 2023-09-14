@@ -9,15 +9,15 @@ import './assets/css/main.scss';
 import { all } from 'bluebird';
 import { Route, Routes } from 'react-router-dom';
 import { Layout, NoMatch } from './components/Layout';
+import { BotDetect } from './route/BotDetect';
 import { HighlightLayout } from './route/Highlight';
 import { Home } from './route/Home';
 import { Login } from './route/Login';
 import { MomentTimezone } from './route/MomentTimezone';
+import { UI } from './route/UI';
 import { Safelink } from './route/safelink';
 import { copyTextToClipboard, randomStr } from './utils';
-import { initHljs } from './utils/highlightjs';
-import { UI } from './route/UI';
-import { BotDetect } from './route/BotDetect';
+import { initHljs } from './components/HighlightElement';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -32,7 +32,7 @@ class App extends React.Component {
     // load main script
     initClipBoard();
     // load highlight.js
-    initHljs();
+    if (document.querySelectorAll('pre').length > 0) initHljs();
     // load bootstrap
     // loadBootstrapModule();
   }
