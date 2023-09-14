@@ -9,6 +9,11 @@ declare global {
     safari: Record<string, any>;
     adsense_option: AdsenseOption;
     adsbygoogle: any;
+    clipboardData?: any;
+  }
+
+  interface Event {
+    clipboardData?: any;
   }
 }
 

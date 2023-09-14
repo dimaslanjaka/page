@@ -3,14 +3,6 @@ import CryptoJS from 'crypto-js';
 export const isIe =
   navigator.userAgent.toLowerCase().indexOf('msie') != -1 || navigator.userAgent.toLowerCase().indexOf('trident') != -1;
 
-interface FakeWindow {
-  clipboardData: any;
-}
-
-interface FakeEvent extends Event {
-  clipboardData: any;
-}
-
 /**
  * fallback when `navigator.clipboard` not found
  * @param text
@@ -39,15 +31,14 @@ function fallbackCopyTextToClipboard(text: string) {
   document.body.removeChild(textArea);
 }
 
-export async function copyTextToClipboard(textToCopy: string, e: FakeEvent) {
+export async function copyTextToClipboard(textToCopy: string, e: Event) {
   try {
     if (!navigator.clipboard) {
       return fallbackCopyTextToClipboard(textToCopy);
     }
     await navigator.clipboard.writeText(textToCopy);
-    const win = window as unknown as FakeWindow;
-    if (isIe && win.clipboardData) {
-      win.clipboardData.setData('Text', textToCopy);
+    if (isIe && window.clipboardData) {
+      window.clipboardData.setData('Text', textToCopy);
     } else if (e && e.clipboardData) {
       e.clipboardData.setData('text/plain', textToCopy);
     }
