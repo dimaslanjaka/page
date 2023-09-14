@@ -11,9 +11,9 @@ export function setCookie(
   name: string,
   value: string | number | boolean,
   expires: number,
-  path: string | string,
-  domain: string,
-  secure: boolean,
+  path?: string | string,
+  domain?: string,
+  secure?: boolean,
 ) {
   let exp = '';
   if (expires) {
