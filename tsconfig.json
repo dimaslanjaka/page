@@ -21,9 +21,8 @@
     ]
   },
   "include": [
-    "./src/**/*",
-    "./src/**/*.json",
-    "./public/**/*"
+    "src",
+    "src/**/*.json"
   ],
   "exclude": [
     "**/node_modules/**",
