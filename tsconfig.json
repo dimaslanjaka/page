@@ -18,11 +18,17 @@
     "lib": [
       "DOM",
       "ES2020"
+    ],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types",
+      "./node_modules/nodejs-package-types/typings"
     ]
   },
   "include": [
     "src",
-    "src/**/*.json"
+    "src/**/*.json",
+    "typings"
   ],
   "exclude": [
     "**/node_modules/**",
