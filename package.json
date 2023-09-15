@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "prestart": "npm run clean",
     "start": "cross-env-shell NODE_ENV=development webpack-dev-server --no-open --mode development --config webpack.config.js",
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
     "prod": "cd page && npm install --omit=dev --production",
