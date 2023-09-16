@@ -57,8 +57,6 @@ export class MySidebar extends React.Component<Record<string, any>, FeedState> {
               image = '//www.webmanajemen.com' + image;
             }
             build.image = image;
-          } else {
-            console.log(build.title, 'no image');
           }
 
           return build;
