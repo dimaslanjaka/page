@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface ImageAttr {
+  [key: string]: any;
   src?: string;
   fallbackSrc?: string;
 }
