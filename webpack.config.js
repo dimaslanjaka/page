@@ -82,7 +82,8 @@ module.exports = {
     // unique chunk filename generation only for production
     filename: devMode ? 'runtime/bundle.js' : 'runtime/[name].[contenthash].js',
     // unique chunk filename generation
-    chunkFilename: `runtime/[name].[contenthash].js`,
+    chunkFilename: `runtime/chunk/[name].[chunkhash].js`,
+    assetModuleFilename: 'media/[name][hash][ext][query]',
     // base directory from root domain
     publicPath: ASSET_PATH,
   },
@@ -91,7 +92,7 @@ module.exports = {
    * [docs](https://webpack.js.org/guides/code-splitting/#prevent-duplication)
    */
   optimization: devMode
-    ? {}
+    ? undefined
     : {
         // enables you to fine-tune how chunks are generated
         runtimeChunk: 'multiple',
@@ -102,7 +103,8 @@ module.exports = {
           cacheGroups: {
             styles: {
               name: 'styles',
-              type: 'css/mini-extract',
+              //type: 'css/mini-extract', // cache minified css
+              test: /\.css$/, // cache by regex
               chunks: 'all',
               enforce: true,
             },
