@@ -2,6 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react",
+    "baseUrl": "./",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "esModuleInterop": true,
@@ -34,11 +35,12 @@
     ]
   },
   "include": [
-    "src",
-    "src/globals.d.ts",
-    "src/**/*",
-    "typings",
-    "./package.json"
+    "./package.json",
+    "./src",
+    "./src/globals.d.ts",
+    "./src/**/*",
+    "./src/**/*.json",
+    "typings"
   ],
   "exclude": [
     "**/node_modules/**",
