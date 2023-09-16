@@ -42,6 +42,17 @@ export const allAds = array_shuffle([
   },
 ]);
 
+export interface AdsenseOption {
+  /**
+   * remove banner when parent width is 0 or display: none
+   */
+  remove?: boolean;
+  /**
+   * current ad slot
+   */
+  currentSlot?: (typeof allAds)[number];
+}
+
 export interface ParamsAdsByGoogle {
   /** data-ad-slot */
   slot?: string;

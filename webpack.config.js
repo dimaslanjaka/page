@@ -1,113 +1,38 @@
 const path = require('path');
 const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const postcssPresetEnv = require('postcss-preset-env');
+const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
-const devMode = /dev/i.test(process.env.NODE_ENV);
-const ASSET_PATH = '/page';
+
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
+const devMode = /dev/i.test(process.env.NODE_ENV);
+const ASSET_PATH = '/page';
 
-/**
- * @type {HtmlWebpackPlugin.Options['meta']}
- */
-const defaultMeta = {
-  author: 'Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)',
-  description: 'Page - WMI',
-  canonical: {
-    rel: 'canonical',
-    href: 'https://www.webmanajemen.com/page/index.html',
-  },
-};
-
-/**
- * @type {HtmlWebpackPlugin.Options[]}
- */
-const routes = [
+const stylesLoader = [
+  // Creates `style` nodes from JS strings
+  devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  // Translates CSS into CommonJS
   {
-    title: 'Login page - WMI',
-    filename: 'login.html', // filename
-    template: path.resolve(__dirname, 'src', 'main.html'), // source html layout
-  },
-  {
-    title: 'Home page - WMI',
-    filename: 'index.html',
-    template: path.resolve(__dirname, 'src', 'main.html'),
-  },
-  {
-    title: '404 - WMI',
-    filename: '404.html',
-    template: path.resolve(__dirname, 'src', 'main.html'),
-  },
-  {
-    title: 'Outbound page - WMI',
-    filename: 'safelink.html',
-    template: path.resolve(__dirname, 'src', 'main.html'),
-  },
-  {
-    title: 'Login page - WMI',
-    filename: 'google/login.html',
-    template: path.resolve(__dirname, 'src', 'main.html'),
-  },
-  {
-    title: 'Moment Timezone Playground',
-    filename: 'moment-timezone.html',
-    meta: {
-      description: 'Moment Timezone Online Playground For Free. Support custom format pattern',
-      language: {
-        httpEquiv: 'Content-Language',
-        content: 'en_US',
+    loader: 'css-loader',
+    options: {
+      // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
+      // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
+      importLoaders: 1,
+      modules: {
+        localIdentName: '[hash:base64]', // default
+        auto: true, // default
       },
-      canonical: {
-        rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/moment-timezone.html',
-      },
+      sourceMap: true,
     },
   },
   {
-    title: 'Selenium checker - bot detector',
-    description: 'Javascript Bot Detector Tools - WMI',
-    filename: 'bot-detect.html',
-    meta: {
-      canonical: {
-        rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/bot-detect.html',
-      },
-    },
+    loader: 'postcss-loader',
+    options: { postcssOptions: { plugins: () => [postcssPresetEnv({ stage: 0 })] } },
   },
-].map(o => {
-  // auto add meta key
-  if (!o.meta) o.meta = {};
-  if (!o.meta.canonical) {
-    // auto add meta canonical
-    o.meta.canonical = {
-      rel: 'canonical',
-      href: 'https://www.webmanajemen.com/page/' + o.filename,
-    };
-  }
-  // assign with default meta
-  o.meta = Object.assign(defaultMeta, o.meta || {});
-  return o;
-});
-
-function createHtml() {
-  return routes.map(
-    option =>
-      new HtmlWebpackPlugin(
-        Object.assign(
-          {
-            baseUrl: 'https://www.webmanajemen.com', // site url
-            filename: 'index.html', // create index.html
-            template: path.resolve('src', 'main.html'), // source html layout
-            publicPath: ASSET_PATH, // base directory from root domain
-            minify: devMode === false, // minify on production
-          },
-          option,
-        ),
-      ),
-  );
-}
+];
 
 /**
  * @type {import('webpack').Configuration}
@@ -208,40 +133,13 @@ module.exports = {
         },
       },
       {
-        test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        exclude: /node_modules|.test.(ts|js)$/,
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: Object.assign(
-            {
-              cacheDirectory: './tmp/babel',
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-            babelConfig,
-          ),
-        },
-      },
-      {
         test: /\.css$/,
-        use: [
-          // Creates `style` nodes from JS strings
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          // Translates CSS into CommonJS
-          'css-loader',
-        ],
+        use: stylesLoader,
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          // Translates CSS into CommonJS
-          'css-loader',
+          ...stylesLoader,
           // Compiles Sass to CSS
           {
             loader: 'sass-loader',
@@ -267,11 +165,39 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
+          ...stylesLoader,
           // compiles Less to CSS
-          'style-loader',
-          'css-loader',
           'less-loader',
         ],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: [
+          {
+            loader: require.resolve('ts-loader'),
+            options: {
+              context: __dirname, // context root
+              allowTsInNodeModules: true, // allow recompile .ts files
+              transpileOnly: true, // fix hot reloading
+              configFile: require.resolve('./tsconfig.json'), // tsconfig
+            },
+          },
+        ],
+        exclude: /node_modules|.(test|specs?).(ts|js)$/,
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: Object.assign(
+            {
+              cacheDirectory: './tmp/babel',
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+            },
+            babelConfig,
+          ),
+        },
       },
     ],
   },
@@ -291,7 +217,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
     }),
-    ...createHtml(),
+    // ignore these patterns to exclude from file watcher
+    new webpack.WatchIgnorePlugin({
+      paths: ['**/img/**', '**/fonts/**'],
+    }),
+    // generate html
+    ...webpackHtmlRoutes(),
+    // minify css
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
