@@ -1,10 +1,12 @@
-const path = require('path');
+const path = require('upath');
 const fs = require('fs');
+const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const postcssPresetEnv = require('postcss-preset-env');
+const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
@@ -30,7 +32,7 @@ const stylesLoader = [
   },
   {
     loader: 'postcss-loader',
-    options: { postcssOptions: { plugins: () => [postcssPresetEnv({ stage: 0 })] } },
+    options: { postcssOptions },
   },
 ];
 
@@ -229,6 +231,10 @@ module.exports = {
       // both options are optional
       filename: 'runtime/css/[name].[contenthash].css',
       chunkFilename: 'runtime/css/[id].[contenthash].css',
+    }),
+    // purge css
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
     }),
   ],
   /**
