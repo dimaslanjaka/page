@@ -36,10 +36,7 @@
   "include": [
     "src",
     "src/globals.d.ts",
-    "src/**/*.json",
-    "src/**/*.css",
-    "src/**/*.scss",
-    "src/**/*.less",
+    "src/**/*",
     "typings"
   ],
   "exclude": [
