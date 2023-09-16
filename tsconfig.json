@@ -37,7 +37,8 @@
     "src",
     "src/globals.d.ts",
     "src/**/*",
-    "typings"
+    "typings",
+    "./package.json"
   ],
   "exclude": [
     "**/node_modules/**",
