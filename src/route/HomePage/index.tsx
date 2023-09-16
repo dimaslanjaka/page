@@ -1,7 +1,8 @@
 //import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
+import { Col, Container, Grid, Panel, Row } from 'rsuite';
 import { Link } from '../../components/Link';
-import classes from './home.module.scss';
+import './homepage.scss';
 
 export class Home extends React.Component {
   constructor(props: any) {
@@ -14,18 +15,60 @@ export class Home extends React.Component {
   }
 
   render() {
+    const featuresConfig = [
+      {
+        icon: 'fa-arrow-right-to-bracket',
+        title: 'Login',
+        link: '/page/login',
+        desc: <>User portal to use any features</>,
+      },
+      {
+        title: 'Moment Timezone playground',
+        icon: 'fa-clock',
+        link: '/page/moment-timezone',
+        desc: (
+          <>
+            Test, format, interval using <Link href="https://www.npmjs.com/moment-timezone">moment-timezone</Link>{' '}
+            module
+          </>
+        ),
+      },
+      {
+        title: 'Outbound Page',
+        icon: 'fa-person-walking-arrow-right',
+        link: '/page/safelink',
+        desc: (
+          <>
+            All external links proxied using outbound page using{' '}
+            <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
+          </>
+        ),
+      },
+      {
+        icon: 'fa-code',
+        title: 'Auto highlight.js',
+        link: '/page/highlight-js',
+        desc: (
+          <>
+            Auto syntax highlighting on <b>{`<pre><code>`}</b> tag using{' '}
+            <Link href="https://www.npmjs.com/highlight.js">highlight.js</Link>
+          </>
+        ),
+      },
+    ];
     return (
-      <div className={classes.myHome}>
+      <div className="myHome">
         <header id="header">
-          <div className="intro">
-            <img
+          <div className="intro" id="intro">
+            {/* <img
               src="//rawcdn.githack.com/dimaslanjaka/dimaslanjaka.github.io/4e6098df3f102e2bd36b33b9055644bccd4faac3/images/PicsArt_09-09-12.12.25%201584x512px.png"
               className="banner"
-            />
-            <div className="overlay">
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-8 col-md-offset-2 intro-text">
+            /> */}
+            <div className="banner"></div>
+            <div className="overlay" id="overlay">
+              <Container>
+                <Row>
+                  <Col md={8} mdOffset={2} className="intro-text">
                     <h1>
                       W<span>M</span>I
                     </h1>
@@ -36,61 +79,38 @@ export class Home extends React.Component {
                     <a href="#features" className="btn btn-custom btn-lg page-scroll">
                       <i className="fa-regular fa-chevron-double-down"></i>
                     </a>
-                  </div>
-                </div>
-              </div>
+                  </Col>
+                </Row>
+              </Container>
             </div>
           </div>
         </header>
-        <div id="features" className="text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12 col-md-offset-1 section-title">
+
+        <div id="features" className="text-center features mt-4">
+          <Grid fluid>
+            <Row>
+              <Col md={12} mdOffset={1} className="section-title">
                 <h2>Features</h2>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-6 col-md-3">
-                <i className="fa-solid fa-arrow-right-to-bracket fa-size-large"></i>
-                <h3>Login</h3>
-                <p>User portal to use any features</p>
-                <a href="/page/login" className="btn btn-sm btn-custom">
-                  <i className="fa-thin fa-arrow-right"></i>
-                </a>
-              </div>
-              <div className="col-xs-6 col-md-3">
-                <i className="fa-solid fa-clock fa-size-large"></i>
-                <h3>Moment Timezone playground</h3>
-                <p>
-                  Test, format, interval using <code>moment-timezone</code> module
-                </p>
-                <a href="/page/moment-timezone" className="btn btn-sm btn-custom">
-                  <i className="fa-thin fa-arrow-right"></i>
-                </a>
-              </div>
-              <div className="col-xs-6 col-md-3">
-                <i className="fa-regular fa-person-walking-arrow-right fa-size-large"></i>
-                <h3>Outbound Page</h3>
-                <p>
-                  All external links proxied using outbound page using{' '}
-                  <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
-                </p>
-                <a href="/page/safelink" className="btn btn-sm btn-custom">
-                  <i className="fa-thin fa-arrow-right"></i>
-                </a>
-              </div>
-              <div className="col-xs-6 col-md-3">
-                <i className="fa-light fa-code fa-size-large"></i>
-                <h3>Auto highlight.js</h3>
-                <p>
-                  Auto syntax highlighting on <kbd>{`<pre><code>`}</kbd> tag using <kbd>highlight.js</kbd>
-                </p>
-                <a href="/page/highlight-js" className="btn btn-sm btn-custom">
-                  <i className="fa-thin fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+            <Row className="features-item">
+              {featuresConfig.slice(0, 4).map(item => {
+                return (
+                  <Col xs={24} sm={24} md={6} className="mb-2">
+                    <Panel shaded bordered bodyFill className="pt-4 pb-4">
+                      <i className={'fa-thin fa-size-large ' + item.icon}></i>
+                      <Panel header={item.title}>
+                        <p>{item.desc}</p>
+                        <a href={item.link} className="btn btn-sm btn-custom">
+                          <i className="fa-thin fa-arrow-right"></i>
+                        </a>
+                      </Panel>
+                    </Panel>
+                  </Col>
+                );
+              })}
+            </Row>
+          </Grid>
         </div>
       </div>
     );

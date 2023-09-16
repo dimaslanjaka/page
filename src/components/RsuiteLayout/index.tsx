@@ -24,9 +24,9 @@ export class RSuiteLayout extends React.Component<Record<string, any>, Record<st
           <Header className="fixed-top">
             <CustomNavbar />
           </Header>
-          <Container style={{ marginTop: '4em' }}>
+          <Container id="content-wrapper">
             <Content>{this.props.children}</Content>
-            <Sidebar>
+            <Sidebar className="d-none d-lg-block d-xl-block">
               <MySidebar />
             </Sidebar>
           </Container>

@@ -1,4 +1,3 @@
-import CogIcon from '@rsuite/icons/legacy/Cog';
 import HomeIcon from '@rsuite/icons/legacy/Home';
 import React from 'react';
 import { Nav, Navbar } from 'rsuite';
@@ -27,9 +26,9 @@ export const CustomNavbar = ({ ...props }) => {
           </Nav.Item>
         </Nav.Menu>
       </Nav>
-      <Nav pullRight>
+      {/* <Nav pullRight>
         <Nav.Item icon={<CogIcon />}>Settings</Nav.Item>
-      </Nav>
+      </Nav> */}
     </Navbar>
   );
 };
