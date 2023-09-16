@@ -1,10 +1,12 @@
 import React from 'react';
-import { createCookieMins, getCookie } from '../assets/js/cookie';
-import { delay, parse_query, parse_url, querySelector, safelinkInstance } from '../utils';
-import { SafelinkLayout2 } from './safelink/layout2';
+import { createCookieMins, getCookie } from '../../assets/js/cookie';
+import { delay, loadCSS, parse_query, parse_url, querySelector, safelinkInstance } from '../../utils';
+import { SafelinkLayout2 } from './layout2';
 
 export class Safelink extends React.Component {
   componentDidMount() {
+    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+
     // check google translate
     const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
     const safelinkURL = 'https://www.webmanajemen.com/page/safelink.html';

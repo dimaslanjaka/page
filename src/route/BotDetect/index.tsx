@@ -1,6 +1,6 @@
 import React from 'react';
-import { runBotDetectionMain } from '../assets/js/bot-detect';
-import './BotDetect.scss';
+import { runBotDetectionMain } from '../../assets/js/bot-detect';
+import { loadCSS } from '../../utils';
 
 export class BotDetect extends React.Component {
   constructor(props: any) {
@@ -8,8 +8,9 @@ export class BotDetect extends React.Component {
   }
 
   componentDidMount(): void {
-    //loadJS('/page/assets/js/bot-detect.js');
+    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
     runBotDetectionMain();
+    require('./BotDetect.scss');
   }
 
   render() {

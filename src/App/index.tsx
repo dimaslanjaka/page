@@ -3,22 +3,22 @@ import React from 'react';
 //
 
 // styling
-import './assets/css/main.scss';
+import '../assets/css/main.scss';
 //
 
 import { all } from 'bluebird';
 import { Route, Routes } from 'react-router-dom';
-import { initHljs } from './components/HighlightElement';
-import { NoMatch } from './components/Layout';
-import { RSuiteLayout } from './components/RsuiteLayout';
-import { BotDetect } from './route/BotDetect';
-import { HighlightLayout } from './route/Highlight';
-import { Home } from './route/Home';
-import { Login } from './route/Login';
-import { MomentTimezone } from './route/MomentTimezone';
-import { UI } from './route/UI';
-import { Safelink } from './route/safelink';
-import { copyTextToClipboard, randomStr } from './utils';
+import { initHljs } from '../components/HighlightElement';
+import { NoMatch } from '../components/Layout';
+import { RSuiteLayout } from '../components/RsuiteLayout';
+import { BotDetect } from '../route/BotDetect';
+import { HighlightLayout } from '../route/Highlight';
+import { Home } from '../route/HomePage';
+import { Login } from '../route/Login';
+import { MomentTimezone } from '../route/moment-timezone';
+import { Safelink } from '../route/safelink';
+import { UI } from '../route/UI';
+import { copyTextToClipboard, randomStr } from '../utils';
 
 /*
 https://codesandbox.io/s/mzj1j0ryxx?file=/src/Icons.js
@@ -40,26 +40,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <main>
-        <RSuiteLayout>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="page" element={<Home />} />
-            <Route path="page/google/login" element={<Login />} />
-            <Route path="page/google/login.html" element={<Login />} />
-            <Route path="page/safelink" element={<Safelink />} />
-            <Route path="page/safelink.html" element={<Safelink />} />
-            <Route path="page/bot-detect" element={<BotDetect />} />
-            <Route path="page/bot-detect.html" element={<BotDetect />} />
-            <Route path="page/highlight-js" element={<HighlightLayout />} />
-            <Route path="page/highlight-js.html" element={<HighlightLayout />} />
-            <Route path="page/moment-timezone" element={<MomentTimezone />} />
-            <Route path="page/moment-timezone.html" element={<MomentTimezone />} />
-            <Route path="ui" element={<UI />} />
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
-        </RSuiteLayout>
-      </main>
+      <RSuiteLayout>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="page" element={<Home />} />
+          <Route path="page/google/login" element={<Login />} />
+          <Route path="page/google/login.html" element={<Login />} />
+          <Route path="page/safelink" element={<Safelink />} />
+          <Route path="page/safelink.html" element={<Safelink />} />
+          <Route path="page/bot-detect" element={<BotDetect />} />
+          <Route path="page/bot-detect.html" element={<BotDetect />} />
+          <Route path="page/highlight-js" element={<HighlightLayout />} />
+          <Route path="page/highlight-js.html" element={<HighlightLayout />} />
+          <Route path="page/moment-timezone" element={<MomentTimezone />} />
+          <Route path="page/moment-timezone.html" element={<MomentTimezone />} />
+          <Route path="ui" element={<UI />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </RSuiteLayout>
     );
   }
 }

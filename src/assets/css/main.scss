@@ -1,31 +1,10 @@
 // malfunction keyboard 56^%
 
-// load UI framework
-@import 'rsuite/dist/rsuite.min.css';
-
 // load fonts
-//@import url('//rawcdn.githack.com/dimaslanjaka/Web-Manajemen/5950c63a3e549a6a33215c1506e5ae7b285eff63/css/all.min.css');
-$fa-font-path: '~@fontawesome/fontawesome-svg-core/webfonts';
-@import '@fontawesome/fontawesome-svg-core/scss/all';
+@import url('//cdn.statically.io/gh/dimaslanjaka/Web-Manajemen/fontawesome-pro/css/all.min.css');
+//$fa-font-path: '~@fontawesome/fontawesome-svg-core/webfonts';
+//@import '@fontawesome/fontawesome-svg-core/scss/all';
 @import url('../fonts/index.scss');
-
-body {
-  padding: 1.5rem;
-}
-
-// @font-face {
-//   font-family: 'Cera Round Pro Bold';
-//   src: url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.eot');
-//   src:
-//     url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.eot?#iefix') format('embedded-opentype'),
-//     url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.woff') format('woff'),
-//     url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.woff2') format('woff2'),
-//     url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.ttf') format('truetype'),
-//     url('//db.onlinewebfonts.com/t/9d23cda2fd2a195a8467e0967debd4d3.svg#Cera Round Pro Bold') format('svg');
-//   font-weight: normal;
-//   font-style: normal;
-//   font-display: swap;
-// }
 
 label,
 h1,
@@ -34,7 +13,8 @@ h3,
 h4,
 h5,
 h6,
-tr th {
+tr th,
+b {
   font-family: 'Cera Pro Bold', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
@@ -158,50 +138,5 @@ pre {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
-  }
-}
-
-/* loading */
-.loader {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background: url('../img/01-progress.gif') 50% 50% no-repeat rgb(249, 249, 249);
-}
-
-/* spinner https://codepen.io/bernethe/pen/dorozd?editors=1100 */
-$spCol: #000;
-.sp {
-  width: 32px;
-  height: 32px;
-  clear: both;
-  margin: 20px auto;
-}
-
-/* Spinner Circle Rotation */
-.sp-circle {
-  border: 4px rgba($spCol, 0.25) solid;
-  border-top: 4px rgba($spCol, 1) solid;
-  border-radius: 50%;
-  -webkit-animation: spCircRot 0.6s infinite linear;
-  animation: spCircRot 0.6s infinite linear;
-}
-@-webkit-keyframes spCircRot {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(359deg);
-  }
-}
-@keyframes spCircRot {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
   }
 }

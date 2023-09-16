@@ -1,9 +1,12 @@
 import React from 'react';
-import './layout1.scss';
 import { SafelinkContents } from '../../components/SafelinkContents';
 import { Adsense } from '../../components/Adsense';
 
 export class SafelinkLayout1 extends React.Component {
+  componentDidMount() {
+    require('./layout1.scss');
+  }
+
   render() {
     return (
       <div>

@@ -8,7 +8,6 @@ export function SafelinkContents() {
       <h1>What is a basic contract in insurance?</h1>
       <small>Verify Links | Insurance Loans Site Information Health</small>
 
-      <blockquote className="text-center">Scrolldown to view your link</blockquote>
       <Adsense
         className="adsbygoogle"
         style={{ display: 'block' }}

@@ -1,0 +1,49 @@
+@import 'rsuite/dist/rsuite.min.css';
+@import 'bootstrap/scss/bootstrap-utilities';
+
+// malfunction keyboard 5 6 ^%
+
+.RsuiteLayout {
+  .rs-container-has-sidebar {
+    min-height: 400px;
+  }
+
+  // header and footer should have same color
+  footer,
+  header nav {
+    background-color: #e1ece5;
+  }
+
+  footer {
+    font-size: medium;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    #socmed {
+      text-align: center;
+
+      .rs-flex-box-grid-item {
+        margin-left: 0.3rem;
+      }
+
+      .fa-brands {
+        background-image: linear-gradient(to bottom, transparent 20%, white 20%, white 93%, transparent 93%);
+        background-size: 84%;
+        background-position: 60% 0;
+        background-repeat: no-repeat;
+      }
+
+      .fa-facebook {
+        color: #3b5998;
+      }
+
+      .fa-github {
+        color: #333;
+      }
+
+      .fa-whatsapp {
+        color: #25d366;
+      }
+    }
+  }
+}

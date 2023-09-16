@@ -5,9 +5,10 @@ import {
   getLocalCredential,
   handleCredentialResponse,
   isTokenExpired,
-} from '../assets/js/google/constants';
-import { firebaseAuthGoogle } from '../assets/js/google/firebase';
-import { Image } from '../components/Image';
+} from '../../assets/js/google/constants';
+import { firebaseAuthGoogle } from '../../assets/js/google/firebase';
+import { Image } from '../../components/Image';
+import { loadCSS } from '../../utils';
 import './Login.scss';
 
 export class Login extends React.Component {
@@ -15,6 +16,7 @@ export class Login extends React.Component {
   componentDidMount() {
     document.title = 'Login page - WMI';
     this.loadGSI().then(this.start.bind(this));
+    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
   }
 
   render() {

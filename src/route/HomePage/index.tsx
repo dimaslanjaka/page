@@ -1,6 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import { Link } from '../components/Link';
+import { Link } from '../../components/Link';
+import { loadCSS } from '../../utils';
 import './Home.scss';
 
 export class Home extends React.Component {
@@ -10,6 +11,7 @@ export class Home extends React.Component {
 
   componentDidMount() {
     document.title = 'Home page - WMI';
+    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
   }
 
   render() {
@@ -95,3 +97,5 @@ export class Home extends React.Component {
     );
   }
 }
+
+export default Home;
