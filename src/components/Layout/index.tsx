@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Footer } from 'rsuite';
-import { Link } from '../components/Link';
-import { Loader } from './Loader';
-import { CustomNavbar } from './Navbar';
+import { Link } from '../Link';
+import { Loader } from '../Loader';
+import { CustomNavbar } from '../Navbar';
 
 export function Layout(props: any) {
   const [activeKey, setActiveKey] = React.useState(null);
