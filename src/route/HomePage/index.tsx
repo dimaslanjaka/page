@@ -1,8 +1,7 @@
 //import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { Link } from '../../components/Link';
-import { loadCSS } from '../../utils';
-import './Home.scss';
+import classes from './home.module.scss';
 
 export class Home extends React.Component {
   constructor(props: any) {
@@ -11,12 +10,12 @@ export class Home extends React.Component {
 
   componentDidMount() {
     document.title = 'Home page - WMI';
-    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    //loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
   }
 
   render() {
     return (
-      <div>
+      <div className={classes.myHome}>
         <header id="header">
           <div className="intro">
             <img

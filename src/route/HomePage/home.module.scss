@@ -1,0 +1,153 @@
+/**
+ * main style
+ * source idea: https://github.com/issaafalkattan/React-Landing-Page-Template/blob/master/public/css/style.css
+ */
+
+.myHome {
+  body,
+  html {
+    height: 100%;
+  }
+
+  #header {
+    display: table;
+    width: 100%;
+    padding: 0;
+    position: relative;
+
+    .intro {
+      background-color: #e5e5e5;
+      /* Full height */
+      height: 100%;
+      width: 100%;
+
+      .banner {
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        height: 100%;
+        width: 100%;
+      }
+
+      .intro-text {
+        position: absolute;
+        /*padding-top: 350px;
+      padding-bottom: 200px;*/
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 80%;
+        padding: 20px;
+        /* Fallback color */
+        background-color: rgb(0, 0, 0);
+        /* Black w/opacity/see-through */
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
+      }
+
+      .overlay {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-family: 'Raleway', sans-serif;
+        color: #fff;
+        font-size: 70px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 10px;
+
+        span {
+          font-weight: 800;
+          color: #5ca9fb !important;
+        }
+      }
+
+      p {
+        color: #fff;
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 30px;
+        margin: 0 auto;
+        margin-bottom: 60px;
+      }
+    }
+  }
+
+  /* Features Section */
+  #features {
+    background: #f6f6f6;
+
+    i {
+      color: #fff;
+    }
+
+    .fa-size-large {
+      font-size: 38px;
+      margin-bottom: 20px;
+      transition: all 0.5s;
+      width: 100px;
+      height: 100px;
+      padding: 30px 0;
+      border-radius: 50%;
+      background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%);
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h3 {
+      height: 70px;
+      vertical-align: top;
+    }
+    p {
+      text-align: left;
+      height: 100px;
+      overflow: 'scroll';
+    }
+  }
+
+  /* common */
+  .section-title {
+    margin-bottom: 70px;
+  }
+
+  .section-title h2 {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+
+  .section-title h2::after {
+    position: absolute;
+    content: '';
+    background: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+    height: 4px;
+    width: 60px;
+    bottom: 0;
+    margin-left: -30px;
+    left: 50%;
+  }
+
+  .section-title p {
+    font-size: 18px;
+  }
+
+  .btn-custom {
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #5ca9fb;
+    background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+    padding: 14px 34px;
+    letter-spacing: 1px;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 25px;
+    transition: all 0.5s linear;
+    border: 0;
+  }
+}
