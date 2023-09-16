@@ -45,7 +45,7 @@ declare global {
     opera: Record<string, any>;
     opr: Record<string, any>;
     safari: Record<string, any>;
-    adsense_option: import('./utils/adsense/config').AdsenseOption;
+    adsense_option: import('./components/Adsense/utils/config').AdsenseOption;
   }
 
   interface Event {

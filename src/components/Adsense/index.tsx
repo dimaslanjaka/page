@@ -1,7 +1,7 @@
 import React from 'react';
-import { arrayDedupe } from '../utils';
-import '../utils/adsense';
-import { ParamsAdsByGoogle } from '../utils/adsense/config';
+import { arrayDedupe } from '../../utils';
+import './utils';
+import { ParamsAdsByGoogle } from './utils/config';
 
 interface AdsenseProperties extends ParamsAdsByGoogle {
   /** data-ad-format */
