@@ -39,6 +39,7 @@
     "./src",
     "./src/globals.d.ts",
     "./src/**/*",
+    "./src/route/**/*",
     "./src/**/*.json",
     "typings"
   ],
