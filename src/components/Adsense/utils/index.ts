@@ -144,7 +144,9 @@ export function applyEnviromentAds() {
       ins.style.minHeight = '50px';
     }
 
-    if (localhost) {
+    // apply ad test to non-localhost ip and process.env.NODE_ENV is dev
+
+    if (!localhost && /dev/i.test(process.env.NODE_ENV)) {
       console.log('apply test ad to existing ins', ins.getAttribute('data-ad-slot'));
       ins.setAttribute('data-adtest', 'on');
     }
