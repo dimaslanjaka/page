@@ -49,6 +49,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
     "@types/babel-plugin-macros": "^3",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
