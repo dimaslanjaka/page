@@ -82,7 +82,7 @@ module.exports = {
     filename: devMode ? 'runtime/bundle.js' : 'runtime/[name].[contenthash].js',
     // unique chunk filename generation
     chunkFilename: `runtime/chunk/[name].[chunkhash].js`,
-    //assetModuleFilename: 'media/[name][hash][ext][query]',
+    assetModuleFilename: 'media/[name][hash][ext][query]',
     // base directory from root domain
     publicPath: ASSET_PATH,
   },
