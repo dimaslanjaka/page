@@ -47,7 +47,7 @@ module.exports = {
     : {
         // shared utility
         shared: {
-          import: ['bluebird', 'crypto-js', 'moment', 'moment-timezone'],
+          import: ['bluebird', 'crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery'],
         },
         // main script
         bundle: {
