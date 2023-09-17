@@ -1,13 +1,12 @@
 const path = require('upath');
 const fs = require('fs');
-const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
-const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
-
+// const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+// const glob = require('glob');
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
 const devMode = /dev/i.test(process.env.NODE_ENV);
@@ -111,9 +110,6 @@ module.exports = {
           },
         },
       },
-  // Optional and for development only. This provides the ability to
-  // map the built code back to the original source format when debugging.
-  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -216,6 +212,13 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
     },
   },
+
+  // Optional and for development only. This provides the ability to
+  // map the built code back to the original source format when debugging.
+  // set to false when using plugin webpack.SourceMapDevToolPlugin
+  // working value 'eval-source-map'
+  devtool: false,
+
   plugins: [
     // This makes it possible for webpack to safely use env vars
     new webpack.DefinePlugin({
@@ -227,16 +230,22 @@ module.exports = {
     }),
     // generate html
     ...webpackHtmlRoutes(),
-    // minify css
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: 'runtime/css/[name].[contenthash].css',
-      chunkFilename: 'runtime/css/[id].[contenthash].css',
-    }),
-    // purge css
-    new PurgeCSSPlugin({
-      paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
+    // minify css on production
+    !devMode &&
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: 'runtime/css/[name].[chunkhash].css',
+        chunkFilename: 'runtime/css/[id].[chunkhash].css',
+      }),
+    // purge css on production
+    // !devMode &&
+    //   new PurgeCSSPlugin({
+    //     paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
+    //   }),
+    // enable source maps generation
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map[query]',
     }),
   ],
   /**
