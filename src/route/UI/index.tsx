@@ -2,18 +2,17 @@
 
 import * as React from 'react';
 import { Button, Col, Container, Grid, Row } from 'rsuite';
-import classes from './ui.module.scss';
 
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the '{}' type.
 export class UI extends React.Component<Record<string, never>, Record<string, never>> {
   componentDidMount(): void {
-    //require('./ui.module.scss');
+    require('./ui.scss');
   }
 
   render() {
     return (
-      <Container className={classes.myUi}>
+      <Container className="myUi">
         <Grid>
           <h1>Hello world</h1>
           <Button appearance="default" size="lg">
