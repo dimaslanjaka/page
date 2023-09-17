@@ -43,6 +43,18 @@
       ],
       "@route/*": [
         "./src/route/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@asset/*": [
+        "./src/assets/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@util/*": [
+        "./src/utils/*"
       ]
     },
     "plugins": [
