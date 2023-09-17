@@ -37,3 +37,19 @@ export function removeElement(e: HTMLElement | Record<string, any> | undefined |
   }
   if (e.remove) e.remove();
 }
+
+/**
+ * react helper - wait until page fully loaded
+ * @param callback
+ */
+export function waitUntilPageFullyLoaded(callback: (...args: any[]) => any) {
+  let interval: NodeJS.Timeout;
+  if (!interval) {
+    interval = setInterval(() => {
+      if (document.readyState == 'complete') {
+        callback.apply(null);
+        clearInterval(interval);
+      }
+    }, 400);
+  }
+}
