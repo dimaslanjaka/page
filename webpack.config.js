@@ -61,7 +61,7 @@ module.exports = {
         },
         // other external module utility
         customModule: {
-          import: ['safelinkify'],
+          import: ['safelinkify', 'rsuite', 'bootstrap', 'highlight.js'],
           dependOn: 'shared',
         },
         // internal/local utility
