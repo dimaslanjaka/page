@@ -1,7 +1,9 @@
 import React from 'react';
 import { createCookieMins, getCookie } from '../../assets/js/cookie';
 import { delay, loadCSS, parse_query, parse_url, querySelector, safelinkInstance } from '../../utils';
-import { SafelinkLayout2 } from './layout2';
+//import { SafelinkLayout2 } from './layout2';
+
+const SafelinkLayout2 = React.lazy(() => import('./layout2'));
 
 export class Safelink extends React.Component {
   componentDidMount() {
@@ -32,9 +34,15 @@ export class Safelink extends React.Component {
   }
 
   render() {
-    return <SafelinkLayout2 />;
+    return (
+      <React.Suspense fallback={<div>Page is Loading...</div>}>
+        <SafelinkLayout2 />
+      </React.Suspense>
+    );
   }
 }
+
+export default Safelink;
 
 /**
  * start decoding safelink

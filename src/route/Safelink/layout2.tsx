@@ -30,3 +30,5 @@ export class SafelinkLayout2 extends React.Component<Record<string, never>, Reco
     );
   }
 }
+
+export default SafelinkLayout2;
