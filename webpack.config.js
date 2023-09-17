@@ -2,7 +2,7 @@ const path = require('upath');
 const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const postcssOptions = require('./postcss.config');
+// const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
@@ -19,7 +19,7 @@ const stylesLoader = [
     options: {
       // 1: Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
       // 2: If you need run `sass-loader` and `postcss-loader` on each CSS `@import`
-      importLoaders: 2,
+      importLoaders: 1,
       modules: {
         localIdentName: '[hash:base64]', // default
         auto: true, // default
@@ -27,10 +27,10 @@ const stylesLoader = [
       sourceMap: true,
     },
   },
-  {
-    loader: 'postcss-loader',
-    options: { postcssOptions },
-  },
+  // {
+  //   loader: 'postcss-loader',
+  //   options: { postcssOptions },
+  // },
 ];
 
 /**
