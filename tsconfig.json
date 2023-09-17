@@ -28,6 +28,23 @@
     "types": [
       "rsuite"
     ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "src/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@component/*": [
+        "./src/components/*"
+      ],
+      "@route/*": [
+        "./src/route/*"
+      ]
+    },
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
@@ -46,6 +63,9 @@
   "exclude": [
     "**/node_modules/**",
     "./page/**/*",
-    "**/dist/**"
+    "**/dist/**",
+    "**/assets/js/core.js",
+    "**/assets/js/v*.js",
+    "**/assets/js/gijgo*.js"
   ]
 }

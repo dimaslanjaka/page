@@ -11,7 +11,9 @@ const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
 const devMode = /dev/i.test(process.env.NODE_ENV);
 const ASSET_PATH = '/page/';
-
+const tsconfigJson = require('./tsconfig.json');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const extensions = ['.scss', '.css', '.less', '.html', '.ts', '.js', '.jsx', '.tsx', '.json'];
 const stylesLoader = [
   // Creates `style` nodes from JS strings
   devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -188,7 +190,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.scss', '.css', '.less', '.html', '.ts', '.js', '.jsx', '.tsx', '.json'],
+    extensions,
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       path: require.resolve('path-browserify'),
@@ -197,6 +199,27 @@ module.exports = {
       constants: require.resolve('constants-browserify'),
       stream: require.resolve('stream-browserify'),
     },
+    // typescript import paths alias support
+    alias: (() => {
+      const paths = tsconfigJson.compilerOptions.paths;
+      for (const key in paths) {
+        if (Object.hasOwnProperty.call(paths, key)) {
+          const resolvedValues = paths[key].map(source => {
+            // resolve absolute path source
+            return path.resolve(__dirname, source);
+          });
+          paths[key] = resolvedValues;
+        }
+      }
+      return paths;
+    })(),
+    plugins: [
+      // typescript import paths alias support
+      new TsconfigPathsPlugin({
+        configFile: './tsconfig.json',
+        extensions,
+      }),
+    ],
   },
 
   // Optional and for development only. This provides the ability to
