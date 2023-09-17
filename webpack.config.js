@@ -2,6 +2,7 @@ const path = require('upath');
 const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
@@ -238,6 +239,15 @@ module.exports = {
     // enable source maps generation
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map[query]',
+    }),
+    // analyze webpack bundle
+    new BundleAnalyzerPlugin({
+      // report filename
+      reportFilename: 'runtime/index.html',
+      // generate report file in output directory
+      generateStatsFile: true,
+      // auto open browser
+      openAnalyzer: false,
     }),
   ],
   /**
