@@ -1,20 +1,26 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"command": "yarn start",
-			"name": "webpack server",
-			"request": "launch",
-			"type": "node-terminal"
-		},
-		{
-			"command": "yarn vite:start",
-			"name": "vite server",
-			"request": "launch",
-			"type": "node-terminal"
-		}
-	]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "yarn start",
+      "name": "webpack server",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "yarn analyze",
+      "name": "webpack analyzer",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "yarn vite:start",
+      "name": "vite server",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ]
 }

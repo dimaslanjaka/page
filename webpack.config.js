@@ -1,10 +1,11 @@
 const path = require('upath');
-const fs = require('fs');
+const fs = require('fs-extra');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
+const webpackEntry = require('./webpack.entries.json');
 const babelConfig = require('./.babelrc').config;
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
@@ -45,29 +46,11 @@ module.exports = {
   entry: devMode
     ? './src/index.js'
     : {
-        // shared utility
-        shared: {
-          import: ['bluebird', 'crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery'],
-        },
+        ...webpackEntry,
         // main script
         bundle: {
           import: './src/index.js',
-          dependOn: ['shared', 'firebase', 'internal'],
-        },
-        // all imported firebase module
-        firebase: {
-          import: ['firebase/app', 'firebase/auth'],
-          dependOn: 'shared',
-        },
-        // other external module utility
-        customModule: {
-          import: ['safelinkify', 'rsuite', 'bootstrap', 'highlight.js'],
-          dependOn: 'shared',
-        },
-        // internal/local utility
-        internal: {
-          import: ['./src/utils/index.ts'],
-          dependOn: ['customModule', 'shared'],
+          dependOn: ['shared', 'internal'],
         },
       },
   /**

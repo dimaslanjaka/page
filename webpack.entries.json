@@ -1,0 +1,49 @@
+{
+  "promise": {
+    "import": "bluebird"
+  },
+  "shared": {
+    "import": [
+      "crypto-js",
+      "moment",
+      "moment-timezone",
+      "lodash",
+      "jquery",
+      "tslib"
+    ],
+    "dependOn": "promise"
+  },
+  "internal": {
+    "import": [
+      "./src/utils/index.ts"
+    ],
+    "dependOn": [
+      "safelinkify",
+      "shared"
+    ]
+  },
+  "safelinkify": {
+    "import": "safelinkify",
+    "dependOn": "shared"
+  },
+  "rsuite": {
+    "import": "rsuite",
+    "dependOn": "shared"
+  },
+  "highlightjs": {
+    "import": "highlight.js",
+    "dependOn": "shared"
+  },
+  "rsuiteiconslegacyHome": {
+    "import": "@rsuite/icons/legacy/Home",
+    "dependOn": "shared"
+  },
+  "firebaseapp": {
+    "import": "firebase/app",
+    "dependOn": "shared"
+  },
+  "firebaseauth": {
+    "import": "firebase/auth",
+    "dependOn": "shared"
+  }
+}
