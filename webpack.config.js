@@ -5,8 +5,6 @@ const webpack = require('webpack');
 const postcssOptions = require('./postcss.config');
 const { webpackHtmlRoutes } = require('./webpack.html');
 const babelConfig = require('./.babelrc').config;
-// const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
-// const glob = require('glob');
 const cacheDirectory = path.join(__dirname, 'tmp/webpack');
 if (!fs.existsSync(cacheDirectory)) fs.mkdirSync(cacheDirectory, { recursive: true });
 const devMode = /dev/i.test(process.env.NODE_ENV);
@@ -237,10 +235,6 @@ module.exports = {
       filename: 'runtime/css/[name].[chunkhash].css',
       chunkFilename: 'runtime/css/[id].[chunkhash].css',
     }),
-    // purge css
-    // new PurgeCSSPlugin({
-    //   paths: glob.sync(`${path.join(__dirname, 'src')}/**/*`, { nodir: true }),
-    // }),
     // enable source maps generation
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map[query]',
