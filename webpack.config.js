@@ -59,14 +59,14 @@ module.exports = {
           dependOn: 'shared',
         },
         // other external module utility
-        /*customModule: {
-        import: ['safelinkify'],
-        dependOn: 'shared',
-      },*/
+        customModule: {
+          import: ['safelinkify'],
+          dependOn: 'shared',
+        },
         // internal/local utility
         internal: {
           import: ['./src/utils/index.ts'],
-          dependOn: 'shared',
+          dependOn: ['customModule', 'shared'],
         },
       },
   /**
