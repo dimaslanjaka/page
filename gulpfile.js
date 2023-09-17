@@ -8,6 +8,7 @@ const safelinkify = require('safelinkify');
 const through2 = require('through2');
 const { restore, backup } = require('./gulpfile.backup');
 const { buildStatic } = require('./gulpfile.webpack');
+const purgeCSSExecutor = require('./gulpfile.purgecss');
 require('./gulpfile.webpack');
 
 const pageGit = new git(path.join(__dirname, 'page'));
@@ -148,6 +149,8 @@ gulp.task('page:clean', function () {
   });
 });
 
+gulp.task('purgecss', gulp.series(purgeCSSExecutor));
+
 gulp.task(
   'build',
   gulp.series(
@@ -155,6 +158,8 @@ gulp.task(
     restore,
     // build static files
     buildStatic,
+    // purge css (remove unused css from dist files)
+    //'purgecss',
     // copy ./dist to ./page
     'page:copy',
     // clean node_modules
