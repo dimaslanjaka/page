@@ -1,7 +1,7 @@
 import React from 'react';
 //
 
-import HomeIcon from '@rsuite/icons/legacy/Home';
+// import HomeIcon from '@rsuite/icons/legacy/Home';
 // import { Nav, Navbar } from 'rsuite';
 
 const Nav = React.lazy(() => import('rsuite/esm/Nav'));
@@ -22,10 +22,7 @@ const NavbarBrand = React.lazy(() =>
   })),
 );
 
-// const NavMenu = React.lazy(() => import('rsuite/esm/Nav/NavMenu'));
-// const NavItem = React.lazy(() => import('rsuite/esm/Nav/NavItem'));
-// const NavbarBrand = React.lazy(() => import('rsuite/esm/Navbar/NavbarBrand'));
-// const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));
+const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));
 
 const MyNavbar = ({ ...props }) => {
   return (
