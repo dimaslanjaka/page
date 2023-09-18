@@ -258,6 +258,8 @@ module.exports = {
       generateStatsFile: true,
       // auto open browser
       openAnalyzer: false,
+      // 'static': generate static html on production
+      analyzerMode: process.env.webpackAnalyze || 'server',
     }),
   ],
   /**
