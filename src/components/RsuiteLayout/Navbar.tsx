@@ -19,11 +19,15 @@ const MyNavbar = ({ ...props }) => {
         </Nav.Item>
         <Nav.Item href="/page/google/login">Login</Nav.Item>
         <Nav.Menu title="Tools">
-          <Nav.Item href="/page/bot-detect" className="text-decoration-none">
+          <Nav.Item onClick={navItemClick} href="/page/bot-detect">
             Selenium Checker
           </Nav.Item>
-          <Nav.Item href="/page/moment-timezone">Moment Timezone Playground</Nav.Item>
-          <Nav.Item href="/page/cookies">Cookie Manager</Nav.Item>
+          <Nav.Item onClick={navItemClick} href="/page/moment-timezone">
+            Moment Timezone Playground
+          </Nav.Item>
+          <Nav.Item onClick={navItemClick} href="/page/cookies">
+            Cookie Manager
+          </Nav.Item>
         </Nav.Menu>
       </Nav>
       {/* <Nav pullRight>
@@ -34,3 +38,10 @@ const MyNavbar = ({ ...props }) => {
 };
 
 export default MyNavbar;
+
+function navItemClick(e: { target: any }): any {
+  const el = e.target as HTMLElement;
+  if (el.hasAttribute('href')) {
+    window.location.href = el.getAttribute('href');
+  }
+}
