@@ -26,16 +26,68 @@
     "import": "safelinkify",
     "dependOn": "shared"
   },
+  "componentsLoader": {
+    "import": "@components/Loader",
+    "dependOn": "shared"
+  },
+  "componentsAdsense": {
+    "import": "@components/Adsense",
+    "dependOn": "shared"
+  },
+  "componentsHighlightjs": {
+    "import": "@components/Highlight.js",
+    "dependOn": "shared"
+  },
+  "componentsAdsenseAdsenseFill": {
+    "import": "@/components/Adsense/AdsenseFill",
+    "dependOn": "shared"
+  },
+  "componentsSafelinkContents": {
+    "import": "@components/SafelinkContents",
+    "dependOn": "shared"
+  },
+  "utils": {
+    "import": "@/utils",
+    "dependOn": "shared"
+  },
+  "assetsjscookie": {
+    "import": "@assets/js/cookie",
+    "dependOn": "shared"
+  },
+  "assetsjsgoogleconstants": {
+    "import": "@assets/js/google/constants",
+    "dependOn": "shared"
+  },
+  "assetsjsgooglefirebase": {
+    "import": "@assets/js/google/firebase",
+    "dependOn": "shared"
+  },
+  "componentsLink": {
+    "import": "@components/Link",
+    "dependOn": "shared"
+  },
   "rsuite": {
     "import": "rsuite",
     "dependOn": "shared"
   },
-  "highlightjs": {
-    "import": "highlight.js",
+  "assetsjsbotdetect": {
+    "import": "@/assets/js/bot-detect",
+    "dependOn": "shared"
+  },
+  "componentsHighlightjshelper": {
+    "import": "@components/Highlight.js/helper",
+    "dependOn": "shared"
+  },
+  "project": {
+    "import": "@/project",
     "dependOn": "shared"
   },
   "rsuiteiconslegacyHome": {
     "import": "@rsuite/icons/legacy/Home",
+    "dependOn": "shared"
+  },
+  "highlightjs": {
+    "import": "highlight.js",
     "dependOn": "shared"
   },
   "firebaseapp": {
