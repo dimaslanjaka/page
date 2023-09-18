@@ -131,4 +131,4 @@ export function ErrorBoundary() {
 }
 
 // If you want to customize the component display name in React dev tools:
-ErrorBoundary.displayName = 'SampleErrorBoundary';
+ErrorBoundary.displayName = 'RSuiteLayoutErrorBoundary';
