@@ -19,7 +19,7 @@ const webpackEntry = {
   },
 };
 
-const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss}'));
+const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss}'), { nodir: true });
 const importedModules = sourcesPaths
   .map(file => {
     const str = fs.readFileSync(file, 'utf-8');
