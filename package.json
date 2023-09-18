@@ -28,8 +28,9 @@
     "url": "https://github.com/dimaslanjaka/page.git"
   },
   "dependencies": {
-    "@fontawesome/fontawesome-svg-core": "https://github.com/dimaslanjaka/Web-Manajemen/tarball/97f55a62c3d35ca245fdd12753efb92a7bff3910",
+    "@fontawesome/fontawesome-svg-core": "https://github.com/dimaslanjaka/Web-Manajemen/tarball/0f634f242ff259087c9fe176e8f28ccaebb5c015",
     "@popperjs/core": "^2.11.8",
+    "axios": "^1.5.0",
     "bluebird": "^3.7.2",
     "bootstrap": "^5.3.1",
     "crypto-js": "^4.1.1",
