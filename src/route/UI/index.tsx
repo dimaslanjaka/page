@@ -11,6 +11,7 @@ const Col = React.lazy(() => import('rsuite/esm/Col'));
 const Panel = React.lazy(() => import('rsuite/esm/Panel'));
 const Avatar = React.lazy(() => import('rsuite/esm/Avatar'));
 const AvatarGroup = React.lazy(() => import('rsuite/esm/AvatarGroup'));
+const Loader = React.lazy(() => import('rsuite/esm/Loader'));
 const Badge = React.lazy(() => import('rsuite/esm/Badge'));
 //const Placeholder = React.lazy(() => import('rsuite/esm/Placeholder'));
 const PlaceholderParagraph = React.lazy(() => import('rsuite/esm/Placeholder/PlaceholderParagraph')); // Placeholder.Paragraph
@@ -91,6 +92,11 @@ class UI extends React.Component<Record<string, never>, Record<string, never>> {
           src="//raw.githubusercontent.com/dimaslanjaka/dimaslanjaka.github.io/4e6098df3f102e2bd36b33b9055644bccd4faac3/images/PicsArt_09-09-12.12.25%201584x512px.png"
           alt="@SevenOutman"
         />
+        <b>loader</b>
+        <div className="position-relative">
+          <PlaceholderParagraph rows={8} />
+          <Loader center content="loading" />
+        </div>
       </Container>
     );
   }
