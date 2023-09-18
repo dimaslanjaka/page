@@ -2,5 +2,6 @@
   "*.js": "eslint --fix",
   "*.ts": "eslint --fix",
   "*.jsx": "eslint --fix",
-  "*.tsx": "eslint --fix"
+  "*.tsx": "eslint --fix",
+  "*.json": "prettier --list-different --write"
 }
