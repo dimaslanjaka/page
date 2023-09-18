@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafelinkContents } from '../../components/SafelinkContents';
-import { Adsense } from '../../components/Adsense';
+import Adsense from '../../components/Adsense';
 
 export class SafelinkLayout1 extends React.Component {
   componentDidMount() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from './Link';
-import { Adsense } from './Adsense';
+import Adsense from './Adsense';
 
 function SafelinkContents() {
   return (

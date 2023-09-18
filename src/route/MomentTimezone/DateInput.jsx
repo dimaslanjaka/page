@@ -1,5 +1,5 @@
 import React from 'react';
-import { Adsense } from '../../components/Adsense';
+import Adsense from '../../components/Adsense';
 import { moment_format, setDateLocalValue } from './moment-timezone';
 import { copyTextToClipboard, querySelector } from '../../utils';
 
