@@ -29,13 +29,21 @@ i:not([class^='fa-']) {
 
 * {
   word-wrap: break-word;
-  max-width: 100%;
+  // max-width: 100%;
   font-family: 'Cera Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 #app {
   height: 100%;
   width: 100%;
+}
+
+// responsive image
+img {
+  width: 100%;
+  height: auto;
+  /* Prevent the image from stretching. So it crops the image to prevent from awkward stretching */
+  object-fit: cover;
 }
 
 /* hide unfilled ads */
