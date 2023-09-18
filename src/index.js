@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import Loader from './components/Loader';
+import { suspenseIt } from './utils/suspense';
 
 const RSuiteLayout = React.lazy(() => import('@components/RsuiteLayout'));
 const UI = React.lazy(() => import('@route/UI'));
@@ -42,7 +42,3 @@ ReactDOM.render(
 
 // hot reloading
 if (module.hot && module.hot.accept) module.hot.accept();
-
-function suspenseIt(element, fallback = <Loader />) {
-  return <React.Suspense fallback={fallback}>{element}</React.Suspense>;
-}
