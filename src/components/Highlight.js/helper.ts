@@ -10,6 +10,7 @@ function startHighlighter(preCode: HTMLElement) {
   // deterimine <code /> tag
   let code = preCode;
   if (preCode.tagName.toLowerCase() === 'pre') {
+    // select inner <code /> from <pre /> tag
     code = preCode.querySelector('code');
     if (!code) {
       // create <code /> tag on single <pre /> tag
@@ -17,7 +18,14 @@ function startHighlighter(preCode: HTMLElement) {
       newC.innerHTML = preCode.innerHTML;
       preCode.innerHTML = '';
       preCode.appendChild(newC);
+      // re-assign new created <code />
+      code = preCode.querySelector('code');
     }
+  }
+  if (!code) {
+    console.log('pre code is null');
+    console.log(preCode);
+    return;
   }
   // add new id
   if (!code.id) code.id = 'code-' + randomStr(4);
