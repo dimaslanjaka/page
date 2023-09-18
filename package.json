@@ -30,6 +30,7 @@
   "dependencies": {
     "@fontawesome/fontawesome-svg-core": "https://github.com/dimaslanjaka/Web-Manajemen/tarball/0f634f242ff259087c9fe176e8f28ccaebb5c015",
     "@popperjs/core": "^2.11.8",
+    "@rsuite/icons": "^1.0.3",
     "axios": "^1.5.0",
     "bluebird": "^3.7.2",
     "bootstrap": "^5.3.1",
