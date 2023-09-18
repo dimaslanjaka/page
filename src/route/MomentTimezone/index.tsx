@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '../../components/Link';
+import Link from '../../components/Link';
 import { loadCSS } from '../../utils';
 import { ClockLive } from './ClockLive';
 import { DateInput } from './DateInput';
@@ -7,7 +7,7 @@ import { FullTimezoneList } from './FullTimezoneList';
 import { momentTimezonePlayground } from './moment-timezone';
 import { Snippet } from './Snippet';
 
-export function MomentTimezone() {
+function MomentTimezone() {
   React.useEffect(() => {
     document.title = 'Moment Timezone Playground';
     momentTimezonePlayground();
@@ -39,3 +39,5 @@ export function MomentTimezone() {
     </div>
   );
 }
+
+export default MomentTimezone;

@@ -1,8 +1,17 @@
 // malfunction keyboard 56^%
 
 .myUi {
+  padding: 1rem;
+
   h1 {
     background-color: rgb(49, 0, 95);
     color: rgb(255, 249, 249);
+  }
+
+  b {
+    text-align: center;
+    padding: 1em;
+    text-decoration: underline;
+    text-transform: uppercase;
   }
 }

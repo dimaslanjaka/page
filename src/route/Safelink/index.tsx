@@ -1,16 +1,15 @@
+import * as utils from '@/utils';
+import { createCookieMins, getCookie } from '@assets/js/cookie';
 import React from 'react';
-import { createCookieMins, getCookie } from '../../assets/js/cookie';
-import { delay, loadCSS, parse_query, parse_url, querySelector, safelinkInstance } from '../../utils';
-//import { SafelinkLayout2 } from './layout2';
 
 const SafelinkLayout2 = React.lazy(() => import('./layout2'));
 
-export class Safelink extends React.Component {
+class Safelink extends React.Component {
   componentDidMount() {
-    loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    utils.loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
 
     // check google translate
-    const queryURL = parse_query('url') || parse_query('o') || parse_query('u');
+    const queryURL = utils.parse_query('url') || utils.parse_query('o') || utils.parse_query('u');
     const safelinkURL = 'https://www.webmanajemen.com/page/safelink.html';
     const origin = queryURL ? safelinkURL + '?url=' + queryURL : safelinkURL;
     // redirect when in translate google
@@ -30,15 +29,11 @@ export class Safelink extends React.Component {
     }, 800);
 
     // decoding
-    decodeStart();
+    utils.waitUntilPageFullyLoaded(decodeStart);
   }
 
   render() {
-    return (
-      <React.Suspense fallback={<div>Page is Loading...</div>}>
-        <SafelinkLayout2 />
-      </React.Suspense>
-    );
+    return <SafelinkLayout2 />;
   }
 }
 
@@ -49,7 +44,7 @@ export default Safelink;
  * @returns
  */
 function decodeStart() {
-  const parse_safelink = safelinkInstance.resolveQueryUrl(location.href);
+  const parse_safelink = utils.safelinkInstance.resolveQueryUrl(location.href);
   if (parse_safelink) {
     const value_from_query = parse_safelink.url || parse_safelink.o || parse_safelink.u;
     if (value_from_query) {
@@ -84,34 +79,19 @@ function refreshWithoutParam() {
 }
 
 async function replaceGoButton(url: string) {
-  const go = querySelector('#go');
-  if (go) {
+  const go = utils.querySelector('#go');
+  if (go instanceof Element) {
     go.setAttribute('disabled', 'true');
     go.textContent = 'Please Wait';
-    await delay(10000);
+    // wait 10 seconds
+    await utils.delay(10000);
     const a = document.createElement('a');
     a.href = url;
     a.rel = 'nofollow noopener noreferer';
     a.target = '_blank';
     a.classList.add('btn', 'btn-sm', 'btn-success', 'text-decoration-none');
-    const parse_redirect = parse_url(url);
+    const parse_redirect = utils.parse_url(url);
     a.textContent = 'goto ' + parse_redirect.host;
-    replaceWith(a, go);
-  }
-}
-
-/**
- * Replace elements with new
- * @param {HTMLElement} newElement
- * @param {HTMLElement} oldElement
- */
-function replaceWith(newElement, oldElement) {
-  if (!oldElement.parentNode) {
-    console.log(oldElement, 'parent null');
-    const d = document.createElement('div');
-    d.appendChild(oldElement);
-  } else {
-    //log(oldElement.parentNode.tagName);
-    oldElement.parentNode.replaceChild(newElement, oldElement);
+    utils.replaceWith(a, go);
   }
 }

@@ -1,9 +1,9 @@
+import * as utils from '@/utils';
 import React from 'react';
-import { arrayDedupe } from '../../utils';
 import './utils';
-import { ParamsAdsByGoogle } from './utils/config';
+import * as conf from './utils/config';
 
-interface AdsenseProperties extends ParamsAdsByGoogle {
+interface AdsenseProperties extends conf.ParamsAdsByGoogle {
   /** data-ad-format */
   format?: 'fluid' | 'auto' | string;
   /** data-ad-layout */
@@ -22,7 +22,7 @@ interface AdsenseState extends AdsenseProperties {
   currentSlot: Record<string, any>;
 }
 
-export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
+class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
   property = {};
   allAds = [
     {
@@ -79,7 +79,8 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
       'data-ad-client': 'ca-pub-' + this.state.client.replace('ca-pub-', ''),
       'data-ad-format': this.state.format,
       style: { display: 'block', ...this.state.style },
-      className: arrayDedupe(['adsbygoogle'].concat((this.state.className || '').split(' ')))
+      className: utils
+        .arrayDedupe(['adsbygoogle'].concat((this.state.className || '').split(' ')))
         //filter empty
         .filter(str => str.length > 0)
         // rejoin
@@ -97,18 +98,4 @@ export class Adsense extends React.Component<AdsenseProperties, AdsenseState> {
   }
 }
 
-// initialize adsense="fill" attribute
-declare module 'react' {
-  interface HTMLAttributes<T> extends React.AriaAttributes, React.DOMAttributes<T> {
-    // extends React's HTMLAttributes
-    adsense?: string;
-  }
-}
-
-/**
- * create div[adsense="fill"]
- * @returns
- */
-export function AdsenseFill() {
-  return <div adsense="fill" style={{ minWidth: '50px' }}></div>;
-}
+export default Adsense;

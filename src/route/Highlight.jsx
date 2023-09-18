@@ -1,9 +1,14 @@
 import React from 'react';
-import { AdsenseFill } from '../components/Adsense';
-import './Highlight.scss';
-import { HighlightElement } from '../components/HighlightElement';
+//
 
-export function HighlightLayout() {
+import { AdsenseFill } from '@components/Adsense';
+import { HighlightElement } from '@components/Highlight.js';
+
+function HighlightLayout() {
+  React.useEffect(() => {
+    require('./Highlight.scss');
+  });
+
   return (
     <div className="mx-auto p-2">
       <h1>Auto highlight.js</h1>
@@ -129,3 +134,5 @@ function initHljs() {
     </div>
   );
 }
+
+export default HighlightLayout;

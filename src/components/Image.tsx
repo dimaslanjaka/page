@@ -13,7 +13,7 @@ interface ImageState extends ImageAttr {
 /**
  * image with fallback
  */
-export class Image extends React.Component<ImageAttr, ImageState> {
+class Image extends React.Component<ImageAttr, ImageState> {
   defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
 
   constructor(props: Readonly<ImageAttr>) {
@@ -41,3 +41,5 @@ export class Image extends React.Component<ImageAttr, ImageState> {
     return <img src={src} onError={this.onError} {...props} />;
   }
 }
+
+export default Image;

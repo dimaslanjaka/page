@@ -1,8 +1,9 @@
+import AdsenseFill from '@/components/Adsense/AdsenseFill';
+import Adsense from '@components/Adsense';
+import SafelinkContents from '@components/SafelinkContents';
 import React from 'react';
-import { Adsense, AdsenseFill } from '../../components/Adsense';
-import { SafelinkContents } from '../../components/SafelinkContents';
 
-export class SafelinkLayout2 extends React.Component<Record<string, never>, Record<string, never>> {
+class SafelinkLayout2 extends React.Component<Record<string, never>, Record<string, never>> {
   constructor(props: Record<string, never>) {
     super(props);
   }

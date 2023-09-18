@@ -1,22 +1,18 @@
+import { loadCSS } from '@/utils';
+import * as constants from '@assets/js/google/constants';
+import { firebaseAuthGoogle } from '@assets/js/google/firebase';
 import React from 'react';
-import {
-  GOOGLE_CONFIG,
-  KEY_LOCALSTORAGE,
-  getLocalCredential,
-  handleCredentialResponse,
-  isTokenExpired,
-} from '../../assets/js/google/constants';
-import { firebaseAuthGoogle } from '../../assets/js/google/firebase';
-import { Image } from '../../components/Image';
-import { loadCSS } from '../../utils';
-import './Login.scss';
 
-export class Login extends React.Component {
+const Image = React.lazy(() => import('@components/Image'));
+
+class Login extends React.Component {
   g_credential: Record<string, any>;
+
   componentDidMount() {
     document.title = 'Login page - WMI';
     this.loadGSI().then(this.start.bind(this));
     loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    require('./Login.scss');
   }
 
   render() {
@@ -26,7 +22,7 @@ export class Login extends React.Component {
           <div className="mb-2" id="profileWrapper">
             <div className="card">
               <Image
-                src="https://codingyaar.com/wp-content/uploads/bootstrap-profile-card-image.jpg"
+                src="//codingyaar.com/wp-content/uploads/bootstrap-profile-card-image.jpg"
                 className="card-img-top"
               />
               <div className="card-body">
@@ -77,18 +73,18 @@ export class Login extends React.Component {
       window.location.replace(window.location.href.split('?')[0]);
     }
     // GSI initializer options
-    GOOGLE_CONFIG.callback = this.handleCredResp;
+    constants.GOOGLE_CONFIG.callback = this.handleCredResp;
 
     // initialize google account
     google.accounts.id.initialize({
-      ...GOOGLE_CONFIG,
+      ...constants.GOOGLE_CONFIG,
       //allowed_parent_origin: true,
     });
     // prevent UX dead loop
     google.accounts.id.disableAutoSelect();
     // initialize token client
     const tokenClient = google.accounts.oauth2.initTokenClient({
-      ...GOOGLE_CONFIG,
+      ...constants.GOOGLE_CONFIG,
       //login_hint: 'credential' in g_credential ? g_credential.credential.email : null,
       prompt: 'consent', // '' | 'none' | 'consent' | 'select_account'
       callback: this.handleCredResp, // your function to handle the response after login. 'access_token' will be returned as property on the response
@@ -111,7 +107,7 @@ export class Login extends React.Component {
       if (tokenDebugger) tokenDebugger.textContent = 'response is null';
       return;
     }
-    handleCredentialResponse(response, function () {
+    constants.handleCredentialResponse(response, function () {
       //console.log('credential', { g_credential }, { response });
 
       // redirect to page
@@ -137,8 +133,10 @@ export class Login extends React.Component {
   }
 }
 
+export default Login;
+
 function updateProfileCard() {
-  const g_credential = getLocalCredential();
+  const g_credential = constants.getLocalCredential();
   document.getElementById('tokenResponse').textContent =
     Object.keys(g_credential).length > 0 ? JSON.stringify(g_credential, null, 2) : 'UNAUTHORIZED';
   if ('credential' in g_credential) {
@@ -154,7 +152,7 @@ function updateProfileCard() {
         wrapper.querySelector('.card-title').innerHTML = fullName;
       }
       document.getElementById('gEmail').textContent = g_credential.credential.email;
-      document.getElementById('isExpired').innerHTML = isTokenExpired(g_credential)
+      document.getElementById('isExpired').innerHTML = constants.isTokenExpired(g_credential)
         ? '<span className="text-danger">true</span>'
         : '<span className="text-success">false</span>';
     }

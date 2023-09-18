@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from './Link';
+import Link from './Link';
 import { Adsense } from './Adsense';
 
-export function SafelinkContents() {
+function SafelinkContents() {
   return (
     <div id="contents">
       <h1>What is a basic contract in insurance?</h1>
@@ -318,3 +318,5 @@ function controlHyperlink(t) {
     location.reload();
   }
 }
+
+export default SafelinkContents;

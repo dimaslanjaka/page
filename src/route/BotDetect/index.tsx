@@ -1,8 +1,10 @@
 import React from 'react';
-import { runBotDetectionMain } from '../../assets/js/bot-detect';
-import { loadCSS } from '../../utils';
+//
 
-export class BotDetect extends React.Component {
+import { runBotDetectionMain } from '@/assets/js/bot-detect';
+import { loadCSS } from '@/utils';
+
+class BotDetect extends React.Component {
   constructor(props: any) {
     super(props);
   }
@@ -21,7 +23,6 @@ export class BotDetect extends React.Component {
             <ol itemScope itemType="https://schema.org/BreadcrumbList" className="breadcrumb" id="BreadcrumbList">
               <li className="me-1" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                 <a itemProp="item" href="https://webmanajemen.com">
-                  {' '}
                   <span itemProp="name">Homepage</span>
                 </a>
                 <meta itemProp="position" content="1" />
@@ -163,3 +164,5 @@ export class BotDetect extends React.Component {
     );
   }
 }
+
+export default BotDetect;

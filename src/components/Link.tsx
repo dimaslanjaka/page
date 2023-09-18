@@ -1,4 +1,5 @@
 import React from 'react';
+//
 import { Link as OriginalLink } from 'react-router-dom';
 import { isValidHttpUrl, safelinkInstance } from '../utils';
 
@@ -22,7 +23,7 @@ interface LinkProperties {
  * React Safelink Converter
  * * Anonymize external links into page redirector
  */
-export class Link extends React.Component<LinkProperties> {
+class Link extends React.Component<LinkProperties> {
   sf = safelinkInstance;
   constructor(props: LinkProperties) {
     super(props);
@@ -44,18 +45,24 @@ export class Link extends React.Component<LinkProperties> {
       }
     }
 
+    let render: JSX.Element;
+
     if (type === 'external') {
-      return (
-        <a {...props} href={result} target={type == 'external' ? '_blank' : '_self'} data-type={type}>
+      render = (
+        <a {...props} href={result} target="_blank">
           {this.props.children}
         </a>
       );
+    } else {
+      render = (
+        <OriginalLink {...props} to={dest}>
+          {this.props.children}
+        </OriginalLink>
+      );
     }
 
-    return (
-      <OriginalLink {...props} to={dest} target={type == 'external' ? '_blank' : '_self'} data-type={type}>
-        {this.props.children}
-      </OriginalLink>
-    );
+    return render;
   }
 }
+
+export default Link;

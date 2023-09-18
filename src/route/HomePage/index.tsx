@@ -1,17 +1,25 @@
-//import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
-import { Col, Container, Grid, Panel, Row } from 'rsuite';
-import { Link } from '../../components/Link';
-import './homepage.scss';
+//
 
-export class Home extends React.Component {
+import Link from '@components/Link';
+import { Col, Container, Grid, Panel, Row } from 'rsuite';
+
+// const Panel = React.lazy(() => import('rsuite/esm/Panel'));
+// const Container = React.lazy(() => import('rsuite/esm/Container'));
+// const Row = React.lazy(() => import('rsuite/esm/Row'));
+// const Grid = React.lazy(() => import('rsuite/esm/Grid'));
+// const Col = React.lazy(() => import('rsuite/esm/Col'));
+// const Link = React.lazy(() => import('@components/Link'));
+
+class Home extends React.Component {
   constructor(props: any) {
     super(props);
   }
 
   componentDidMount() {
     document.title = 'Home page - WMI';
-    //loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    // loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+    require('./homepage.scss');
   }
 
   render() {
@@ -60,10 +68,6 @@ export class Home extends React.Component {
       <div className="myHome">
         <header id="header">
           <div className="intro" id="intro">
-            {/* <img
-              src="//rawcdn.githack.com/dimaslanjaka/dimaslanjaka.github.io/4e6098df3f102e2bd36b33b9055644bccd4faac3/images/PicsArt_09-09-12.12.25%201584x512px.png"
-              className="banner"
-            /> */}
             <div className="banner"></div>
             <div className="overlay" id="overlay">
               <Container>
@@ -94,9 +98,9 @@ export class Home extends React.Component {
               </Col>
             </Row>
             <Row className="features-item">
-              {featuresConfig.slice(0, 4).map(item => {
+              {featuresConfig.slice(0, 4).map((item, i) => {
                 return (
-                  <Col xs={24} sm={24} md={6} className="mb-2">
+                  <Col xs={24} sm={24} md={6} className="mb-2" key={i + item.title}>
                     <Panel shaded bordered bodyFill className="pt-4 pb-4">
                       <i className={'fa-thin fa-size-large ' + item.icon}></i>
                       <Panel header={item.title}>
