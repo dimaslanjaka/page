@@ -20,7 +20,8 @@
     "php": "php -S 127.0.0.1:4000",
     "clean": "rm -rf dist tmp",
     "clean:build": "npm run clean && npm run build",
-    "analyze": "webpack --profile --mode production"
+    "analyze": "webpack --profile --mode production",
+    "entries": "node webpack.entries.js"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
