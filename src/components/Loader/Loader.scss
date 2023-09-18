@@ -9,35 +9,35 @@
 }
 
 /* spinner https://codepen.io/bernethe/pen/dorozd?editors=1100 */
-$spCol: #000;
-.sp {
-  width: 32px;
-  height: 32px;
-  clear: both;
-  margin: 20px auto;
-}
+// $spCol: #000;
+// .sp {
+//   width: 32px;
+//   height: 32px;
+//   clear: both;
+//   margin: 20px auto;
+// }
 
-/* Spinner Circle Rotation */
-.sp-circle {
-  border: 4px rgba($spCol, 0.25) solid;
-  border-top: 4px rgba($spCol, 1) solid;
-  border-radius: 50%;
-  -webkit-animation: spCircRot 0.6s infinite linear;
-  animation: spCircRot 0.6s infinite linear;
-}
-@-webkit-keyframes spCircRot {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(359deg);
-  }
-}
-@keyframes spCircRot {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
+// /* Spinner Circle Rotation */
+// .sp-circle {
+//   border: 4px rgba($spCol, 0.25) solid;
+//   border-top: 4px rgba($spCol, 1) solid;
+//   border-radius: 50%;
+//   -webkit-animation: spCircRot 0.6s infinite linear;
+//   animation: spCircRot 0.6s infinite linear;
+// }
+// @-webkit-keyframes spCircRot {
+//   from {
+//     -webkit-transform: rotate(0deg);
+//   }
+//   to {
+//     -webkit-transform: rotate(359deg);
+//   }
+// }
+// @keyframes spCircRot {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(359deg);
+//   }
+// }

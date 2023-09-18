@@ -1,17 +1,17 @@
 import React from 'react';
-import { querySelector, removeElement, waitUntilPageFullyLoaded } from '../../utils';
+import { Loader as RLoader } from 'rsuite';
 
 class Loader extends React.Component {
   componentDidMount() {
     require('./Loader.scss');
-    waitUntilPageFullyLoaded(() => removeElement(querySelector('.loader')));
+    // waitUntilPageFullyLoaded(() => removeElement(querySelector('.loader')));
   }
 
   render() {
     return (
-      <div className="loader">
-        <div className="sp sp-circle"></div>
-      </div>
+      <RLoader center content="loading" className="loader" size="lg">
+        {/* <div className="sp sp-circle"></div> */}
+      </RLoader>
     );
   }
 }
