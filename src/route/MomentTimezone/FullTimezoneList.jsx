@@ -2,7 +2,7 @@ import React from 'react';
 import timezones from './timezones.json';
 import moment from 'moment-timezone';
 
-export function FullTimezoneList() {
+function FullTimezoneList() {
   React.useEffect(() => {
     const table = document.getElementById('table-timezones');
 
@@ -60,3 +60,5 @@ export function FullTimezoneList() {
     </section>
   );
 }
+
+export default FullTimezoneList;

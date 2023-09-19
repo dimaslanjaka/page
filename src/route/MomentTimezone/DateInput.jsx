@@ -3,7 +3,7 @@ import Adsense from '../../components/Adsense';
 import { moment_format, setDateLocalValue } from './moment-timezone';
 import { copyTextToClipboard, querySelector } from '../../utils';
 
-export function DateInput() {
+export default function DateInput() {
   React.useEffect(() => {
     const date_input = querySelector('input#date');
     const date_text = querySelector('input#date-text');

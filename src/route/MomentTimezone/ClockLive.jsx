@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 import React from 'react';
 import { querySelector } from '../../utils';
 
-export function ClockLive() {
+export default function ClockLive() {
   React.useEffect(() => {
     // clock live
     setInterval(clock_update, 1000);
