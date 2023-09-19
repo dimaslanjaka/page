@@ -11,9 +11,9 @@ const Safelink = React.lazy(() => import('@route/Safelink'));
 const Home = React.lazy(() => import('@route/HomePage'));
 const BotDetect = React.lazy(() => import('@route/BotDetect'));
 const HighlightLayout = React.lazy(() => import('@route/Highlight'));
-const MomentTimezone = React.lazy(() => import('@/route/MomentTimezone'));
+const MomentTimezone = React.lazy(() => import('@route/MomentTimezone'));
 
-let _Router_array = () => {
+const _Router_array = () => {
   /**
    * create multiple routes based on defined path
    * @param {string} path
