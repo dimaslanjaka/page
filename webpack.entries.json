@@ -3,24 +3,12 @@
     "import": "bluebird"
   },
   "shared": {
-    "import": [
-      "crypto-js",
-      "moment",
-      "moment-timezone",
-      "lodash",
-      "jquery",
-      "tslib"
-    ],
+    "import": ["crypto-js", "moment", "moment-timezone", "lodash", "jquery", "tslib"],
     "dependOn": "promise"
   },
   "internal": {
-    "import": [
-      "./src/utils/index.ts"
-    ],
-    "dependOn": [
-      "safelinkify",
-      "shared"
-    ]
+    "import": ["./src/utils/index.ts"],
+    "dependOn": ["safelinkify", "shared"]
   },
   "safelinkify": {
     "import": "safelinkify",
@@ -80,10 +68,6 @@
   },
   "project": {
     "import": "@/project",
-    "dependOn": "shared"
-  },
-  "rsuiteiconslegacyHome": {
-    "import": "@rsuite/icons/legacy/Home",
     "dependOn": "shared"
   },
   "highlightjs": {
