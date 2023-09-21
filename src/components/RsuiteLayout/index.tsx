@@ -63,26 +63,37 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     //const [activeKey, setActiveKey] = React.useState(null);
 
     return (
-      <div className="RsuiteLayout">
-        {/* <Loader /> */}
-        <Container>
-          <Header className="fixed-top">
-            <MyNavbar />
-          </Header>
-          <Container id="content-wrapper">
-            {/* <Content>{this.props.children}</Content> */}
-            <Content>
-              <Outlet />
-            </Content>
-            <Sidebar className="d-none d-lg-block d-xl-block">
-              <MySidebar />
-            </Sidebar>
+      <React.Suspense fallback={<div>Theme loading</div>}>
+        <div className="RsuiteLayout">
+          <Container>
+            <React.Suspense fallback={<div>Navbar loading</div>}>
+              <Header className="fixed-top">
+                <MyNavbar />
+              </Header>
+            </React.Suspense>
+            <React.Suspense fallback={<div>Content wrapper loading</div>}>
+              <Container id="content-wrapper">
+                {/* <Content>{this.props.children}</Content> */}
+                <React.Suspense fallback={<div>Content loading</div>}>
+                  <Content>
+                    <Outlet />
+                  </Content>
+                </React.Suspense>
+                <React.Suspense fallback={<div>Sidebar loading</div>}>
+                  <Sidebar className="d-none d-lg-block d-xl-block">
+                    <MySidebar />
+                  </Sidebar>
+                </React.Suspense>
+              </Container>
+            </React.Suspense>
+            <React.Suspense fallback={<div>Footer loading</div>}>
+              <Footer>
+                <MyFooter />
+              </Footer>
+            </React.Suspense>
           </Container>
-          <Footer>
-            <MyFooter />
-          </Footer>
-        </Container>
-      </div>
+        </div>
+      </React.Suspense>
     );
   }
 
