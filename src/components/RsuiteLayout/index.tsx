@@ -36,17 +36,27 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     console.error('theme error caught');
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     // load main stylesheet
     require('@assets/css/main.scss');
     // load theme stylesheet
     require('./theme.scss');
+
+    window.addEventListener('load', this.handleLoad.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('load', this.handleLoad.bind(this));
+  }
+
+  handleLoad() {
     // load pre/code copy button
     this.initClipBoard();
     // load highlight.js
-    utils.waitUntilPageFullyLoaded(() => {
-      if (document.querySelectorAll('pre').length > 0) hljs.initHljs();
-    });
+    // utils.waitUntilPageFullyLoaded(() => {
+    //   if (document.querySelectorAll('pre').length > 0) hljs.initHljs();
+    // });
+    hljs.initHljs();
   }
 
   render() {
@@ -91,7 +101,10 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
       button.type = 'button';
       const s = codeBlock.innerText;
       button.setAttribute('data-clipboard-text', s);
-      button.innerText = 'Copy';
+      // button.innerText = 'Copy';
+      const span = document.createElement('span');
+      span.innerText = 'Copy';
+      button.appendChild(span);
       // button.setAttribute('title', 'Copiar para a área de transferência');
       button.onclick = function (e) {
         const el = document.getElementById(codeBlock.getAttribute('id'));
