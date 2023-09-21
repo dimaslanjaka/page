@@ -8,11 +8,7 @@ class Loader extends React.Component {
   }
 
   render() {
-    return (
-      <RLoader center content="loading" className="loader" size="lg">
-        {/* <div className="sp sp-circle"></div> */}
-      </RLoader>
-    );
+    return <RLoader center content={<div className="sp sp-circle"></div>} className="loader" size="lg"></RLoader>;
   }
 }
 
