@@ -6,6 +6,39 @@
 // @import '@fontawesome/fontawesome-svg-core/scss/all';
 @import url('../fonts/index.scss');
 
+@font-face {
+  font-family: 'consolas';
+  src: url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.eot?#iefix') format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.woff') format('woff'),
+    url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.ttf') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/1db29588408eadbd4406aae9238555eb.svg#Consolas') format('svg');
+}
+
+@font-face {
+  font-family: 'monaco';
+  src: url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.eot?#iefix') format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.woff') format('woff'),
+    url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.ttf') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/440785c689da19fbbdb1346932c8c029.svg#Monaco') format('svg');
+}
+
+@font-face {
+  font-family: 'monospace';
+  src: url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.eot?#iefix') format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.woff2') format('woff2'),
+    url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.woff') format('woff'),
+    url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.ttf') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/b118fb07592ef4854d1fb0ea1e6bafc2.svg#Monospaced') format('svg');
+}
+
 body,
 html {
   height: 100%;
@@ -21,6 +54,15 @@ h6,
 tr th,
 b {
   font-family: 'Cera Pro Bold', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+pre,
+code {
+  font-family: 'consolas', 'monaco', 'monospace';
+
+  * {
+    font-family: 'consolas', 'monaco', 'monospace';
+  }
 }
 
 i:not([class^='fa-']) {
