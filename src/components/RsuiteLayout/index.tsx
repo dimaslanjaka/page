@@ -51,7 +51,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
 
   handleLoad() {
     // load pre/code copy button
-    this.initClipBoard();
+    this.initClipBoard.bind(this)();
     // load highlight.js
     // utils.waitUntilPageFullyLoaded(() => {
     //   if (document.querySelectorAll('pre').length > 0) hljs.initHljs();
@@ -107,16 +107,22 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
         codeBlock.setAttribute('id', utils.randomStr(4));
       }
 
-      const button = document.createElement('button');
-      button.className = 'copy-code-button';
-      button.type = 'button';
-      const s = codeBlock.innerText;
-      button.setAttribute('data-clipboard-text', s);
-      // button.innerText = 'Copy';
-      const span = document.createElement('span');
-      span.innerText = 'Copy';
-      button.appendChild(span);
-      // button.setAttribute('title', 'Copiar para a área de transferência');
+      let button = codeBlock.querySelector('.copy-code-button') as HTMLButtonElement;
+      let append = false;
+      if (!button) {
+        // create one when copy button not found
+        append = true;
+        button = document.createElement('button');
+        button.className = 'copy-code-button';
+        button.type = 'button';
+        const s = codeBlock.innerText;
+        button.setAttribute('data-clipboard-text', s);
+        button.setAttribute('title', 'Copy code block');
+        const span = document.createElement('span');
+        span.innerText = 'Copy';
+        button.appendChild(span);
+      }
+
       button.onclick = function (e) {
         const el = document.getElementById(codeBlock.getAttribute('id'));
         utils
@@ -132,10 +138,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
           .catch(console.error);
       };
 
-      // var pre = codeBlock.parentNode;
-      //codeBlock.classList.add('prettyprint');
-      // pre.parentNode.insertBefore(button, pre);
-      codeBlock.appendChild(button);
+      if (append) codeBlock.appendChild(button);
     });
   }
 }

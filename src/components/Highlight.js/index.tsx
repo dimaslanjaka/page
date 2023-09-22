@@ -18,8 +18,13 @@ class HighlightElement extends React.Component<HighlightProps, Record<string, an
     super(props);
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     helper.initHljs();
+    //window.addEventListener('load', helper.initHljs.bind(this));
+  }
+
+  componentWillUnmount() {
+    //window.removeEventListener('load', helper.initHljs.bind(this));
   }
 
   render() {
@@ -33,6 +38,14 @@ class HighlightElement extends React.Component<HighlightProps, Record<string, an
     return (
       <pre>
         <code {...buildProps}>{this.props.children}</code>
+        <button
+          className="copy-code-button"
+          type="button"
+          title="Copy code block"
+          data-clipboard-text={this.props.children}
+        >
+          <span>Copy</span>
+        </button>
       </pre>
     );
   }
