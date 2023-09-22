@@ -100,33 +100,30 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
           </Stack>
         }
       >
-        {utils
-          .array_shuffle(this.state.feedItems)
-          .slice(0, 10)
-          .map((item, i) => {
-            return (
-              <div key={'sidebar-feed-' + i + item.title}>
-                {item.image && (
-                  <div
-                    style={{
-                      marginRight: '4px',
-                      backgroundImage: `url('${item.image}')`,
-                      height: '100px',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: 'cover',
-                    }}
-                  />
-                )}
-                <b>
-                  <a href={item.link} target="_blank">
-                    {item.title}
-                  </a>
-                </b>
-                <p>{item.description.substring(0, 120) + '...'}</p>
-                <Divider />
-              </div>
-            );
-          })}
+        {this.state.feedItems.slice(0, 10).map((item, i) => {
+          return (
+            <div key={'sidebar-feed-' + i + item.title}>
+              {item.image && (
+                <div
+                  style={{
+                    marginRight: '4px',
+                    backgroundImage: `url('${item.image}')`,
+                    height: '100px',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                  }}
+                />
+              )}
+              <b>
+                <a href={item.link} target="_blank">
+                  {item.title}
+                </a>
+              </b>
+              <p>{item.description.substring(0, 120) + '...'}</p>
+              <Divider />
+            </div>
+          );
+        })}
       </Panel>
     );
   }
