@@ -57,6 +57,8 @@ declare global {
     opr: Record<string, any>;
     safari: Record<string, any>;
     adsense_option: import('./components/Adsense/utils/config').AdsenseOption;
+    /** Indicator for adsense initializer */
+    adsenseInitialized?: boolean;
   }
 
   interface Event {

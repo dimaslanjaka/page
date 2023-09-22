@@ -4,6 +4,7 @@ import { array_shuffle } from '../../../utils';
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (!window.adsense_option) window.adsense_option = {};
   if (!window.adsbygoogle) window.adsbygoogle = [];
+  if (typeof window.adsenseInitialized === 'undefined') window.adsenseInitialized = false;
 }
 
 /**

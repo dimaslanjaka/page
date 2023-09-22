@@ -11,11 +11,6 @@ import { array_shuffle, insertAfter, islocalhost, loadJS, replaceWith } from '..
  * ADSENSE FULLY AUTOMATIC
  */
 
-/**
- * Prevent Duplicate
- */
-let called = false;
-
 /** Option */
 if (!window.adsense_option) window.adsense_option = {};
 
@@ -37,8 +32,8 @@ let currentSlot = window.adsense_option.currentSlot;
  */
 export function triggerAdsense(_e?: Event) {
   // run once
-  if (called) return;
-  called = true;
+  if (window.adsenseInitialized) return;
+  window.adsenseInitialized = true;
 
   // apply current slot
   window.adsense_option.currentSlot = getCurrentSlot();
