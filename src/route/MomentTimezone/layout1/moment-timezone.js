@@ -19,7 +19,8 @@ export function momentTimezonePlayground() {
 /**
  * moment format
  * @param {Date|string|number} dateInput
- * @param {string} custom_pattern
+ * @param {string} [custom_pattern]
+ * @param {string} [custom_timezone]
  * @returns
  */
 export function moment_format(dateInput, custom_pattern, custom_timezone) {
@@ -36,8 +37,8 @@ export function moment_format(dateInput, custom_pattern, custom_timezone) {
   let value = '';
   if (typeof custom_pattern === 'string' && custom_pattern.length > 0) {
     value = custom_pattern;
-  } else if (pattern.value.length > 0) {
-    value = pattern.value;
+  } else if (custom_pattern.value && custom_pattern.value.length > 0) {
+    value = custom_pattern.value;
   }
   const date_timezone = document.getElementById('date-timezone');
   let timezone = date_timezone.value.trim();
@@ -71,4 +72,29 @@ export function setDateLocalValue(element, date) {
 
 export function isNumeric(str) {
   return parseFloat(str) === parseFloat(str);
+}
+
+/**
+ * Get client side timezone offset from UTC or GMT (for example, UTC+01)
+ *
+ * @returns {{ offset: string|undefined, timeZone: string|undefined }} (+|-)HH:mm - Where `HH` is 2 digits hours and `mm` 2 digits minutes.
+ * @example
+ * // From Indian/Reunion with UTC+4
+ * // '+04:00'
+ * getTimeZone()
+ */
+export function getTimeZoneOffset() {
+  const result = {
+    timeZone: undefined,
+    offset: undefined,
+  };
+  try {
+    result.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  } catch (_) {
+    //
+  }
+  const offset = new Date().getTimezoneOffset(),
+    o = Math.abs(offset);
+  result.offset = (offset < 0 ? '+' : '-') + ('00' + Math.floor(o / 60)).slice(-2) + ':' + ('00' + (o % 60)).slice(-2);
+  return result;
 }

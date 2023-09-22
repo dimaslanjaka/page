@@ -1,11 +1,11 @@
 import { loadCSS } from '@/utils';
+import Link from '@components/Link';
 import React from 'react';
-import Link from '../../components/Link';
+import Snippet from '../shared/Snippet';
 import ClockLive from './ClockLive';
 import DateInput from './DateInput';
 import FullTimezoneList from './FullTimezoneList';
 import { momentTimezonePlayground } from './moment-timezone';
-import { Snippet } from './Snippet';
 
 function MTLayout1() {
   React.useEffect(() => {

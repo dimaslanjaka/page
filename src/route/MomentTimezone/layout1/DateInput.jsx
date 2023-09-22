@@ -37,7 +37,6 @@ export default function DateInput() {
                 console.log('date input', { value: e.target.value, formatted });
                 const date_text = querySelector('input#date-text');
                 const result = querySelector('#moment-result');
-
                 result.textContent = formatted;
                 date_text.value = formatted;
               }}

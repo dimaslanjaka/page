@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 import React from 'react';
-import { querySelector } from '../../utils';
+import { querySelector } from '../../../utils';
 
 export default function ClockLive() {
   React.useEffect(() => {
