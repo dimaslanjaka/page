@@ -16,10 +16,10 @@ class MyFooter extends React.Component {
         <FlexboxGridItem style={{ marginLeft: '3em' }}>
           <a href="/page" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
             <Image
-              src="https://rsuitejs.com/favicon.ico"
+              src="//rsuitejs.com/favicon.ico"
               width="16px"
               height="16px"
-              style={{ verticalAlign: 'middle', marginRight: '3px' }}
+              style={{ verticalAlign: 'middle', marginRight: '3px', width: '16px', height: '16px' }}
             />
           </a>
           <span className="mb-3 mb-md-0 text-muted">© {new Date().getFullYear()} WMI, Inc</span>
