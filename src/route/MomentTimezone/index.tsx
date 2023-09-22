@@ -119,10 +119,12 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
 
     return (
       <React.Suspense fallback={<div>Moment timezone playground loading</div>}>
-        <h1>Moment Timezone Playground Online</h1>
-        <p>
-          Online test for library <Link href="https://npmjs.com/moment-timezone">moment-timezone</Link>
-        </p>
+        <div className="text-center">
+          <h1>Moment Timezone Playground Online</h1>
+          <p>
+            Online test for library <Link href="https://npmjs.com/moment-timezone">moment-timezone</Link>
+          </p>
+        </div>
         <Nav
           justified
           appearance="tabs"
@@ -271,7 +273,7 @@ const moment = momentTimezone.tz('${item}');
             </Button>
           </ButtonToolbar>
         </FormGroup>
-        <p>format result</p>
+        <b>format result</b>
         <HighlightElement id="moment-result" lang="text">
           {result}
         </HighlightElement>
