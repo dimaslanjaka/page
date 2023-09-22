@@ -1,5 +1,5 @@
+import { copyTextToClipboard, loadJS, randomStr } from '@/utils';
 import hljs from 'highlight.js';
-import { loadJS, randomStr } from '../../utils';
 
 // start highlight pre code
 function startHighlighter(preCode: HTMLElement) {
@@ -84,4 +84,51 @@ export function initHljs() {
     hljs.highlightAll();
   }
   */
+}
+
+/**
+ * init copy to clipboard button on pre-code
+ * @returns
+ */
+export function initClipBoard() {
+  import('bluebird').then(({ default: Bluebird }) => {
+    Bluebird.all(Array.from(document.querySelectorAll('pre'))).each(function (codeBlock) {
+      if (!codeBlock.getAttribute('id')) {
+        codeBlock.setAttribute('id', randomStr(4));
+      }
+
+      let button = codeBlock.querySelector('.copy-code-button') as HTMLButtonElement;
+      let append = false;
+      if (!button) {
+        // create one when copy button not found
+        append = true;
+        button = document.createElement('button');
+        button.className = 'copy-code-button';
+        button.type = 'button';
+        const s = codeBlock.innerText;
+        button.setAttribute('data-clipboard-text', s);
+        button.setAttribute('title', 'Copy code block');
+        const span = document.createElement('span');
+        span.innerText = 'Copy';
+        button.appendChild(span);
+      }
+
+      button.onclick = function (e) {
+        const el = document.getElementById(codeBlock.getAttribute('id'));
+
+        copyTextToClipboard(el.textContent.replace(/(Copy|Copied)$/gm, ''), e)
+          .then(() => {
+            (e.target as Element).textContent = 'Copied';
+          })
+          .finally(() => {
+            window.setTimeout(function () {
+              (e.target as Element).textContent = 'Copy';
+            }, 2000);
+          })
+          .catch(console.error);
+      };
+
+      if (append) codeBlock.appendChild(button);
+    });
+  });
 }
