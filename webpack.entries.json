@@ -18,16 +18,12 @@
     "import": "@components/Loader",
     "dependOn": "shared"
   },
-  "componentsAdsense": {
-    "import": "@components/Adsense",
-    "dependOn": "shared"
-  },
-  "componentsHighlightjs": {
-    "import": "@components/Highlight.js",
-    "dependOn": "shared"
-  },
   "componentsAdsenseAdsenseFill": {
     "import": "@/components/Adsense/AdsenseFill",
+    "dependOn": "shared"
+  },
+  "componentsAdsense": {
+    "import": "@components/Adsense",
     "dependOn": "shared"
   },
   "componentsSafelinkContents": {
@@ -42,16 +38,16 @@
     "import": "@assets/js/cookie",
     "dependOn": "shared"
   },
+  "componentsLink": {
+    "import": "@components/Link",
+    "dependOn": "shared"
+  },
   "assetsjsgoogleconstants": {
     "import": "@assets/js/google/constants",
     "dependOn": "shared"
   },
   "assetsjsgooglefirebase": {
     "import": "@assets/js/google/firebase",
-    "dependOn": "shared"
-  },
-  "componentsLink": {
-    "import": "@components/Link",
     "dependOn": "shared"
   },
   "rsuite": {
