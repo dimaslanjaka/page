@@ -6,6 +6,7 @@
     "formulahendry.code-runner",
     "esbenp.prettier-vscode",
     "formulahendry.auto-rename-tag",
-    "stxr.iconfont-preview"
+    "stxr.iconfont-preview",
+    "iliazeus.vscode-ansi"
   ]
 }
