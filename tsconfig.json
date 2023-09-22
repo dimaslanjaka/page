@@ -16,46 +16,20 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "strict": false,
-    "lib": [
-      "DOM",
-      "ES2020"
-    ],
-    "typeRoots": [
-      "./typings",
-      "./node_modules/@types",
-      "./node_modules/nodejs-package-types/typings"
-    ],
-    "types": [
-      "rsuite"
-    ],
+    "lib": ["DOM", "ES2020"],
+    "typeRoots": ["./typings", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
+    "types": ["rsuite"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "src/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@component/*": [
-        "./src/components/*"
-      ],
-      "@route/*": [
-        "./src/route/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@asset/*": [
-        "./src/assets/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@util/*": [
-        "./src/utils/*"
-      ]
+      "@/*": ["./src/*"],
+      "src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@component/*": ["./src/components/*"],
+      "@route/*": ["./src/route/*"],
+      "@routes/*": ["./src/route/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@asset/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@util/*": ["./src/utils/*"]
     },
     "plugins": [
       {
