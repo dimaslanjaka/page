@@ -31,7 +31,7 @@ function fallbackCopyTextToClipboard(text: string) {
   document.body.removeChild(textArea);
 }
 
-export async function copyTextToClipboard(textToCopy: string, e: Event) {
+export async function copyTextToClipboard(textToCopy: string, e?: Event) {
   try {
     if (!navigator.clipboard) {
       return fallbackCopyTextToClipboard(textToCopy);
