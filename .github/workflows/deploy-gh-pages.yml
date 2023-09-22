@@ -36,12 +36,20 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: install production dependencies
+        run: |
+          rm -rf node_modules
+          npm install --omit=dev
       - name: remove unused files
-        run:
+        run: |
           rm -rf .vscode
           rm -rf .github
           rm -rf tmp
-          rm -rf bin
+          rm -rf bin 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         if: ${{ success() }}
