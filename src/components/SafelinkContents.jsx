@@ -14,8 +14,7 @@ function SafelinkContents() {
         client="ca-pub-2188063137129806"
         slot="2667720583"
         format="auto"
-        widthResponsive="true"
-      ></Adsense>
+        widthResponsive="true"></Adsense>
 
       <p>
         As the name suggests, core policies have a "master" or "supervisor" responsible for managing the policy.
@@ -133,8 +132,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/_layouts/15/download.aspx?SourceUrl=https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/SQ_Previous_release.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -147,8 +145,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/_layouts/15/download.aspx?SourceUrl=https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/SA_Previous_Release.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -161,8 +158,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/EIO_Previous_Release.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -175,8 +171,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/_layouts/15/download.aspx?SourceUrl=https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/GA_Previous_release.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -189,8 +184,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/_layouts/15/download.aspx?SourceUrl=https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/GQ_Previous_Release.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -221,8 +215,7 @@ function SafelinkContents() {
               |
               <Link
                 href="https://register.eiopa.europa.eu/_layouts/15/download.aspx?SourceUrl=https://register.eiopa.europa.eu/Publications/Insurance%20Statistics/Solo%20Quarterly%202016Q3%20-%202020Q4.zip"
-                target="_blank"
-              >
+                target="_blank">
                 zip
               </Link>
               |
@@ -238,8 +231,7 @@ function SafelinkContents() {
           client="ca-pub-2188063137129806"
           slot="5369043101"
           format="auto"
-          widthResponsive="true"
-        ></Adsense>
+          widthResponsive="true"></Adsense>
         <div className="text-center py-1 px-1">
           <button className="btn btn-sm btn-success" id="go">
             Click Here
@@ -251,8 +243,7 @@ function SafelinkContents() {
           client="ca-pub-2188063137129806"
           slot="6873696468"
           format="auto"
-          widthResponsive="true"
-        ></Adsense>
+          widthResponsive="true"></Adsense>
       </div>
 
       {/*<!-- debug localhost -->*/}
@@ -286,8 +277,7 @@ function SafelinkContents() {
               <td>
                 <Link
                   href="/page/safelink.html#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="
-                  onClick={controlHyperlink.bind(this)}
-                >
+                  onClick={controlHyperlink.bind(this)}>
                   #o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg=
                 </Link>
               </td>
@@ -298,8 +288,7 @@ function SafelinkContents() {
                   className="btn btn-sm btn-primary"
                   onClick={() => {
                     location.href = location.pathname;
-                  }}
-                >
+                  }}>
                   Remove URL Queries
                 </button>
               </td>
