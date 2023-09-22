@@ -474,7 +474,7 @@ class Snippet extends React.Component {
                         <td>
                           <code>000</code>..<code>999</code>
                         </td>
-                        <td rowSpan={3}>Milliseconds</td>
+                        <td>Milliseconds</td>
                       </tr>
                     </tbody>
                     <tbody>
