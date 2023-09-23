@@ -98,4 +98,4 @@ if [ -f "$NPM_PREFIX_NPX_CLI_JS" ] || [ -f "$NPX_WSL_PATH" ]; then
 fi
 
 # execute lint-staged
-"$NODE_EXE" "$NPX_CLI_JS" lint-staged
+"$NODE_EXE" "$NPX_CLI_JS" lint-staged --allow-empty
