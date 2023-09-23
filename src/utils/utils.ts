@@ -33,9 +33,9 @@ export function loadJS(url: string, props?: LoadJSOpt) {
     {
       proxy: false,
       onload: noop,
-      onerror: noop,
+      onerror: noop
     },
-    props || {},
+    props || {}
   );
 
   return new Bluebird((resolve, reject) => {
@@ -85,7 +85,7 @@ export const safelinkInstance = new safelinkify.safelink({
   // encryption type = 'base64' | 'aes'
   type: 'base64',
   // password aes, default = root
-  password: 'unique-password',
+  password: 'unique-password'
 });
 
 /**

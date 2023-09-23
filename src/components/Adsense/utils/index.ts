@@ -66,7 +66,7 @@ export function getCurrentSlot() {
         1,
         location.pathname,
         location.hostname,
-        location.protocol.includes('https') && location.host === 'www.webmanajemen.com',
+        location.protocol.includes('https') && location.host === 'www.webmanajemen.com'
       );
     }
   }
@@ -214,7 +214,7 @@ export function initializeRandomAds() {
 
   const pageAd = `//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${currentSlot.pub.replace(
     'ca-pub-',
-    '',
+    ''
   )}`;
   const existingSources = Array.from(document.scripts).map(el => el.src);
   //console.log({ existingSources });
@@ -262,15 +262,15 @@ export function onloadAds() {
         client,
         width: {
           parent: ins.parentElement.offsetWidth,
-          self: ins.offsetWidth,
+          self: ins.offsetWidth
         },
         height: {
           parent: ins.parentElement.offsetHeight,
-          self: ins.offsetHeight,
-        },
+          self: ins.offsetHeight
+        }
       });
       window.adsbygoogle.push({
-        params: paramBuilder({ slot, client }),
+        params: paramBuilder({ slot, client })
       });
     }
   }

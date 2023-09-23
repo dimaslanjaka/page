@@ -8,7 +8,7 @@ export function scrollToHash() {
       if (typeof distanceFromTop === 'number')
         window.scrollTo({
           top: distanceFromTop,
-          behavior: 'smooth',
+          behavior: 'smooth'
         });
     }
   }

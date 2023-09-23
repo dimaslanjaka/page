@@ -28,7 +28,7 @@ class Home extends React.Component {
         icon: 'fa-arrow-right-to-bracket',
         title: 'Login',
         link: '/page/login',
-        desc: <>User portal to use any features</>,
+        desc: <>User portal to use any features</>
       },
       {
         title: 'Moment Timezone playground',
@@ -39,7 +39,7 @@ class Home extends React.Component {
             Test, format, interval using <Link href="https://www.npmjs.com/moment-timezone">moment-timezone</Link>{' '}
             module
           </>
-        ),
+        )
       },
       {
         title: 'Outbound Page',
@@ -50,7 +50,7 @@ class Home extends React.Component {
             All external links proxied using outbound page using{' '}
             <Link href="https://www.npmjs.com/safelinkify">safelinkify</Link>
           </>
-        ),
+        )
       },
       {
         icon: 'fa-code',
@@ -61,8 +61,8 @@ class Home extends React.Component {
             Auto syntax highlighting on <b>{`<pre><code>`}</b> tag using{' '}
             <Link href="https://www.npmjs.com/highlight.js">highlight.js</Link>
           </>
-        ),
-      },
+        )
+      }
     ];
     return (
       <div className="myHome">

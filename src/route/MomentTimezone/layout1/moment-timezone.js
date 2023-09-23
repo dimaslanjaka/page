@@ -86,7 +86,7 @@ export function isNumeric(str) {
 export function getTimeZoneOffset() {
   const result = {
     timeZone: undefined,
-    offset: undefined,
+    offset: undefined
   };
   try {
     result.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

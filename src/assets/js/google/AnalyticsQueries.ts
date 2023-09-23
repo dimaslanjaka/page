@@ -17,20 +17,20 @@ export class AnalyticsQueries {
       dateRanges: [
         {
           startDate,
-          endDate,
-        },
+          endDate
+        }
       ],
       dimensions: [
         {
-          name: 'ga:pagePath',
-        },
+          name: 'ga:pagePath'
+        }
       ],
       viewId,
       metrics: [
         {
-          expression: 'ga:pageviews',
-        },
-      ],
+          expression: 'ga:pageviews'
+        }
+      ]
     };
   };
 
@@ -43,25 +43,25 @@ export class AnalyticsQueries {
     startDate = 'today',
     endDate = 'today',
     value = undefined as string,
-    viewId = 'ga:159996509',
+    viewId = 'ga:159996509'
   } = {}) => {
     return {
       dateRanges: [
         {
           startDate,
-          endDate,
-        },
+          endDate
+        }
       ],
       dimensions: [
         {
-          name: 'ga:pagePath',
-        },
+          name: 'ga:pagePath'
+        }
       ],
       viewId: viewId || 'ga:159996509',
       metrics: [
         {
-          expression: 'ga:pageviews',
-        },
+          expression: 'ga:pageviews'
+        }
       ],
       dimensionFilterClauses: [
         {
@@ -69,11 +69,11 @@ export class AnalyticsQueries {
             {
               dimensionName: 'ga:pagePath',
               operator: 'IN_LIST' /*EXACT*/,
-              expressions: [value],
-            },
-          ],
-        },
-      ],
+              expressions: [value]
+            }
+          ]
+        }
+      ]
     };
   };
 }

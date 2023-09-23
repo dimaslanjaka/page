@@ -4,7 +4,7 @@ import { firebaseApp } from './firebase';
 export const GOOGLE_SCOPES = [
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/userinfo.email',
-  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/userinfo.profile'
   //'https://www.googleapis.com/auth/contacts.readonly',
   //'https://www.googleapis.com/auth/plus.login',
 ];
@@ -32,7 +32,7 @@ export const GOOGLE_CONFIG = {
   // cookie origin
   state_cookie_domain: window.location.origin,
   // scope library
-  scope: GOOGLE_SCOPES.join(' '),
+  scope: GOOGLE_SCOPES.join(' ')
 } as googleConfig;
 
 // key to save credential for offline usage
@@ -48,7 +48,7 @@ let g_credential = getLocalCredential();
  */
 export async function handleCredentialResponse(
   response: Record<string, any>,
-  callback?: { (): void; (arg0: LocalCredential): void },
+  callback?: { (): void; (arg0: LocalCredential): void }
 ) {
   if (!response) {
     console.error('token response is null');
@@ -294,7 +294,7 @@ export function parseJwt(token: string) {
       .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
-      .join(''),
+      .join('')
   );
   return JSON.parse(jsonPayload);
 }

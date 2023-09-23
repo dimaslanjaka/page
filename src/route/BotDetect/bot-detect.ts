@@ -1,7 +1,6 @@
 /*console.clear();*/
 
-import { getElementById } from '../../utils';
-import * as cookies from '../../utils/cookie';
+import { getCookie, getCookies, getElementById, setCookie } from '@/utils';
 
 export const runBotDetectionMain = () => {
   const logdiv = getElementById('selenium');
@@ -53,7 +52,7 @@ export const runBotDetectionMain = () => {
                 'FORWARDED',
                 'CLIENT_IP',
                 'FORWARDED_FOR_IP',
-                'HTTP_PROXY_CONNECTION',
+                'HTTP_PROXY_CONNECTION'
               ];
               headers.forEach(function (header) {
                 // proxy detection
@@ -163,7 +162,7 @@ export function runBotDetection() {
       '__webdriver_unwrapped',
       '__driver_evaluate',
       '__selenium_unwrapped',
-      '__fxdriver_unwrapped',
+      '__fxdriver_unwrapped'
     ];
     const windowDetectionKeys = [
       '_phantom',
@@ -171,7 +170,7 @@ export function runBotDetection() {
       '_selenium',
       'callPhantom',
       'callSelenium',
-      '_Selenium_IDE_Recorder',
+      '_Selenium_IDE_Recorder'
     ];
     for (const windowDetectionKey in windowDetectionKeys) {
       const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
@@ -223,22 +222,22 @@ export function runBotDetection() {
 /** Cookies **/
 export function runBotDetectionCookies() {
   // set current id
-  if (!cookies.getCookie('___current_id')) {
-    cookies.setCookie(
+  if (!getCookie('___current_id')) {
+    setCookie(
       '___current_id',
       Math.random()
         .toString(36)
         .substring(2, 7 + 2),
-      1,
+      1
     );
   }
 
-  document.querySelector('span#sid').textContent = cookies.getCookie('___current_id');
-  getElementById('unique-id').textContent = cookies.getCookie('___current_id');
+  document.querySelector('span#sid').textContent = getCookie('___current_id');
+  getElementById('unique-id').textContent = getCookie('___current_id');
 
   const tbl = document.querySelector('table#cookies');
   const tbody = tbl.querySelector('tbody');
-  const gck = cookies.getCookies();
+  const gck = getCookies();
   for (const key in gck) {
     //console.log(key, gck[key]);
     const row = document.createElement('tr');

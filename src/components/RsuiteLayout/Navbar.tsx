@@ -7,19 +7,19 @@ const Link = React.lazy(() => import('@components/Link'));
 const Nav = React.lazy(() => import('rsuite/esm/Nav'));
 const NavItem = React.lazy(() =>
   import('rsuite/esm/Nav').then(module => ({
-    default: module.default.Item,
-  })),
+    default: module.default.Item
+  }))
 );
 const NavMenu = React.lazy(() =>
   import('rsuite/esm/Nav').then(module => ({
-    default: module.default.Menu,
-  })),
+    default: module.default.Menu
+  }))
 );
 const Navbar = React.lazy(() => import('rsuite/esm/Navbar'));
 const NavbarBrand = React.lazy(() =>
   import('rsuite/esm/Navbar').then(module => ({
-    default: module.default.Brand,
-  })),
+    default: module.default.Brand
+  }))
 );
 
 const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));

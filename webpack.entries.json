@@ -34,10 +34,6 @@
     "import": "@/utils",
     "dependOn": "shared"
   },
-  "utilscookie": {
-    "import": "@/utils/cookie",
-    "dependOn": "shared"
-  },
   "componentsLink": {
     "import": "@components/Link",
     "dependOn": "shared"

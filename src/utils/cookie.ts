@@ -13,7 +13,7 @@ export function setCookie(
   expires: number,
   path?: string | string,
   domain?: string,
-  secure?: boolean,
+  secure?: boolean
 ) {
   let exp = '';
   if (expires) {

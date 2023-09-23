@@ -47,8 +47,8 @@ const initOpt = {
   // scope library
   scope: [
     'https://www.googleapis.com/auth/analytics.readonly',
-    'https://www.googleapis.com/auth/userinfo.profile',
-  ].join(' '),
+    'https://www.googleapis.com/auth/userinfo.profile'
+  ].join(' ')
 };
 // last login credential
 const g_credential = Object.assign(initOpt, JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}'));
@@ -146,7 +146,7 @@ const start = function () {
       discoveryDocs: ['https://people.googleapis.com/$discovery/rest'],
       // clientId and scope are optional if auth is not required.
       clientId: initOpt.client_id,
-      scope: initOpt.scope,
+      scope: initOpt.scope
     })
     .then(() => {
       // initialize google account
@@ -159,8 +159,8 @@ const start = function () {
           theme: 'filled_blue',
           size: 'small',
           shape: 'pill',
-          click_listener: onSignIn,
-        },
+          click_listener: onSignIn
+        }
       );
 
       getClient().then(gapi => {
@@ -204,7 +204,7 @@ function parseJwt(token) {
       .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
-      .join(''),
+      .join('')
   );
   return JSON.parse(jsonPayload);
 }

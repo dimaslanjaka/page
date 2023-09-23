@@ -21,7 +21,7 @@ export const firebaseConfig = {
   storageBucket: 'android-008.appspot.com',
   messagingSenderId: '435643304043',
   appId: '1:435643304043:web:e712ff091810ace72bc92e',
-  measurementId: 'G-EJKJMM8ZQB',
+  measurementId: 'G-EJKJMM8ZQB'
   //prjectKey: 'project-435643304043'
 };
 
@@ -58,7 +58,7 @@ export function firebaseAuthGoogle(force = false) {
       if (credential.email && String(credential?.email).includes('@') && !force) {
         // login existing user
         provider.setCustomParameters({
-          login_hint: credential.email,
+          login_hint: credential.email
         });
         auth = getAuth(firebaseApp);
       }

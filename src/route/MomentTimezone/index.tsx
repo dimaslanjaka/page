@@ -13,27 +13,27 @@ const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
 const Form = React.lazy(() => import('rsuite/esm/Form'));
 const FormGroup = React.lazy(() =>
   import('rsuite/esm/Form').then(module => ({
-    default: module.default.Group,
-  })),
+    default: module.default.Group
+  }))
 );
 const Divider = React.lazy(() => import('rsuite/esm/Divider'));
 const FlexboxGrid = React.lazy(() => import('rsuite/esm/FlexboxGrid'));
 const FlexboxGridItem = React.lazy(() =>
   import('rsuite/esm/FlexboxGrid').then(module => ({
-    default: module.default.Item,
-  })),
+    default: module.default.Item
+  }))
 );
 const DatePicker = React.lazy(() => import('rsuite/esm/DatePicker'));
 const FormControl = React.lazy(() => import('rsuite/esm/FormControl'));
 const FormHelpText = React.lazy(() =>
   import('rsuite/esm/Form').then(module => ({
-    default: module.default.HelpText,
-  })),
+    default: module.default.HelpText
+  }))
 );
 const FormControlLabel = React.lazy(() =>
   import('rsuite/esm/Form').then(module => ({
-    default: module.default.ControlLabel,
-  })),
+    default: module.default.ControlLabel
+  }))
 );
 const Button = React.lazy(() => import('rsuite/esm/Button'));
 const Container = React.lazy(() => import('rsuite/esm/Container'));
@@ -43,8 +43,8 @@ const Link = React.lazy(() => import('@components/Link'));
 const Nav = React.lazy(() => import('rsuite/esm/Nav'));
 const NavItem = React.lazy(() =>
   import('rsuite/esm/Nav').then(module => ({
-    default: module.default.Item,
-  })),
+    default: module.default.Item
+  }))
 );
 // const NavMenu = React.lazy(() =>
 //   import('rsuite/esm/Nav').then(module => ({
@@ -74,9 +74,9 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
         ...item,
         key: md5(item.value + item.text),
         id: 'zone' + md5(item.value + item.text),
-        dst: String(item.isdst),
+        dst: String(item.isdst)
       })),
-      result: 'unformatted yet',
+      result: 'unformatted yet'
     };
     // require('./layout2/layout2.scss');
   }

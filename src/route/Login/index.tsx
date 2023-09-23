@@ -77,7 +77,7 @@ class Login extends React.Component {
 
     // initialize google account
     google.accounts.id.initialize({
-      ...constants.GOOGLE_CONFIG,
+      ...constants.GOOGLE_CONFIG
       //allowed_parent_origin: true,
     });
     // prevent UX dead loop
@@ -87,7 +87,7 @@ class Login extends React.Component {
       ...constants.GOOGLE_CONFIG,
       //login_hint: 'credential' in g_credential ? g_credential.credential.email : null,
       prompt: 'consent', // '' | 'none' | 'consent' | 'select_account'
-      callback: this.handleCredResp, // your function to handle the response after login. 'access_token' will be returned as property on the response
+      callback: this.handleCredResp // your function to handle the response after login. 'access_token' will be returned as property on the response
     });
 
     document.getElementById('loginGoogle').addEventListener('click', function () {

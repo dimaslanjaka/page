@@ -24,7 +24,7 @@ GOOGLE_CONFIG.callback = handleCredResp;
   // initialize google account
   google.accounts.id.initialize({
     ...GOOGLE_CONFIG,
-    allowed_parent_origin: true,
+    allowed_parent_origin: true
   });
   // prevent UX dead loop
   google.accounts.id.disableAutoSelect();
@@ -33,7 +33,7 @@ GOOGLE_CONFIG.callback = handleCredResp;
     ...GOOGLE_CONFIG,
     //login_hint: 'credential' in g_credential ? g_credential.credential.email : null,
     prompt: 'consent', // '' | 'none' | 'consent' | 'select_account'
-    callback: handleCredResp, // your function to handle the response after login. 'access_token' will be returned as property on the response
+    callback: handleCredResp // your function to handle the response after login. 'access_token' will be returned as property on the response
   });
   // render profile card
   updateProfileCard();

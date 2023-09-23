@@ -19,28 +19,28 @@ export const allAds = array_shuffle([
         style: 'display: block !important; text-align: center',
         'data-ad-layout': 'in-article',
         'data-ad-format': 'fluid',
-        'data-ad-slot': '5634823028',
+        'data-ad-slot': '5634823028'
       },
       {
         style: 'display: block !important; text-align: center',
         'data-ad-layout': 'in-article',
         'data-ad-format': 'fluid',
-        'data-ad-slot': '8481296455',
+        'data-ad-slot': '8481296455'
       },
       {
         style: 'display:block !important',
         'data-ad-slot': '2667720583',
         'data-ad-format': 'auto',
-        'data-full-width-responsive': 'true',
+        'data-full-width-responsive': 'true'
       },
       {
         style: 'display:block !important',
         'data-ad-format': 'fluid',
         'data-ad-layout-key': '-gw-3+1f-3d+2z',
-        'data-ad-slot': '6979059162',
-      },
-    ],
-  },
+        'data-ad-slot': '6979059162'
+      }
+    ]
+  }
 ]);
 
 export interface AdsenseOption {
@@ -99,7 +99,7 @@ export function paramBuilder(opt: ParamsAdsByGoogle) {
  * @returns
  */
 export function removeDuplicateAds(
-  adsConfig: typeof allAds | (typeof allAds)[number]['ads'],
+  adsConfig: typeof allAds | (typeof allAds)[number]['ads']
 ): typeof allAds | (typeof allAds)[number]['ads'] {
   const filter = (item: (typeof allAds)[number]['ads']) =>
     item.filter(ads => {

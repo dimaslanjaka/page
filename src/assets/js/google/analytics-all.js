@@ -11,7 +11,7 @@ const g_credential = Object.assign(JSON.parse(localStorage.getItem(KEY_LOCALSTOR
   response_type: 'token',
   cookiepolicy: 'single_host_origin',
   authuser: -1,
-  prompt: 'consent',
+  prompt: 'consent'
 });
 var tokenClient;
 
@@ -40,7 +40,7 @@ window.onload = async function () {
       },
       function (reason) {
         console.log('Error: ' + reason.result.error.message);
-      },
+      }
     );
 
   // load gsi
@@ -53,7 +53,7 @@ window.onload = async function () {
           handleCredentialResponse(tokenResponse);
           gapi.auth.setToken(tokenResponse);
           startAnalytics();
-        },
+        }
       });
       resolve();
     } catch (err) {
@@ -97,11 +97,11 @@ function startAnalytics() {
       root: 'https://analyticsreporting.googleapis.com/',
       method: 'POST',
       headers: {
-        Authorization: 'Bearer ' + gapi.client.getToken().access_token,
+        Authorization: 'Bearer ' + gapi.client.getToken().access_token
       },
       body: {
-        reportRequests: [AnalyticsQueries.getAllPagePathsWithView({ viewId })],
-      },
+        reportRequests: [AnalyticsQueries.getAllPagePathsWithView({ viewId })]
+      }
     })
     .then(displayResults, handleError);
 }

@@ -24,7 +24,7 @@ import * as cookies from '../../utils/cookie';
       Math.random()
         .toString(36)
         .substring(2, 7 + 2),
-      3,
+      3
     );
   }
   document.getElementById('uniqueHash').textContent = cookies.getCookie('___current_id');

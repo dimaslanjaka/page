@@ -26,18 +26,18 @@ const _Router_array = () => {
     return [
       {
         element: suspenseIt(jsx),
-        path,
+        path
       },
       // create path.html
       {
         element: suspenseIt(jsx),
-        path: `${path}.html`,
+        path: `${path}.html`
       },
       // create path/index.html
       {
         element: suspenseIt(jsx),
-        path: `${path}/index.html`,
-      },
+        path: `${path}/index.html`
+      }
     ];
   };
   const routes = [
@@ -47,14 +47,14 @@ const _Router_array = () => {
       children: [
         {
           index: true,
-          element: suspenseIt(<Home />),
+          element: suspenseIt(<Home />)
         },
         {
           element: suspenseIt(<NoMatch />),
-          path: '*',
+          path: '*'
         },
-        ...createDual('ui', <UI />),
-      ],
+        ...createDual('ui', <UI />)
+      ]
     },
     {
       element: suspenseIt(<RSuiteLayout />),
@@ -62,16 +62,16 @@ const _Router_array = () => {
       children: [
         {
           index: true,
-          element: suspenseIt(<Home />),
+          element: suspenseIt(<Home />)
         },
         ...createDual('ui', <UI />),
         ...createDual('safelink', <Safelink />),
         ...createDual('google/login', <Login />),
         ...createDual('bot-detect', <BotDetect />),
         ...createDual('highlight-js', <HighlightLayout />),
-        ...createDual('moment-timezone', <MomentTimezone />),
-      ],
-    },
+        ...createDual('moment-timezone', <MomentTimezone />)
+      ]
+    }
   ];
 
   const Router = () => useRoutes(routes);
@@ -87,7 +87,7 @@ ReactDOM.render(
   <React.StrictMode>
     <_Router_array />
   </React.StrictMode>,
-  document.getElementById('app'),
+  document.getElementById('app')
 );
 
 // hot reloading

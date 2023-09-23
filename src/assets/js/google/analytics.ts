@@ -12,8 +12,8 @@ export async function listAccounts(access_token: string): Promise<ListAccountsRe
   const res = await fetch('https://analyticsadmin.googleapis.com/v1alpha/accounts', {
     method: 'GET',
     headers: new Headers({
-      Authorization: 'Bearer ' + access_token,
-    }),
+      Authorization: 'Bearer ' + access_token
+    })
   });
   return await res.json();
 }

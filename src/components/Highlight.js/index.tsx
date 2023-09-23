@@ -56,7 +56,7 @@ class HighlightElement extends React.Component<HighlightProps, Record<string, an
       js: 'javascript',
       kt: 'kotlin',
       ts: 'typescript',
-      mysql: 'sql',
+      mysql: 'sql'
     };
     if (lang in map) {
       return map[lang];

@@ -42,7 +42,7 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
       const url = 'https://api.allorigins.win/raw?url=https://www.webmanajemen.com/rss.xml';
       fetch(url, {
         mode: 'cors',
-        credentials: 'include',
+        credentials: 'include'
       })
         .then(res => res.text())
         .then(contents => {
@@ -110,7 +110,7 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
                     backgroundImage: `url('${item.image}')`,
                     height: '100px',
                     backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
+                    backgroundSize: 'cover'
                   }}
                 />
               )}

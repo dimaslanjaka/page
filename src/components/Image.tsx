@@ -21,7 +21,7 @@ class Image extends React.Component<ImageAttr, ImageState> {
 
     this.state = {
       src: props.src || this.defaultImage,
-      errored: false,
+      errored: false
     };
   }
 
@@ -29,7 +29,7 @@ class Image extends React.Component<ImageAttr, ImageState> {
     if (!this.state.errored) {
       this.setState({
         src: this.props.fallbackSrc || this.defaultImage,
-        errored: true,
+        errored: true
       });
     }
   };
