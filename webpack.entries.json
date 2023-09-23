@@ -34,8 +34,8 @@
     "import": "@/utils",
     "dependOn": "shared"
   },
-  "assetsjscookie": {
-    "import": "@assets/js/cookie",
+  "utilscookie": {
+    "import": "@/utils/cookie",
     "dependOn": "shared"
   },
   "componentsLink": {
@@ -52,10 +52,6 @@
   },
   "rsuite": {
     "import": "rsuite",
-    "dependOn": "shared"
-  },
-  "assetsjsbotdetect": {
-    "import": "@/assets/js/bot-detect",
     "dependOn": "shared"
   },
   "componentsHighlightjshelper": {

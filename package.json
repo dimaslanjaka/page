@@ -11,6 +11,7 @@
     "prod": "cd page && npm install --omit=dev --production",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "update": "npm run update:ncu",
+    "build:entries": "yarn entries",
     "build:webpack": "cross-env-shell NODE_ENV=production webpackAnalyze=static webpack --mode production",
     "build": "run-s \"build:**\" && gulp build",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
