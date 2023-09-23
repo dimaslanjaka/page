@@ -41,6 +41,8 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     require('./theme.scss');
     // load adsense
     import('@component/Adsense/utils');
+    // load scroll to hash
+    import('@utils/scroll-to-hash');
 
     window.addEventListener('load', this.handleLoad.bind(this));
   }

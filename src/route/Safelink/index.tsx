@@ -1,5 +1,5 @@
 import * as utils from '@/utils';
-import { createCookieMins, getCookie } from '@assets/js/cookie';
+import { createCookieMins, getCookie } from '@/utils/cookie';
 import React from 'react';
 
 const SafelinkLayout2 = React.lazy(() => import('./layout2'));

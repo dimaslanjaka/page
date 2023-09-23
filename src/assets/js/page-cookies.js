@@ -1,4 +1,4 @@
-import * as cookies from './cookie';
+import * as cookies from '../../utils/cookie';
 
 (function () {
   // save cookie

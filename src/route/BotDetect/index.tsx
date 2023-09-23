@@ -1,7 +1,7 @@
 import React from 'react';
 //
 
-import { runBotDetectionMain } from '@/assets/js/bot-detect';
+import { runBotDetectionMain } from './bot-detect';
 import { loadCSS } from '@/utils';
 
 class BotDetect extends React.Component {

@@ -1,7 +1,7 @@
 /*console.clear();*/
 
 import { getElementById } from '../../utils';
-import * as cookies from './cookie';
+import * as cookies from '../../utils/cookie';
 
 export const runBotDetectionMain = () => {
   const logdiv = getElementById('selenium');

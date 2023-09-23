@@ -62,6 +62,7 @@ export const md5 = (str: string) => CryptoJS.MD5(str).toString();
 
 export * from './dom';
 export * from './utils';
+export * from './cookie';
 
 /**
  * remove duplicate array items
