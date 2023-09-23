@@ -1,8 +1,8 @@
 import React from 'react';
 //
 
-import { runBotDetectionMain } from './bot-detect';
 import { loadCSS } from '@/utils';
+import { runBotDetectionMain } from './bot-detect';
 
 class BotDetect extends React.Component {
   constructor(props: any) {
