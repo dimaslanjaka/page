@@ -16,9 +16,21 @@
   },
   "[typescriptreact]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": true,
+      "source.fixAll": false,
       "source.organizeImports": true
-    }
+    },
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false
+  },
+  "[javascriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": false,
+      "source.organizeImports": false
+    },
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false
   },
   "[typescript]": {
     "editor.codeActionsOnSave": {
@@ -84,5 +96,6 @@
   },
   "npm.packageManager": "yarn",
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "debug.javascript.autoAttachFilter": "disabled"
+  "debug.javascript.autoAttachFilter": "disabled",
+  "editor.formatOnSave": false
 }
