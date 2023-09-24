@@ -69,7 +69,7 @@ class Login extends React.Component {
     const needClean = value !== null;
     if (needClean) {
       this.g_credential = {} as Record<string, any>;
-      localStorage.removeItem(KEY_LOCALSTORAGE);
+      localStorage.removeItem(constants.KEY_LOCALSTORAGE);
       window.location.replace(window.location.href.split('?')[0]);
     }
     // GSI initializer options
