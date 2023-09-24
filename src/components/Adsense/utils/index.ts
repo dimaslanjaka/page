@@ -54,12 +54,12 @@ export function getCurrentSlot() {
   currentSlot = allAds.find(item => item.pub === ca);
 
   if (ca.length > 0 && typeof currentSlot === 'object') {
-    console.log('cached pub', ca);
+    console.info('cached pub', ca);
   } else {
     currentSlot = allAds[0];
 
     if (location.pathname != '/') {
-      console.log('caching pub', currentSlot.pub);
+      console.info('caching pub', currentSlot.pub);
       setCookie(
         ck,
         currentSlot.pub,
@@ -108,7 +108,7 @@ export function fillFixedPosition(currentSlot?: (typeof allAds)[number]) {
       if (attr) {
         attr['data-ad-client'] = 'ca-pub-' + currentSlot.pub.replace('ca-pub-', '');
         const ins = createIns(attr);
-        console.log('insert ads to adsense="fill"', i + 1);
+        console.info('insert ads to adsense="fill"', i + 1);
         replaceWith(ins, place);
       }
     }
@@ -121,7 +121,7 @@ export function fillFixedPosition(currentSlot?: (typeof allAds)[number]) {
 export function applyEnviromentAds() {
   // apply ad testing
   const existingIns = Array.from(document.querySelectorAll('ins[class*=adsbygoogle]'));
-  console.log('existing ins', existingIns.length);
+  console.info('existing ins', existingIns.length);
 
   for (let i = 0; i < existingIns.length; i++) {
     const ins = existingIns[i] as HTMLElement | undefined;
@@ -141,7 +141,7 @@ export function applyEnviromentAds() {
     // apply ad test to non-localhost ip and process.env.NODE_ENV is dev
 
     if (!localhost && /dev/i.test(process.env.NODE_ENV)) {
-      console.log('apply test ad to existing ins', ins.getAttribute('data-ad-slot'));
+      console.info('apply test ad to existing ins', ins.getAttribute('data-ad-slot'));
       ins.setAttribute('data-adtest', 'on');
     }
   }
@@ -173,7 +173,7 @@ export function initializeRandomAds() {
   // select random place
   const adsPlaces = array_shuffle(findPlaces.map(getAllPlaces).flat(1)).filter(el => el !== null);
 
-  console.log('total targeted ads places', adsPlaces.length);
+  console.info('total targeted ads places', adsPlaces.length);
 
   if (adsPlaces.length > 0 && currentSlot.ads.length > 0) {
     for (let i = 0; i < currentSlot.ads.length; i++) {
@@ -195,7 +195,7 @@ export function initializeRandomAds() {
         }
 
         if (nextOf) {
-          console.log(i + 1, 'add banner', attr['data-ad-slot']);
+          console.info(i + 1, 'add banner', attr['data-ad-slot']);
           const prevEl = nextOf.previousElementSibling || ({} as Element);
           const nextEl = nextOf.nextElementSibling || ({} as Element);
           if (prevEl.tagName === 'INS' || nextEl.tagName === 'INS' || nextOf.tagName == 'INS') {
@@ -217,7 +217,7 @@ export function initializeRandomAds() {
     ''
   )}`;
   const existingSources = Array.from(document.scripts).map(el => el.src);
-  //console.log({ existingSources });
+  //console.info({ existingSources });
   if (!existingSources.some(str => str.includes('pagead/js/adsbygoogle.js'))) {
     // create pagead when not existing page ad
     loadJS(pageAd, { onload: onloadAds });
@@ -231,7 +231,7 @@ export function initializeRandomAds() {
 
 export function onloadAds() {
   const allIns = Array.from(document.querySelectorAll('ins'));
-  console.log('total ins', allIns.length);
+  console.info('total ins', allIns.length);
 
   for (let i = 0; i < allIns.length; i++) {
     // log('apply banner', i + 1);
@@ -241,7 +241,7 @@ export function onloadAds() {
     } else if (!ins.getAttribute('data-ad-client')) {
       // ins.adsbygoogle-noablate is default adsense hidden element
       if (!ins.classList.contains('adsbygoogle-noablate')) {
-        console.log('no data-ad-client', ins);
+        console.info('no data-ad-client', ins);
       }
       continue;
     }
@@ -253,11 +253,11 @@ export function onloadAds() {
     if (ins.parentElement.offsetWidth < 250) {
       // remove banner when parent width is 0 or display: none
       if (window.adsense_option.remove) {
-        console.log(i + 1, 'remove', slot);
+        console.info(i + 1, 'remove', slot);
         ins.remove();
       }
     } else if (ins.innerHTML.trim().length === 0) {
-      console.log('adsbygoogle.push', i + 1, '.' + ins.classList, {
+      console.info('adsbygoogle.push', i + 1, '.' + ins.classList, {
         slot,
         client,
         width: {
@@ -335,7 +335,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   }
 }
 
-// console.log('adsense', {
+// console.info('adsense', {
 //   localhost,
 //   banned,
 //   state: document.readyState,
