@@ -1,11 +1,12 @@
 /*console.clear();*/
 
-import { getCookie, getCookies, getElementById, setCookie } from '@/utils';
+import { getCookies, getElementById } from '@/utils';
+import axios from 'axios';
 
 export const runBotDetectionMain = () => {
   const logdiv = getElementById('selenium');
   let proxyInfo = getElementById('sel-proxyInfo');
-  runBotDetection()
+  isSelenium()
     .then(result => {
       logdiv.innerHTML = String(result);
     })
@@ -145,11 +146,101 @@ export const runBotDetectionMain = () => {
     });
 };
 
+export type IpResult = {
+  [key: string]: any;
+  ip: string;
+  uag: string;
+  loc: string;
+  warp: string;
+  rbi: string;
+  gateway: string;
+};
+
+export async function getIp(abortController: AbortController) {
+  const response = await axios('//www.cloudflare.com/cdn-cgi/trace', { signal: abortController.signal });
+  //const processResponse = await response.text();
+  const data = String(response.data)
+    .trim()
+    .split('\n')
+    .reduce(function (obj, pair) {
+      const splitPair = pair.split('=');
+      return (obj[splitPair[0]] = splitPair[1]), obj;
+    }, {}) as IpResult;
+  // console.log(data);
+  data.warp = data.warp.toUpperCase();
+  data.rbi = data.rbi.toUpperCase();
+  data.gateway = data.gateway.toUpperCase();
+  return data;
+}
+
+const headersResult = {
+  proxy: false,
+  headers: {} as Record<string, string>
+};
+
+export type headersResult = typeof headersResult;
+
+export async function getHeaders(abortController: AbortController) {
+  const response = await axios('//httpbin.org/headers', { signal: abortController.signal });
+  const { data } = response;
+  // console.log('headers', data.headers);
+  const headers = [
+    'HTTP_VIA',
+    'HTTP_X_FORWARDED_FOR',
+    'HTTP_FORWARDED_FOR',
+    'HTTP_X_FORWARDED',
+    'HTTP_FORWARDED',
+    'HTTP_CLIENT_IP',
+    'HTTP_FORWARDED_FOR_IP',
+    'VIA',
+    'X_FORWARDED_FOR',
+    'FORWARDED_FOR',
+    'X_FORWARDED',
+    'FORWARDED',
+    'CLIENT_IP',
+    'FORWARDED_FOR_IP',
+    'HTTP_PROXY_CONNECTION'
+  ];
+  headers.forEach(function (header) {
+    // proxy detection
+    const isProxy = header in data.headers;
+    headersResult.proxy = isProxy;
+  });
+  headersResult.headers = data.headers;
+  return headersResult;
+}
+
+export interface GeoIpResult {
+  status: string;
+  country: string;
+  countryCode: string;
+  region: string;
+  regionName: string;
+  city: string;
+  zip: string;
+  lat: number;
+  lon: number;
+  timezone: string;
+  isp: string;
+  org: string;
+  as: string;
+  query: string;
+}
+
+export async function getGeoIp(ip?: string | AbortController, abortController?: AbortController) {
+  const controller = ip instanceof AbortController ? ip : abortController;
+  const response = await axios('http://ip-api.com/json/' + (typeof ip === 'string' ? ip : ''), {
+    signal: controller?.signal
+  });
+  // console.log('geo ip', JSON.stringify(data));
+  return (response?.data || {}) as GeoIpResult;
+}
+
 /**
  * detect selenium
- * @returns {Promise<boolean>}
+ * @returns
  */
-export function runBotDetection() {
+export function isSelenium(): Promise<{ selenium: boolean }> {
   return new Promise(resolve => {
     const documentDetectionKeys = [
       '__webdriver_evaluate',
@@ -175,18 +266,18 @@ export function runBotDetection() {
     for (const windowDetectionKey in windowDetectionKeys) {
       const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
       if (window[windowDetectionKeyValue] || windowDetectionKeyValue in window) {
-        return resolve(true);
+        return resolve({ selenium: true });
       }
     }
     for (const documentDetectionKey in documentDetectionKeys) {
       const documentDetectionKeyValue = documentDetectionKeys[documentDetectionKey];
       if (window['document'][documentDetectionKeyValue] || documentDetectionKeyValue in document) {
-        return resolve(true);
+        return resolve({ selenium: true });
       }
     }
     for (const documentKey in window['document']) {
       if (documentKey.match(/\$[a-z]dc_/) && window['document'][documentKey]['cache_']) {
-        return resolve(true);
+        return resolve({ selenium: true });
       }
     }
     if (
@@ -194,50 +285,39 @@ export function runBotDetection() {
       window['external'].toString() &&
       window['external'].toString()['indexOf']('Sequentum') !== -1
     )
-      return resolve(true);
-    if (window['document']['documentElement']['getAttribute']('selenium')) return resolve(true);
-    if (window['document']['documentElement']['getAttribute']('webdriver')) return resolve(true);
-    if (window['document']['documentElement']['getAttribute']('driver')) return resolve(true);
+      return resolve({ selenium: true });
+    if (window['document']['documentElement']['getAttribute']('selenium')) return resolve({ selenium: true });
+    if (window['document']['documentElement']['getAttribute']('webdriver')) return resolve({ selenium: true });
+    if (window['document']['documentElement']['getAttribute']('driver')) return resolve({ selenium: true });
     if (window.document.documentElement.getAttribute('webdriver')) {
-      return resolve(true);
+      return resolve({ selenium: true });
     }
     if ('callPhantom' in window || '_phantom' in window) {
       if (window.callPhantom || window._phantom) {
-        return resolve(true);
+        return resolve({ selenium: true });
       }
     }
     if ('webdriver' in navigator) {
       if (navigator.webdriver == true) {
-        return resolve(true);
+        return resolve({ selenium: true });
       }
     }
     if ('userAgentData' in navigator) {
       const udata = JSON.stringify(navigator.userAgentData);
-      return resolve(udata.includes('Not=A?Brand'));
+      return resolve({ selenium: udata.includes('Not=A?Brand') });
     }
-    return resolve(false);
+    return resolve({ selenium: false });
   });
 }
 
 /** Cookies **/
 export function runBotDetectionCookies() {
-  // set current id
-  if (!getCookie('___current_id')) {
-    setCookie(
-      '___current_id',
-      Math.random()
-        .toString(36)
-        .substring(2, 7 + 2),
-      1
-    );
-  }
-
-  document.querySelector('span#sid').textContent = getCookie('___current_id');
-  getElementById('unique-id').textContent = getCookie('___current_id');
+  // document.querySelector('span#sid').textContent = getCurrentPageId();
+  // getElementById('unique-id').textContent = getCurrentPageId();
 
   const tbl = document.querySelector('table#cookies');
   const tbody = tbl.querySelector('tbody');
-  const gck = getCookies();
+  const gck = getCookies({ sort: true });
   for (const key in gck) {
     //console.log(key, gck[key]);
     const row = document.createElement('tr');

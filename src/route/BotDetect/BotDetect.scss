@@ -1,27 +1,50 @@
+// Configuration
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+// Layout and components
+@import 'bootstrap/scss/tables';
+
 body {
   --table-width: 100%;
   /* Or any value, this will change dinamically */
 }
 
-tbody {
-  display: block;
-  /*max-height: 500px;
-  overflow-y: auto;*/
-}
+#bot-detector {
+  h3,
+  h1,
+  h2 {
+    text-transform: capitalize;
+  }
 
-thead,
-tbody tr {
-  display: table;
-  width: var(--table-width);
-  table-layout: fixed;
-}
+  tbody {
+    display: block;
+    /*max-height: 500px;
+    overflow-y: auto;*/
+  }
 
-td {
-  word-wrap: break-word;
-}
+  thead,
+  tbody tr {
+    display: table;
+    width: var(--table-width);
+    table-layout: fixed;
+  }
 
-ol.breadcrumb li {
-  display: inline;
-  margin-right: 0.2rem;
-  margin-left: 0.2rem;
+  table {
+    width: 100%;
+  }
+
+  td {
+    word-wrap: break-word;
+  }
+
+  ol.breadcrumb li {
+    display: inline;
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+  }
 }

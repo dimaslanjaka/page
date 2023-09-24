@@ -50,6 +50,10 @@
     "import": "rsuite",
     "dependOn": "shared"
   },
+  "axios": {
+    "import": "axios",
+    "dependOn": "shared"
+  },
   "componentsHighlightjshelper": {
     "import": "@components/Highlight.js/helper",
     "dependOn": "shared"
