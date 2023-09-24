@@ -59,6 +59,8 @@ declare global {
     adsense_option: import('./components/Adsense/utils/config').AdsenseOption;
     /** Indicator for adsense initializer */
     adsenseInitialized?: boolean;
+    /** current unique page id */
+    pageId?: string;
   }
 
   interface Event {

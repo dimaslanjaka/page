@@ -122,7 +122,8 @@ export function getCurrentPageId() {
       1
     );
   }
-  return getCookie('___current_id');
+  if (!window.pageId) window.pageId = getCookie('___current_id');
+  return window.pageId;
 }
 
 /*if (typeof module === 'object' && 'exports' in module) {
