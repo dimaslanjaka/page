@@ -16,7 +16,7 @@
   },
   "[typescriptreact]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": false,
+      "source.fixAll": true,
       "source.organizeImports": true
     },
     "editor.formatOnSave": false,
@@ -25,7 +25,7 @@
   },
   "[javascriptreact]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": false,
+      "source.fixAll": true,
       "source.organizeImports": false
     },
     "editor.formatOnSave": false,
@@ -57,9 +57,10 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
+    "source.fixAll": false,
     "source.organizeImports": false
   },
+  "eslint.codeActionsOnSave.mode": "problems",
   "code-runner.clearPreviousOutput": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveAllFilesBeforeRun": true,
