@@ -62,19 +62,44 @@ export function getCookie(name: string) {
   return null;
 }
 
+interface GetCookiesOptions {
+  /** sort cookies by key? */
+  sort: boolean;
+  /** skip these keys from result */
+  skipKey?: string[];
+}
+
 /**
  * get all cookies
+ * @param sort sort cookies by key?
  * @returns
  */
-export function getCookies() {
+export function getCookies(options: GetCookiesOptions) {
+  const { sort = false, skipKey = [] } = options;
   const cookies = document.cookie
     .split(';')
     .reduce((ac, cv, _i) => Object.assign(ac, { [cv.split('=')[0].trim()]: cv.split('=')[1] }), {});
 
-  const index = Object.keys(cookies).sort(function (a, b) {
-    return a === b ? 0 : a < b ? -1 : 1;
-  });
-  console.log({ index });
+  // delete keys from result
+  if (skipKey.length > 0) {
+    for (const key in cookies) {
+      if (skipKey.includes(key)) delete cookies[key];
+    }
+  }
+
+  // do sorting
+  if (sort) {
+    const sorted = {};
+
+    const sortKeys = Object.keys(cookies).sort(function (a, b) {
+      return a === b ? 0 : a < b ? -1 : 1;
+    });
+    sortKeys.forEach(key => {
+      sorted[key] = cookies[key];
+    });
+
+    return sorted;
+  }
 
   return cookies;
 }
