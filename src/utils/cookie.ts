@@ -108,6 +108,23 @@ export function deleteAllCookies() {
   }
 }
 
+/**
+ * get current unique page id by cookie
+ * @returns
+ */
+export function getCurrentPageId() {
+  if (!getCookie('___current_id')) {
+    setCookie(
+      '___current_id',
+      Math.random()
+        .toString(36)
+        .substring(2, 7 + 2),
+      1
+    );
+  }
+  return getCookie('___current_id');
+}
+
 /*if (typeof module === 'object' && 'exports' in module) {
   module.exports = { getCookie, removeCookie, eraseCookie, setCookie, createCookieMins };
 }*/
