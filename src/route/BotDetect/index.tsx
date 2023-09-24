@@ -172,7 +172,7 @@ class BotDetect extends React.Component<Record<string, any>, State> {
                   <tbody>
                     {this.state.headers &&
                       Object.keys(this.state.headers)
-                        .filter(key => !['host'].some(item => item === key))
+                        .filter(key => !['host'].some(item => item.toLowerCase() === key.toLowerCase()))
                         .map(key => (
                           <tr key={key}>
                             <td>{key}</td>
