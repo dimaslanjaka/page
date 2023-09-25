@@ -26,11 +26,11 @@ const stylesLoader = [
       importLoaders: 1,
       modules: {
         localIdentName: '[hash:base64]', // default
-        auto: true, // default
+        auto: true // default
       },
-      sourceMap: true,
-    },
-  },
+      sourceMap: true
+    }
+  }
   // {
   //   loader: 'postcss-loader',
   //   options: { postcssOptions },
@@ -52,8 +52,8 @@ module.exports = {
         // main script
         bundle: {
           import: './src/index.js',
-          dependOn: ['shared', 'internal'],
-        },
+          dependOn: ['shared', 'internal']
+        }
       },
   /**
    * The location of the build folder
@@ -68,7 +68,7 @@ module.exports = {
     chunkFilename: `runtime/chunk/[name].[chunkhash].js`,
     assetModuleFilename: 'media/[name][hash][ext][query]',
     // base directory from root domain
-    publicPath: ASSET_PATH,
+    publicPath: ASSET_PATH
   },
   /**
    * Prevent duplication, but disable unique filename chunk generation on dev mode
@@ -89,14 +89,14 @@ module.exports = {
               //type: 'css/mini-extract', // cache minified css
               test: /\.css$/, // cache by regex
               chunks: 'all',
-              enforce: true,
-            },
-          },
-        },
+              enforce: true
+            }
+          }
+        }
       },
   performance: {
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    maxAssetSize: 512000
   },
   module: {
     rules: [
@@ -105,24 +105,24 @@ module.exports = {
         type: 'asset', // <-- Assets module - asset
         parser: {
           dataUrlCondition: {
-            maxSize: 8 * 1024, // 8kb
-          },
+            maxSize: 8 * 1024 // 8kb
+          }
         },
         generator: {
           //If emitting file, the file path is
-          filename: 'runtime/fonts/[hash][ext][query]',
-        },
+          filename: 'runtime/fonts/[hash][ext][query]'
+        }
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource', // <-- Assets module - asset/resource
         generator: {
-          filename: 'runtime/images/[hash][ext][query]',
-        },
+          filename: 'runtime/images/[hash][ext][query]'
+        }
       },
       {
         test: /\.css$/,
-        use: stylesLoader,
+        use: stylesLoader
       },
       {
         test: /\.s[ac]ss$/i,
@@ -138,25 +138,25 @@ module.exports = {
                 includePaths: [
                   path.join(__dirname, '../node_modules'),
                   path.join(process.cwd(), 'node_modules'),
-                  path.join(__dirname, '../../node_modules'),
+                  path.join(__dirname, '../../node_modules')
                 ]
                   .filter(fs.existsSync)
                   .map(str => path.resolve(str))
                   .filter(function (elem, index, self) {
                     return index === self.indexOf(elem);
-                  }),
-              },
-            },
-          },
-        ],
+                  })
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.less$/i,
         use: [
           ...stylesLoader,
           // compiles Less to CSS
-          'less-loader',
-        ],
+          'less-loader'
+        ]
       },
       {
         test: /\.(ts|tsx)$/,
@@ -167,11 +167,11 @@ module.exports = {
               context: __dirname, // context root
               allowTsInNodeModules: true, // allow recompile .ts files
               transpileOnly: true, // fix hot reloading
-              configFile: require.resolve('./tsconfig.json'), // tsconfig
-            },
-          },
+              configFile: require.resolve('./tsconfig.json') // tsconfig
+            }
+          }
         ],
-        exclude: /node_modules|.(test|specs?).(ts|js)$/,
+        exclude: /node_modules|.(test|specs?).(ts|js)$/
       },
       {
         test: /\.(js|jsx)$/,
@@ -181,13 +181,13 @@ module.exports = {
           options: Object.assign(
             {
               cacheDirectory: './tmp/babel',
-              presets: ['@babel/preset-env', '@babel/preset-react'],
+              presets: ['@babel/preset-env', '@babel/preset-react']
             },
-            babelConfig,
-          ),
-        },
-      },
-    ],
+            babelConfig
+          )
+        }
+      }
+    ]
   },
   resolve: {
     extensions,
@@ -197,17 +197,19 @@ module.exports = {
       os: require.resolve('os-browserify'),
       buffer: require.resolve('buffer/'),
       constants: require.resolve('constants-browserify'),
-      stream: require.resolve('stream-browserify'),
+      stream: require.resolve('stream-browserify')
     },
     // typescript import paths alias support
     alias: (() => {
       const paths = tsconfigJson.compilerOptions.paths;
       for (const key in paths) {
         if (Object.hasOwnProperty.call(paths, key)) {
-          const resolvedValues = paths[key].map(source => {
-            // resolve absolute path source
-            return path.resolve(__dirname, source);
-          });
+          const resolvedValues = Array.isArray(paths[key])
+            ? paths[key].map(source => {
+                // resolve absolute path source
+                return path.resolve(__dirname, source);
+              })
+            : path.resolve(__dirname, paths[key]);
           paths[key] = resolvedValues;
         }
       }
@@ -217,9 +219,9 @@ module.exports = {
       // typescript import paths alias support
       new TsconfigPathsPlugin({
         configFile: './tsconfig.json',
-        extensions,
-      }),
-    ],
+        extensions
+      })
+    ]
   },
 
   // Optional and for development only. This provides the ability to
@@ -231,11 +233,11 @@ module.exports = {
   plugins: [
     // This makes it possible for webpack to safely use env vars
     new webpack.DefinePlugin({
-      'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
+      'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH)
     }),
     // ignore these patterns to exclude from file watcher
     new webpack.WatchIgnorePlugin({
-      paths: ['**/img/**', '**/fonts/**'],
+      paths: ['**/img/**', '**/fonts/**']
     }),
     // generate html
     ...webpackHtmlRoutes(),
@@ -244,11 +246,11 @@ module.exports = {
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: 'runtime/css/[name].[chunkhash].css',
-      chunkFilename: 'runtime/css/[id].[chunkhash].css',
+      chunkFilename: 'runtime/css/[id].[chunkhash].css'
     }),
     // enable source maps generation
     new webpack.SourceMapDevToolPlugin({
-      filename: '[file].map[query]',
+      filename: '[file].map[query]'
     }),
     // analyze webpack bundle
     new BundleAnalyzerPlugin({
@@ -259,8 +261,8 @@ module.exports = {
       // auto open browser
       openAnalyzer: false,
       // 'static': generate static html on production
-      analyzerMode: process.env.webpackAnalyze || 'server',
-    }),
+      analyzerMode: process.env.webpackAnalyze || 'server'
+    })
   ],
   /**
    * [Docs](https://webpack.js.org/configuration/dev-server/)
@@ -279,8 +281,8 @@ module.exports = {
       type: 'http',
       options: {
         key: './cert/localhost.key',
-        cert: './cert/localhost.crt',
-      },
+        cert: './cert/localhost.crt'
+      }
     },
     devMiddleware: {
       index: true,
@@ -290,11 +292,11 @@ module.exports = {
       writeToDisk: true,
       headers: (_req, res, _context) => {
         res.setHeader('Last-Modified', new Date());
-      },
-    },
+      }
+    }
   },
   cache: {
     type: 'filesystem',
-    cacheDirectory,
-  },
+    cacheDirectory
+  }
 };
