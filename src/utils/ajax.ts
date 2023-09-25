@@ -26,6 +26,17 @@ export const axiosWithCache = {
   )
 };
 
+/**
+ * Axios cache builder
+ * @param axiosOption
+ */
+export function axiosCache(
+  axiosOptions: Parameters<(typeof Axios)['create']>[0],
+  cacheOptions: Parameters<typeof setupCache>[1] = {}
+) {
+  return setupCache(Axios.create(axiosOptions), cacheOptions);
+}
+
 export interface FetchCacheOptions extends RequestInit {
   seconds?: number;
 }
