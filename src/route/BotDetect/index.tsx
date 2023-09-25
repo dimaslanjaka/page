@@ -105,7 +105,7 @@ class BotDetect extends React.Component<Record<string, any>, State> {
 
         <Grid fluid className="mb-2">
           <Row className="show-grid">
-            <Col xs={12}>
+            <Col xs={12} className="mb-2">
               <h3 className="text-center">Cloudflare Trace</h3>
               <div className="table-responsive">
                 <table className="table table-striped table-bordered" id="cloudflare-tracer">
@@ -162,7 +162,7 @@ class BotDetect extends React.Component<Record<string, any>, State> {
               <AdsenseFill />
             </Col>
 
-            <Col xs={12}>
+            <Col xs={12} className="mb-2">
               <h3 className="text-center">Your Connection Informations</h3>
               <div className="table-responsive">
                 <table className="table table-striped table-bordered" id="con-headers">
@@ -188,7 +188,7 @@ class BotDetect extends React.Component<Record<string, any>, State> {
               <AdsenseFill />
             </Col>
 
-            <Col xs={12}>
+            <Col xs={12} className="mb-2">
               <h3 className="text-center">Cookies information</h3>
               <table id="cookies" className="table table-striped table-bordered">
                 <thead>
@@ -202,7 +202,7 @@ class BotDetect extends React.Component<Record<string, any>, State> {
               <AdsenseFill />
             </Col>
 
-            <Col xs={12}>
+            <Col xs={12} className="mb-2">
               <h3 className="text-center">Your browser navigator</h3>
               <table className="table" id="navigator">
                 <thead>
