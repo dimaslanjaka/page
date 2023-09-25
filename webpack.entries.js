@@ -5,32 +5,33 @@ const { writefile } = require('sbg-utility');
 
 const webpackEntry = {
   promise: {
-    import: 'bluebird',
+    import: 'bluebird'
   },
   shared: {
     import: ['crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery', 'tslib'],
-    dependOn: 'promise',
+    dependOn: 'promise'
   },
 
   // internal/local utility
   internal: {
     import: ['./src/utils/index.ts'],
-    dependOn: ['safelinkify', 'shared'],
-  },
+    dependOn: ['safelinkify', 'shared']
+  }
 };
 
-const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss}'), { nodir: true });
+const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss,cjs,mjs}'), { nodir: true });
 const importedModules = sourcesPaths
   .map(file => {
     const str = fs.readFileSync(file, 'utf-8');
-    const regex = /^import\s.*from\s['"](.*)['"]|require\(['"](.*)['"]\)/gm;
+    const regex = /^import\s.*from\s['"](.*)['"]|(require|import)\(['"](.*)['"]\)/gm;
     let m;
     const result = [];
 
     while ((m = regex.exec(str)) !== null) {
       if (m) {
-        result.push(m[1]);
-        //console.log(typeof m[1]);
+        if (m[1]) {
+          result.push(m[1]);
+        }
       }
     }
 
@@ -48,7 +49,7 @@ const importedModules = sourcesPaths
   .filter((value, index, array) => array.indexOf(value) === index)
   // filter shared modules
   .filter(
-    str => !webpackEntry.shared.import.concat(['react', 'react-dom', 'react-router-dom', 'bluebird']).includes(str),
+    str => !webpackEntry.shared.import.concat(['react', 'react-dom', 'react-router-dom', 'bluebird']).includes(str)
   );
 
 // turn into webpack entry
@@ -56,7 +57,7 @@ importedModules.forEach(str => {
   const key = str.replace(/[^a-zA-Z ]/g, '');
   webpackEntry[key] = {
     import: str,
-    dependOn: 'shared',
+    dependOn: 'shared'
   };
 });
 

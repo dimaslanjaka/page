@@ -18,6 +18,14 @@
     "import": "@components/Loader",
     "dependOn": "shared"
   },
+  "axios": {
+    "import": "axios",
+    "dependOn": "shared"
+  },
+  "axioscacheinterceptor": {
+    "import": "axios-cache-interceptor",
+    "dependOn": "shared"
+  },
   "componentsAdsenseAdsenseFill": {
     "import": "@/components/Adsense/AdsenseFill",
     "dependOn": "shared"
@@ -50,8 +58,8 @@
     "import": "rsuite",
     "dependOn": "shared"
   },
-  "axios": {
-    "import": "axios",
+  "utilsajax": {
+    "import": "@/utils/ajax",
     "dependOn": "shared"
   },
   "componentsHighlightjshelper": {
