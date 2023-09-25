@@ -140,6 +140,17 @@ function loadHljs() {
 </code></pre>
     `}</code>
         </pre>
+
+        <h2>React</h2>
+        <p>
+          This code also works on reactjs{' '}
+          <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fe/src/components/Highlight.js">
+            see full codes
+          </Link>{' '}
+          <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fecf11178a42503b15c8df26edaa5823961/src/route/Highlight">
+            see implementation usages
+          </Link>
+        </p>
       </div>
     </React.Suspense>
   );
