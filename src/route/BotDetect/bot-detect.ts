@@ -1,7 +1,7 @@
 /*console.clear();*/
 
 import { getCookies, getElementById } from '@/utils';
-import axios from 'axios';
+import { axiosWithCache, axiosWithoutCache, fetchWithCache } from '@/utils/ajax';
 
 export const runBotDetectionMain = () => {
   const logdiv = getElementById('selenium');
@@ -14,7 +14,7 @@ export const runBotDetectionMain = () => {
       if (!proxyInfo) proxyInfo = getElementById('sel-proxyInfo');
       if (typeof fetch != 'undefined') {
         const trace = () =>
-          fetch('//www.cloudflare.com/cdn-cgi/trace').then(response => {
+          fetchWithCache('//www.cloudflare.com/cdn-cgi/trace').then(response => {
             response.text().then(function (response) {
               const data = response
                 .trim()
@@ -34,7 +34,7 @@ export const runBotDetectionMain = () => {
           });
         const tableCon = getElementById('con-headers').querySelector('tbody');
         const fetchHeaders = () =>
-          fetch('//httpbin.org/headers')
+          fetchWithCache('//httpbin.org/headers')
             .then(response => response.json())
             .then(data => {
               //console.log(data.headers);
@@ -101,7 +101,7 @@ export const runBotDetectionMain = () => {
             });
 
         const fetchGeoIp = () =>
-          fetch('http://ip-api.com/json/').then(response => {
+          fetchWithCache('http://ip-api.com/json/').then(response => {
             response.text().then(function (data) {
               try {
                 const parse = JSON.parse(data);
@@ -157,8 +157,11 @@ export type IpResult = {
 };
 
 export async function getIp(abortController: AbortController) {
-  const response = await axios('//www.cloudflare.com/cdn-cgi/trace', { signal: abortController.signal });
-  //const processResponse = await response.text();
+  const response = await axiosWithoutCache('//www.cloudflare.com/cdn-cgi/trace', {
+    method: 'GET',
+    signal: abortController.signal
+  });
+
   const data = String(response.data)
     .trim()
     .split('\n')
@@ -181,7 +184,7 @@ const headersResult = {
 export type headersResult = typeof headersResult;
 
 export async function getHeaders(abortController: AbortController) {
-  const response = await axios('//httpbin.org/headers', { signal: abortController.signal });
+  const response = await axiosWithoutCache('//httpbin.org/headers', { signal: abortController.signal });
   const { data } = response;
   // console.log('headers', data.headers);
   const headers = [
@@ -229,9 +232,12 @@ export interface GeoIpResult {
 
 export async function getGeoIp(ip?: string | AbortController, abortController?: AbortController) {
   const controller = ip instanceof AbortController ? ip : abortController;
-  const response = await axios('http://ip-api.com/json/' + (typeof ip === 'string' ? ip : ''), {
-    signal: controller?.signal
-  });
+  const response = await axiosWithCache.withoutCredentials(
+    'http://ip-api.com/json/' + (typeof ip === 'string' ? ip : ''),
+    {
+      signal: controller?.signal
+    }
+  );
   // console.log('geo ip', JSON.stringify(data));
   return (response?.data || {}) as GeoIpResult;
 }

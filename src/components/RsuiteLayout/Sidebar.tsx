@@ -3,6 +3,7 @@ import React from 'react';
 
 import * as project from '@/project';
 import * as utils from '@/utils';
+import { fetchWithCache } from '@/utils/ajax';
 import { Divider, Panel, Stack } from 'rsuite';
 
 // const Stack = React.lazy(() => import('rsuite/esm/Stack'));
@@ -40,12 +41,14 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
 
     if (this._mounted) {
       const url = 'https://api.allorigins.win/raw?url=https://www.webmanajemen.com/rss.xml';
-      fetch(url, {
+      fetchWithCache(url, {
         mode: 'cors',
         credentials: 'include'
       })
-        .then(res => res.text())
-        .then(contents => {
+        .then(response => response.text())
+        .then(response => {
+          // const contents = response.data;
+          const contents = response;
           const feed = new window.DOMParser().parseFromString(contents, 'text/xml');
           const items = Array.from(feed.querySelectorAll('item'));
           const feedItems = items.map(el => {
