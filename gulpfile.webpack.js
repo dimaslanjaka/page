@@ -1,7 +1,10 @@
 const { spawn } = require('git-command-helper');
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
 const babelConfig = require('./.babelrc').config;
+
+if (process.env.TS_NODE_PROJECT) delete process.env.TS_NODE_PROJECT;
 
 /**
  * create webpack config
@@ -10,6 +13,7 @@ const babelConfig = require('./.babelrc').config;
  * @returns {webpack.Configuration}
  */
 function createConfig(entry, output) {
+  const extensions = ['.ts', '.js', '.json'];
   /**
    * @type {webpack.Configuration}
    */
@@ -20,7 +24,7 @@ function createConfig(entry, output) {
       path: path.dirname(output)
     },
     resolve: {
-      extensions: ['.ts', '.js', '.json'],
+      extensions,
       fallback: {
         crypto: require.resolve('crypto-browserify'),
         path: require.resolve('path-browserify'),
@@ -28,7 +32,31 @@ function createConfig(entry, output) {
         buffer: require.resolve('buffer/'),
         constants: require.resolve('constants-browserify'),
         stream: require.resolve('stream-browserify')
-      }
+      },
+      // typescript import paths alias support
+      alias: (() => {
+        const paths = require('./tsconfig.json').compilerOptions.paths;
+        for (const key in paths) {
+          if (Object.hasOwnProperty.call(paths, key)) {
+            const resolvedValues = Array.isArray(paths[key])
+              ? paths[key].map(source => {
+                  // resolve absolute path source
+                  return path.resolve(__dirname, source);
+                })
+              : path.resolve(__dirname, paths[key]);
+            paths[key] = resolvedValues;
+          }
+        }
+        return paths;
+      })(),
+      plugins: [
+        // typescript import paths alias support
+        new TsconfigPathsPlugin({
+          configFile: path.resolve(__dirname, './tsconfig.json'),
+          extensions,
+          baseUrl: path.resolve(__dirname, '.')
+        })
+      ]
     },
     module: {
       rules: [
@@ -64,7 +92,8 @@ const buildStatic = done => {
       createConfig('./src/components/Adsense/utils/index.ts', path.join(__dirname, 'dist/assets/js/r-ads.js')),
       createConfig('./public/page/assets/js/analystic.js', path.join(__dirname, 'dist/assets/js/analystic.js')),
       createConfig('./src/utils/scroll-helper.ts', path.join(__dirname, 'dist/assets/js/remember-scroll-position.js')),
-      createConfig('./src/utils/scroll-helper.ts', path.join(__dirname, 'dist/assets/js/scroll-to-hash.js'))
+      createConfig('./src/utils/scroll-helper.ts', path.join(__dirname, 'dist/assets/js/scroll-to-hash.js')),
+      createConfig('./src/components/Highlight.js/helper.ts', path.join(__dirname, 'dist/assets/js/highlight.js'))
     ],
     (err, stats) => {
       if (stats) {
@@ -91,3 +120,9 @@ const buildSite = done =>
     .catch(done);
 
 module.exports = { buildStatic, buildSite };
+
+if (require.main === module) {
+  buildStatic(() => {
+    //
+  });
+}

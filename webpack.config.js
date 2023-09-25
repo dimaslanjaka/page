@@ -228,8 +228,9 @@ module.exports = {
     plugins: [
       // typescript import paths alias support
       new TsconfigPathsPlugin({
-        configFile: './tsconfig.json',
-        extensions
+        configFile: path.resolve(__dirname, './tsconfig.json'),
+        extensions,
+        baseUrl: path.resolve(__dirname, '.')
       })
     ]
   },
