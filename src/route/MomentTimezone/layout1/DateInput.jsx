@@ -1,6 +1,6 @@
 import React from 'react';
 import Adsense from '../../components/Adsense';
-import { moment_format, setDateLocalValue } from './moment-timezone';
+import { moment_format, setDateLocalValue } from '../shared/moment-timezone';
 import { copyTextToClipboard, querySelector } from '../../utils';
 
 export default function DateInput() {

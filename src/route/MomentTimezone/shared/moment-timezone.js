@@ -7,7 +7,7 @@
 // require('moment-timezone/builds/moment-timezone-with-data.min');
 // const moment = require('moment-timezone');
 
-const moment = require('moment-timezone');
+export const moment = require('moment-timezone');
 
 /**
  * start moment timezone script
