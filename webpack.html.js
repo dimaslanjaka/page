@@ -12,8 +12,8 @@ const defaultMeta = {
   description: 'Page - WMI',
   canonical: {
     rel: 'canonical',
-    href: 'https://www.webmanajemen.com/page/index.html',
-  },
+    href: 'https://www.webmanajemen.com/page/index.html'
+  }
 };
 
 const htmlTemplate = path.resolve(__dirname, 'src', 'main.html'); // source html layout
@@ -24,23 +24,27 @@ const htmlTemplate = path.resolve(__dirname, 'src', 'main.html'); // source html
 const routes = [
   {
     title: 'Login page - WMI',
-    filename: 'login.html', // filename
+    filename: 'login.html' // filename
   },
   {
     title: 'Home page - WMI',
-    filename: 'index.html',
+    filename: 'index.html'
   },
   {
     title: '404 - WMI',
-    filename: '404.html',
+    filename: '404.html'
   },
   {
     title: 'Outbound page - WMI',
-    filename: 'safelink.html',
+    filename: 'safelink.html'
+  },
+  {
+    title: 'Auto highlight.js - WMI',
+    filename: 'highlight-js.html'
   },
   {
     title: 'Login page - WMI',
-    filename: 'google/login.html',
+    filename: 'google/login.html'
   },
   {
     title: 'Moment Timezone Playground',
@@ -49,13 +53,13 @@ const routes = [
       description: 'Moment Timezone Online Playground For Free. Support custom format pattern',
       language: {
         httpEquiv: 'Content-Language',
-        content: 'en_US',
+        content: 'en_US'
       },
       canonical: {
         rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/moment-timezone.html',
-      },
-    },
+        href: 'https://www.webmanajemen.com/page/moment-timezone.html'
+      }
+    }
   },
   {
     title: 'Selenium checker - bot detector',
@@ -64,10 +68,10 @@ const routes = [
     meta: {
       canonical: {
         rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/bot-detect.html',
-      },
-    },
-  },
+        href: 'https://www.webmanajemen.com/page/bot-detect.html'
+      }
+    }
+  }
 ].map(o => {
   // assign template
   if (!o.template) o.template = htmlTemplate;
@@ -77,7 +81,7 @@ const routes = [
     // auto add meta canonical
     o.meta.canonical = {
       rel: 'canonical',
-      href: 'https://www.webmanajemen.com/page/' + o.filename,
+      href: 'https://www.webmanajemen.com/page/' + o.filename
     };
   }
   // assign with default meta
@@ -95,11 +99,11 @@ function webpackHtmlRoutes() {
             filename: 'index.html', // create index.html
             template: path.resolve('src', 'main.html'), // source html layout
             publicPath: ASSET_PATH, // base directory from root domain
-            minify: devMode === false, // minify on production
+            minify: devMode === false // minify on production
           },
-          option,
-        ),
-      ),
+          option
+        )
+      )
   );
 }
 
