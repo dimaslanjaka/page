@@ -37,6 +37,15 @@ const stylesLoader = [
   // },
 ];
 
+const _originalEntries = {
+  ...webpackEntry,
+  // main script
+  bundle: {
+    import: './src/index.js',
+    dependOn: ['shared', 'internal']
+  }
+};
+
 /**
  * @type {import('webpack').Configuration}
  */
@@ -48,11 +57,12 @@ module.exports = {
   entry: devMode
     ? './src/index.js'
     : {
-        ...webpackEntry,
-        // main script
+        shared: {
+          import: ['bluebird']
+        },
         bundle: {
           import: './src/index.js',
-          dependOn: ['shared', 'internal']
+          dependOn: ['shared']
         }
       },
   /**
