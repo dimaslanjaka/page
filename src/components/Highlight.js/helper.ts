@@ -132,3 +132,15 @@ export function initClipBoard() {
     });
   });
 }
+
+/** main */
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState !== 'loading') {
+    // fix react
+    document.addEventListener('scroll', initHljs);
+    //triggerAdsense(undefined);
+  } else {
+    document.addEventListener('DOMContentLoaded', initHljs);
+  }
+}
