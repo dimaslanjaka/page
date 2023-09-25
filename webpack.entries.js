@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { spawn } = require('git-command-helper');
 const glob = require('glob');
 const path = require('path');
 const { writefile } = require('sbg-utility');
@@ -73,6 +74,7 @@ importedModules.forEach(str => {
 module.exports = webpackEntry;
 
 if (require.main === module) {
-  // console.log('called directly');
-  writefile(path.join(__dirname, 'webpack.entries.json'), webpackEntry);
+  const saveTo = path.join(__dirname, 'webpack.entries.json');
+  writefile(saveTo, webpackEntry);
+  spawn('prettier', ['--write', saveTo]);
 }
