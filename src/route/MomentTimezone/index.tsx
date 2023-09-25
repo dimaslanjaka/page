@@ -2,8 +2,7 @@ import React from 'react';
 //
 
 import { copyTextToClipboard, md5, querySelector } from '@/utils';
-import moment from 'moment-timezone';
-import { getTimeZoneOffset } from './layout1/moment-timezone';
+import { getTimeZoneOffset, moment } from './shared/moment-timezone';
 import timezones from './shared/timezones.json';
 
 const Snippet = React.lazy(() => import('./shared/Snippet'));
