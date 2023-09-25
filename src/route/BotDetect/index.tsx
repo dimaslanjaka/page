@@ -66,9 +66,12 @@ class BotDetect extends React.Component<Record<string, any>, State> {
     this.abortController = new AbortController();
     const wrap = Bluebird.all([
       isSelenium(),
-      getGeoIp(),
       getHeaders(this.abortController),
-      getIp(this.abortController)
+      getIp(this.abortController).then(ipResult => {
+        return getGeoIp(ipResult.ip).then(geoIp => {
+          return Object.assign(ipResult, geoIp);
+        });
+      })
     ]);
     this.promises.push(wrap);
     wrap.each(result => {
