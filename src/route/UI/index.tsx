@@ -8,6 +8,7 @@ const Container = React.lazy(() => import('rsuite/esm/Container'));
 const Row = React.lazy(() => import('rsuite/esm/Row'));
 const Grid = React.lazy(() => import('rsuite/esm/Grid'));
 const Col = React.lazy(() => import('rsuite/esm/Col'));
+const Notification = React.lazy(() => import('rsuite/esm/Notification'));
 const Panel = React.lazy(() => import('rsuite/esm/Panel'));
 const Avatar = React.lazy(() => import('rsuite/esm/Avatar'));
 const AvatarGroup = React.lazy(() => import('rsuite/esm/AvatarGroup'));
@@ -18,11 +19,64 @@ const PlaceholderParagraph = React.lazy(() => import('rsuite/esm/Placeholder/Pla
 const Link = React.lazy(() => import('@components/Link'));
 const Image = React.lazy(() => import('@components/Image'));
 
+/**
+ * check if the component still mounted
+ */
+export const useIsMounted = () => {
+  const mountedRef = React.useRef(false);
+  const isMounted = React.useCallback(() => mountedRef.current, []);
+
+  React.useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  });
+
+  return isMounted;
+};
+
+interface State {
+  [key: string]: any;
+  toasterReady: boolean;
+  isMounted: boolean;
+}
+
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the '{}' type.
-class UI extends React.Component<Record<string, never>, Record<string, never>> {
+class UI extends React.Component<Record<string, never>, State> {
+  toaster: ReturnType<(typeof import('rsuite'))['useToaster']>;
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      toasterReady: false,
+      isMounted: false
+    };
+  }
+
   componentDidMount(): void {
     require('./ui.scss');
+    this.setState({ isMounted: true });
+    import('rsuite').then(loaded => {
+      this.setState({ toasterReady: true });
+      this.toaster = loaded.toaster;
+    });
+  }
+
+  componentWillUnmount(): void {
+    this.setState({ isMounted: false, toasterReady: false });
+  }
+
+  pushToast() {
+    const ready = this.state.toasterReady;
+    const isMounted = this.state.isMounted;
+    if (!isMounted || !ready || !this.toaster) return;
+    this.toaster.push(
+      <Notification closable type="info" header="Informational">
+        <PlaceholderParagraph style={{ width: 320 }} rows={3} />
+      </Notification>,
+      { placement: 'topStart' }
+    );
   }
 
   render() {
@@ -97,6 +151,11 @@ class UI extends React.Component<Record<string, never>, Record<string, never>> {
           <PlaceholderParagraph rows={8} />
           <Loader center content="loading" />
         </div>
+        <b>Notification</b>
+        <Notification closable type="info" header="Informational">
+          <PlaceholderParagraph style={{ width: 320 }} rows={3} />
+        </Notification>
+        <Button onClick={this.pushToast.bind(this)}>Push</Button>
       </Container>
     );
   }
