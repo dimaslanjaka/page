@@ -4,7 +4,7 @@ import React from 'react';
 import * as project from '@/project';
 import * as utils from '@/utils';
 import { fetchWithCache } from '@/utils/ajax';
-import { Divider, Panel, Stack } from 'rsuite';
+import { Panel, Stack } from 'rsuite';
 
 // const Stack = React.lazy(() => import('rsuite/esm/Stack'));
 // const Panel = React.lazy(() => import('rsuite/esm/Panel'));
@@ -95,39 +95,46 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
 
   render() {
     return (
-      <Panel
-        bordered
-        header={
-          <Stack justifyContent="space-between">
-            <span>Latest Posts</span>
-          </Stack>
-        }
-      >
+      <div>
+        <div className="text-center mb-2">
+          <h4>Latest Posts</h4>
+        </div>
         {this.state.feedItems.slice(0, 10).map((item, i) => {
           return (
-            <div key={'sidebar-feed-' + i + item.title}>
-              {item.image && (
-                <div
-                  style={{
-                    marginRight: '4px',
-                    backgroundImage: `url('${item.image}')`,
-                    height: '100px',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover'
-                  }}
-                />
-              )}
-              <b>
-                <a href={item.link} target="_blank">
-                  {item.title}
-                </a>
-              </b>
-              <p>{item.description.substring(0, 120) + '...'}</p>
-              <Divider />
-            </div>
+            <Panel
+              key={'sidebar-feed-' + i + item.title}
+              bordered
+              header={
+                <Stack justifyContent="space-between">
+                  <span>{item.title}</span>
+                </Stack>
+              }
+              className="mb-2"
+              onClick={() => console.log('clicked', item.title)}
+            >
+              <div>
+                {item.image && (
+                  <div
+                    style={{
+                      marginRight: '4px',
+                      backgroundImage: `url('${item.image}')`,
+                      height: '100px',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover'
+                    }}
+                  />
+                )}
+                <b>
+                  <a href={item.link} target="_blank">
+                    {item.title}
+                  </a>
+                </b>
+                <p>{item.description.substring(0, 120) + '...'}</p>
+              </div>
+            </Panel>
           );
         })}
-      </Panel>
+      </div>
     );
   }
 }
