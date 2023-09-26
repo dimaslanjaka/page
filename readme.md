@@ -13,12 +13,10 @@ https://github.com/dimaslanjaka/dimaslanjaka.github.io
 last commit master (before migrated): https://github.com/dimaslanjaka/page/commit/96061003820867230c43253d7afd1a96233b6574
 
 ### test dist
+update entries
 ```bash
-yarn run build
-yarn run php
+yarn run entries
 ```
-
-or
 
 open terminal 1
 ```bash
@@ -28,4 +26,6 @@ yarn run php
 open terminal 2
 ```bash
 yarn build:webpack && gulp page:copy
+# or
+yarn run build
 ```
