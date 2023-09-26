@@ -7,7 +7,9 @@ const htmlPlugin = new HtmlWebPackPlugin({
   template: paths.public + "/index.html", // template file
   filename: "index.html", // output file
 });
-
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
   entry: [paths.src + "/index.js"],
   output: {
@@ -18,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(t|j|cj|mj)sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -31,4 +33,7 @@ module.exports = {
     ],
   },
   plugins: [new CleanWebpackPlugin(), htmlPlugin],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
+  }
 };

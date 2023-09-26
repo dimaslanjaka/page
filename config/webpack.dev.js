@@ -1,6 +1,9 @@
 const { merge } = require("webpack-merge");
 const paths = require("./paths");
 const common = require("./webpack.common.js");
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = merge(common, {
   mode: "development",
   devtool: "inline-source-map",
@@ -8,7 +11,8 @@ module.exports = merge(common, {
     historyApiFallback: true,
     compress: true,
     hot: true,
-    port: 3000,
+    port: 4000,
+    host: 'adsense.webmanajemen.com',
     open: false,
   },
 });
