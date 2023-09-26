@@ -61,6 +61,7 @@ class UI extends React.Component<Record<string, never>, State> {
     require('./ui.scss');
     this.setState({ isMounted: true });
     import('rsuite').then(loaded => {
+      console.log('rsuite loaded');
       this.setState({ toasterReady: true });
       this.toaster = loaded.toaster;
     });
@@ -73,6 +74,7 @@ class UI extends React.Component<Record<string, never>, State> {
   pushToast() {
     const ready = this.state.toasterReady;
     const isMounted = this.state.isMounted;
+    console.log('push toast clicked', { isMounted, ready, toaster: typeof this.toaster });
     if (!isMounted || !ready || !this.toaster) return;
     this.toaster.push(
       <Notification closable type="info" header="Informational">
@@ -83,6 +85,7 @@ class UI extends React.Component<Record<string, never>, State> {
   }
 
   render() {
+    const pushToast = this.pushToast;
     const Heading = (props: any) => (
       <React.Suspense fallback={<div>Header loading</div>}>
         <Divider />
@@ -142,7 +145,6 @@ class UI extends React.Component<Record<string, never>, State> {
             Violet
           </Button>
         </ButtonToolbar>
-
         <ButtonToolbar style={{ background: '#000', padding: 10 }}>
           <Button color="red" appearance="ghost">
             Red
@@ -231,7 +233,7 @@ class UI extends React.Component<Record<string, never>, State> {
         <Notification closable type="info" header="Informational">
           <PlaceholderParagraph style={{ width: 320 }} rows={3} />
         </Notification>
-        <Button onClick={this.pushToast.bind(this)}>Push</Button>
+        <Button onClick={() => pushToast()}>Push</Button>
       </Container>
     );
   }
