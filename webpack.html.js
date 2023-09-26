@@ -99,7 +99,8 @@ function webpackHtmlRoutes() {
             filename: 'index.html', // create index.html
             template: path.resolve('src', 'main.html'), // source html layout
             publicPath: ASSET_PATH, // base directory from root domain
-            minify: devMode === false // minify on production
+            minify: devMode === false, // minify on production
+            inject: true
           },
           option
         )
