@@ -109,5 +109,11 @@ module.exports = {
       filename: 'runtime/css/[name].css',
       chunkFilename: 'runtime/css/[id].css'
     })
-  ]
+  ],
+
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  }
 };
