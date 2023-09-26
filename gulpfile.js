@@ -16,35 +16,38 @@ const pageGit = new git(path.join(__dirname, 'page'));
 gulp.task('page:copy', async function () {
   // copy non-compiled files
 
+  const baseFolder = path.join(__dirname, 'page');
+
   const option = [
     // copy workflow
     {
       src: path.join(__dirname, '.github'),
-      dest: path.join(__dirname, 'page/.github'),
+      dest: path.join(baseFolder, '.github')
     },
     // copy dist
     {
       src: path.join(__dirname, 'dist'),
-      dest: path.join(__dirname, 'page'),
+      dest: baseFolder
     },
     // copy static files
     {
       src: path.join(__dirname, 'public/page'),
-      dest: path.join(__dirname, 'page'),
-    },
+      dest: baseFolder
+    }
   ];
 
   // delete bundled react folder
-  const runtimeFolder = path.join(__dirname, 'page/runtime');
+  const runtimeFolder = path.join(baseFolder, 'runtime');
   if (fs.existsSync(runtimeFolder)) {
     await fs.rm(runtimeFolder, { recursive: true, force: true });
   }
 
   await Bluebird.all(option).each(item => {
-    // delete destination path except root path
-    if (fs.existsSync(item.dest) && item.dest !== path.join(__dirname, 'page')) {
+    // delete destination path and not base path
+    if (fs.existsSync(item.dest) && item.dest !== baseFolder) {
       fs.rmSync(item.dest, { force: true, recursive: true });
     }
+    // copy the source
     return fs.copy(item.src, item.dest, { overwrite: true });
   });
 
@@ -63,7 +66,7 @@ gulp.task('page:copy', async function () {
             // exclude patterns (dont anonymize these patterns)
             exclude: [
               /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/,
-              /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/,
+              /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/
             ],
             // url redirector
             redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
@@ -72,14 +75,14 @@ gulp.task('page:copy', async function () {
             // encryption type = 'base64' | 'aes'
             type: 'base64',
             // password aes, default = root
-            password: 'unique-password',
+            password: 'unique-password'
           });
           let str = Buffer.from(vinyl.contents).toString();
           str = await safelink.parse(str);
           vinyl.contents = Buffer.from(str);
           if (this.push) this.push(vinyl); // emit this file
           callback(null, vinyl); // emit new data
-        }),
+        })
       )
       .pipe(gulp.dest(dest));
   });
@@ -133,12 +136,12 @@ gulp.task('page:clean', function () {
           '**/@types',
           '**/@eslint',
           '**/@typescript',
-          '**/rmdir',
+          '**/rmdir'
         ].concat(devPagePkg),
         {
-          cwd: path.join(base, 'node_modules'),
-        },
-      ),
+          cwd: path.join(base, 'node_modules')
+        }
+      )
     )
       .map(str => path.join(base, 'node_modules', str))
       .each(str => fs.rmSync(str, { recursive: true, force: true }));
@@ -165,13 +168,15 @@ gulp.task(
     // clean node_modules
     'page:clean',
     // commit
-    'page:commit',
-  ),
+    'page:commit'
+  )
 );
 
 // remove ./page/\n
 gulp.task('backup', gulp.series(backup));
+// restore to latest origin/gh-pages
 gulp.task('restore', gulp.series(restore));
+// default task is build task
 gulp.task('default', gulp.series('build'));
 
 module.exports = gulp;
