@@ -19,6 +19,9 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'runtime/bundle.js',
+    // unique chunk filename generation
+    chunkFilename: `runtime/chunk/[name].[chunkhash].js`,
+    assetModuleFilename: 'runtime/media/[name][hash][ext][query]',
     path: __dirname + '/dist',
     publicPath: ASSET_PATH
   },
@@ -101,8 +104,10 @@ module.exports = {
     // generate html
     ...webpackHtmlRoutes(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'runtime/css/[name].css',
+      chunkFilename: 'runtime/css/[id].css'
     })
   ]
 };

@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const devMode = /dev/i.test(process.env.NODE_ENV);
+// const devMode = /dev/i.test(process.env.NODE_ENV);
 const ASSET_PATH = '/page';
 
 /**
@@ -99,7 +99,8 @@ function webpackHtmlRoutes() {
             filename: 'index.html', // create index.html
             template: path.resolve('src', 'main.html'), // source html layout
             publicPath: ASSET_PATH, // base directory from root domain
-            minify: devMode === false, // minify on production
+            // minify: devMode === false, // minify on production
+            minify: false,
             inject: true
           },
           option
