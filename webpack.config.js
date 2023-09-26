@@ -10,10 +10,9 @@ const { webpackHtmlRoutes } = require('./webpack.html');
 
 module.exports = {
   devServer: {
-    // disableHostCheck: true,
+    host: 'adsense.webmanajemen.com', // local domain by /etc/hosts
     historyApiFallback: true,
     compress: true,
-    host: '0.0.0.0',
     port: 4000
   },
   entry: './src/index.js',
