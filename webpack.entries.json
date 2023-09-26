@@ -98,10 +98,6 @@
     "import": "rsuite/esm/Badge",
     "dependOn": "shared"
   },
-  "rsuiteesmPlaceholder": {
-    "import": "rsuite/esm/Placeholder",
-    "dependOn": "shared"
-  },
   "rsuiteesmPlaceholderPlaceholderParagraph": {
     "import": "rsuite/esm/Placeholder/PlaceholderParagraph",
     "dependOn": "shared"
@@ -166,14 +162,6 @@
     "import": "rsuite/esm/Nav",
     "dependOn": "shared"
   },
-  "momentminmomentwithlocales": {
-    "import": "moment/min/moment-with-locales",
-    "dependOn": "shared"
-  },
-  "momenttimezonebuildsmomenttimezonewithdatamin": {
-    "import": "moment-timezone/builds/moment-timezone-with-data.min",
-    "dependOn": "shared"
-  },
   "assetsjsgoogleconstants": {
     "import": "@assets/js/google/constants",
     "dependOn": "shared"
@@ -214,6 +202,10 @@
     "import": "rsuite/esm/Footer",
     "dependOn": "shared"
   },
+  "assetscssmainscss": {
+    "import": "@assets/css/main.scss",
+    "dependOn": "shared"
+  },
   "componentAdsenseutils": {
     "import": "@component/Adsense/utils",
     "dependOn": "shared"
@@ -222,16 +214,8 @@
     "import": "@/utils/scroll-helper",
     "dependOn": "shared"
   },
-  "assetscssmainscss": {
-    "import": "@assets/css/main.scss",
-    "dependOn": "shared"
-  },
   "project": {
     "import": "@/project",
-    "dependOn": "shared"
-  },
-  "rsuiteesmStack": {
-    "import": "rsuite/esm/Stack",
     "dependOn": "shared"
   },
   "rsuiteesmNavbar": {

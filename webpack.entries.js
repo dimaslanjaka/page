@@ -23,26 +23,35 @@ const webpackEntry = {
 const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss,cjs,mjs}'), { nodir: true });
 const importedModules = sourcesPaths
   .map(file => {
-    const str = fs.readFileSync(file, 'utf-8');
+    const contents = fs
+      .readFileSync(file, 'utf-8')
+      // remove js comments https://regex101.com/r/a1o7jA/2
+      // eslint-disable-next-line no-useless-escape
+      .replace(/(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)|(\/\/.*)/gm, '');
     const result = [];
     const regexes = [
       /^import\s.*from\s['"](.*)['"];?/gm,
       /import\s?\(['"](.*)['"]\)/gm,
       /require\s?\(['"](.*)['"]\)/gm
     ];
-    regexes.forEach(regex => {
-      let m;
+    contents
+      .split(/\r?\n/gm)
+      .filter(line => !/^\/\//.test(line.trim()))
+      .forEach(str => {
+        regexes.forEach(regex => {
+          let m;
 
-      while ((m = regex.exec(str)) !== null) {
-        if (m) {
-          if (m[1]) {
-            result.push(m[1]);
-          } else {
-            console.log(m[0], '->', m[1], m[2], m[3], 'length=' + m.length);
+          while ((m = regex.exec(str)) !== null) {
+            if (m) {
+              if (m[1]) {
+                result.push(m[1]);
+              } else {
+                console.log(m[0], '->', m[1], m[2], m[3], 'length=' + m.length);
+              }
+            }
           }
-        }
-      }
-    });
+        });
+      });
 
     return (
       result
