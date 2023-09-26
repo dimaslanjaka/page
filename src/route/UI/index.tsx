@@ -13,7 +13,9 @@ const Panel = React.lazy(() => import('rsuite/esm/Panel'));
 const Avatar = React.lazy(() => import('rsuite/esm/Avatar'));
 const AvatarGroup = React.lazy(() => import('rsuite/esm/AvatarGroup'));
 const Loader = React.lazy(() => import('rsuite/esm/Loader'));
+const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
 const Badge = React.lazy(() => import('rsuite/esm/Badge'));
+const Divider = React.lazy(() => import('rsuite/esm/Divider'));
 //const Placeholder = React.lazy(() => import('rsuite/esm/Placeholder'));
 const PlaceholderParagraph = React.lazy(() => import('rsuite/esm/Placeholder/PlaceholderParagraph')); // Placeholder.Paragraph
 const Link = React.lazy(() => import('@components/Link'));
@@ -81,17 +83,90 @@ class UI extends React.Component<Record<string, never>, State> {
   }
 
   render() {
+    const Heading = (props: any) => (
+      <React.Suspense fallback={<div>Header loading</div>}>
+        <Divider />
+        <b>{props.children}</b>
+        <Divider />
+      </React.Suspense>
+    );
     return (
       <Container className="myUi">
-        <Grid>
-          <h1>
-            <Link href="#">Hello world</Link>
-          </h1>
-          <Button appearance="default" size="lg">
-            React Suite
+        <h1 className="text-center">
+          <Link href="#">React Suite Component</Link>
+        </h1>
+        <b>button</b>
+        <ButtonToolbar>
+          <Button color="red" appearance="primary">
+            Red
           </Button>
-        </Grid>
-        <b>grid</b>
+          <Button color="orange" appearance="primary">
+            Orange
+          </Button>
+          <Button color="yellow" appearance="primary">
+            Yellow
+          </Button>
+          <Button color="green" appearance="primary">
+            Green
+          </Button>
+          <Button color="cyan" appearance="primary">
+            Cyan
+          </Button>
+          <Button color="blue" appearance="primary">
+            Blue
+          </Button>
+          <Button color="violet" appearance="primary">
+            Violet
+          </Button>
+        </ButtonToolbar>
+        <ButtonToolbar>
+          <Button color="red" appearance="subtle">
+            Red
+          </Button>
+          <Button color="orange" appearance="subtle">
+            Orange
+          </Button>
+          <Button color="yellow" appearance="subtle">
+            Yellow
+          </Button>
+          <Button color="green" appearance="subtle">
+            Green
+          </Button>
+          <Button color="cyan" appearance="subtle">
+            Cyan
+          </Button>
+          <Button color="blue" appearance="subtle">
+            Blue
+          </Button>
+          <Button color="violet" appearance="subtle">
+            Violet
+          </Button>
+        </ButtonToolbar>
+
+        <ButtonToolbar style={{ background: '#000', padding: 10 }}>
+          <Button color="red" appearance="ghost">
+            Red
+          </Button>
+          <Button color="orange" appearance="ghost">
+            Orange
+          </Button>
+          <Button color="yellow" appearance="ghost">
+            Yellow
+          </Button>
+          <Button color="green" appearance="ghost">
+            Green
+          </Button>
+          <Button color="cyan" appearance="ghost">
+            Cyan
+          </Button>
+          <Button color="blue" appearance="ghost">
+            Blue
+          </Button>
+          <Button color="violet" appearance="ghost">
+            Violet
+          </Button>
+        </ButtonToolbar>
+        <Heading>grid</Heading>
         <Grid>
           <Row className="show-grid">
             <Col xs={24} sm={24} md={8}>
@@ -129,11 +204,11 @@ class UI extends React.Component<Record<string, never>, State> {
             </Col>
           </Row>
         </Grid>
-        <b>panel</b>
+        <Heading>panel</Heading>
         <Panel header="Panel title" bordered>
           <PlaceholderParagraph />
         </Panel>
-        <b>avatar</b>
+        <Heading>avatar</Heading>
         <AvatarGroup spacing={6}>
           <Badge>
             <Avatar src="//avatars.githubusercontent.com/u/12592949" alt="@superman66" />
@@ -147,12 +222,12 @@ class UI extends React.Component<Record<string, never>, State> {
           src="//raw.githubusercontent.com/dimaslanjaka/dimaslanjaka.github.io/4e6098df3f102e2bd36b33b9055644bccd4faac3/images/PicsArt_09-09-12.12.25%201584x512px.png"
           alt="@SevenOutman"
         />
-        <b>loader</b>
+        <Heading>loader</Heading>
         <div className="position-relative">
           <PlaceholderParagraph rows={8} />
           <Loader center content="loading" />
         </div>
-        <b>Notification</b>
+        <Heading>Notification</Heading>
         <Notification closable type="info" header="Informational">
           <PlaceholderParagraph style={{ width: 320 }} rows={3} />
         </Notification>
