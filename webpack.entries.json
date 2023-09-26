@@ -202,10 +202,6 @@
     "import": "rsuite/esm/Footer",
     "dependOn": "shared"
   },
-  "assetscssmainscss": {
-    "import": "@assets/css/main.scss",
-    "dependOn": "shared"
-  },
   "componentAdsenseutils": {
     "import": "@component/Adsense/utils",
     "dependOn": "shared"

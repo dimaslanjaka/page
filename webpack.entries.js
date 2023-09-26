@@ -60,6 +60,8 @@ const importedModules = sourcesPaths
         .filter(str => !str.startsWith('.'))
         // filter @types
         .filter(str => !str.startsWith('@types'))
+        // filter assets
+        .filter(str => !/.(css|scss|less|png|jpg|webp|gif|svg|woff|woff2|otf|ttf)$/.test(str))
     );
   })
   // flattern
