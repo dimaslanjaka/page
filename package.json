@@ -22,7 +22,8 @@
     "clean": "rm -rf dist tmp",
     "clean:build": "npm run clean && npm run build",
     "analyze": "webpack --profile --mode production",
-    "entries": "node webpack.entries.js"
+    "entries": "node webpack.entries.js",
+    "test:dist": "yarn run entries && yarn run build:webpack && gulp page:copy"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
