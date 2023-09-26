@@ -1,8 +1,12 @@
-const plugins = ['macros', "@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-nullish-coalescing-operator",
-  "@babel/plugin-proposal-optional-chaining"]
-const presets = ['@babel/preset-env', '@babel/preset-react']
+const plugins = [
+  'macros',
+  '@babel/plugin-proposal-class-properties',
+  '@babel/plugin-proposal-nullish-coalescing-operator',
+  '@babel/plugin-proposal-optional-chaining'
+];
+const presets = ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'];
 
-module.exports.config = { plugins, presets }
+module.exports.config = { cacheDirectory: './tmp/babel', plugins, presets };
 
 /**
  * babel config
@@ -36,9 +40,8 @@ module.exports = function (api) {
   //api.cache.never(); // api.cache(false)
   //api.cache.using(fn); // api.cache(fn)
 
-
   return {
     plugins,
-    presets,
+    presets
   };
 };

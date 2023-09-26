@@ -13,7 +13,7 @@
     "update": "npm run update:ncu",
     "build:entries": "yarn entries",
     "build:webpack": "cross-env-shell NODE_ENV=production webpackAnalyze=static webpack --mode production",
-    "build": "run-s \"build:**\" && gulp build",
+    "build": "rm -rf dist && run-s \"build:**\" && gulp build",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
     "vite:start": "vite",
     "vite:build": "tsc && vite build",
@@ -23,7 +23,7 @@
     "clean:build": "npm run clean && npm run build",
     "analyze": "webpack --profile --mode production",
     "entries": "node webpack.entries.js",
-    "test:dist": "yarn run entries && yarn run build:webpack && gulp page:copy"
+    "test:dist": "rm -rf dist && yarn run entries && yarn run build:webpack && gulp page:copy"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
@@ -56,6 +56,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.23.0",
     "@types/babel-plugin-macros": "^3",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
@@ -114,6 +115,7 @@
     "react-router-dom": "^6.15.0",
     "resolve-typescript-plugin": "^2.0.1",
     "sass-loader": "^13.3.2",
+    "source-map-loader": "^4.0.1",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.3",
     "through2": "^4.0.2",
