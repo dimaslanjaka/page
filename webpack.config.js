@@ -37,15 +37,6 @@ const stylesLoader = [
   // },
 ];
 
-const _originalEntries = {
-  ...webpackEntry,
-  // main script
-  bundle: {
-    import: './src/index.js',
-    dependOn: ['shared', 'internal']
-  }
-};
-
 /**
  * @type {import('webpack').Configuration}
  */
@@ -54,17 +45,7 @@ module.exports = {
    * The entry point file
    * [prevent duplication docs](https://webpack.js.org/guides/code-splitting/#prevent-duplication)
    */
-  entry: devMode
-    ? './src/index.js'
-    : {
-        shared: {
-          import: ['bluebird']
-        },
-        bundle: {
-          import: './src/index.js',
-          dependOn: ['shared']
-        }
-      },
+  entry: devMode ? './src/index.js' : webpackEntry,
   /**
    * The location of the build folder
    */

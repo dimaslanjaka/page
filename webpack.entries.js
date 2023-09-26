@@ -4,12 +4,12 @@ const glob = require('glob');
 const path = require('path');
 const { writefile } = require('sbg-utility');
 
-const webpackEntry = {
+const _dynamicEntry = {
   promise: {
     import: 'bluebird'
   },
   shared: {
-    import: ['crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery', 'tslib'],
+    import: ['crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery', 'tslib', 'rsuite'],
     dependOn: 'promise'
   }
 
@@ -70,17 +70,55 @@ const importedModules = sourcesPaths
   .filter((value, index, array) => array.indexOf(value) === index)
   // filter shared modules
   .filter(
-    str => !webpackEntry.shared.import.concat(['react', 'react-dom', 'react-router-dom', 'bluebird']).includes(str)
+    str => !_dynamicEntry.shared.import.concat(['react', 'react-dom', 'react-router-dom', 'bluebird']).includes(str)
   );
 
 // turn into webpack entry
 importedModules.forEach(str => {
   const key = str.replace(/[^a-zA-Z ]/g, '');
-  webpackEntry[key] = {
+  _dynamicEntry[key] = {
     import: str,
     dependOn: 'shared'
   };
 });
+
+// add main
+_dynamicEntry.bundle = {
+  import: './src/index.js',
+  dependOn: ['shared']
+};
+
+// custom entries
+const _customEntry = {
+  promise: {
+    import: 'bluebird'
+  },
+  moment: {
+    import: 'moment',
+    dependOn: 'promise'
+  },
+  mtz: {
+    import: 'moment-timezone',
+    dependOn: ['moment', 'promise']
+  },
+  tslib: { import: 'tslib' },
+  cryptojs: { import: 'crypto-js' },
+  lodash: {
+    import: 'lodash',
+    dependOn: 'promise'
+  },
+  firebase: {
+    import: ['firebase/app', 'firebase/auth'],
+    dependOn: ['promise', 'tslib']
+  },
+  bundle: {
+    import: './src/index.js',
+    dependOn: ['promise', 'mtz', 'firebase']
+  }
+};
+
+// which entry to be used?
+const webpackEntry = _customEntry;
 
 module.exports = webpackEntry;
 

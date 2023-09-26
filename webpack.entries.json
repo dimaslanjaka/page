@@ -2,248 +2,30 @@
   "promise": {
     "import": "bluebird"
   },
-  "shared": {
-    "import": ["crypto-js", "moment", "moment-timezone", "lodash", "jquery", "tslib"],
+  "moment": {
+    "import": "moment",
     "dependOn": "promise"
   },
-  "componentsRsuiteLayout": {
-    "import": "@components/RsuiteLayout",
-    "dependOn": "shared"
+  "mtz": {
+    "import": "moment-timezone",
+    "dependOn": ["moment", "promise"]
   },
-  "routeUI": {
-    "import": "@route/UI",
-    "dependOn": "shared"
+  "tslib": {
+    "import": "tslib"
   },
-  "componentsNoMatch": {
-    "import": "@components/NoMatch",
-    "dependOn": "shared"
+  "cryptojs": {
+    "import": "crypto-js"
   },
-  "routeLogin": {
-    "import": "@route/Login",
-    "dependOn": "shared"
+  "lodash": {
+    "import": "lodash",
+    "dependOn": "promise"
   },
-  "routeSafelink": {
-    "import": "@route/Safelink",
-    "dependOn": "shared"
+  "firebase": {
+    "import": ["firebase/app", "firebase/auth"],
+    "dependOn": ["promise", "tslib"]
   },
-  "routeHomePage": {
-    "import": "@route/HomePage",
-    "dependOn": "shared"
-  },
-  "routeBotDetect": {
-    "import": "@route/BotDetect",
-    "dependOn": "shared"
-  },
-  "routeHighlight": {
-    "import": "@route/Highlight",
-    "dependOn": "shared"
-  },
-  "routeMomentTimezone": {
-    "import": "@route/MomentTimezone",
-    "dependOn": "shared"
-  },
-  "safelinkify": {
-    "import": "safelinkify",
-    "dependOn": "shared"
-  },
-  "componentsLoader": {
-    "import": "@components/Loader",
-    "dependOn": "shared"
-  },
-  "axios": {
-    "import": "axios",
-    "dependOn": "shared"
-  },
-  "axioscacheinterceptor": {
-    "import": "axios-cache-interceptor",
-    "dependOn": "shared"
-  },
-  "rsuiteesmButton": {
-    "import": "rsuite/esm/Button",
-    "dependOn": "shared"
-  },
-  "rsuiteesmContainer": {
-    "import": "rsuite/esm/Container",
-    "dependOn": "shared"
-  },
-  "rsuiteesmRow": {
-    "import": "rsuite/esm/Row",
-    "dependOn": "shared"
-  },
-  "rsuiteesmGrid": {
-    "import": "rsuite/esm/Grid",
-    "dependOn": "shared"
-  },
-  "rsuiteesmCol": {
-    "import": "rsuite/esm/Col",
-    "dependOn": "shared"
-  },
-  "rsuiteesmPanel": {
-    "import": "rsuite/esm/Panel",
-    "dependOn": "shared"
-  },
-  "rsuiteesmAvatar": {
-    "import": "rsuite/esm/Avatar",
-    "dependOn": "shared"
-  },
-  "rsuiteesmAvatarGroup": {
-    "import": "rsuite/esm/AvatarGroup",
-    "dependOn": "shared"
-  },
-  "rsuiteesmLoader": {
-    "import": "rsuite/esm/Loader",
-    "dependOn": "shared"
-  },
-  "rsuiteesmBadge": {
-    "import": "rsuite/esm/Badge",
-    "dependOn": "shared"
-  },
-  "rsuiteesmPlaceholderPlaceholderParagraph": {
-    "import": "rsuite/esm/Placeholder/PlaceholderParagraph",
-    "dependOn": "shared"
-  },
-  "componentsLink": {
-    "import": "@components/Link",
-    "dependOn": "shared"
-  },
-  "componentsImage": {
-    "import": "@components/Image",
-    "dependOn": "shared"
-  },
-  "componentsAdsenseAdsenseFill": {
-    "import": "@components/Adsense/AdsenseFill",
-    "dependOn": "shared"
-  },
-  "componentsAdsense": {
-    "import": "@components/Adsense",
-    "dependOn": "shared"
-  },
-  "componentsSafelinkContents": {
-    "import": "@components/SafelinkContents",
-    "dependOn": "shared"
-  },
-  "utils": {
-    "import": "@/utils",
-    "dependOn": "shared"
-  },
-  "componentsHighlightjs": {
-    "import": "@components/Highlight.js",
-    "dependOn": "shared"
-  },
-  "rsuiteesmButtonToolbar": {
-    "import": "rsuite/esm/ButtonToolbar",
-    "dependOn": "shared"
-  },
-  "rsuiteesmForm": {
-    "import": "rsuite/esm/Form",
-    "dependOn": "shared"
-  },
-  "rsuiteesmDivider": {
-    "import": "rsuite/esm/Divider",
-    "dependOn": "shared"
-  },
-  "rsuiteesmFlexboxGrid": {
-    "import": "rsuite/esm/FlexboxGrid",
-    "dependOn": "shared"
-  },
-  "rsuiteesmDatePicker": {
-    "import": "rsuite/esm/DatePicker",
-    "dependOn": "shared"
-  },
-  "rsuiteesmFormControl": {
-    "import": "rsuite/esm/FormControl",
-    "dependOn": "shared"
-  },
-  "rsuiteesmPanelGroup": {
-    "import": "rsuite/esm/PanelGroup",
-    "dependOn": "shared"
-  },
-  "rsuiteesmNav": {
-    "import": "rsuite/esm/Nav",
-    "dependOn": "shared"
-  },
-  "assetsjsgoogleconstants": {
-    "import": "@assets/js/google/constants",
-    "dependOn": "shared"
-  },
-  "assetsjsgooglefirebase": {
-    "import": "@assets/js/google/firebase",
-    "dependOn": "shared"
-  },
-  "rsuite": {
-    "import": "rsuite",
-    "dependOn": "shared"
-  },
-  "componentAdsenseAdsenseFill": {
-    "import": "@component/Adsense/AdsenseFill",
-    "dependOn": "shared"
-  },
-  "utilsajax": {
-    "import": "@/utils/ajax",
-    "dependOn": "shared"
-  },
-  "componentsHighlightjshelper": {
-    "import": "@components/Highlight.js/helper",
-    "dependOn": "shared"
-  },
-  "rsuiteesmSidebar": {
-    "import": "rsuite/esm/Sidebar",
-    "dependOn": "shared"
-  },
-  "rsuiteesmHeader": {
-    "import": "rsuite/esm/Header",
-    "dependOn": "shared"
-  },
-  "rsuiteesmContent": {
-    "import": "rsuite/esm/Content",
-    "dependOn": "shared"
-  },
-  "rsuiteesmFooter": {
-    "import": "rsuite/esm/Footer",
-    "dependOn": "shared"
-  },
-  "componentAdsenseutils": {
-    "import": "@component/Adsense/utils",
-    "dependOn": "shared"
-  },
-  "utilsscrollhelper": {
-    "import": "@/utils/scroll-helper",
-    "dependOn": "shared"
-  },
-  "project": {
-    "import": "@/project",
-    "dependOn": "shared"
-  },
-  "rsuiteesmNavbar": {
-    "import": "rsuite/esm/Navbar",
-    "dependOn": "shared"
-  },
-  "rsuiteiconslegacyHome": {
-    "import": "@rsuite/icons/legacy/Home",
-    "dependOn": "shared"
-  },
-  "rsuiteesmFlexboxGridFlexboxGridItem": {
-    "import": "rsuite/esm/FlexboxGrid/FlexboxGridItem",
-    "dependOn": "shared"
-  },
-  "highlightjs": {
-    "import": "highlight.js",
-    "dependOn": "shared"
-  },
-  "firebaseapp": {
-    "import": "firebase/app",
-    "dependOn": "shared"
-  },
-  "firebaseauth": {
-    "import": "firebase/auth",
-    "dependOn": "shared"
-  },
-  "fs": {
-    "import": "fs",
-    "dependOn": "shared"
-  },
-  "path": {
-    "import": "path",
-    "dependOn": "shared"
+  "bundle": {
+    "import": "./src/index.js",
+    "dependOn": ["promise", "mtz", "firebase"]
   }
 }
