@@ -138,6 +138,10 @@ function loadHljs() {
 <pre><code class="language-javascript">
 // your codes to print here
 </code></pre>
+<!-- disable highlight -->
+<pre><code class="language-javascript" data-highlight="false">
+// your codes to print here
+</code></pre>
     `}</code>
         </pre>
 
@@ -147,6 +151,7 @@ function loadHljs() {
           <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fe/src/components/Highlight.js">
             see full codes
           </Link>{' '}
+          |{' '}
           <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fecf11178a42503b15c8df26edaa5823961/src/route/Highlight">
             see implementation usages
           </Link>
