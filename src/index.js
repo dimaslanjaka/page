@@ -20,7 +20,7 @@ if (/dev/i.test(process.env.NODE_ENV)) {
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, useRoutes } from 'react-router-dom';
-import { suspenseIt } from './utils/suspense';
+import Loader from './components/Loader';
 
 const RSuiteLayout = React.lazy(() => import('@components/RsuiteLayout'));
 const UI = React.lazy(() => import('@route/UI'));
@@ -44,44 +44,45 @@ const _Router_array = () => {
   const createDual = (path, jsx) => {
     return [
       {
-        element: suspenseIt(jsx),
+        element: <React.Suspense fallback={<div>route loading</div>}>{jsx}</React.Suspense>,
         path
       },
       // create path.html
       {
-        element: suspenseIt(jsx),
+        element: <React.Suspense fallback={<div>ext route loading</div>}>{jsx}</React.Suspense>,
         path: `${path}.html`
       },
       // create path/index.html
       {
-        element: suspenseIt(jsx),
+        element: <React.Suspense fallback={<div>index route loading</div>}>{jsx}</React.Suspense>,
         path: `${path}/index.html`
       }
     ];
   };
   const routes = [
     {
-      element: suspenseIt(<RSuiteLayout />),
+      element: (
+        <React.Suspense fallback={<Loader />}>
+          <RSuiteLayout />
+        </React.Suspense>
+      ),
       path: '/',
       children: [
         {
           index: true,
-          element: suspenseIt(<Home />)
+          element: (
+            <React.Suspense fallback={<div>Homepage loading</div>}>
+              <Home />
+            </React.Suspense>
+          )
         },
         {
-          element: suspenseIt(<NoMatch />),
+          element: (
+            <React.Suspense fallback={<div>404 loading</div>}>
+              <NoMatch />
+            </React.Suspense>
+          ),
           path: '*'
-        },
-        ...createDual('ui', <UI />)
-      ]
-    },
-    {
-      element: suspenseIt(<RSuiteLayout />),
-      path: '/page',
-      children: [
-        {
-          index: true,
-          element: suspenseIt(<Home />)
         },
         ...createDual('ui', <UI />),
         ...createDual('safelink', <Safelink />),
@@ -96,7 +97,7 @@ const _Router_array = () => {
   const Router = () => useRoutes(routes);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/page">
       <Router />
     </BrowserRouter>
   );
