@@ -16,7 +16,7 @@ const config = {
     // add node support (module.export,etc)
     node: true,
     // add jquery support
-    jquery: true,
+    jquery: true
   },
   globals: {
     adsbygoogle: true,
@@ -24,16 +24,17 @@ const config = {
     $: true,
     safelink: true,
     google: 'readonly',
-    gapi: 'readonly',
+    gapi: 'readonly'
   },
   parserOptions: {
     // Allows for the parsing of modern ECMAScript features
     ecmaVersion: 2020,
     // Allows for the use of imports
-    sourceType: 'module',
+    sourceType: 'module'
     // strict nested project to be handled
     // project: ['./tsconfig.json'],
   },
+  plugins: ['react-hooks'],
   extends: [
     // Uses eslint default recommended rules
     'eslint:recommended',
@@ -44,7 +45,7 @@ const config = {
     // Enables eslint-plugin-prettier and eslint-config-prettier.
     // This will display prettier errors as ESLint errors.
     // Make sure this is always the last configuration in the extends array.
-    'plugin:prettier/recommended',
+    'plugin:prettier/recommended'
   ],
   // override rules for js files
   overrides: [
@@ -54,9 +55,16 @@ const config = {
         // disable require warning on js files
         '@typescript-eslint/no-var-requires': 'off',
         // disable include refenrences definition files on js
-        '@typescript-eslint/triple-slash-reference': 'off',
-      },
+        '@typescript-eslint/triple-slash-reference': 'off'
+      }
     },
+    {
+      files: ['*.jsx', '*.tsx'],
+      rules: {
+        'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+        'react-hooks/exhaustive-deps': 'warn' // Checks effect dependencies
+      }
+    }
   ],
   // specify your desired rules for eslint
   rules: {
@@ -72,8 +80,8 @@ const config = {
       {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
+        caughtErrorsIgnorePattern: '^_'
+      }
     ],
     // allow any types
     '@typescript-eslint/no-explicit-any': 'off',
@@ -84,8 +92,8 @@ const config = {
         // Disallow `const { props, state } = this`; true by default
         allowDestructuring: false,
         // Allow `const self = this`; `[]` by default
-        allowedNames: ['self'],
-      },
+        allowedNames: ['self']
+      }
     ],
     // these ESLint core rules that can cause issues with
     // prettier/prettier plugin, so turn them off.
@@ -104,8 +112,8 @@ const config = {
     '@typescript-eslint/indent': 'off',
     // fix default eslint rules
     // * disable the Enforce sorted import declarations within modules
-    'sort-imports': 'off',
-  },
+    'sort-imports': 'off'
+  }
 };
 
 module.exports = config;
