@@ -12,6 +12,15 @@ https://github.com/dimaslanjaka/dimaslanjaka.github.io
 
 last commit master (before migrated): https://github.com/dimaslanjaka/page/commit/96061003820867230c43253d7afd1a96233b6574
 
+### install
+
+```bash
+git submodule update -i -r
+touch yarn.lock
+yarn install
+mkdir page
+```
+
 ### test dist
 update entries
 ```bash
