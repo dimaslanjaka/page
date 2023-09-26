@@ -15,11 +15,11 @@ const NavItem = React.lazy(() =>
     default: module.default.Item
   }))
 );
-const NavMenu = React.lazy(() =>
-  import('rsuite/esm/Nav').then(module => ({
-    default: module.default.Menu
-  }))
-);
+// const NavMenu = React.lazy(() =>
+//   import('rsuite/esm/Nav').then(module => ({
+//     default: module.default.Menu
+//   }))
+// );
 const Navbar = React.lazy(() => import('rsuite/esm/Navbar'));
 const NavbarBrand = React.lazy(() =>
   import('rsuite/esm/Navbar').then(module => ({
@@ -33,23 +33,19 @@ const MyNavbar = ({ ...props }) => {
     <Navbar {...props}>
       <NavbarBrand href="#">WMI</NavbarBrand>
       <Nav>
-        <NavItem icon={<HomeIcon />} as={Link} href="/" eventKey="home">
-          Home
+        <NavItem icon={<HomeIcon />} as={Link} href="/" eventKey="home" title="Home"></NavItem>
+        <NavItem href="/page/google/login" eventKey="login" title="login">
+          <i className="fa-regular fa-arrow-right-to-arc"></i>
         </NavItem>
-        <NavItem href="/page/google/login" eventKey="login">
-          Login
+        <NavItem as={Link} href="/page/bot-detect" title="Selenium Checker" eventKey="selenium">
+          <i className="fa-thin fa-robot"></i>
         </NavItem>
-        <NavMenu title="Tools">
-          <NavItem as={Link} href="/page/bot-detect">
-            Selenium Checker
-          </NavItem>
-          <NavItem as={Link} href="/page/moment-timezone">
-            Moment Timezone Playground
-          </NavItem>
-          <NavItem as={Link} href="/page/cookies">
-            Cookie Manager
-          </NavItem>
-        </NavMenu>
+        <NavItem as={Link} href="/page/moment-timezone" title="Moment Timezone Playground" eventKey="momentTimezone">
+          <i className="fa-thin fa-clock"></i>
+        </NavItem>
+        <NavItem as={Link} href="/page/cookies" title="Cookie Manager" eventKey="cookieMgr">
+          <i className="fa-thin fa-cookie"></i>
+        </NavItem>
       </Nav>
       {/* <Nav pullRight>
         <NavItem icon={<CogIcon />}>Settings</NavItem>
