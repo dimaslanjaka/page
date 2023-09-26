@@ -1,8 +1,13 @@
 import React from 'react';
 //
 
+// import Link from '@components/Link';
 // import HomeIcon from '@rsuite/icons/legacy/Home';
 // import { Nav, Navbar } from 'rsuite';
+
+// const { Brand: NavbarBrand } = Navbar;
+// const { Item: NavItem, Menu: NavMenu } = Nav;
+
 const Link = React.lazy(() => import('@components/Link'));
 const Nav = React.lazy(() => import('rsuite/esm/Nav'));
 const NavItem = React.lazy(() =>
@@ -21,7 +26,6 @@ const NavbarBrand = React.lazy(() =>
     default: module.default.Brand
   }))
 );
-
 const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));
 
 const MyNavbar = ({ ...props }) => {
@@ -29,7 +33,7 @@ const MyNavbar = ({ ...props }) => {
     <Navbar {...props}>
       <NavbarBrand href="#">WMI</NavbarBrand>
       <Nav>
-        <NavItem icon={<HomeIcon />} as={Link} href="/page" eventKey="home">
+        <NavItem icon={<HomeIcon />} as={Link} href="/" eventKey="home">
           Home
         </NavItem>
         <NavItem href="/page/google/login" eventKey="login">
