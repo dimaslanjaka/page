@@ -1,8 +1,12 @@
 import React from 'react';
 //
 
-import * as hljs from '@components/Highlight.js/helper';
 import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router-dom';
+//
+
+import * as hljs from '@components/Highlight.js/helper';
+import Loader from '@components/Loader';
+
 // import { Container, Content, Footer, Header, Sidebar } from 'rsuite';
 // import MyFooter from './Footer';
 // import MyNavbar from './Navbar';
@@ -64,7 +68,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     //const [activeKey, setActiveKey] = React.useState(null);
 
     return (
-      <React.Suspense fallback={<div>Theme loading</div>}>
+      <React.Suspense fallback={<Loader />}>
         <div className="RsuiteLayout">
           <Container>
             <React.Suspense fallback={<div>Navbar loading</div>}>
