@@ -55,6 +55,7 @@ class UI extends React.Component<Record<string, never>, State> {
   }
 
   componentDidMount(): void {
+    document.title = 'React Suite Components';
     require('./ui.scss');
     this.setState({ isMounted: true });
     import('rsuite').then(loaded => {
@@ -91,7 +92,7 @@ class UI extends React.Component<Record<string, never>, State> {
           </Button>
         </Grid>
         <b>grid</b>
-        <Grid fluid>
+        <Grid>
           <Row className="show-grid">
             <Col xs={24} sm={24} md={8}>
               xs={24} sm={24} md={8}
