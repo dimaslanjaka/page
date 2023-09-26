@@ -11,13 +11,13 @@ const webpackEntry = {
   shared: {
     import: ['crypto-js', 'moment', 'moment-timezone', 'lodash', 'jquery', 'tslib'],
     dependOn: 'promise'
-  },
+  }
 
   // internal/local utility
-  internal: {
-    import: ['./src/utils/index.ts'],
-    dependOn: ['safelinkify', 'shared']
-  }
+  // internal: {
+  //   import: ['./src/utils/index.ts'],
+  //   dependOn: ['safelinkify', 'shared']
+  // }
 };
 
 const sourcesPaths = glob.sync(path.join(__dirname, 'src/**/*.{ts,js,tsx,jsx,less,scss,cjs,mjs}'), { nodir: true });

@@ -6,10 +6,6 @@
     "import": ["crypto-js", "moment", "moment-timezone", "lodash", "jquery", "tslib"],
     "dependOn": "promise"
   },
-  "internal": {
-    "import": ["./src/utils/index.ts"],
-    "dependOn": ["safelinkify", "shared"]
-  },
   "componentsRsuiteLayout": {
     "import": "@components/RsuiteLayout",
     "dependOn": "shared"
