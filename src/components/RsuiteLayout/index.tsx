@@ -68,24 +68,24 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
 
     return (
       <div className="RsuiteLayout">
-          <Container>
-            <Header className="fixed-top">
-              <MyNavbar />
-            </Header>
-            <Container id="content-wrapper">
-              {/* <Content>{this.props.children}</Content> */}
-              <Content>
-                <Outlet />
-              </Content>
-              <Sidebar className="d-none d-lg-block d-xl-block">
-                <MySidebar />
-              </Sidebar>
-            </Container>
-            <Footer>
-              <MyFooter />
-            </Footer>
+        <Container>
+          <Header className="fixed-top">
+            <MyNavbar />
+          </Header>
+          <Container id="content-wrapper">
+            {/* <Content>{this.props.children}</Content> */}
+            <Content>
+              <Outlet />
+            </Content>
+            <Sidebar className="d-none d-lg-block d-xl-block">
+              <MySidebar />
+            </Sidebar>
           </Container>
-        </div>
+          <Footer>
+            <MyFooter />
+          </Footer>
+        </Container>
+      </div>
     );
   }
 }
