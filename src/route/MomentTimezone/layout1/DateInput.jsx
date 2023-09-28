@@ -1,7 +1,7 @@
 import React from 'react';
-import Adsense from '../../components/Adsense';
+import Adsense from '@components/Adsense';
 import { moment_format, setDateLocalValue } from '../shared/moment-timezone';
-import { copyTextToClipboard, querySelector } from '../../utils';
+import { copyTextToClipboard, querySelector } from '@utils/index';
 
 export default function DateInput() {
   React.useEffect(() => {

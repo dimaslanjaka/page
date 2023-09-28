@@ -1,25 +1,44 @@
 // UI dump and tester
 
+import Image from '@components/Image';
 import React from 'react';
-//import { Button, Col, Container, Grid, Row } from 'rsuite';
+import {
+  Avatar,
+  AvatarGroup,
+  Badge,
+  Button,
+  ButtonToolbar,
+  Col,
+  Container,
+  Divider,
+  Grid,
+  Loader,
+  Notification,
+  Panel,
+  Placeholder,
+  Row,
+  toaster
+} from 'rsuite';
 
-const Button = React.lazy(() => import('rsuite/esm/Button'));
-const Container = React.lazy(() => import('rsuite/esm/Container'));
-const Row = React.lazy(() => import('rsuite/esm/Row'));
-const Grid = React.lazy(() => import('rsuite/esm/Grid'));
-const Col = React.lazy(() => import('rsuite/esm/Col'));
-const Notification = React.lazy(() => import('rsuite/esm/Notification'));
-const Panel = React.lazy(() => import('rsuite/esm/Panel'));
-const Avatar = React.lazy(() => import('rsuite/esm/Avatar'));
-const AvatarGroup = React.lazy(() => import('rsuite/esm/AvatarGroup'));
-const Loader = React.lazy(() => import('rsuite/esm/Loader'));
-const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
-const Badge = React.lazy(() => import('rsuite/esm/Badge'));
-const Divider = React.lazy(() => import('rsuite/esm/Divider'));
-//const Placeholder = React.lazy(() => import('rsuite/esm/Placeholder'));
-const PlaceholderParagraph = React.lazy(() => import('rsuite/esm/Placeholder/PlaceholderParagraph')); // Placeholder.Paragraph
-const Link = React.lazy(() => import('@components/Link'));
-const Image = React.lazy(() => import('@components/Image'));
+const { Paragraph: PlaceholderParagraph } = Placeholder;
+
+// const Button = React.lazy(() => import('rsuite/esm/Button'));
+// const Container = React.lazy(() => import('rsuite/esm/Container'));
+// const Row = React.lazy(() => import('rsuite/esm/Row'));
+// const Grid = React.lazy(() => import('rsuite/esm/Grid'));
+// const Col = React.lazy(() => import('rsuite/esm/Col'));
+// const Notification = React.lazy(() => import('rsuite/esm/Notification'));
+// const Panel = React.lazy(() => import('rsuite/esm/Panel'));
+// const Avatar = React.lazy(() => import('rsuite/esm/Avatar'));
+// const AvatarGroup = React.lazy(() => import('rsuite/esm/AvatarGroup'));
+// const Loader = React.lazy(() => import('rsuite/esm/Loader'));
+// const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
+// const Badge = React.lazy(() => import('rsuite/esm/Badge'));
+// const Divider = React.lazy(() => import('rsuite/esm/Divider'));
+// const Placeholder = React.lazy(() => import('rsuite/esm/Placeholder'));
+// const PlaceholderParagraph = React.lazy(() => import('rsuite/esm/Placeholder/PlaceholderParagraph')); // Placeholder.Paragraph
+// const Link = React.lazy(() => import('@components/Link'));
+// const Image = React.lazy(() => import('@components/Image'));
 
 /**
  * check if the component still mounted
@@ -47,7 +66,7 @@ interface State {
 // 'HelloProps' describes the shape of props.
 // State is never set so we use the '{}' type.
 class UI extends React.Component<Record<string, never>, State> {
-  toaster: ReturnType<(typeof import('rsuite'))['useToaster']>;
+  // toaster: ReturnType<(typeof import('rsuite'))['useToaster']>;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -60,11 +79,6 @@ class UI extends React.Component<Record<string, never>, State> {
     document.title = 'React Suite Components';
     require('./ui.scss');
     this.setState({ isMounted: true });
-    import('rsuite').then(loaded => {
-      console.log('rsuite loaded');
-      this.setState({ toasterReady: true });
-      this.toaster = loaded.toaster;
-    });
   }
 
   componentWillUnmount(): void {
@@ -74,9 +88,9 @@ class UI extends React.Component<Record<string, never>, State> {
   pushToast() {
     const ready = this.state.toasterReady;
     const isMounted = this.state.isMounted;
-    console.log('push toast clicked', { isMounted, ready, toaster: typeof this.toaster });
-    if (!isMounted || !ready || !this.toaster) return;
-    this.toaster.push(
+    console.log('push toast clicked', { isMounted, ready });
+    if (!isMounted) return;
+    toaster.push(
       <Notification closable type="info" header="Informational">
         <PlaceholderParagraph style={{ width: 320 }} rows={3} />
       </Notification>,
@@ -87,26 +101,26 @@ class UI extends React.Component<Record<string, never>, State> {
   render() {
     const pushToast = this.pushToast;
     const Heading = (props: any) => (
-      <React.Suspense fallback={<div>Header loading</div>}>
+      <React.Fragment>
         <Divider />
         <b>{props.children}</b>
         <Divider />
-      </React.Suspense>
+      </React.Fragment>
     );
     return (
       <Container className="myUi">
         <h1 className="text-center">
-          <Link href="#">React Suite Component</Link>
+          <a href="#">React Suite Component</a>
         </h1>
         <b>button</b>
         <ButtonToolbar>
-          <Button color="red" appearance="primary">
+          <Button color="red" appearance="primary" onClick={() => console.log('clicked')}>
             Red
           </Button>
-          <Button color="orange" appearance="primary">
+          <Button color="orange" appearance="primary" onClick={() => console.log('clicked')}>
             Orange
           </Button>
-          <Button color="yellow" appearance="primary">
+          <Button color="yellow" appearance="primary" onClick={() => console.log('clicked')}>
             Yellow
           </Button>
           <Button color="green" appearance="primary">

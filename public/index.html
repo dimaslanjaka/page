@@ -1,26 +1,18 @@
-<!-- this file only for 404 response code fallback on dev server -->
-<!-- dont copy this file to production -->
+<!-- webpack dev server fallback -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page - WMI</title>
-  <link rel="manifest" href="https://www.webmanajemen.com/manifest.json" />
-  <link rel="shortcut icon" type="image" href="https://www.webmanajemen.com/favicon.ico" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini React Webpack</title>
+    <script defer src="/page/main.js"></script>
 </head>
 
 <body>
-  <div id="app"></div>
-
-  <!-- Static Javascripts -->
-	<script async="" src="//www.googletagmanager.com/gtag/js?id=UA-106238155-1"></script>
-  <script src="/page/assets/js/analystic.js"></script>
-  <script defer="" src="/page/runtime/bundle.js"></script>
-  <!--this is 404 on localhost-->
+    <div id="root"></div>
+    <div id="app"></div>
 </body>
 
 </html>

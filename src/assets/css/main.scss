@@ -4,7 +4,79 @@
 @import url('//cdn.statically.io/gh/dimaslanjaka/Web-Manajemen/fontawesome-pro/css/all.min.css');
 // $fa-font-path: '~@fontawesome/fontawesome-svg-core/webfonts';
 // @import '@fontawesome/fontawesome-svg-core/scss/all';
-@import url('../fonts/index.scss');
+
+@font-face {
+  font-family: 'Cera Pro Black italic';
+  src: url('../fonts/Cera\ Pro\ Black\ italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Black';
+  src: url('../fonts/Cera\ Pro\ Black.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Bold italic';
+  src: url('../fonts/Cera\ Pro\ Bold\ italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Bold';
+  src: url('../fonts/Cera\ Pro\ Bold.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Light italic';
+  src: url('../fonts/Cera\ Pro\ Light\ italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Light';
+  src: url('../fonts/Cera\ Pro\ Light.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Medium italic';
+  src: url('../fonts/Cera\ Pro\ Medium\ italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Medium';
+  src: url('../fonts/Cera\ Pro\ Medium.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Regular Italic';
+  src: url('../fonts/Cera\ Pro\ Regular\ Italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Thin Italic';
+  src: url('../fonts/Cera\ Pro\ Thin\ Italic.otf');
+}
+@font-face {
+  font-family: 'Cera Pro Thin';
+  src: url('../fonts/Cera\ Pro\ Thin.otf');
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('../fonts/Cera\ Pro.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO';
+  src: url('../fonts/Cera_Stencil_PRO.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO_Black';
+  src: url('../fonts/Cera_Stencil_PRO_Black.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO_Bold';
+  src: url('../fonts/Cera_Stencil_PRO_Bold.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO_Light';
+  src: url('../fonts/Cera_Stencil_PRO_Light.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO_Medium';
+  src: url('../fonts/Cera_Stencil_PRO_Medium.otf');
+}
+@font-face {
+  font-family: 'Cera_Stencil_PRO_Thin';
+  src: url('../fonts/Cera_Stencil_PRO_Thin.otf');
+}
 
 @font-face {
   font-family: 'consolas';

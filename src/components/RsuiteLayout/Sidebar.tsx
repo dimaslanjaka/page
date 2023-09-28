@@ -1,10 +1,10 @@
 import React from 'react';
 //
 
-import * as project from '@/project';
-import * as utils from '@/utils';
-import { fetchWithCache } from '@/utils/ajax';
+import { fetchWithCache } from '@utils/ajax';
+import * as utils from '@utils/index';
 import { Panel, Stack } from 'rsuite';
+import * as project from 'src/project';
 
 // const Stack = React.lazy(() => import('rsuite/esm/Stack'));
 // const Panel = React.lazy(() => import('rsuite/esm/Panel'));

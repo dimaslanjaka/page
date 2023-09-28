@@ -8,6 +8,7 @@ interface ImageAttr {
 
 interface ImageState extends ImageAttr {
   errored: boolean;
+  mounted: boolean;
 }
 
 /**
@@ -21,8 +22,17 @@ class Image extends React.Component<ImageAttr, ImageState> {
 
     this.state = {
       src: props.src || this.defaultImage,
-      errored: false
+      errored: false,
+      mounted: false
     };
+  }
+
+  componentDidMount(): void {
+    this.setState({ mounted: true });
+  }
+
+  componentWillUnmount(): void {
+    this.setState({ mounted: false });
   }
 
   onError = () => {
@@ -36,9 +46,9 @@ class Image extends React.Component<ImageAttr, ImageState> {
 
   render() {
     const { src } = this.state;
-    const { src: _1, fallbackSrc: _2, ...props } = this.props;
+    const { src: _ignore1, fallbackSrc: _ignore2, ...props } = this.props;
 
-    return <img src={src} onError={this.onError} {...props} />;
+    return <img {...props} src={src} onError={this.onError} />;
   }
 }
 

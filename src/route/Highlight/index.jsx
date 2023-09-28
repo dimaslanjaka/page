@@ -1,12 +1,12 @@
 import React from 'react';
 //
 
-// import AdsenseFill from '@components/Adsense/AdsenseFill';
-// import HighlightElement from '@components/Highlight.js';
+import AdsenseFill from '@components/Adsense/AdsenseFill';
+import HighlightElement from '@components/Highlight.js';
 
-const AdsenseFill = React.lazy(() => import('@components/Adsense/AdsenseFill'));
-const HighlightElement = React.lazy(() => import('@components/Highlight.js'));
-const Link = React.lazy(() => import('@components/Link'));
+// const AdsenseFill = React.lazy(() => import('@components/Adsense/AdsenseFill'));
+// const HighlightElement = React.lazy(() => import('@components/Highlight.js'));
+// const Link = React.lazy(() => import('@components/Link'));
 
 function HighlightLayout() {
   React.useEffect(() => {
@@ -14,7 +14,7 @@ function HighlightLayout() {
   });
 
   return (
-    <React.Suspense fallback={<div>Page loading</div>}>
+    <React.Fragment>
       <div className="text-center">
         <h1>Auto highlight.js</h1>
         <p>
@@ -157,7 +157,7 @@ function loadHljs() {
           </Link>
         </p>
       </div>
-    </React.Suspense>
+    </React.Fragment>
   );
 }
 

@@ -1,9 +1,14 @@
 import React from 'react';
+import { FlexboxGrid } from 'rsuite';
+import Image from '../Image';
+import Link from '../Link';
 
-const FlexboxGrid = React.lazy(() => import('rsuite/esm/FlexboxGrid'));
-const FlexboxGridItem = React.lazy(() => import('rsuite/esm/FlexboxGrid/FlexboxGridItem'));
-const Image = React.lazy(() => import('../Image'));
-const Link = React.lazy(() => import('../Link'));
+const FlexboxGridItem = FlexboxGrid.Item;
+
+// const FlexboxGrid = React.lazy(() => import('rsuite/esm/FlexboxGrid'));
+// const FlexboxGridItem = React.lazy(() => import('rsuite/esm/FlexboxGrid/FlexboxGridItem'));
+// const Image = React.lazy(() => import('../Image'));
+// const Link = React.lazy(() => import('../Link'));
 
 class MyFooter extends React.Component {
   constructor(props: any) {

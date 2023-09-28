@@ -5,21 +5,20 @@ import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router-dom';
 //
 
 import * as hljs from '@components/Highlight.js/helper';
-import Loader from '@components/Loader';
 
-// import { Container, Content, Footer, Header, Sidebar } from 'rsuite';
-// import MyFooter from './Footer';
-// import MyNavbar from './Navbar';
-// import MySidebar from './Sidebar';
+import { Container, Content, Footer, Header, Sidebar } from 'rsuite';
+import MyFooter from './Footer';
+import MyNavbar from './Navbar';
+import MySidebar from './Sidebar';
 
-const Container = React.lazy(() => import('rsuite/esm/Container'));
-const Sidebar = React.lazy(() => import('rsuite/esm/Sidebar'));
-const Header = React.lazy(() => import('rsuite/esm/Header'));
-const Content = React.lazy(() => import('rsuite/esm/Content'));
-const Footer = React.lazy(() => import('rsuite/esm/Footer'));
-const MyNavbar = React.lazy(() => import('./Navbar'));
-const MySidebar = React.lazy(() => import('./Sidebar'));
-const MyFooter = React.lazy(() => import('./Footer'));
+// const Container = React.lazy(() => import('rsuite/esm/Container'));
+// const Sidebar = React.lazy(() => import('rsuite/esm/Sidebar'));
+// const Header = React.lazy(() => import('rsuite/esm/Header'));
+// const Content = React.lazy(() => import('rsuite/esm/Content'));
+// const Footer = React.lazy(() => import('rsuite/esm/Footer'));
+// const MyNavbar = React.lazy(() => import('./Navbar'));
+// const MySidebar = React.lazy(() => import('./Sidebar'));
+// const MyFooter = React.lazy(() => import('./Footer'));
 
 class RSuiteLayout extends React.Component<Record<string, any>, Record<string, any>> {
   constructor(props: any) {
@@ -44,9 +43,9 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     // load theme stylesheet
     require('./theme.scss');
     // load adsense
-    import('@component/Adsense/utils');
+    import('@components/Adsense/utils');
     // load scroll helper
-    import('@/utils/scroll-helper');
+    import('@utils/scroll-helper');
 
     window.addEventListener('load', this.handleLoad.bind(this));
   }
@@ -68,37 +67,25 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     //const [activeKey, setActiveKey] = React.useState(null);
 
     return (
-      <React.Suspense fallback={<Loader />}>
-        <div className="RsuiteLayout">
+      <div className="RsuiteLayout">
           <Container>
-            <React.Suspense fallback={<div>Navbar loading</div>}>
-              <Header className="fixed-top">
-                <MyNavbar />
-              </Header>
-            </React.Suspense>
-            <React.Suspense fallback={<div>Content wrapper loading</div>}>
-              <Container id="content-wrapper">
-                {/* <Content>{this.props.children}</Content> */}
-                <React.Suspense fallback={<div>Content loading</div>}>
-                  <Content>
-                    <Outlet />
-                  </Content>
-                </React.Suspense>
-                <React.Suspense fallback={<div>Sidebar loading</div>}>
-                  <Sidebar className="d-none d-lg-block d-xl-block">
-                    <MySidebar />
-                  </Sidebar>
-                </React.Suspense>
-              </Container>
-            </React.Suspense>
-            <React.Suspense fallback={<div>Footer loading</div>}>
-              <Footer>
-                <MyFooter />
-              </Footer>
-            </React.Suspense>
+            <Header className="fixed-top">
+              <MyNavbar />
+            </Header>
+            <Container id="content-wrapper">
+              {/* <Content>{this.props.children}</Content> */}
+              <Content>
+                <Outlet />
+              </Content>
+              <Sidebar className="d-none d-lg-block d-xl-block">
+                <MySidebar />
+              </Sidebar>
+            </Container>
+            <Footer>
+              <MyFooter />
+            </Footer>
           </Container>
         </div>
-      </React.Suspense>
     );
   }
 }

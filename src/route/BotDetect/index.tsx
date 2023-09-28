@@ -1,8 +1,12 @@
-import { getCurrentPageId } from '@/utils';
+import { getCurrentPageId } from '@utils/index';
 import Bluebird from 'bluebird';
 import React from 'react';
 //
 
+import AdsenseFill from '@components/Adsense/AdsenseFill';
+import Image from '@components/Image';
+import Link from '@components/Link';
+import { Col, Container, Grid, Row } from 'rsuite';
 import {
   getGeoIp,
   getHeaders,
@@ -12,13 +16,13 @@ import {
   runBotDetectionNavigator
 } from './bot-detect';
 
-const AdsenseFill = React.lazy(() => import('@component/Adsense/AdsenseFill'));
-const Container = React.lazy(() => import('rsuite/esm/Container'));
-const Row = React.lazy(() => import('rsuite/esm/Row'));
-const Grid = React.lazy(() => import('rsuite/esm/Grid'));
-const Col = React.lazy(() => import('rsuite/esm/Col'));
-const Link = React.lazy(() => import('@components/Link'));
-const Image = React.lazy(() => import('@components/Image'));
+// const AdsenseFill = React.lazy(() => import('@components/Adsense/AdsenseFill'));
+// const Container = React.lazy(() => import('rsuite/esm/Container'));
+// const Row = React.lazy(() => import('rsuite/esm/Row'));
+// const Grid = React.lazy(() => import('rsuite/esm/Grid'));
+// const Col = React.lazy(() => import('rsuite/esm/Col'));
+// const Link = React.lazy(() => import('@components/Link'));
+// const Image = React.lazy(() => import('@components/Image'));
 
 type Results = Partial<ReturnType<typeof isSelenium>> &
   Partial<ReturnType<typeof getHeaders>> &

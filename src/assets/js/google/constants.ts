@@ -38,7 +38,8 @@ export const GOOGLE_CONFIG = {
 // key to save credential for offline usage
 export const KEY_LOCALSTORAGE = 'google_credential';
 // last login credential
-let g_credential = getLocalCredential();
+let g_credential: LocalCredential;
+g_credential = getLocalCredential();
 
 /**
  * Global token handler
@@ -268,7 +269,7 @@ export interface LocalCredential {
  * @returns
  */
 export function getLocalCredential(): LocalCredential {
-  if (!g_credential) g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
+  g_credential = JSON.parse(localStorage.getItem(KEY_LOCALSTORAGE) || '{}');
   return g_credential;
 }
 

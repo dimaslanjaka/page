@@ -1,47 +1,30 @@
+const presets = ['@babel/env', '@babel/react', '@babel/preset-typescript'];
 const plugins = [
-  'macros',
-  '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-proposal-nullish-coalescing-operator',
-  '@babel/plugin-proposal-optional-chaining'
+  [
+    require.resolve('babel-plugin-module-resolver'),
+    {
+      root: ['./src/'],
+      alias: {
+        '@utils': './src/utils',
+        '@components': './src/components',
+        '@routes': './src/routes',
+        '@assets': './src/assets',
+        '@project': './src/project',
+        'src': './src'
+      }
+    }
+  ]
 ];
-const presets = ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'];
 
-module.exports.config = { cacheDirectory: './tmp/babel', plugins, presets };
+module.exports.config = { cacheDirectory: './tmp/babel', presets, plugins };
 
 /**
- * babel config
- * @param {import('@babel/core').ConfigAPI} api
+ *
+ * @param {*} api
  * @returns
  */
 module.exports = function (api) {
-  // The API exposes the following:
-
-  // Cache the returned value forever and don't call this function again.
   api.cache(true);
 
-  // Don't cache at all. Not recommended because it will be very slow.
-  //api.cache(false);
-
-  // Cached based on the value of some function. If this function returns a value different from
-  // a previously-encountered value, the plugins will re-evaluate.
-  // var env = api.cache(() => process.env.NODE_ENV);
-
-  // If testing for a specific env, we recommend specifics to avoid instantiating a plugin for
-  // any possible NODE_ENV value that might come up during plugin execution.
-  //var isProd = api.cache(() => process.env.NODE_ENV === 'production');
-
-  // .cache(fn) will perform a linear search though instances to find the matching plugin based
-  // based on previous instantiated plugins. If you want to recreate the plugin and discard the
-  // previous instance whenever something changes, you may use:
-  //var isProd = api.cache.invalidate(() => process.env.NODE_ENV === 'production');
-
-  // Note, we also expose the following more-verbose versions of the above examples:
-  //api.cache.forever(); // api.cache(true)
-  //api.cache.never(); // api.cache(false)
-  //api.cache.using(fn); // api.cache(fn)
-
-  return {
-    plugins,
-    presets
-  };
+  return { presets, plugins };
 };

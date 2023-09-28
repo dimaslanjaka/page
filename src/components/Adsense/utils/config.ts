@@ -1,4 +1,4 @@
-import { array_shuffle } from '@/utils';
+import { array_shuffle } from '@utils/index';
 
 // initialize undefined window properties
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

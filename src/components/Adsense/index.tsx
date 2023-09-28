@@ -1,4 +1,4 @@
-import * as utils from '@/utils';
+import * as utils from '@utils/index';
 import React from 'react';
 import './utils';
 import * as conf from './utils/config';

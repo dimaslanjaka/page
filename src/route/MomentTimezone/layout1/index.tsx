@@ -1,5 +1,5 @@
-import { loadCSS } from '@/utils';
 import Link from '@components/Link';
+import { loadCSS } from '@utils/index';
 import React from 'react';
 import { momentTimezonePlayground } from '../shared/moment-timezone';
 import Snippet from '../shared/Snippet';

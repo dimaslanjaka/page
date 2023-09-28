@@ -1,9 +1,12 @@
-import { loadCSS } from '@/utils';
+import React from 'react';
+//
+
 import * as constants from '@assets/js/google/constants';
 import { firebaseAuthGoogle } from '@assets/js/google/firebase';
-import React from 'react';
+import Image from '@components/Image';
+import { loadCSS } from '@utils/index';
 
-const Image = React.lazy(() => import('@components/Image'));
+// const Image = React.lazy(() => import('@components/Image'));
 
 class Login extends React.Component {
   g_credential: Record<string, any>;

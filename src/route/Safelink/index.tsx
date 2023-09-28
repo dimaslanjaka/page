@@ -9,7 +9,7 @@ import {
   replaceWith,
   safelinkInstance,
   waitUntilPageFullyLoaded
-} from '@/utils';
+} from '@utils/index';
 import React from 'react';
 
 const SafelinkLayout2 = React.lazy(() => import('./layout2'));

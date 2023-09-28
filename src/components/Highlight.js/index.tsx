@@ -7,6 +7,7 @@ import * as helper from './helper';
 // @import 'highlight.js/styles/github-dark.css';
 
 interface HighlightProps {
+  [key: string]: any;
   /** specify language */
   lang?: string;
   /** enable highlighting? */
@@ -42,8 +43,7 @@ class HighlightElement extends React.Component<HighlightProps, Record<string, an
           className="copy-code-button"
           type="button"
           title="Copy code block"
-          data-clipboard-text={this.props.children}
-        >
+          data-clipboard-text={this.props.children}>
           <span>Copy</span>
         </button>
       </pre>

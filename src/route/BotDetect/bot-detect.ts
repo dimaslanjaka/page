@@ -1,7 +1,7 @@
 /*console.clear();*/
 
-import { getCookies, getElementById } from '@/utils';
-import { axiosWithCache, axiosWithoutCache, fetchWithCache } from '@/utils/ajax';
+import { axiosWithCache, axiosWithoutCache, fetchWithCache } from '@utils/ajax';
+import { getCookies, getElementById } from '@utils/index';
 
 export const runBotDetectionMain = () => {
   const logdiv = getElementById('selenium');

@@ -1,32 +1,32 @@
 import React from 'react';
 //
 
-// import Link from '@components/Link';
-// import HomeIcon from '@rsuite/icons/legacy/Home';
-// import { Nav, Navbar } from 'rsuite';
+import Link from '@components/Link';
+import HomeIcon from '@rsuite/icons/legacy/Home';
+import { Nav, Navbar } from 'rsuite';
 
-// const { Brand: NavbarBrand } = Navbar;
-// const { Item: NavItem, Menu: NavMenu } = Nav;
+const { Brand: NavbarBrand } = Navbar;
+const { Item: NavItem, Menu: NavMenu } = Nav;
 
-const Link = React.lazy(() => import('@components/Link'));
-const Nav = React.lazy(() => import('rsuite/esm/Nav'));
-const NavItem = React.lazy(() =>
-  import('rsuite/esm/Nav').then(module => ({
-    default: module.default.Item
-  }))
-);
+// const Link = React.lazy(() => import('@components/Link'));
+// const Nav = React.lazy(() => import('rsuite/esm/Nav'));
+// const NavItem = React.lazy(() =>
+//   import('rsuite/esm/Nav').then(module => ({
+//     default: module.default.Item
+//   }))
+// );
+// const Navbar = React.lazy(() => import('rsuite/esm/Navbar'));
+// const NavbarBrand = React.lazy(() =>
+//   import('rsuite/esm/Navbar').then(module => ({
+//     default: module.default.Brand
+//   }))
+// );
+// const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));
 // const NavMenu = React.lazy(() =>
 //   import('rsuite/esm/Nav').then(module => ({
 //     default: module.default.Menu
 //   }))
 // );
-const Navbar = React.lazy(() => import('rsuite/esm/Navbar'));
-const NavbarBrand = React.lazy(() =>
-  import('rsuite/esm/Navbar').then(module => ({
-    default: module.default.Brand
-  }))
-);
-const HomeIcon = React.lazy(() => import('@rsuite/icons/legacy/Home'));
 
 const MyNavbar = ({ ...props }) => {
   return (

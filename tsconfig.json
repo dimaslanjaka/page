@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react",
     "baseUrl": "./",
@@ -18,20 +17,34 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "strict": false,
-    "lib": ["DOM", "ES2020"],
-    "typeRoots": ["./typings", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
-    "types": ["rsuite"],
+    "lib": [
+      "DOM",
+      "ES2020"
+    ],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types",
+      "./node_modules/nodejs-package-types/typings"
+    ],
     "paths": {
-      "@/*": ["./src/*"],
-      "src/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@component/*": ["./src/components/*"],
-      "@route/*": ["./src/route/*"],
-      "@routes/*": ["./src/route/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@asset/*": ["./src/assets/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@util/*": ["./src/utils/*"]
+      "src/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@routes/*": [
+        "./src/route/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@project": [
+        "./src/project"
+      ]
     },
     "plugins": [
       {

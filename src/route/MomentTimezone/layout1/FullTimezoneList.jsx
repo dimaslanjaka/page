@@ -1,5 +1,5 @@
 import React from 'react';
-import timezones from './timezones.json';
+import timezones from '../shared/timezones.json';
 import moment from 'moment-timezone';
 
 function FullTimezoneList() {

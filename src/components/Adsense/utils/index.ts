@@ -4,7 +4,7 @@
 import { allAds, paramBuilder } from './config';
 //
 
-import { array_shuffle, getCookie, insertAfter, islocalhost, loadJS, replaceWith, setCookie } from '@/utils';
+import { array_shuffle, getCookie, insertAfter, islocalhost, loadJS, replaceWith, setCookie } from '@utils/index';
 
 /**
  * ADSENSE FULLY AUTOMATIC

@@ -1,4 +1,4 @@
-import { copyTextToClipboard, loadJS, randomStr } from '@/utils';
+import { copyTextToClipboard, loadJS, randomStr } from '@utils/index';
 import hljs from 'highlight.js';
 
 // start highlight pre code
