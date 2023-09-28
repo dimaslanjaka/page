@@ -1,4 +1,5 @@
 import Bluebird from 'bluebird';
+import CryptoJS from 'crypto-js';
 import * as safelinkify from 'safelinkify';
 
 /** md5 encoder */
