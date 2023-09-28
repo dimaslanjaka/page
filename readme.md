@@ -22,11 +22,6 @@ mkdir page
 ```
 
 ### test dist
-update entries
-```bash
-yarn run entries
-```
-
 open terminal 1
 ```bash
 yarn run php
