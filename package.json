@@ -7,8 +7,8 @@
   "scripts": {
     "analyze": "webpack --profile --mode production",
     "build": "rm -rf dist && run-s \"build:**\" && gulp build",
-    "build:html": "ts-node html/index",
     "build:webpack": "cross-env-shell NODE_ENV=production webpackAnalyze=static webpack --progress --mode production --config config/webpack.prod.js",
+    "build:html": "ts-node html/index",
     "clean": "rm -rf dist tmp",
     "clean:build": "npm run clean && npm run build",
     "clone": "rm -rf page && git clone -b gh-pages https://github.com/dimaslanjaka/page page",
