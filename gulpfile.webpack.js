@@ -2,7 +2,7 @@ const { spawn } = require('git-command-helper');
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
-const babelConfig = require('./.babelrc').config;
+const common = require('./config/webpack.common');
 
 if (process.env.TS_NODE_PROJECT) delete process.env.TS_NODE_PROJECT;
 
@@ -58,25 +58,7 @@ function createConfig(entry, output) {
         })
       ]
     },
-    module: {
-      rules: [
-        { test: /\.ts$/, loader: 'ts-loader' },
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: Object.assign(
-              {
-                cacheDirectory: './tmp/babel',
-                presets: ['@babel/preset-env', '@babel/preset-react']
-              },
-              babelConfig
-            )
-          }
-        }
-      ]
-    },
+    module: common.module,
     mode: 'production'
   };
   return override;
