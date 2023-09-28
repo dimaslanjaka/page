@@ -1,0 +1,29 @@
+// Configuration
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+// Layout and components
+@import 'bootstrap/scss/tables';
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-width: 1px;
+}
+
+// align rowSpan centered text
+// https://stackoverflow.com/a/61253797/6404439
+
+th[rowspan]:not([rowspan='1']) {
+  vertical-align: middle;
+}
+
+td[rowspan]:not([rowspan='1']) {
+  vertical-align: middle;
+}

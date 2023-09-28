@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# housekeeping
+
+git submodule foreach "git gc --prune=now"
+git submodule foreach "git fsck --full"
+git gc --prune=now
+git fsck --full
+if [ -d "page" ]; then
+  cd page
+  git gc --prune=now
+  git fsck --full
+fi

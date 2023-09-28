@@ -1,0 +1,8 @@
+<VirtualHost 192.168.0.1:443>
+  ...
+  ServerName local.dev
+  SSLEngine on
+  SSLCertificateFile /path/to/localhost.crt
+  SSLCertificateKeyFile /path/to/localhost.key
+  ...
+</VirtualHost>

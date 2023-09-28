@@ -1,0 +1,72 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES5",
+    "esModuleInterop": true,
+    "outDir": "tmp/tsc",
+    "checkJs": false,
+    "composite": false,
+    "sourceMap": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "allowSyntheticDefaultImports": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "lib": [
+      "DOM",
+      "ES2020"
+    ],
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types",
+      "./node_modules/nodejs-package-types/typings"
+    ],
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@routes/*": [
+        "./src/route/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@project": [
+        "./src/project"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
+  },
+  "include": [
+    "./package.json",
+    "./src",
+    "./src/globals.d.ts",
+    "./src/**/*",
+    "./src/route/**/*",
+    "./src/**/*.json",
+    "typings"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "./page/**/*",
+    "**/dist/**",
+    "**/assets/js/core.js",
+    "**/assets/js/v*.js",
+    "**/assets/js/gijgo*.js"
+  ]
+}

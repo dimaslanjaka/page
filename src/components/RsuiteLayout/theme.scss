@@ -1,0 +1,70 @@
+// malfunction keyboard 5 6 ^%
+
+@import 'rsuite/dist/rsuite.min.css';
+@import 'bootstrap/scss/bootstrap-utilities';
+@import 'highlight.js/styles/github-dark.css';
+
+.RsuiteLayout {
+  .rs-container-has-sidebar {
+    min-height: 400px;
+  }
+
+  // navbar
+  .rs-navbar-nav {
+    .rs-dropdown-item {
+      //width: 300px;
+      background-color: rgb(253, 253, 253);
+
+      * {
+        width: 100%;
+      }
+    }
+  }
+
+  // header and footer should have same color
+  footer,
+  header nav {
+    background-color: #e1ece5;
+  }
+
+  footer {
+    font-size: medium;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    #socmed {
+      text-align: center;
+
+      .rs-flex-box-grid-item {
+        margin-left: 0.3rem;
+      }
+
+      .fa-brands {
+        background-image: linear-gradient(to bottom, transparent 20%, white 20%, white 93%, transparent 93%);
+        background-size: 84%;
+        background-position: 60% 0;
+        background-repeat: no-repeat;
+      }
+
+      .fa-facebook {
+        color: #3b5998;
+      }
+
+      .fa-github {
+        color: #333;
+      }
+
+      .fa-whatsapp {
+        color: #25d366;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  @import './theme-mobile.scss';
+}
+
+@media only screen and (min-width: 768px) {
+  @import './theme-desktop.scss';
+}

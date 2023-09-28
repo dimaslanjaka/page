@@ -1,0 +1,68 @@
+#profileWrapper {
+  .card-img-top {
+    max-width: 60%;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .card {
+    max-width: 30rem;
+    padding: 1.5em 0.5em 0.5em;
+    text-align: center;
+    border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    table {
+      text-align: left;
+    }
+  }
+
+  .card-title {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  /*.btn-primary {
+    border-radius: 2em;
+    padding: 0.5em 1.5em;
+  }*/
+}
+
+.firebaseIcon {
+  background-image: url('//cdn.icon-icons.com/icons2/2699/PNG/512/firebase_logo_icon_171157.png');
+  border-radius: 0px 5px 5px 0px !important;
+  border-color: #ffcb2b !important;
+  border-left-color: transparent !important;
+  &:hover {
+    background-color: #ffcb2b !important;
+    color: white !important;
+  }
+}
+
+.googleIcon {
+  background-image: url('//static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png');
+  border-radius: 5px 0px 0px 5px !important;
+  border-color: #5290f5 !important;
+  border-right-color: transparent !important;
+  &:hover {
+    color: white !important;
+    background-color: #5290f5 !important;
+  }
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 27px 27px;
+  padding: 14px 28px !important;
+  cursor: pointer !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+button.iconButton::-moz-focus-inner {
+  border: 0;
+}

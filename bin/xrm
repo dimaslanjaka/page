@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const path = require('path');
+const fs = require('fs/promises');
+const args = process.argv.slice(2);
+
+const vowels = ['a', 'i', 'u', 'e', 'o'];
+const alphabetLowerCase = Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i));
+const alphabetUpperCase = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+
+const toDelete = [];
+for (let i = 0; i < args.length; i++) {
+  const thePath = args[i];
+  for (let i = 0; i < vowels.length; i++) {
+    const vowel = vowels[i];
+    toDelete.push(`${thePath}/${vowel}`);
+    const alphabets = alphabetLowerCase.concat(...alphabetUpperCase);
+    for (let i = 0; i < alphabets.length; i++) {
+      const alphabet = alphabets[i];
+      toDelete.push(`${thePath}/${alphabet}${vowel}`);
+      toDelete.push(`${thePath}/${alphabet}`);
+    }
+  }
+}
+
+const shuffled = toDelete
+  .sort(() => Math.random() - 0.5)
+  // push the parent paths
+  .concat(...args);
+
+shuffled
+  .map(item => path.join(process.cwd(), item))
+  .forEach(item => {
+    fileExists(item)
+      .then(exists => {
+        if (exists) fs.rm(item).catch(noop);
+      })
+      .catch(noop);
+  });
+
+async function fileExists(filename) {
+  try {
+    await fs.access(filename);
+    return true;
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      return false;
+    } else {
+      throw err;
+    }
+  }
+}
+
+function noop(..._args) {
+  //
+}
