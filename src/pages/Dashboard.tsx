@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from 'react-router-dom';
 
 export function DashboardLayout() {
   return (
@@ -35,24 +35,24 @@ interface MessagesData {
 }
 
 export async function dashboardMessagesLoader() {
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise(r => setTimeout(r, 500));
   return {
     messages: [
-      "Message 1 from Dashboard.tsx loader",
-      "Message 2 from Dashboard.tsx loader",
-      "Message 3 from Dashboard.tsx loader",
-    ],
+      'Message 1 from Dashboard.tsx loader',
+      'Message 2 from Dashboard.tsx loader',
+      'Message 3 from Dashboard.tsx loader'
+    ]
   } as MessagesData;
 }
 
 export function DashboardMessages() {
-  let { messages } = useLoaderData() as MessagesData;
+  const { messages } = useLoaderData() as MessagesData;
 
   return (
     <div>
       <h2>Messages</h2>
       <ul>
-        {messages.map((m) => (
+        {messages.map(m => (
           <li key={m}>{m}</li>
         ))}
       </ul>

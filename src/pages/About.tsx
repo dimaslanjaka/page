@@ -1,13 +1,13 @@
 import React from 'react';
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-  await new Promise((r) => setTimeout(r, 500));
-  return "I came from the About.tsx loader function!";
+  await new Promise(r => setTimeout(r, 500));
+  return 'I came from the About.tsx loader function!';
 }
 
 export function Component() {
-  let data = useLoaderData() as string;
+  const data = useLoaderData() as string;
 
   return (
     <div>
@@ -17,4 +17,4 @@ export function Component() {
   );
 }
 
-Component.displayName = "AboutPage";
+Component.displayName = 'AboutPage';

@@ -64,7 +64,7 @@ const router = createBrowserRouter([
               {
                 path: 'test',
                 async lazy() {
-                  let { Handler: Component } = await import('@components/TestUnit');
+                  const { Handler: Component } = await import('@components/TestUnit');
                   return { Component };
                 }
                 // element: <Handler />
