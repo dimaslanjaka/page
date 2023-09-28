@@ -74,7 +74,11 @@ interface GetCookiesOptions {
  * @param sort sort cookies by key?
  * @returns
  */
-export function getCookies(options: GetCookiesOptions) {
+export function getCookies(
+  options: GetCookiesOptions = {
+    sort: false
+  }
+) {
   const { sort = false, skipKey = [] } = options;
   const cookies = document.cookie
     .split(';')
