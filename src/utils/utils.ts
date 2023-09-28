@@ -1,6 +1,29 @@
 import Bluebird from 'bluebird';
 import * as safelinkify from 'safelinkify';
-import { randomStr } from '.';
+
+/** md5 encoder */
+export const md5 = (str: string) => CryptoJS.MD5(str).toString();
+
+/**
+ * remove duplicate array items
+ * @param arr
+ * @returns
+ */
+export function arrayDedupe<T extends any[]>(arr: T): T[] {
+  return arr.filter(function (value, index, array) {
+    return array.indexOf(value) === index;
+  });
+}
+
+/**
+ * generate random string
+ * @param len length
+ * @returns
+ */
+export const randomStr = (len = 8) =>
+  Math.random()
+    .toString(36)
+    .substring(2, len + 2);
 
 /**
  * No Operations
