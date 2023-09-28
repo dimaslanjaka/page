@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "webpack --profile --mode production",
     "build": "rm -rf dist && run-s \"build:**\" && gulp build",
-    "build:webpack": "cross-env-shell NODE_ENV=production webpackAnalyze=static webpack --progress --mode production --config config/webpack.prod.js",
+    "build:webpack": "webpack --progress --mode production --config config/webpack.prod.js",
     "build:html": "ts-node html/index",
     "clean": "rm -rf dist tmp",
     "clean:build": "npm run clean && npm run build",
@@ -16,7 +16,7 @@
     "prepare": "husky install",
     "prod": "cd page && npm install --omit=dev --production",
     "prod:update": "cd page && npx npm-check-updates -u && npm install --omit=dev --production",
-    "start": "cross-env-shell NODE_ENV=development webpackAnalyze=server webpack-dev-server --progress --mode development --config config/webpack.dev.js",
+    "start": "cross-env-shell NODE_ENV=development webpackAnalyze=server webpack-dev-server --progress --no-open --mode development --config config/webpack.dev.js",
     "test:dist": "rm -rf dist && yarn run build:webpack && yarn run build:html && gulp page:copy",
     "update": "npm run update:ncu",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts"
