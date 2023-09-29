@@ -8,7 +8,7 @@ const cli = require('./cli');
  */
 module.exports = merge(common, {
   output: {
-    filename: 'page/main.js'
+    filename: 'page/[name].js'
   },
   mode: 'development',
   devtool: 'inline-source-map',
