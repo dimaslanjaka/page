@@ -72,6 +72,7 @@ export function setCookieMins(
       path +
       (domain ? '; domain=' + domain : '') +
       (secure ? '; secure' : '');
+    // console.log(cookie);
     document.cookie = cookie;
     resolve(null);
   });
@@ -87,6 +88,10 @@ export function getCookie(name: string) {
   }
   return null;
 }
+
+// export const createCookieExpires = ({ mins = 0, hours = 0, week = 0, month = 0 }) => {
+//   return new Date(new Date().getTime() + mins * 60 * 1000);
+// };
 
 interface GetCookiesOptions {
   /** sort cookies by key? */
