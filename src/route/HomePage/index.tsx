@@ -3,6 +3,8 @@ import React from 'react';
 
 import Link from '@components/Link';
 import { Col, Container, Grid, Panel, Row } from 'rsuite';
+import Adsense from 'src/components/Adsense';
+import AdsenseFill from 'src/components/Adsense/AdsenseFill';
 
 // const Panel = React.lazy(() => import('rsuite/esm/Panel'));
 // const Container = React.lazy(() => import('rsuite/esm/Container'));
@@ -20,6 +22,9 @@ class Home extends React.Component {
     document.title = 'Home page - WMI';
     // loadCSS('//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
     require('./homepage.scss');
+    if (!window.adsense_option) window.adsense_option = {};
+    window.adsense_option.root = '.myHome';
+    // window.adsense_option.places = ['#features', 'h1', '.rs-panel-body'];
   }
 
   render() {
@@ -92,12 +97,10 @@ class Home extends React.Component {
 
         <div id="features" className="text-center features mt-4">
           <Grid fluid>
-            <Row>
-              <Col md={12} mdOffset={1} className="section-title">
-                <h2>Features</h2>
-              </Col>
-            </Row>
             <Row className="features-item">
+              <div className="section-title">
+                <h2>Features</h2>
+              </div>
               {featuresConfig.slice(0, 4).map((item, i) => {
                 return (
                   <Col xs={24} sm={24} md={6} className="mb-2" key={i + item.title}>
@@ -109,12 +112,22 @@ class Home extends React.Component {
                           <i className="fa-thin fa-arrow-right"></i>
                         </a>
                       </Panel>
+                      <AdsenseFill style={{ height: '150px' }} format="auto" />
                     </Panel>
                   </Col>
                 );
               })}
             </Row>
           </Grid>
+        </div>
+
+        <div className="mt-2 mb-2">
+          <Adsense
+            style={{ display: 'block' }}
+            format="autorelaxed"
+            client="ca-pub-2188063137129806"
+            slot="5041245242"
+          />
         </div>
       </div>
     );
