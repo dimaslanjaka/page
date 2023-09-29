@@ -36,7 +36,23 @@ export function setCookie(
   document.cookie = cookie;
 }
 
-export function createCookieMins(name: string, value: string, minutes: number, path = '/') {
+/**
+ * Create detailed cookie in minutes
+ * @param name
+ * @param value
+ * @param expires expires in minutes
+ * @param path set on spesific path
+ * @param domain set on spesific domain
+ * @param secure set secured cookie (https only)
+ */
+export function setCookieMins(
+  name: string,
+  value: string,
+  minutes = 10,
+  path = '/',
+  domain?: string,
+  secure?: boolean
+) {
   return new Promise(function (resolve) {
     let expires: string;
     if (minutes) {
@@ -46,7 +62,17 @@ export function createCookieMins(name: string, value: string, minutes: number, p
     } else {
       expires = '';
     }
-    document.cookie = name + '=' + value + expires + '; path=' + path + ';';
+    // document.cookie = name + '=' + value + expires + '; path=' + path + ';';
+    const cookie =
+      name +
+      '=' +
+      encodeURIComponent(value) +
+      expires +
+      '; path=' +
+      path +
+      (domain ? '; domain=' + domain : '') +
+      (secure ? '; secure' : '');
+    document.cookie = cookie;
     resolve(null);
   });
 }
@@ -156,7 +182,7 @@ export function getCurrentPageId() {
 }
 
 /*if (typeof module === 'object' && 'exports' in module) {
-  module.exports = { getCookie, removeCookie, eraseCookie, setCookie, createCookieMins };
+  module.exports = { getCookie, removeCookie, eraseCookie, setCookie, setCookieMins };
 }*/
 
-//module.exports = { getCookie, getCookies, removeCookie, eraseCookie, setCookie, createCookieMins, deleteAllCookies };
+//module.exports = { getCookie, getCookies, removeCookie, eraseCookie, setCookie, setCookieMins, deleteAllCookies };
