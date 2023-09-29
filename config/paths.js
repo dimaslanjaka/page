@@ -9,6 +9,8 @@ module.exports = {
   build: path.resolve(__dirname, '../dist'),
   // Temp directory
   tmp: path.resolve(__dirname, '../tmp'),
+  // Project Working Directory
+  cwd: path.resolve(__dirname, '..'),
   // base path
   base: '/page/'
 };
