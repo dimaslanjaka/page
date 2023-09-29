@@ -1,6 +1,8 @@
 const { merge } = require('webpack-merge');
 // const paths = require('./paths');
 const common = require('./webpack.common.js');
+const cli = require('./cli');
+
 /**
  * @type {import('webpack').Configuration}
  */
@@ -14,8 +16,10 @@ module.exports = merge(common, {
     historyApiFallback: true,
     compress: true,
     hot: true,
-    port: 4000,
-    host: 'adsense.webmanajemen.com',
+    // yarn start --port 8888
+    port: cli.port || 4000,
+    // yarn start --host custom.host.name
+    host: cli.host || 'adsense.webmanajemen.com',
     open: false
   }
 });

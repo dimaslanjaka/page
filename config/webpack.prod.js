@@ -1,15 +1,15 @@
-const { merge } = require("webpack-merge");
-const paths = require("./paths");
-const common = require("./webpack.common.js");
+const { merge } = require('webpack-merge');
+const paths = require('./paths');
+const common = require('./webpack.common.js');
 /**
  * @type {import('webpack').Configuration}
  */
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   devtool: false,
   output: {
     path: paths.build,
     publicPath: paths.base,
-    filename: "runtime/js/[name].[contenthash].bundle.js",
-  },
+    filename: 'runtime/js/[name].[contenthash].bundle.js'
+  }
 });
