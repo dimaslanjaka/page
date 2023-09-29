@@ -104,11 +104,14 @@ export function getCookies(
   options: GetCookiesOptions = {
     sort: false
   }
-) {
+): Record<string, any> {
   const { sort = false, skipKey = [] } = options;
-  const cookies = document.cookie
-    .split(';')
-    .reduce((ac, cv, _i) => Object.assign(ac, { [cv.split('=')[0].trim()]: cv.split('=')[1] }), {});
+  const pairs = document.cookie.split(';');
+  const cookies = {};
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i].split('=');
+    cookies[(pair[0] + '').trim()] = unescape(pair.slice(1).join('='));
+  }
 
   // delete keys from result
   if (skipKey.length > 0) {
