@@ -4,6 +4,7 @@ import Loader from './components/Loader';
 import NoMatch from './components/NoMatch';
 import RSuiteLayout from './components/RsuiteLayout';
 import BotDetect from './route/BotDetect';
+import CookieManager from './route/Cookies';
 import HighlightLayout from './route/Highlight';
 import Home from './route/HomePage';
 import Login from './route/Login';
@@ -38,6 +39,8 @@ const _createMultipleRoute = (path: string, element: JSX.Element | React.ReactNo
   ];
 };
 
+// const CookieManagerWithCookie = reactCookie.withCookies(CookieManager);
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -71,6 +74,7 @@ const router = createBrowserRouter([
               }
             ]
           },
+          ..._createMultipleRoute('cookies', <CookieManager />),
           ..._createMultipleRoute('safelink', <Safelink />),
           ..._createMultipleRoute('google/login', <Login />),
           ..._createMultipleRoute('bot-detect', <BotDetect />),

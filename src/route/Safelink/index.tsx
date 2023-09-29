@@ -1,5 +1,4 @@
 import {
-  createCookieMins,
   delay,
   getCookie,
   loadCSS,
@@ -8,6 +7,7 @@ import {
   querySelector,
   replaceWith,
   safelinkInstance,
+  setCookieMins,
   waitUntilPageFullyLoaded
 } from '@utils/index';
 import React from 'react';
@@ -63,7 +63,7 @@ function decodeStart() {
       // set cookie value and refresh without parameters
       if (value_cookie) {
         // eslint-disable-next-line no-undef
-        createCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
+        setCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
       } else {
         try {
           // check if query is url
