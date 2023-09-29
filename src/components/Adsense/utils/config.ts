@@ -4,7 +4,8 @@ import { array_shuffle } from '@utils/index';
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (!window.adsense_option)
     window.adsense_option = {
-      places: []
+      places: [],
+      localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com']
     };
   if (!window.adsbygoogle) window.adsbygoogle = [];
   if (typeof window.adsenseInitialized === 'undefined') window.adsenseInitialized = false;
@@ -73,6 +74,11 @@ export interface AdsenseOption {
    * '#main-content'
    */
   root?: string;
+  /**
+   * localhost domain list
+   * * force display ads on local domain
+   */
+  localhost?: string[];
 }
 
 export interface ParamsAdsByGoogle {
