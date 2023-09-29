@@ -33,6 +33,13 @@ const _mainEntry = {
         generator: {
           filename: 'runtime/images/[hash][ext][query]'
         }
+      },
+      {
+        test: /\.json$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'runtime/json/[hash][ext][query]'
+        }
       }
     ]
   },
