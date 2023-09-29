@@ -2,7 +2,10 @@ import { array_shuffle } from '@utils/index';
 
 // initialize undefined window properties
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  if (!window.adsense_option) window.adsense_option = {};
+  if (!window.adsense_option)
+    window.adsense_option = {
+      places: []
+    };
   if (!window.adsbygoogle) window.adsbygoogle = [];
   if (typeof window.adsenseInitialized === 'undefined') window.adsenseInitialized = false;
 }
@@ -44,6 +47,8 @@ export const allAds = array_shuffle([
 ]);
 
 export interface AdsenseOption {
+  [key: string]: any;
+
   /**
    * remove banner when parent width is 0 or display: none
    */
@@ -52,6 +57,22 @@ export interface AdsenseOption {
    * current ad slot
    */
   currentSlot?: (typeof allAds)[number];
+  /**
+   * element pseudo selector - ads places
+   * * find element to add ads next of element
+   * @example
+   * '.root'
+   * '#main-content'
+   */
+  places?: string[];
+  /**
+   * element pseudo selector - root ads places
+   * * where to find elements
+   * @example
+   * '.root'
+   * '#main-content'
+   */
+  root?: string;
 }
 
 export interface ParamsAdsByGoogle {
