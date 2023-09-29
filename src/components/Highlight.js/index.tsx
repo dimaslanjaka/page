@@ -1,4 +1,5 @@
 import React from 'react';
+import { randomStr } from 'src/utils';
 import * as helper from './helper';
 
 // css for browser
@@ -8,14 +9,30 @@ import * as helper from './helper';
 
 interface HighlightProps {
   [key: string]: any;
-  /** specify language */
+  /**
+   * specify language
+   * * applied to `<code />` tag
+   */
   lang?: string;
-  /** enable highlighting? */
+  /**
+   * enable highlighting?
+   * * applied to `<code />` tag
+   */
   'data-highlight'?: boolean;
+  /**
+   * custom id
+   * * applied for `<pre />` tag
+   */
+  id?: string;
+  /**
+   * custom class names
+   * * applied for `<pre />` tag
+   */
+  className?: string;
 }
 
 class HighlightElement extends React.Component<HighlightProps, Record<string, any>> {
-  constructor(props: any) {
+  constructor(props: HighlightProps) {
     super(props);
   }
 
@@ -37,13 +54,14 @@ class HighlightElement extends React.Component<HighlightProps, Record<string, an
       buildProps['data-highlight'] = String(this.props['data-highlight']);
     }
     return (
-      <pre>
+      <pre id={this.props.id || 'pre-' + randomStr(3)} className={this.props.className}>
         <code {...buildProps}>{this.props.children}</code>
         <button
           className="copy-code-button"
           type="button"
           title="Copy code block"
-          data-clipboard-text={this.props.children}>
+          data-clipboard-text={this.props.children}
+        >
           <span>Copy</span>
         </button>
       </pre>
