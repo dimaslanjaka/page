@@ -1,5 +1,5 @@
 const { merge } = require('webpack-merge');
-// const paths = require('./paths');
+const paths = require('./paths');
 const common = require('./webpack.common.js');
 const cli = require('./cli');
 
@@ -7,8 +7,9 @@ const cli = require('./cli');
  * @type {import('webpack').Configuration}
  */
 module.exports = merge(common, {
+  entry: [paths.src + '/index.tsx'],
   output: {
-    filename: 'page/[name].js'
+    filename: 'page/main.js'
   },
   mode: 'development',
   devtool: 'inline-source-map',

@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 /**
  * @type {import('webpack').Configuration}
  */
-module.exports = merge(common, {
+const config = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
@@ -28,3 +28,5 @@ module.exports = merge(common, {
     })
   ]
 });
+
+module.exports = merge(config, require('./webpack.entry'));

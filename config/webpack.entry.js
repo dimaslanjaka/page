@@ -12,30 +12,6 @@ const _mainEntry = {
     adsense: paths.src + '/components/Adsense/utils/index.ts'
     // highlightjs: paths.src + '/components/Highlight.js/helper.ts'
   },
-  module: {
-    rules: [
-      {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/resource',
-        parser: {
-          dataUrlCondition: {
-            maxSize: 8 * 1024 // 8kb
-          }
-        },
-        generator: {
-          // If emitting file, the file path is
-          filename: 'runtime/fonts/[hash][ext][query]'
-        }
-      },
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'runtime/images/[hash][ext][query]'
-        }
-      }
-    ]
-  },
   optimization: {
     splitChunks: {
       cacheGroups: {

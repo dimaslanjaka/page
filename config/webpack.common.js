@@ -1,7 +1,6 @@
 const paths = require('./paths');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const { merge } = require('webpack-merge');
 
 const htmlPlugin = new HtmlWebPackPlugin({
   title: 'Website Manajemen Indonesia',
@@ -12,7 +11,6 @@ const htmlPlugin = new HtmlWebPackPlugin({
  * @type {import('webpack').Configuration}
  */
 const config = {
-  // entry: [paths.src + '/index.tsx'],
   entry: {},
   output: {
     path: paths.build,
@@ -23,6 +21,26 @@ const config = {
   },
   module: {
     rules: [
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/resource',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024 // 8kb
+          }
+        },
+        generator: {
+          // If emitting file, the file path is
+          filename: 'runtime/fonts/[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'runtime/images/[hash][ext][query]'
+        }
+      },
       {
         test: /\.(t|j|cj|mj)sx?$/,
         exclude: /node_modules/,
@@ -54,6 +72,4 @@ const config = {
   }
 };
 
-// module.exports = config;
-
-module.exports = merge(config, require('./webpack.entry'));
+module.exports = config;
