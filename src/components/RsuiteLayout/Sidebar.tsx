@@ -28,18 +28,29 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
   _controller: AbortController;
   _signal: AbortSignal;
   _mounted: boolean;
+  _runner: (...args: any[]) => any;
 
   constructor(props: any) {
     super(props);
     this.state = { feedItems: [] };
+    this._runner = this.fetchRss.bind(this);
   }
 
   componentDidMount() {
-    this._controller = new AbortController();
-    this._signal = this._controller.signal;
     this._mounted = true;
+    window.addEventListener('load', this._runner);
+  }
+
+  componentWillUnmount() {
+    if (this._controller) this._controller.abort();
+    window.removeEventListener('load', this._runner);
+  }
+
+  fetchRss() {
+    this._controller = new AbortController();
 
     if (this._mounted) {
+      this._signal = this._controller.signal;
       const url = 'https://api.allorigins.win/raw?url=https://www.webmanajemen.com/rss.xml';
       fetchWithCache(url, {
         mode: 'cors',
@@ -86,11 +97,6 @@ class MySidebar extends React.Component<Record<string, any>, FeedState> {
           this._controller = null;
         });
     }
-  }
-
-  componentWillUnmount() {
-    // this.setState({ feedItems: [] });
-    if (this._controller) this._controller.abort();
   }
 
   render() {
