@@ -37,5 +37,9 @@ module.exports = {
   plugins: [new CleanWebpackPlugin(), htmlPlugin],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss']
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: paths.tmp
   }
 };
