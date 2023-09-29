@@ -1,7 +1,8 @@
 import React from 'react';
 //
 
-import { Button, Table } from 'rsuite';
+import { Button, Col, Grid, Row, Table } from 'rsuite';
+import Adsense from 'src/components/Adsense';
 import { mockUsers } from './mock';
 
 const { Column, HeaderCell, Cell } = Table;
@@ -9,6 +10,7 @@ const data = mockUsers(3);
 
 class TextAdsense extends React.Component {
   componentDidMount(): void {
+    document.title = 'Adsense Test - WMI';
     require('./TestAdsense.scss');
     if (!window.adsense_option) window.adsense_option = { places: [] };
     window.adsense_option.places = ['article', '.rs-table', 'h1'];
@@ -37,6 +39,39 @@ class TextAdsense extends React.Component {
         ))}
         <b className="text-center">table</b>
         <TableContent />
+        <div className="mt-2 mb-2">
+          <Adsense
+            style={{ display: 'block' }}
+            format="autorelaxed"
+            client="ca-pub-2188063137129806"
+            slot="5041245242"
+          />
+        </div>
+        <Grid fluid className="mb-2">
+          <Row className="show-grid">
+            <Col xsHidden xs={12}>
+              <Adsense
+                style={{ display: 'block' }}
+                format="fluid"
+                layout-key="-gw-3+1f-3d+2z"
+                client="ca-pub-2188063137129806"
+                slot="6979059162"
+              />
+            </Col>
+            <Col xs={12}>
+              <Adsense
+                style={{ display: 'block' }}
+                format="fluid"
+                layout-key="-fb+5w+4e-db+86"
+                client="ca-pub-2188063137129806"
+                slot="6133452172"
+              />
+            </Col>
+          </Row>
+        </Grid>
+        <div className="empty">
+          <Adsense client="ca-pub-2188063137129806" slot="2667720583" format="auto" widthResponsive="true" />
+        </div>
       </div>
     );
   }
