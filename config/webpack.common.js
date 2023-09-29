@@ -36,7 +36,15 @@ module.exports = {
   },
   plugins: [new CleanWebpackPlugin(), htmlPlugin],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss']
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss'],
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      path: require.resolve('path-browserify'),
+      os: require.resolve('os-browserify'),
+      buffer: require.resolve('buffer/'),
+      constants: require.resolve('constants-browserify'),
+      stream: require.resolve('stream-browserify')
+    }
   },
   cache: {
     type: 'filesystem',
