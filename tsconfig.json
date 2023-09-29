@@ -17,34 +17,15 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "strict": false,
-    "lib": [
-      "DOM",
-      "ES2020"
-    ],
-    "typeRoots": [
-      "./typings",
-      "./node_modules/@types",
-      "./node_modules/nodejs-package-types/typings"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "typeRoots": ["./typings", "./node_modules/@types", "./node_modules/nodejs-package-types/typings"],
     "paths": {
-      "src/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@routes/*": [
-        "./src/route/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@project": [
-        "./src/project"
-      ]
+      "src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@routes/*": ["./src/route/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@project": ["./src/project"]
     },
     "plugins": [
       {
