@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwmi_page_monorepo=self.webpackChunkwmi_page_monorepo||[]).push([[708],{94708:function(e,n,o){o.d(n,{Handler:function(){return c}});var t=o(67294);function c(){return t.createElement("div",{className:"p-2"},t.createElement("button",{onClick:()=>console.log("clicked")},"button"))}}}]);

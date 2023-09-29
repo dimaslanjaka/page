@@ -1,0 +1,8 @@
+https://www.webmanajemen.com/page/index.html
+https://www.webmanajemen.com/page/login.html
+https://www.webmanajemen.com/page/404.html
+https://www.webmanajemen.com/page/safelink.html
+https://www.webmanajemen.com/page/highlight-js.html
+https://www.webmanajemen.com/page/google/login.html
+https://www.webmanajemen.com/page/moment-timezone.html
+https://www.webmanajemen.com/page/bot-detect.html
