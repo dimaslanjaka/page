@@ -20,6 +20,7 @@ export function Template(props: TemplateOptions) {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="robots" content="index,follow" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+          <link rel="icon" type="image/x-icon" href="//www.webmanajemen.com/favicon.ico" />
           {/* <meta name="language" content="English" /> */}
           <title>{props.title}</title>
           {props.head}
@@ -41,9 +42,9 @@ export async function renderStatic(props: TemplateOptions, outputFile: string) {
     fs.mkdirSync(path.dirname(outputFile), { recursive: true });
   }
 
-  let html = ReactDOMServer.renderToStaticMarkup(<Template {...props} />);
-  let htmlWDoc = '<!DOCTYPE html>' + html;
-  let prettyHtml = await (await import('prettier')).format(htmlWDoc, { parser: 'html' });
+  const html = ReactDOMServer.renderToStaticMarkup(<Template {...props} />);
+  const htmlWDoc = '<!DOCTYPE html>' + html;
+  const prettyHtml = await (await import('prettier')).format(htmlWDoc, { parser: 'html' });
 
   fs.writeFileSync(outputFile, prettyHtml);
   console.log(`Wrote ${outputFile}`);
