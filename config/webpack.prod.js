@@ -1,12 +1,13 @@
 const { merge } = require('webpack-merge');
 const paths = require('./paths');
 const common = require('./webpack.common.js');
+const { cssProd } = require('./webpack.css');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /**
  * @type {import('webpack').Configuration}
  */
-module.exports = merge(common, {
+module.exports = merge(common, cssProd, {
   mode: 'production',
   devtool: false,
   output: {

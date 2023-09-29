@@ -2,11 +2,12 @@ const { merge } = require('webpack-merge');
 // const paths = require('./paths');
 const common = require('./webpack.common.js');
 const cli = require('./cli');
+const { cssDev } = require('./webpack.css.js');
 
 /**
  * @type {import('webpack').Configuration}
  */
-module.exports = merge(common, {
+module.exports = merge(common, cssDev, {
   output: {
     filename: 'page/main.js'
   },
