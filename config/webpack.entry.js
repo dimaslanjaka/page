@@ -33,19 +33,24 @@ const _mainEntry = {
         generator: {
           filename: 'runtime/images/[hash][ext][query]'
         }
-      },
-      {
-        test: /\.json$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'runtime/json/[hash][ext][query]'
-        }
       }
+      // {
+      //   test: /\.json$/i,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'runtime/json/[hash][ext][query]'
+      //   }
+      // }
     ]
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
+        // dataVendor: {
+        //   test: /\.json$/i,
+        //   name: 'vendor-data',
+        //   chunks: 'all'
+        // },
         reactVendor: {
           test: /[\\/]node_modules[\\/](react|react-dom|@remix-run|react-router|react-router-dom)[\\/]/,
           name: 'vendor-react',
