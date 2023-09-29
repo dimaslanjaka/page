@@ -68,7 +68,6 @@
     "gulp": "^4.0.2",
     "html-webpack-plugin": "^5.5.0",
     "lint-staged": "^14.0.1",
-    "mini-css-extract-plugin": "^2.7.6",
     "minimist": "^1.2.8",
     "node-sass": "^7.0.0",
     "postcss": "^8.4.30",

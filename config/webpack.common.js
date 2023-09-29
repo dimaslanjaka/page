@@ -29,6 +29,10 @@ const config = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.(s[a|c]ss)$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
   },
