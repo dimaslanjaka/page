@@ -74,7 +74,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
           </Header>
           <Container id="content-wrapper">
             {/* <Content>{this.props.children}</Content> */}
-            <Content style={{ maxWidth: '80%' }} className="p-2">
+            <Content style={{ maxWidth: '100%' }} className="p-2">
               <Outlet />
             </Content>
             <Sidebar className="d-none d-lg-block d-xl-block">
