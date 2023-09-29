@@ -1,5 +1,54 @@
 import { array_shuffle } from '@utils/index';
 
+type AdsList = {
+  name: string;
+  pub: string;
+  ads: {
+    [key: string]: string;
+    style: string;
+    'data-ad-layout'?: string;
+    'data-ad-format': string;
+    'data-ad-slot': string;
+    'data-full-width-responsive'?: string;
+    'data-ad-layout-key'?: string;
+  }[];
+}[];
+
+export interface AdsenseOption {
+  [key: string]: any;
+
+  /**
+   * remove banner when parent width is 0 or display: none
+   */
+  remove?: boolean;
+  /**
+   * current ad slot
+   */
+  currentSlot?: AdsList[number];
+  /**
+   * element pseudo selector - ads places
+   * * find element to add ads next of element
+   * @example
+   * '.root'
+   * '#main-content'
+   */
+  places?: string[];
+  /**
+   * element pseudo selector - root ads places
+   * * where to find elements
+   * @example
+   * '.root'
+   * '#main-content'
+   */
+  root?: string;
+  /**
+   * localhost domain list
+   * * force display ads on local domain
+   */
+  localhost?: string[];
+  allAds?: AdsList;
+}
+
 // initialize undefined window properties
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (!window.adsense_option)
@@ -14,7 +63,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 /**
  * shuffled all ads
  */
-export const allAds = array_shuffle([
+export const allAds: AdsenseOption['allAds'] = array_shuffle([
   {
     name: 'kiki',
     pub: '2188063137129806',
@@ -46,40 +95,6 @@ export const allAds = array_shuffle([
     ]
   }
 ]);
-
-export interface AdsenseOption {
-  [key: string]: any;
-
-  /**
-   * remove banner when parent width is 0 or display: none
-   */
-  remove?: boolean;
-  /**
-   * current ad slot
-   */
-  currentSlot?: (typeof allAds)[number];
-  /**
-   * element pseudo selector - ads places
-   * * find element to add ads next of element
-   * @example
-   * '.root'
-   * '#main-content'
-   */
-  places?: string[];
-  /**
-   * element pseudo selector - root ads places
-   * * where to find elements
-   * @example
-   * '.root'
-   * '#main-content'
-   */
-  root?: string;
-  /**
-   * localhost domain list
-   * * force display ads on local domain
-   */
-  localhost?: string[];
-}
 
 export interface ParamsAdsByGoogle {
   /** data-ad-slot */
@@ -149,4 +164,4 @@ export function removeDuplicateAds(
   }
 }
 
-export const getAllAds = () => removeDuplicateAds(allAds);
+export const getAllAds = () => removeDuplicateAds(window.adsense_option.allAds || allAds) as AdsenseOption['allAds'];
