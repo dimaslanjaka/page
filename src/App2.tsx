@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Loader from './components/Loader';
 import NoMatch from './components/NoMatch';
 import RSuiteLayout from './components/RsuiteLayout';
+import TestAdsense from './pages/TestAdsense';
 import BotDetect from './route/BotDetect';
 import CookieManager from './route/Cookies';
 import HighlightLayout from './route/Highlight';
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
                   return { Component };
                 }
                 // element: <Handler />
+              },
+              {
+                path: 'adsense',
+                element: <TestAdsense />
               }
             ]
           },
