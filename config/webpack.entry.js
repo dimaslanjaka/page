@@ -25,36 +25,68 @@ const _mainEntry = {
     //   import: ['bootstrap', '@popperjs/core'],
     //   dependOn: ['initStyle']
     // },
-    // axios: {
-    //   import: ['axios', 'axios-cache-interceptor']
-    // },
-    // moment: {
-    //   import: 'moment'
-    // },
-    // 'moment-timezone': {
-    //   import: 'moment-timezone',
-    //   dependOn: 'moment'
-    // },
-    // safelinkify: {
-    //   import: 'safelinkify',
-    //   dependOn: ['crypto', 'moment', 'moment-timezone']
-    // },
-    // firebase: {
-    //   import: ['firebase/auth', 'firebase/app'],
-    //   dependOn: ['bluebird']
-    // }
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-dom|@remix-run|react-router|react-router-dom)[\\/]/,
           name: 'vendor-react',
           chunks: 'all'
         },
         corejsVendor: {
           test: /[\\/]node_modules[\\/](core-js)[\\/]/,
           name: 'vendor-corejs',
+          chunks: 'all'
+        },
+        safelinkVendor: {
+          test: /[\\/]node_modules[\\/](safelinkify|crypto-js)[\\/]/,
+          name: 'vendor-safelink',
+          chunks: 'all'
+        },
+        axiosVendor: {
+          test: /[\\/]node_modules[\\/](axios|axios-cache-interceptor)[\\/]/,
+          name: 'vendor-axios',
+          chunks: 'all'
+        },
+        tslibVendor: {
+          test: /[\\/]node_modules[\\/](tslib)[\\/]/,
+          name: 'vendor-tslib',
+          chunks: 'all'
+        },
+        momentVendor: {
+          test: /[\\/]node_modules[\\/](moment|moment-timezone)[\\/]/,
+          name: 'vendor-moment',
+          chunks: 'all'
+        },
+        lodashVendor: {
+          test: /[\\/]node_modules[\\/](lodash)[\\/]/,
+          name: 'vendor-lodash',
+          chunks: 'all'
+        },
+        highlightjsVendor: {
+          test: /[\\/]node_modules[\\/](highlight.js)[\\/]/,
+          name: 'vendor-highlightjs',
+          chunks: 'all'
+        },
+        firebaseVendor: {
+          test: /[\\/]node_modules[\\/](firebase|@firebase)[\\/]/,
+          name: 'vendor-firebase',
+          chunks: 'all'
+        },
+        rsuiteVendor: {
+          test: /[\\/]node_modules[\\/](rsuite|@rsuite)[\\/]/,
+          name: 'vendor-rsuite',
+          chunks: 'all'
+        },
+        bootstrapVendor: {
+          test: /[\\/]node_modules[\\/](bootstrap|@popperjs)[\\/]/,
+          name: 'vendor-bootstrap',
+          chunks: 'all'
+        },
+        mockVendor: {
+          test: /[\\/]node_modules[\\/](@faker-js)[\\/]/,
+          name: 'vendor-mock',
           chunks: 'all'
         }
       }
