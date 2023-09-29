@@ -99,19 +99,4 @@ _mainEntry.entry.main = {
   dependOn: Object.keys(_mainEntry.entry)
 };
 
-/** @type {import('webpack').Configuration} */
-const _defaults = {
-  entry: [index]
-};
-
-/** @type {import('webpack').Configuration} */
-
-const _test = {
-  entry: {
-    main: {
-      import: index
-    }
-  }
-};
-
 module.exports = _mainEntry;
