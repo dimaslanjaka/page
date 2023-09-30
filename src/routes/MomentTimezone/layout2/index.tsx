@@ -1,77 +1,78 @@
 import React from 'react';
 //
 
-import HighlightElement from '@components/Highlight.js';
-import Link from '@components/Link';
+// import HighlightElement from '@components/Highlight.js';
+// import Link from '@components/Link';
 import { copyTextToClipboard, md5, querySelector } from '@utils/index';
-import {
-  Button,
-  ButtonToolbar,
-  Col,
-  Container,
-  DatePicker,
-  Divider,
-  FlexboxGrid,
-  Form,
-  Nav,
-  Panel,
-  PanelGroup
-} from 'rsuite';
+// import {
+//   Button,
+//   ButtonToolbar,
+//   Col,
+//   Container,
+//   DatePicker,
+//   Divider,
+//   FlexboxGrid,
+//   Form,
+//   Nav,
+//   Panel,
+//   PanelGroup
+// } from 'rsuite';
 import { getTimeZoneOffset, moment } from '../shared/moment-timezone';
-import Snippet from '../shared/Snippet';
+// import Snippet from '../shared/Snippet';
+import Loader, { Spinner } from '@components/Loader';
 import timezones from '../shared/timezones.json';
 
-const NavItem = Nav.Item;
-const FormGroup = Form.Group;
-const FormControl = Form.Control;
-const FormControlLabel = Form.ControlLabel;
-const FlexboxGridItem = FlexboxGrid.Item;
-const FormHelpText = Form.HelpText;
+// const NavItem = Nav.Item;
+// const FormGroup = Form.Group;
+// const FormControl = Form.Control;
+// const FormControlLabel = Form.ControlLabel;
+// const FlexboxGridItem = FlexboxGrid.Item;
+// const FormHelpText = Form.HelpText;
 
-// const Snippet = React.lazy(() => import('./shared/Snippet'));
-// const Col = React.lazy(() => import('rsuite/esm/Col'));
-// const HighlightElement = React.lazy(() => import('@components/Highlight.js'));
-// const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
-// const Form = React.lazy(() => import('rsuite/esm/Form'));
-// const FormGroup = React.lazy(() =>
-//   import('rsuite/esm/Form').then(module => ({
-//     default: module.default.Group
-//   }))
-// );
-// const Divider = React.lazy(() => import('rsuite/esm/Divider'));
-// const FlexboxGrid = React.lazy(() => import('rsuite/esm/FlexboxGrid'));
-// const FlexboxGridItem = React.lazy(() =>
-//   import('rsuite/esm/FlexboxGrid').then(module => ({
-//     default: module.default.Item
-//   }))
-// );
-// const DatePicker = React.lazy(() => import('rsuite/esm/DatePicker'));
-// const FormControl = React.lazy(() => import('rsuite/esm/FormControl'));
-// const FormHelpText = React.lazy(() =>
-//   import('rsuite/esm/Form').then(module => ({
-//     default: module.default.HelpText
-//   }))
-// );
-// const FormControlLabel = React.lazy(() =>
-//   import('rsuite/esm/Form').then(module => ({
-//     default: module.default.ControlLabel
-//   }))
-// );
-// const Button = React.lazy(() => import('rsuite/esm/Button'));
-// const Container = React.lazy(() => import('rsuite/esm/Container'));
-// const Panel = React.lazy(() => import('rsuite/esm/Panel'));
-// const PanelGroup = React.lazy(() => import('rsuite/esm/PanelGroup'));
-// const Link = React.lazy(() => import('@components/Link'));
-// const Nav = React.lazy(() => import('rsuite/esm/Nav'));
-// const NavItem = React.lazy(() =>
-//   import('rsuite/esm/Nav').then(module => ({
-//     default: module.default.Item
-//   }))
-// );
+const Snippet = React.lazy(() => import('../shared/Snippet'));
+const Col = React.lazy(() => import('rsuite/esm/Col'));
+const HighlightElement = React.lazy(() => import('@components/Highlight.js'));
+const ButtonToolbar = React.lazy(() => import('rsuite/esm/ButtonToolbar'));
+const Form = React.lazy(() => import('rsuite/esm/Form'));
+const FormGroup = React.lazy(() =>
+  import('rsuite/esm/Form').then(module => ({
+    default: module.default.Group
+  }))
+);
+const Divider = React.lazy(() => import('rsuite/esm/Divider'));
+const FlexboxGrid = React.lazy(() => import('rsuite/esm/FlexboxGrid'));
+const FlexboxGridItem = React.lazy(() =>
+  import('rsuite/esm/FlexboxGrid').then(module => ({
+    default: module.default.Item
+  }))
+);
+const DatePicker = React.lazy(() => import('rsuite/esm/DatePicker'));
+const FormControl = React.lazy(() => import('rsuite/esm/FormControl'));
+const FormHelpText = React.lazy(() =>
+  import('rsuite/esm/Form').then(module => ({
+    default: module.default.HelpText
+  }))
+);
+const FormControlLabel = React.lazy(() =>
+  import('rsuite/esm/Form').then(module => ({
+    default: module.default.ControlLabel
+  }))
+);
+const Button = React.lazy(() => import('rsuite/esm/Button'));
+const Container = React.lazy(() => import('rsuite/esm/Container'));
+const Panel = React.lazy(() => import('rsuite/esm/Panel'));
+const PanelGroup = React.lazy(() => import('rsuite/esm/PanelGroup'));
+const Link = React.lazy(() => import('@components/Link'));
+const Nav = React.lazy(() => import('rsuite/esm/Nav'));
+const NavItem = React.lazy(() =>
+  import('rsuite/esm/Nav').then(module => ({
+    default: module.default.Item
+  }))
+);
 // const NavMenu = React.lazy(() =>
 //   import('rsuite/esm/Nav').then(module => ({
-//     default: module.default.Menu,
-//   })),
+//     default: module.default.Menu
+//   }))
 // );
 
 interface State {
@@ -140,7 +141,7 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
     }
 
     return (
-      <React.Fragment>
+      <React.Suspense fallback={<Loader />}>
         <div className="text-center">
           <h1>Moment Timezone Playground Online</h1>
           <p>
@@ -161,10 +162,12 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
           <NavItem eventKey="formatList">Format Cheatsheet</NavItem>
           <NavItem eventKey="timezoneList">Timezone List</NavItem>
         </Nav>
-        <Panel /*header=""*/ shaded className="mb-2">
-          <Render />
+        <Panel shaded className="mb-2">
+          <React.Suspense fallback={<Spinner content={<span>loading {active}</span>} />}>
+            <Render />
+          </React.Suspense>
         </Panel>
-      </React.Fragment>
+      </React.Suspense>
     );
   }
 
