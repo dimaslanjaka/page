@@ -322,45 +322,53 @@ export function runBotDetectionCookies() {
   // getElementById('unique-id').textContent = getCurrentPageId();
 
   const tbl = document.querySelector('table#cookies');
-  const tbody = tbl.querySelector('tbody');
-  const gck = getCookies({ sort: true });
-  for (const key in gck) {
-    //console.log(key, gck[key]);
-    const row = document.createElement('tr');
-    let cell = document.createElement('td');
-    let cellText = document.createTextNode(key);
-    cell.appendChild(cellText);
-    row.appendChild(cell);
+  if (tbl) {
+    const tbody = tbl.querySelector('tbody');
+    const gck = getCookies({ sort: true });
+    if (tbody) {
+      for (const key in gck) {
+        //console.log(key, gck[key]);
+        const row = document.createElement('tr');
+        let cell = document.createElement('td');
+        let cellText = document.createTextNode(key);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
 
-    cell = document.createElement('td');
-    cellText = document.createTextNode(gck[key]);
-    cell.appendChild(cellText);
-    row.appendChild(cell);
-    tbody.appendChild(row);
+        cell = document.createElement('td');
+        cellText = document.createTextNode(gck[key]);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        tbody.appendChild(row);
+      }
+    }
   }
 }
 
 /** Navigator **/
 export function runBotDetectionNavigator() {
-  const tbln = document.querySelector('table#navigator');
-  const tbodyn = tbln.querySelector('tbody');
-  for (const key in navigator) {
-    let value = navigator[key];
-    if (typeof value === 'object') {
-      value = '<pre>' + JSON.stringify(value, null, 2) + '</pre>';
-    }
-    const row = document.createElement('tr');
-    let cell = document.createElement('td');
-    let cellText = document.createTextNode(key);
-    cell.appendChild(cellText);
-    row.appendChild(cell);
+  const tbl = document.querySelector('table#navigator');
+  if (tbl) {
+    const tbody = tbl.querySelector('tbody');
+    if (tbody) {
+      for (const key in navigator) {
+        let value = navigator[key];
+        if (typeof value === 'object') {
+          value = '<pre>' + JSON.stringify(value, null, 2) + '</pre>';
+        }
+        const row = document.createElement('tr');
+        let cell = document.createElement('td');
+        let cellText = document.createTextNode(key);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
 
-    cell = document.createElement('td');
-    cellText = document.createTextNode(value);
-    //cell.appendChild(cellText);
-    cell.innerHTML = value;
-    row.appendChild(cell);
-    tbodyn.appendChild(row);
+        cell = document.createElement('td');
+        cellText = document.createTextNode(value);
+        //cell.appendChild(cellText);
+        cell.innerHTML = value;
+        row.appendChild(cell);
+        tbody.appendChild(row);
+      }
+    }
   }
 }
 
