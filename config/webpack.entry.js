@@ -10,7 +10,6 @@ const _mainEntry = {
     },
     utils: paths.src + '/utils/index.ts',
     adsense: paths.src + '/components/Adsense/utils/index.ts'
-    // highlightjs: paths.src + '/components/Highlight.js/helper.ts'
   },
   optimization: {
     splitChunks: {
