@@ -1,3 +1,6 @@
+import React from 'react';
+//
+
 import {
   delay,
   getCookie,
@@ -10,7 +13,6 @@ import {
   setCookieMins,
   waitUntilPageFullyLoaded
 } from '@utils/index';
-import React from 'react';
 import SafelinkLayout2 from './layout2';
 
 // const SafelinkLayout2 = React.lazy(() => import('./layout2'));
