@@ -20,3 +20,5 @@ if (/dev/i.test(process.env.NODE_ENV)) {
     cancellation: true
   });
 }
+
+export default Promise;
