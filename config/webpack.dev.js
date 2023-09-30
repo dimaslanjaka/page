@@ -11,6 +11,14 @@ module.exports = merge(common, {
   output: {
     filename: 'page/main.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(s[a|c]ss)$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+      }
+    ]
+  },
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {

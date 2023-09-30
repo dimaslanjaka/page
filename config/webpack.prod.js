@@ -14,6 +14,14 @@ const config = merge(common, {
     publicPath: paths.base,
     filename: 'runtime/js/[name].[contenthash].bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(s[a|c]ss)$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+      }
+    ]
+  },
   plugins: [
     // analyze webpack bundle
     new BundleAnalyzerPlugin({

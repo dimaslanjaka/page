@@ -47,16 +47,12 @@ const config = {
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.(s[a|c]ss)$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       }
     ]
   },
   plugins: [new CleanWebpackPlugin(), htmlPlugin],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss', '.css', '.json', '.otf'],
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       path: require.resolve('path-browserify'),
