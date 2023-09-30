@@ -1,16 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router-dom';
 import Loader from './components/Loader';
-import NoMatch from './components/NoMatch';
-import RSuiteLayout from './components/RsuiteLayout';
-import TestAdsense from './pages/TestAdsense';
-import BotDetect from './routes/BotDetect';
-import CookieManager from './routes/Cookies';
-import HighlightLayout from './routes/Highlight';
-import Home from './routes/HomePage';
-import Login from './routes/Login';
-import Safelink from './routes/Safelink';
-import UI from './routes/UI';
 
 /**
  * create multiple routes based on defined path
@@ -27,6 +17,7 @@ const _createMultipleRoute = (path: string, element: RouteObject['element'] | Ro
       // component export
       if ('Component' in awaited) return { Component: awaited.Component };
       // default export
+      if ('default' in awaited) return { Component: awaited.default };
       return { Component: awaited };
     };
     return [
@@ -69,25 +60,41 @@ const _createMultipleRoute = (path: string, element: RouteObject['element'] | Ro
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RSuiteLayout />,
+    // element: <RSuiteLayout />,
+    async lazy() {
+      const { default: Component } = await import('@components/RsuiteLayout');
+      return { Component };
+    },
     children: [
       {
         index: true,
-        element: <Home />
+        // element: <Home />
+        async lazy() {
+          const { default: Component } = await import('@routes/HomePage');
+          return { Component };
+        }
       },
       {
         path: 'page',
         children: [
           {
             index: true,
-            element: <Home />
+            // element: <Home />
+            async lazy() {
+              const { default: Component } = await import('@routes/HomePage');
+              return { Component };
+            }
           },
           {
             path: 'ui',
             children: [
               {
                 index: true,
-                element: <UI />
+                // element: <UI />
+                async lazy() {
+                  const { default: Component } = await import('@routes/UI');
+                  return { Component };
+                }
               },
               {
                 path: 'test',
@@ -99,21 +106,29 @@ const router = createBrowserRouter([
               },
               {
                 path: 'adsense',
-                element: <TestAdsense />
+                // element: <TestAdsense />
+                async lazy() {
+                  const { default: Component } = await import('src/pages/TestAdsense');
+                  return { Component };
+                }
               }
             ]
           },
-          ..._createMultipleRoute('cookies', <CookieManager />),
-          ..._createMultipleRoute('safelink', <Safelink />),
-          ..._createMultipleRoute('google/login', <Login />),
-          ..._createMultipleRoute('bot-detect', <BotDetect />),
-          ..._createMultipleRoute('highlight-js', <HighlightLayout />),
+          ..._createMultipleRoute('cookies', import('@routes/Cookies')),
+          ..._createMultipleRoute('safelink', import('@routes/Safelink')),
+          ..._createMultipleRoute('google/login', import('@routes/Login')),
+          ..._createMultipleRoute('bot-detect', import('@routes/BotDetect')),
+          ..._createMultipleRoute('highlight-js', import('@routes/Highlight')),
           ..._createMultipleRoute('moment-timezone', import('@routes/MomentTimezone'))
         ]
       },
       {
         path: '*',
-        element: <NoMatch />
+        // element: <NoMatch />
+        async lazy() {
+          const { default: Component } = await import('@components/NoMatch');
+          return { Component };
+        }
       }
     ]
   }
