@@ -1,6 +1,8 @@
 const { merge } = require('webpack-merge');
 const paths = require('./paths');
-const { spawn } = require('git-command-helper');
+const { spawn } = require('child_process');
+
+let child;
 
 // run dev server
 // build production after compile for dev server
@@ -16,10 +18,9 @@ const config = {
        */
       apply: compiler => {
         compiler.hooks.afterEmit.tapAsync('AfterEmitPlugin', (_compilation, callback) => {
-          // exec('npm run test:dist', {});
-          spawn('npm', ['run', 'test:dist'], { stdio: 'inherit', cwd: paths.cwd })
-            .catch(console.error)
-            .finally(() => callback());
+          if (child) childKill(child);
+          child = spawn('npm', ['run', 'test:dist'], { stdio: 'inherit', cwd: paths.cwd, env: process.env });
+          callback();
         });
       }
     }
@@ -27,3 +28,21 @@ const config = {
 };
 
 module.exports = merge(require('./webpack.dev'), config);
+
+/**
+ * kill spawn
+ * @param {import('child_process').ChildProcess|null} child
+ */
+function childKill(child) {
+  if (child) {
+    if (child.stdin) child.stdin.pause();
+    if (!child.killed) {
+      child.kill();
+      if (process.platform === 'win32') {
+        spawn('taskkill', ['/pid', child.pid, '/f', '/t']);
+      } else {
+        spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
+      }
+    }
+  }
+}
