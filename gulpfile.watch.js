@@ -59,3 +59,5 @@ function childKill(child) {
     }
   }
 }
+
+module.exports = { childKill, testDist };
