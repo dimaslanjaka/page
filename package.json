@@ -20,7 +20,8 @@
     "test:dist": "yarn run build:webpack && yarn run build:html && gulp page:copy",
     "update": "npm run update:ncu",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
-    "x": "node config/cli \"$@\""
+    "x": "node config/cli \"$@\"",
+    "dev": "webpack-dev-server --progress --no-open --mode development --config config/webpack.dev-prod.js \"$@\""
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
