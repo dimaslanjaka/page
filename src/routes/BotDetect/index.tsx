@@ -6,17 +6,18 @@ import React from 'react';
 // import Image from '@components/Image';
 // import Link from '@components/Link';
 // import { Col, Container, Grid, Row } from 'rsuite';
-import { getCurrentPageId } from '@utils/index';
 import { Spinner } from 'src/components/Loader';
 import { getGeoIp, getHeaders, getIp, isSelenium } from './bot-detect';
 
-const AdsenseFill = React.lazy(() => import('@components/Adsense/AdsenseFill'));
-const Container = React.lazy(() => import('rsuite/esm/Container'));
-const Row = React.lazy(() => import('rsuite/esm/Row'));
-const Grid = React.lazy(() => import('rsuite/esm/Grid'));
-const Col = React.lazy(() => import('rsuite/esm/Col'));
-const Link = React.lazy(() => import('@components/Link'));
-const Image = React.lazy(() => import('@components/Image'));
+const AdsenseFill = React.lazy(
+  () => import(/* webpackChunkName: "bot-detect-AdsenseFill" */ '@components/Adsense/AdsenseFill')
+);
+const Container = React.lazy(() => import(/* webpackChunkName: "bot-detect-Container" */ 'rsuite/esm/Container'));
+const Row = React.lazy(() => import(/* webpackChunkName: "bot-detect-Row" */ 'rsuite/esm/Row'));
+const Grid = React.lazy(() => import(/* webpackChunkName: "bot-detect-Grid" */ 'rsuite/esm/Grid'));
+const Col = React.lazy(() => import(/* webpackChunkName: "bot-detect-Col" */ 'rsuite/esm/Col'));
+const Link = React.lazy(() => import(/* webpackChunkName: "bot-detect-Link" */ '@components/Link'));
+const Image = React.lazy(() => import(/* webpackChunkName: "bot-detect-Image" */ '@components/Image'));
 
 type Results = Partial<ReturnType<typeof isSelenium>> &
   Partial<ReturnType<typeof getHeaders>> &
@@ -45,17 +46,29 @@ class BotDetect extends React.Component<Record<string, any>, State> {
     document.title = 'Bot Selenium Checker - WMI';
     // load stylesheet
     require('./BotDetect.scss');
+    // set mounted
+    this._mounted = true;
     // get current unique page id
-    this.setState({ id: getCurrentPageId() });
+    import('@utils/index').then(utils => {
+      this._utils = utils;
+      if (this._mounted) {
+        this.setState({ id: utils.getCurrentPageId() });
+      }
+      import(/* webpackChunkName: "bot-detect" */ './bot-detect').then(detector => {
+        this._detector = detector;
+        // detector loaded
+        this.runDetection();
+      });
+    });
+
     // load page script
     // window.addEventListener('load', this.runner);
-    this._mounted = true;
-    this.runDetection();
   }
 
   componentWillUnmount(): void {
     // remove page script
     // window.removeEventListener('load', this.runner);
+    // reset mounted
     this._mounted = false;
     if (this.abortController) this.abortController.abort();
     this.promises.map(item => item && item.cancel && item.cancel());
@@ -64,34 +77,32 @@ class BotDetect extends React.Component<Record<string, any>, State> {
 
   abortController: AbortController;
   promises: Promise<any>[] = [];
+  _utils: typeof import('@utils/index');
+  _detector: typeof import('./bot-detect');
 
   runDetection() {
     if (!this._mounted) return;
     this.abortController = new AbortController();
 
-    import('@utils/index').then(utils => {
-      utils.waitUntilPageFullyLoaded(() => {
-        import('./bot-detect').then(detector => {
-          detector.runBotDetectionCookies();
-          detector.runBotDetectionNavigator();
-          const wrap = Promise.all([
-            detector.isSelenium(),
-            detector.getHeaders(this.abortController),
-            detector.getIp(this.abortController).then(async ipResult => {
-              const geoIp = await detector.getGeoIp(ipResult.ip);
-              return Object.assign(ipResult, geoIp);
-            })
-          ]);
-          this.promises.push(wrap);
-          wrap.each(result => {
-            for (const key in result) {
-              if (this._mounted) {
-                const value = result[key];
-                this.setState({ [key]: value });
-              }
-            }
-          });
-        });
+    this._utils.waitUntilPageFullyLoaded(() => {
+      this._detector.runBotDetectionCookies();
+      this._detector.runBotDetectionNavigator();
+      const wrap = Promise.all([
+        this._detector.isSelenium(),
+        this._detector.getHeaders(this.abortController),
+        this._detector.getIp(this.abortController).then(async ipResult => {
+          const geoIp = await this._detector.getGeoIp(ipResult.ip);
+          return Object.assign(ipResult, geoIp);
+        })
+      ]);
+      this.promises.push(wrap);
+      wrap.each(result => {
+        for (const key in result) {
+          if (this._mounted) {
+            const value = result[key];
+            this.setState({ [key]: value });
+          }
+        }
       });
     });
   }
