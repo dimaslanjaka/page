@@ -1,17 +1,16 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router-dom';
 import Loader from './components/Loader';
 import NoMatch from './components/NoMatch';
 import RSuiteLayout from './components/RsuiteLayout';
 import TestAdsense from './pages/TestAdsense';
-import BotDetect from './route/BotDetect';
-import CookieManager from './route/Cookies';
-import HighlightLayout from './route/Highlight';
-import Home from './route/HomePage';
-import Login from './route/Login';
-import MomentTimezone from './route/MomentTimezone';
-import Safelink from './route/Safelink';
-import UI from './route/UI';
+import BotDetect from './routes/BotDetect';
+import CookieManager from './routes/Cookies';
+import HighlightLayout from './routes/Highlight';
+import Home from './routes/HomePage';
+import Login from './routes/Login';
+import Safelink from './routes/Safelink';
+import UI from './routes/UI';
 
 /**
  * create multiple routes based on defined path
@@ -21,7 +20,32 @@ import UI from './route/UI';
  * @example
  * defined path is 'home' will be returned 'home', 'home.html', 'home/index.html'
  */
-const _createMultipleRoute = (path: string, element: JSX.Element | React.ReactNode) => {
+const _createMultipleRoute = (path: string, element: RouteObject['element'] | RouteObject['lazy']): RouteObject[] => {
+  if (element instanceof Promise) {
+    const lazy = async function lazy() {
+      const awaited = await element;
+      // component export
+      if ('Component' in awaited) return { Component: awaited.Component };
+      // default export
+      return { Component: awaited };
+    };
+    return [
+      {
+        path,
+        lazy
+      },
+      // create path.html
+      {
+        path: `${path}.html`,
+        lazy
+      },
+      // create path/index.html
+      {
+        path: `${path}/index.html`,
+        lazy
+      }
+    ];
+  }
   return [
     {
       element,
@@ -84,7 +108,7 @@ const router = createBrowserRouter([
           ..._createMultipleRoute('google/login', <Login />),
           ..._createMultipleRoute('bot-detect', <BotDetect />),
           ..._createMultipleRoute('highlight-js', <HighlightLayout />),
-          ..._createMultipleRoute('moment-timezone', <MomentTimezone />)
+          ..._createMultipleRoute('moment-timezone', import('@routes/MomentTimezone'))
         ]
       },
       {
