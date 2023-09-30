@@ -21,7 +21,8 @@
     "update": "npm run update:ncu",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,jsdom,deepmerge-ts",
     "x": "node config/cli \"$@\"",
-    "dev": "webpack-dev-server --progress --no-open --mode development --config config/webpack.dev-prod.js \"$@\""
+    "dev": "webpack-dev-server --progress --no-open --mode development --config config/webpack.dev-prod.js \"$@\"",
+    "dev:php": "php -S 127.0.0.1:8888"
   },
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
