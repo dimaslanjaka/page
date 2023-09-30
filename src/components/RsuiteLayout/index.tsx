@@ -39,7 +39,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
 
   componentDidMount() {
     // load main stylesheet
-    require('@assets/css/main.scss');
+    require('src/assets/css/main.scss');
     // load theme stylesheet
     require('./theme.scss');
     // load adsense

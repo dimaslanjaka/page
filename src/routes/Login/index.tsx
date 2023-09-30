@@ -1,10 +1,10 @@
 import React from 'react';
 //
 
-import * as constants from '@assets/js/google/constants';
-import { firebaseAuthGoogle } from '@assets/js/google/firebase';
 import Image from '@components/Image';
 import { loadCSS } from '@utils/index';
+import * as constants from 'src/assets/js/google/constants';
+import { firebaseAuthGoogle } from 'src/assets/js/google/firebase';
 
 // const Image = React.lazy(() => import('@components/Image'));
 
