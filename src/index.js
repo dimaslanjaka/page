@@ -7,14 +7,14 @@ import { BrowserRouter, useRoutes } from 'react-router-dom';
 import Loader from './components/Loader';
 
 const RSuiteLayout = React.lazy(() => import('@components/RsuiteLayout'));
-const UI = React.lazy(() => import('@route/UI'));
+const UI = React.lazy(() => import('@routes/UI'));
 const NoMatch = React.lazy(() => import('@components/NoMatch'));
-const Login = React.lazy(() => import('@route/Login'));
-const Safelink = React.lazy(() => import('@route/Safelink'));
-const Home = React.lazy(() => import('@route/HomePage'));
-const BotDetect = React.lazy(() => import('@route/BotDetect'));
-const HighlightLayout = React.lazy(() => import('@route/Highlight'));
-const MomentTimezone = React.lazy(() => import('@route/MomentTimezone'));
+const Login = React.lazy(() => import('@routes/Login'));
+const Safelink = React.lazy(() => import('@routes/Safelink'));
+const Home = React.lazy(() => import('@routes/HomePage'));
+const BotDetect = React.lazy(() => import('@routes/BotDetect'));
+const HighlightLayout = React.lazy(() => import('@routes/Highlight'));
+const MomentTimezone = React.lazy(() => import('@routes/MomentTimezone'));
 
 const _Router_array = () => {
   /**

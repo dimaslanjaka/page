@@ -22,7 +22,7 @@
     "paths": {
       "src/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@routes/*": ["./src/route/*"],
+      "@routes/*": ["src/routes/*"],
       "@assets/*": ["./src/assets/*"],
       "@utils/*": ["./src/utils/*"],
       "@project": ["./src/project"]
@@ -38,7 +38,7 @@
     "./src",
     "./src/globals.d.ts",
     "./src/**/*",
-    "./src/route/**/*",
+    "src/routes/**/*",
     "./src/**/*.json",
     "typings"
   ],

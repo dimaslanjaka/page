@@ -154,7 +154,8 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
           onSelect={(active: string) => {
             this.setState({ active });
           }}
-          className="mb-2 mt-2">
+          className="mb-2 mt-2"
+        >
           <NavItem eventKey="textInput">Text Input</NavItem>
           <NavItem eventKey="dateInput">Date Input</NavItem>
           <NavItem eventKey="formatList">Format Cheatsheet</NavItem>
@@ -222,7 +223,8 @@ class MTLayout2 extends React.Component<Record<string, any>, State> {
               id={'panel' + i}
               shaded
               className="mb-2"
-              key={'panelTimezone' + i + tz.value}>
+              key={'panelTimezone' + i + tz.value}
+            >
               {tz.utc.map((item, ii) => {
                 return (
                   <React.Fragment key={'itemWrapper' + item + ii + i}>
@@ -273,7 +275,8 @@ const moment = momentTimezone.tz('${item}');
               appearance="primary"
               onClick={() => {
                 copyTextToClipboard(result);
-              }}>
+              }}
+            >
               Copy Result
             </Button>
           </ButtonToolbar>
@@ -298,7 +301,8 @@ const moment = momentTimezone.tz('${item}');
           <FormControl
             name="timezoneString"
             defaultValue={clientTimezone.timeZone}
-            onChange={this.handleChanges.bind(this)}></FormControl>
+            onChange={this.handleChanges.bind(this)}
+          ></FormControl>
         </FormGroup>
         <FormGroup controlId="pattern" className="mb-2">
           <FormControlLabel>Pattern String</FormControlLabel>

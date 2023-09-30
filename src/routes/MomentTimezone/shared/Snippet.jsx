@@ -80,7 +80,8 @@ class Snippet extends React.Component {
                   . Similar to Java{' '}
                   <Link
                     rel="nofollow noopener"
-                    href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html">
+                    href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html"
+                  >
                     SimpleDateFormat
                   </Link>
                   .

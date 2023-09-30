@@ -3,6 +3,7 @@ import React from 'react';
 
 import AdsenseFill from '@components/Adsense/AdsenseFill';
 import HighlightElement from '@components/Highlight.js';
+import Link from '@components/Link';
 
 // const AdsenseFill = React.lazy(() => import('@components/Adsense/AdsenseFill'));
 // const HighlightElement = React.lazy(() => import('@components/Highlight.js'));
@@ -152,7 +153,7 @@ function loadHljs() {
             see full codes
           </Link>{' '}
           |{' '}
-          <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fecf11178a42503b15c8df26edaa5823961/src/route/Highlight">
+          <Link href="https://github.com/dimaslanjaka/page/tree/83bc6fecf11178a42503b15c8df26edaa5823961/src/routes/Highlight">
             see implementation usages
           </Link>
         </p>
