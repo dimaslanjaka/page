@@ -16,7 +16,7 @@ const _mainEntry = {
     splitChunks: {
       cacheGroups: {
         reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|@remix-run|react-router|react-router-dom)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-(dom|window|router|is)|@remix-run|react-router-dom)[\\/]/,
           name: 'vendor-react',
           chunks: 'all'
         },
@@ -40,9 +40,9 @@ const _mainEntry = {
           name: 'vendor-tslib',
           chunks: 'all'
         },
-        momentVendor: {
-          test: /[\\/]node_modules[\\/](moment|moment-timezone)[\\/]/,
-          name: 'vendor-moment',
+        dateVendor: {
+          test: /[\\/]node_modules[\\/](moment|moment-timezone|date-fns)[\\/]/,
+          name: 'vendor-date',
           chunks: 'all'
         },
         lodashVendor: {
@@ -61,7 +61,7 @@ const _mainEntry = {
           chunks: 'all'
         },
         rsuiteVendor: {
-          test: /[\\/]node_modules[\\/](rsuite|@rsuite)[\\/]/,
+          test: /[\\/]node_modules[\\/](rsuite|@rsuite|rsuite-table)[\\/]/,
           name: 'vendor-rsuite',
           chunks: 'all'
         },
