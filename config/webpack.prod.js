@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const paths = require('./paths');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const common = require('./webpack.common.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -23,6 +24,7 @@ const config = merge(common, {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     // analyze webpack bundle
     new BundleAnalyzerPlugin({
       // report filename

@@ -1,5 +1,5 @@
 const paths = require('./paths');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -50,7 +50,7 @@ const config = {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin(), htmlPlugin],
+  plugins: [htmlPlugin],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss', '.css', '.json', '.otf'],
     fallback: {
