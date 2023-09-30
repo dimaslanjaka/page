@@ -3,19 +3,13 @@ const spawn = require('child_process').spawn;
 /** @type {ReturnType<typeof spawn>|null} */
 let child = null;
 
-gulp.task('test:dist', function (taskDone) {
+const testDist = function (taskDone) {
   /** @type {gulp.TaskFunction} */
   const runTestDist = function (cb) {
     if (child) {
-      console.log('kill start', child.pid, 'killed', child.killed);
-      if (child.stdin) child.stdin.pause();
-      if (!child.killed) child.kill();
-      if (process.platform === 'win32') {
-        spawn('taskkill', ['/pid', child.pid, '/f', '/t']);
-      } else {
-        spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
-      }
-      console.log('kill end', child.pid, 'killed', child.killed);
+      // console.log('kill start', child.pid, 'killed', child.killed);
+      childKill(child);
+      // console.log('kill end', child.pid, 'killed', child.killed);
       child = null;
     }
     child = spawn('yarn', ['test:dist'], { stdio: 'inherit' });
@@ -25,7 +19,7 @@ gulp.task('test:dist', function (taskDone) {
   runTestDist(() => {
     //
   });
-  gulp.watch(
+  const watcher = gulp.watch(
     [
       '.babelrc.js',
       'tsconfig.json',
@@ -39,4 +33,29 @@ gulp.task('test:dist', function (taskDone) {
     ],
     runTestDist
   );
-});
+  process.once('SIGINT', function () {
+    console.log('signint signal received');
+    if (watcher) watcher.close();
+    childKill(child);
+    taskDone();
+  });
+};
+
+gulp.task('test:dist', testDist);
+gulp.task('td', testDist);
+
+/**
+ * kill spawn
+ * @param {ReturnType<typeof spawn>|null} child
+ */
+function childKill(child) {
+  if (child.stdin) child.stdin.pause();
+  if (!child.killed) {
+    child.kill();
+    if (process.platform === 'win32') {
+      spawn('taskkill', ['/pid', child.pid, '/f', '/t']);
+    } else {
+      spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
+    }
+  }
+}
