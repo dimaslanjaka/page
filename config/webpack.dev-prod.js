@@ -1,5 +1,4 @@
 const { merge } = require('webpack-merge');
-const paths = require('./paths');
 const { spawn } = require('child_process');
 
 let child;
@@ -19,7 +18,7 @@ const config = {
       apply: compiler => {
         compiler.hooks.afterEmit.tapAsync('AfterEmitPlugin', (_compilation, callback) => {
           if (child) childKill(child);
-          child = spawn('npm', ['run', 'test:dist'], { stdio: 'inherit', cwd: paths.cwd, env: process.env });
+          child = spawn('yarn', ['test:dist'], { stdio: 'inherit' });
           callback();
         });
       }
