@@ -1,0 +1,12 @@
+imports dictionary
+
+const AdsenseFill = React.lazy(() => import(/* webpackChunkName: "prefix-AdsenseFill" */ '@components/Adsense/AdsenseFill'));
+const Container = React.lazy(() => import(/* webpackChunkName: "prefix-Container" */ 'rsuite/esm/Container'));
+const Row = React.lazy(() => import(/* webpackChunkName: "prefix-Row" */ 'rsuite/esm/Row'));
+const Grid = React.lazy(() => import(/* webpackChunkName: "prefix-Grid" */ 'rsuite/esm/Grid'));
+const Col = React.lazy(() => import(/* webpackChunkName: "prefix-Col" */ 'rsuite/esm/Col'));
+const Link = React.lazy(() => import(/* webpackChunkName: "prefix-Link" */ '@components/Link'));
+const Image = React.lazy(() => import(/* webpackChunkName: "prefix-Image" */ '@components/Image'));
+
+these imports no need defining webpack chunk name
+import('@utils/index')
