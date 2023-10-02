@@ -4,7 +4,10 @@ import 'src/utils/promise';
  * @link {@url https://www.webmanajemen.com/assets/adblock-notify/}
  */
 class adblock {
-  constructor() {
+  /**
+   * inject adblock dynamically
+   */
+  inject() {
     this.html();
 
     const ykrd1 = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

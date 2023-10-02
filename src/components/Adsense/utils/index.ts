@@ -49,7 +49,7 @@ export function triggerAdsense(_e?: Event) {
   if (adblock) {
     import('./adblock').then(({ default: adblock }) => {
       import('./adblock.scss').then(() => {
-        new adblock();
+        new adblock().inject();
       });
     });
   } else {
