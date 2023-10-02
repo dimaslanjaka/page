@@ -37,5 +37,7 @@ gulp.task('backup', gulp.series(backup));
 gulp.task('restore', gulp.series(restore));
 // default task is build task
 gulp.task('default', gulp.series('build'));
+// build static
+gulp.task('static', buildStatic);
 
 module.exports = gulp;
