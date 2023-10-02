@@ -195,129 +195,96 @@ Tip: Search engines can use this attribute to get more information about a link!
 
 NOREFERER
 In short, the noreferrer link type hides referrer information when the link is clicked. A link with the noreferrer link type looks something like this:
-&lt;a href="http://www.webmanajemen.com" rel= ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/02/bash-git-commit-recursive-with-submodule.html" title="Script bash git commit recursive with submodules">Script bash git commit recursive with submodules</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">#!/bin/bash -e
+&lt;a href="http://www.webmanajemen.com" rel= ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/04/setup-jest-code-runner-vscode.html" title="How to setup jest typescript and code runner in vscode">How to setup jest typescript and code runner in vscode</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">
+How to setup jest typescript with code runner in vscode
+with this technique you can directly run test single file in vscode without typings manually in terminal, see below screenshot
 
-## Commit With Submodules
-## usages: sh scripts/commit.sh "commit message"
+Requirements
 
-if [ -z "$1" ]; then
-    echo "You need to provide a commit message"
-    exit
-fi
+install vscode code-runner
+optional install vscode prettier
 
-git submodule foreach "
-    git add -A .
-    git update-index --refresh
-    commits=\$(git diff-index HEAD)
-    if [ ! -z \"\$commits\" ]; then
-        git commit -am \"$1\"
-    fi"
+Setup
+step by step how to setup jest within vscode code runner
+create file .vscode/settings.json
+create settings file and fill below configs.
+{
+  "emmet.includeLanguages": {
+    "ejs": "html" // treat ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/05/asynchronous-serial-iteration-over-an-array-collection.html" title="Asynchronous serial iteration over an array collection">Asynchronous serial iteration over an array collection</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">Node.js design patterns:
+Asynchronous serial iteration over a collection using callbacks.
+This is an example of a very common Node.js design pattern.
+Serial asynchronous iteration over collections (arrays) using callbacks.
+If you want to learn more about common (and not-so-common) Node.js design patterns, check this out.
+Book Node.js design patterns by Mario Casciaro and Luciano Mammino modified by L3n4r0x support for typescript. source
+Features
 
-git add -A .
-git commit -am "$1"</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/02/bash-rollback-github-pages.html" title="bash script to rollback github pages">bash script to rollback github pages</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">Bash script github pages rollback
-#!/usr/bin/env bash
+iterate without callback (auto detect callback is ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/05/git-remove-big-files.html" title="remove files from git history for specific size">remove files from git history for specific size</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">delete big files from git history
+example deleting files more than 100Mb
+cd folder/your/repository
+bfg --strip-blobs-bigger-than 100M .
+clean old logs before push
+git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive
+push
+git push
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/05/hexo-run-custom-script-after-site-generated.html" title="hexo run custom script after site generated">hexo run custom script after site generated</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">Create custom script file
+create new custom script file inside &lt;your hexo project dir&gt;/scripts/script-file-name.js.
 
-echo "Insert commit hash" read commitHash
-branch=$(git branch --show-current)
-branchpatch=patch
+&lt;your hexo project dir&gt; is your current site directory
 
-if [ -z "$commitHash" ]; then
-  echo "No commit hash supplied"
-  exit
-fi
+fill below codes
+'use strict';
 
-git checkout $branch
-git reset --hard $commitHash
-git checkout -b $branchpatch
-git add -A
-git commit -am "hotfix patch ${branch}@${commitHash}" 2&gt; /dev/null
-git checkout $branch
-git checkout $branchpatch .
-git a ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/02/what-is-devnull-in-shell-command.html" title="What is /dev/null in shell command ?">What is /dev/null in shell command ?</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">various types of arguments /dev/null
+/**
+ * clean auto generated files inside .deploy_git
+ */
 
+// const path = require('path');
+// const fs = require('fs-extra');
 
+hexo.extend.filter.register('after_generate', function () {
+  // your logic codes here
+});
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/05/how-to-test-render-custom-tag.html" title="How to test render custom tag on single post HexoJS ?">How to test render custom tag on single post HexoJS ?</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">QA
 
-argument
-argument description
+How to test render custom tag on single post HexoJS ?
+original disscussion at https://github.com/orgs/hexojs/discussions/5203
 
+I was created my plugin custom shortcode.
+how to test render single post with plugin enabled ?
+i was used
+process.cwd = () =&gt; __dirname;
 
+import Hexo from 'hexo';
+import path from 'path';
 
+const hexo = new Hexo(__dirname);
+async function main() {
+  await hexo.init();
+  await hexo.load(() =&gt; {
+    //
+  });
+  const post = await  ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/05/removes-nodemodules-from-git-history.html" title="removes node_modules from git history"><img class="post-bg" src="https://github.com/dimaslanjaka/source-posts/assets/12471057/40dd6736-8c54-4039-bce4-cbddd5984f82" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="removes node_modules from git history"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/removes-nodemodules-from-git-history.html" title="removes node_modules from git history">removes node_modules from git history</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">
 
-&gt; /dev/null
-throw away stdout
+  Deprecated method to delete node_modules from github repository commit history
+WARNING: git filter-branch is no longer officially recommended.
+The official recommendation is to use git-filter-repo.
+see André Anjos’ answer for details
 
+If you are here to copy-paste code:
+This is an example which removes node_modules from history
+  git filter-branch --tree-filter "rm -rf node_modules" --prune-empty HEAD
+git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/05/typescript-equivalent-nets-systemrandom.html" title="TypeScript equivalent .NETs System.Random">TypeScript equivalent .NETs System.Random</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">// by design, this returns the same values as .NET's System.Random
+export default class Random {
+    private static readonly INT_MAX_VALUE: number = 0x7fffffff;
+    private static readonly INT_MIN_VALUE: number = 0x80000000;
+    private static readonly MSEED = 161803398;
 
-1&gt; /dev/null
-throw away stdout
+    private inext = 0;
+    private inextp = 21;
+    private seedArray = new Array(56);
 
-
-2&gt; /dev/null
-throw away stderr
-
-
-&amp;&gt; /dev/null
-throw away both stdout and stderr
-
-
-
-&gt; is the operator used to redirect output. 2 is a reference to the standard error output stream, i.e. 2&gt; = redirect error output.
-/dev/null is the ‘null device’ which just swallows any input provided to it. You can combine the two to effectively throw away ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/install-git-filter-repo.html" title="Tutorial install git-filter-repo"><img class="post-bg" src="https://i.ytimg.com/vi/HV8hfmwDlPY/maxresdefault.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Tutorial install git-filter-repo"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/install-git-filter-repo.html" title="Tutorial install git-filter-repo">Tutorial install git-filter-repo</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">Requirements for installing git-filter-repo
-
-Python v3.x
-Python pip
-
-Step to install
-python -m pip install git-filter-repo
-Usage
-git filter-repo --path FOLDER-NAME/
-Troubleshooting
-pip is missing
-python -m pip install --upgrade pip
-</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2023/04/bash-delete-folder-recursive.html" title="bash script delete folder recursively">bash script delete folder recursively</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">script bash to recursive delete folder
-#!/usr/bin/env bash
-
-# make cygwin bin as priority
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH";
-
-(set -o igncr) 2&gt;/dev/null &amp;&amp; set -o igncr; # cygwin encoding fix
-
-basedir=`dirname "$0"`
-
-case `uname` in
-  *CYGWIN*) basedir=`cygpath -w "$basedir"`;;
-esac
-
-if [ -z "$1" ]; then
-    echo "You need to provide a file or folder path"
-    exit
-fi
-
-if [ ! -d "$1&amp;q ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/04/git-fix-case-sensitive-conflict.html" title="git fix case-sensitive conflict"><img class="post-bg" src="https://1.bp.blogspot.com/-qPtq_n0ithw/YPbCOjZsFyI/AAAAAAAAAhM/JfQ6R2yIcgYMlTZ9GhPaOgFEZ1rm0O0lACLcBGAsYHQ/s600/git-cli-commands.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git fix case-sensitive conflict"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/git-fix-case-sensitive-conflict.html" title="git fix case-sensitive conflict">git fix case-sensitive conflict</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">How do I commit case-sensitive filename changes in Git?
-I renamed some files to name.jpg, like Name.jpg.
-Git doesn’t recognize these changes, so I had to delete the file and re-upload it.
-Is there a way for Git to be case sensitive when checking for filename changes?
-I haven’t changed anything in the file itself.
-Solutions
-Here some solutions to fix git case-sensitive filenames.
-The correct case for Git filenames for whole repo:
-git rm -r --cached .
-git add --all .
-
-git status ##Review that **on ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/how-to-delete-commit-history-github.html" title="How to delete commit history from github repository"><img class="post-bg" src="https://www.techielass.com/content/images/2022/09/REWRITING-GIT-HISTORY.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to delete commit history from github repository"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/how-to-delete-commit-history-github.html" title="How to delete commit history from github repository">How to delete commit history from github repository</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2023-09-02T14:28:04.000Z" title="Diupdate 2023-09-02 21:28:04">2023-09-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/programming/">programming</a></span></div><div class="content">How to delete commit history from github repository
-
-bash script to delete history of commits from github repository
-
-#!/usr/bin/env bash
-
-## delete commit history
-
-branch=$(git branch --show-current)
-git checkout --orphan latest_branch # Move to new branch with new object
-git add -A # Add all files
-git commit -am "Prune at $(date)" # Commiting the changes
-git branch -D $branch # Deleting master branch
-git branch -m $branch # Renaming branch as master
-git push -f origin $branch # Pushe ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/31/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/31/#content-inner">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/#content-inner">33</a><span class="space">…</span><a class="page-number" href="/page/178/#content-inner">178</a><a class="extend next" rel="next" href="/page/33/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Dimas Lanjaka</div><div class="author-info__description">Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering php, javascript, jquery, mysql, seo, e-commerce and others.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Postingan</div><div class="length-num">1773</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">143</div></a><a href="/categories/"><div class="headline">Kategori</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ=="><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ==" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:dimaslanjaka@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Postingan Baru</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/notes/catatan-muslim.html" title="Catatan Muslim">Catatan Muslim</a><time datetime="2023-10-01T19:09:45.000Z" title="Dibuat 2023-10-02 02:09:45">2023-10-02</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/react-dom-server-generate-static-html-from-react.html" title="react-dom server generate static html from react elements">react-dom server generate static html from react elements</a><time datetime="2023-09-27T23:34:23.000Z" title="Dibuat 2023-09-28 06:34:23">2023-09-28</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/how-to-use-react-suite-toaster-in-reactjs.html" title="How to use react suite toaster in reactjs">How to use react suite toaster in reactjs</a><time datetime="2023-09-26T01:00:44.000Z" title="Dibuat 2023-09-26 08:00:44">2023-09-26</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/fix-vscode-settings-sync-linux.html" title="How to fix vscode settings sync in linux">How to fix vscode settings sync in linux</a><time datetime="2023-09-18T20:37:50.000Z" title="Dibuat 2023-09-19 03:37:50">2023-09-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/how-to-react-lazy-load-module-with-dot-notation.html" title="How to lazy loading JSX react module with dots notation"><img src="https://felixgerschau.com/static/fd98b903a50c5468828ec6c1c72d7b7e/0243e/react-lazy-loading-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to lazy loading JSX react module with dots notation"></a><div class="content"><a class="title" href="/2023/09/how-to-react-lazy-load-module-with-dot-notation.html" title="How to lazy loading JSX react module with dots notation">How to lazy loading JSX react module with dots notation</a><time datetime="2023-09-17T23:18:02.000Z" title="Dibuat 2023-09-18 06:18:02">2023-09-18</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+    constructor(seed: number) {
+        var subtraction = (seed == Random.INT_MIN_VALUE) ? Random.INT_MAX_VALUE : Math.abs(s ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/31/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/31/#content-inner">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/#content-inner">33</a><span class="space">…</span><a class="page-number" href="/page/178/#content-inner">178</a><a class="extend next" rel="next" href="/page/33/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Dimas Lanjaka</div><div class="author-info__description">Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering php, javascript, jquery, mysql, seo, e-commerce and others.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Postingan</div><div class="length-num">1773</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">143</div></a><a href="/categories/"><div class="headline">Kategori</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ=="><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ==" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:dimaslanjaka@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Postingan Baru</span></div><div class="aside-list"><div class="aside-list-item"><div class="content"><a class="title" href="/notes/catatan-muslim.html" title="Catatan Muslim">Catatan Muslim</a><time datetime="2023-10-01T19:09:45.000Z" title="Dibuat 2023-10-02 02:09:45">2023-10-02</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/react-dom-server-generate-static-html-from-react.html" title="react-dom server generate static html from react elements">react-dom server generate static html from react elements</a><time datetime="2023-09-27T23:34:23.000Z" title="Dibuat 2023-09-28 06:34:23">2023-09-28</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/how-to-use-react-suite-toaster-in-reactjs.html" title="How to use react suite toaster in reactjs">How to use react suite toaster in reactjs</a><time datetime="2023-09-26T01:00:44.000Z" title="Dibuat 2023-09-26 08:00:44">2023-09-26</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/09/fix-vscode-settings-sync-linux.html" title="How to fix vscode settings sync in linux">How to fix vscode settings sync in linux</a><time datetime="2023-09-18T20:37:50.000Z" title="Dibuat 2023-09-19 03:37:50">2023-09-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/how-to-react-lazy-load-module-with-dot-notation.html" title="How to lazy loading JSX react module with dots notation"><img src="https://felixgerschau.com/static/fd98b903a50c5468828ec6c1c72d7b7e/0243e/react-lazy-loading-cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to lazy loading JSX react module with dots notation"></a><div class="content"><a class="title" href="/2023/09/how-to-react-lazy-load-module-with-dot-notation.html" title="How to lazy loading JSX react module with dots notation">How to lazy loading JSX react module with dots notation</a><time datetime="2023-09-17T23:18:02.000Z" title="Dibuat 2023-09-18 06:18:02">2023-09-18</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>Kategori</span>
             <a class="card-more-btn" href="/categories/" title="Selengkapnya">
@@ -325,7 +292,7 @@ git push -f origin $branch # Pushe ...</div></div></div><nav id="pagination"><di
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/download/"><span class="card-category-list-name">download</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/education/"><span class="card-category-list-name">education</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/education/math/"><span class="card-category-list-name">math</span><span class="card-category-list-count">3</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/flashing/"><span class="card-category-list-name">flashing</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/"><span class="card-category-list-name">games</span><span class="card-category-list-count">963</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/"><span class="card-category-list-name">chimeraland</span><span class="card-category-list-count">934</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/attendants/"><span class="card-category-list-name">attendants</span><span class="card-category-list-count">103</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/material/"><span class="card-category-list-name">material</span><span class="card-category-list-count">281</span></a></li></ul></li></ul></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/vainglory/" style="font-size: 1.15em; color: #999b9e">vainglory</a> <a href="/tags/java/" style="font-size: 1.18em; color: #999ca0">java</a> <a href="/tags/tips-tricks/" style="font-size: 1.48em; color: #99a8bd">tips &amp; tricks</a> <a href="/tags/blog/" style="font-size: 1.1em; color: #999">blog</a> <a href="/tags/download/" style="font-size: 1.1em; color: #999">download</a> <a href="/tags/bluestack/" style="font-size: 1.1em; color: #999">bluestack</a> <a href="/tags/jest/" style="font-size: 1.13em; color: #999a9b">jest</a> <a href="/tags/time/" style="font-size: 1.1em; color: #999">time</a> <a href="/tags/musics/" style="font-size: 1.45em; color: #99a7ba">musics</a> <a href="/tags/redmi/" style="font-size: 1.1em; color: #999">redmi</a> <a href="/tags/social-media/" style="font-size: 1.25em; color: #999fa7">social media</a> <a href="/tags/bluestacks/" style="font-size: 1.13em; color: #999a9b">bluestacks</a> <a href="/tags/powershell/" style="font-size: 1.13em; color: #999a9b">powershell</a> <a href="/tags/regexp/" style="font-size: 1.13em; color: #999a9b">regexp</a> <a href="/tags/cmd/" style="font-size: 1.18em; color: #999ca0">cmd</a> <a href="/tags/github-actions/" style="font-size: 1.2em; color: #999da3">github-actions</a> <a href="/tags/themes/" style="font-size: 1.1em; color: #999">themes</a> <a href="/tags/nunjucks/" style="font-size: 1.1em; color: #999">nunjucks</a> <a href="/tags/file/" style="font-size: 1.13em; color: #999a9b">file</a> <a href="/tags/typescript/" style="font-size: 1.28em; color: #99a0aa">typescript</a> <a href="/tags/css/" style="font-size: 1.4em; color: #99a5b6">css</a> <a href="/tags/chimeraland/" style="font-size: 1.5em; color: #99a9bf">chimeraland</a> <a href="/tags/midi/" style="font-size: 1.1em; color: #999">midi</a> <a href="/tags/movie/" style="font-size: 1.1em; color: #999">movie</a> <a href="/tags/kotlin/" style="font-size: 1.13em; color: #999a9b">kotlin</a> <a href="/tags/snippet/" style="font-size: 1.3em; color: #99a1ac">snippet</a> <a href="/tags/blogging/" style="font-size: 1.38em; color: #99a4b3">blogging</a> <a href="/tags/codeigniter/" style="font-size: 1.15em; color: #999b9e">codeigniter</a> <a href="/tags/size/" style="font-size: 1.1em; color: #999">size</a> <a href="/tags/scala/" style="font-size: 1.13em; color: #999a9b">scala</a> <a href="/tags/movies/" style="font-size: 1.35em; color: #99a3b1">movies</a> <a href="/tags/commonjs/" style="font-size: 1.1em; color: #999">commonjs</a> <a href="/tags/seo/" style="font-size: 1.32em; color: #99a2ae">seo</a> <a href="/tags/durango/" style="font-size: 1.23em; color: #999ea5">durango</a> <a href="/tags/event/" style="font-size: 1.13em; color: #999a9b">event</a> <a href="/tags/proxy/" style="font-size: 1.15em; color: #999b9e">proxy</a> <a href="/tags/agent/" style="font-size: 1.1em; color: #999">agent</a> <a href="/tags/net/" style="font-size: 1.1em; color: #999">net</a> <a href="/tags/ts-node/" style="font-size: 1.1em; color: #999">ts-node</a> <a href="/tags/blogger/" style="font-size: 1.43em; color: #99a6b8">blogger</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="Selengkapnya">
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/test/" style="font-size: 1.1em; color: #999">test</a> <a href="/tags/esm/" style="font-size: 1.13em; color: #999a9b">esm</a> <a href="/tags/php/" style="font-size: 1.35em; color: #99a3b1">php</a> <a href="/tags/pet/" style="font-size: 1.48em; color: #99a8bd">pet</a> <a href="/tags/miscellaneous/" style="font-size: 1.25em; color: #999fa7">miscellaneous</a> <a href="/tags/chimeraland/" style="font-size: 1.5em; color: #99a9bf">chimeraland</a> <a href="/tags/unit/" style="font-size: 1.1em; color: #999">unit</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/blogger/" style="font-size: 1.4em; color: #99a5b6">blogger</a> <a href="/tags/tips-tricks/" style="font-size: 1.45em; color: #99a7ba">tips &amp; tricks</a> <a href="/tags/nunjucks/" style="font-size: 1.1em; color: #999">nunjucks</a> <a href="/tags/scenic-spot/" style="font-size: 1.1em; color: #999">scenic-spot</a> <a href="/tags/cygwin/" style="font-size: 1.1em; color: #999">cygwin</a> <a href="/tags/bluestacks/" style="font-size: 1.13em; color: #999a9b">bluestacks</a> <a href="/tags/javascript/" style="font-size: 1.43em; color: #99a6b8">javascript</a> <a href="/tags/proxy/" style="font-size: 1.15em; color: #999b9e">proxy</a> <a href="/tags/android/" style="font-size: 1.38em; color: #99a4b3">android</a> <a href="/tags/amp/" style="font-size: 1.28em; color: #99a0aa">amp</a> <a href="/tags/monster/" style="font-size: 1.48em; color: #99a8bd">monster</a> <a href="/tags/snippet/" style="font-size: 1.32em; color: #99a2ae">snippet</a> <a href="/tags/gulp/" style="font-size: 1.1em; color: #999">gulp</a> <a href="/tags/recaptcha/" style="font-size: 1.1em; color: #999">recaptcha</a> <a href="/tags/hosting/" style="font-size: 1.13em; color: #999a9b">hosting</a> <a href="/tags/agent/" style="font-size: 1.1em; color: #999">agent</a> <a href="/tags/regedit/" style="font-size: 1.1em; color: #999">regedit</a> <a href="/tags/coverage/" style="font-size: 1.1em; color: #999">coverage</a> <a href="/tags/node/" style="font-size: 1.1em; color: #999">node</a> <a href="/tags/random/" style="font-size: 1.1em; color: #999">random</a> <a href="/tags/speed/" style="font-size: 1.1em; color: #999">speed</a> <a href="/tags/auto/" style="font-size: 1.1em; color: #999">auto</a> <a href="/tags/life-skill/" style="font-size: 1.15em; color: #999b9e">life skill</a> <a href="/tags/mysql/" style="font-size: 1.2em; color: #999da3">mysql</a> <a href="/tags/apache/" style="font-size: 1.15em; color: #999b9e">apache</a> <a href="/tags/qfil/" style="font-size: 1.1em; color: #999">qfil</a> <a href="/tags/vscode/" style="font-size: 1.23em; color: #999ea5">vscode</a> <a href="/tags/flash/" style="font-size: 1.1em; color: #999">flash</a> <a href="/tags/bash/" style="font-size: 1.3em; color: #99a1ac">bash</a> <a href="/tags/popular/" style="font-size: 1.18em; color: #999ca0">popular</a> <a href="/tags/midi/" style="font-size: 1.1em; color: #999">midi</a> <a href="/tags/snippets/" style="font-size: 1.13em; color: #999a9b">snippets</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="Selengkapnya">
     <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">Oktober 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">September 2023</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">Agustus 2023</span><span class="card-archive-list-count">23</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">Juli 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">Juni 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">Mei 2023</span><span class="card-archive-list-count">175</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">April 2023</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">Maret 2023</span><span class="card-archive-list-count">49</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2014 - 2023 By Dimas Lanjaka</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9oZXhvLmlv">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2plcnJ5YzEyNy9oZXhvLXRoZW1lLWJ1dHRlcmZseQ==">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Kembali ke atas"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/tw_cn.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="https://www.webmanajemen.com/page/assets/js/r-ads.js"></script><script src="/page/assets/js/highlight.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Memuat Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Cari postingan" type="text"></div></div><hr><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/search/local-search.min.js"></script></div></div>
 <script src="/hexo-shortcodes-lib/githubcard.js"></script>
 <link rel="stylesheet" href="/hexo-shortcodes-lib/gist.css">
