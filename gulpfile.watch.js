@@ -12,7 +12,7 @@ const testDist = function (taskDone) {
       // console.log('kill end', child.pid, 'killed', child.killed);
       child = null;
     }
-    child = spawn('yarn', ['test:dist'], { stdio: 'inherit' });
+    child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
     // child.on('exit', () => cb());
     cb();
   };
@@ -53,7 +53,7 @@ function childKill(child) {
   if (!child.killed) {
     child.kill();
     if (process.platform === 'win32') {
-      spawn('taskkill', ['/pid', child.pid, '/f', '/t']);
+      spawn('taskkill', ['/pid', child.pid, '/f', '/t'], { shell: true });
     } else {
       spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
     }
