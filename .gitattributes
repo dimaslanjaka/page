@@ -1,0 +1,46 @@
+# Autodetect text files
+*           text=auto eol=lf
+# Definitively text files
+*.txt       text eol=lf
+*.json      text eol=lf
+*.txt       text eol=lf
+*.vcproj    text eol=crlf
+*.sh        text eol=lf
+*.ts        text eol=lf
+*.js        text eol=lf
+
+# Ensure those won't be messed up with
+*.gif       binary diff
+*.ttf       binary diff
+*.otf       binary diff
+*.woff      binary diff
+*.woff2     binary diff
+*.png       binary diff
+*.jpg       binary diff
+*.ico       binary diff
+*.pdf       binary diff
+
+# Ignore some meta files when creating an archive of this repository
+/.github            export-ignore
+/.editorconfig      export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.scrutinizer.yml   export-ignore
+/phpunit.xml.dist   export-ignore
+/tests              export-ignore
+/docs               export-ignore
+
+# Avoid merge conflicts in CHANGELOG
+# https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/
+/CHANGELOG.md		merge=union
+/changelog.md		merge=union
+
+# turn off delta attributes for large files
+# fix large files
+# https://stackoverflow.com/a/3096675
+# /large_file_dir/* -delta
+# another/file/that/is/large -delta
+*.psd -delta
+*.iso -delta
+*.tgz -delta
+
