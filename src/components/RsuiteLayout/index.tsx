@@ -43,9 +43,16 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     // load theme stylesheet
     require('./theme.scss');
     // load adsense
-    import('@components/Adsense/utils');
+    window.adsense_option = {
+      places: ['.RsuiteLayout'],
+      localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com'],
+      adblock: false
+    };
+    import('@components/Adsense/utils').then(load => {
+      load.main();
+    });
     // load scroll helper
-    import('@utils/scroll-helper');
+    // import('@utils/scroll-helper');
 
     window.addEventListener('load', this.handleLoad.bind(this));
   }
