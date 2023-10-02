@@ -2,6 +2,14 @@ import React from 'react';
 import { createBrowserRouter, RouteObject, RouterProvider } from 'react-router-dom';
 import Loader from './components/Loader';
 
+if (!window.adsense_option) {
+  window.adsense_option = {
+    places: ['.RsuiteLayout'],
+    localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com'],
+    adblock: true
+  };
+}
+
 /**
  * create multiple routes based on defined path
  * @param path
