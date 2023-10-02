@@ -1,4 +1,5 @@
 import paths from '../config/paths';
+import rconfig from '../routes.json';
 
 type Routes = import('html-webpack-plugin').Options & {
   [key: string]: any;
@@ -6,60 +7,7 @@ type Routes = import('html-webpack-plugin').Options & {
   filename: string;
 };
 
-const rconfig: Routes[] = [
-  {
-    title: 'Home page - WMI',
-    filename: 'index.html'
-  },
-  {
-    title: 'Login page - WMI',
-    filename: 'login.html'
-  },
-  {
-    title: '404 - WMI',
-    filename: '404.html'
-  },
-  {
-    title: 'Outbound page - WMI',
-    filename: 'safelink.html'
-  },
-  {
-    title: 'Auto highlight.js - WMI',
-    filename: 'highlight-js.html'
-  },
-  {
-    title: 'Login page - WMI',
-    filename: 'google/login.html'
-  },
-  {
-    title: 'Moment Timezone Playground',
-    filename: 'moment-timezone.html',
-    meta: {
-      description: 'Moment Timezone Online Playground For Free. Support custom format pattern',
-      language: {
-        httpEquiv: 'Content-Language',
-        content: 'en_US'
-      },
-      canonical: {
-        rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/moment-timezone.html'
-      }
-    }
-  },
-  {
-    title: 'Selenium checker - bot detector',
-    description: 'Javascript Bot Detector Tools - WMI',
-    filename: 'bot-detect.html',
-    meta: {
-      canonical: {
-        rel: 'canonical',
-        href: 'https://www.webmanajemen.com/page/bot-detect.html'
-      }
-    }
-  }
-];
-
-const routes = rconfig
+const routes = (rconfig as Routes[])
   .map(obj => {
     obj.meta = obj.meta || ({} as any);
     return obj;
