@@ -1,11 +1,12 @@
 const gulp = require('gulp');
-const { copy } = require('./gulpfile.shared');
-const { buildSite } = require('./gulpfile.webpack');
 const spawn = require('child_process').spawn;
 require('ts-node').register();
 
 /** @type {import('child_process').ChildProcess[]} */
 let childs = [];
+// /** @type {AbortController|null} */
+// let abortController = null;
+let indicator = false;
 
 const testDist = function (taskDone) {
   /** @type {gulp.TaskFunction} */
@@ -13,13 +14,22 @@ const testDist = function (taskDone) {
     childKill(childs);
     if (process.platform === 'win32') {
       // windows doesnt kill subprocesses
-      // yarn build:webpack
-      buildSite(async () => {
-        // yarn build:html
-        await require('./html/generate').generateRouteHtml();
-        // gulp page:copy
-        await copy();
-      });
+      // if (abortController) abortController.abort();
+      // abortController = new AbortController();
+      // // yarn build:webpack
+      // require('./gulpfile.webpack').buildSite(async () => {
+      //   // yarn build:html
+      //   await require('./html/generate').generateRouteHtml();
+      //   // gulp page:copy
+      //   await require('./gulpfile.shared').copy();
+      // });
+      if (!indicator) {
+        indicator = true;
+        spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true }).on('exit', () => {
+          indicator = false;
+          cb();
+        });
+      }
     } else {
       const child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
       // child.on('exit', () => cb());
