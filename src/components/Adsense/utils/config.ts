@@ -47,15 +47,18 @@ export interface AdsenseOption {
    */
   localhost?: string[];
   allAds?: AdsList;
+  /** enable adblock detector */
+  adblock?: boolean;
 }
 
 // initialize undefined window properties
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  if (!window.adsense_option)
+  if (!window.adsense_option) {
     window.adsense_option = {
       places: [],
       localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com']
     };
+  }
   if (!window.adsbygoogle) window.adsbygoogle = [];
   if (typeof window.adsenseInitialized === 'undefined') window.adsenseInitialized = false;
 }

@@ -37,10 +37,24 @@ export function triggerAdsense(_e?: Event) {
   window.adsenseInitialized = true;
 
   // apply current slot
-  window.adsense_option.currentSlot = getCurrentSlot();
-  fillFixedPosition(window.adsense_option.currentSlot);
-  initializeRandomAds();
-  applyEnviromentAds();
+  const apply = () => {
+    window.adsense_option.currentSlot = getCurrentSlot();
+    fillFixedPosition(window.adsense_option.currentSlot);
+    initializeRandomAds();
+    applyEnviromentAds();
+  };
+
+  const { adblock } = window.adsense_option || {};
+
+  if (adblock) {
+    import('./adblock').then(({ default: adblock }) => {
+      import('./adblock.scss').then(() => {
+        new adblock();
+      });
+    });
+  } else {
+    apply();
+  }
 }
 
 /*if (typeof module === 'object' && 'exports' in module) {
