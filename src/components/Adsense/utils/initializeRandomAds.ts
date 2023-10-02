@@ -101,7 +101,8 @@ export default function initializeRandomAds() {
   //console.info({ existingSources });
   if (!existingSources.some(str => str.includes('pagead/js/adsbygoogle.js'))) {
     // create pagead when not existing page ad
-    loadJS(pageAd, { onload: onloadAds, onerror: () => console.error('failed load adsense') });
+    const onerror = () => console.error('failed load adsense');
+    loadJS(pageAd, { onload: onloadAds, onerror }).catch(onerror);
   } else {
     // load callback instead
     onloadAds();
