@@ -65,14 +65,7 @@ const router = createBrowserRouter([
     // element: <RSuiteLayout />,
     async lazy() {
       const { default: Layout } = await import('@components/RsuiteLayout');
-      const { default: Adblock } = await import('@components/Adsense/AdBlockModal');
-      const Component = () => (
-        <React.Fragment>
-          <Layout />
-          <Adblock />
-        </React.Fragment>
-      );
-      return { Component };
+      return { Component: Layout };
     },
     children: [
       {

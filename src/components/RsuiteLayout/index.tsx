@@ -7,6 +7,7 @@ import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router-dom';
 import * as hljs from '@components/Highlight.js/helper';
 
 import { Container, Content, Footer, Header, Sidebar } from 'rsuite';
+import AdBlockModal from '../Adsense/AdBlockModal';
 import MyFooter from './Footer';
 import MyNavbar from './Navbar';
 import MySidebar from './Sidebar';
@@ -42,15 +43,14 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
     require('src/assets/css/main.scss');
     // load theme stylesheet
     require('./theme.scss');
-    // load adsense
-    window.adsense_option = {
+    // load adsense option
+    window.adsense_option = Object.assign(window.adsense_option || {}, {
       places: ['.RsuiteLayout'],
-      localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com'],
-      adblock: false
-    };
-    import('@components/Adsense/utils').then(load => {
-      load.main();
+      localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com']
     });
+    // import('@components/Adsense/utils').then(load => {
+    //   load.triggerAdsense({ react: true });
+    // });
     // load scroll helper
     // import('@utils/scroll-helper');
 
@@ -92,6 +92,7 @@ class RSuiteLayout extends React.Component<Record<string, any>, Record<string, a
             <MyFooter />
           </Footer>
         </Container>
+        <AdBlockModal />
       </div>
     );
   }

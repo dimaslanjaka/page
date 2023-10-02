@@ -18,13 +18,19 @@ class AdBlockModal extends React.Component<any, State> {
   componentDidMount(): void {
     this._mounted = true;
     this._abortController = new AbortController();
-    import('./utils/adblock').then(({ default: adblock }) => {
-      new adblock()
-        .ajaxMethod()
-        .catch(() => {
-          if (this._mounted) this.setState({ open: true });
+    // import('./utils/adblock').then(({ default: adblock }) => {
+    //   new adblock().ajaxMethod().catch(() => {
+    //     if (this._mounted) this.setState({ open: true });
+    //   });
+    // });
+    import('@components/Adsense/utils').then(load => {
+      load
+        .triggerAdsense({
+          react: true
         })
-        .then(console.log);
+        .then(open => {
+          if (this._mounted) this.setState({ open });
+        });
     });
   }
 
