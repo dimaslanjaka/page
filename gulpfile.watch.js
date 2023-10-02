@@ -6,7 +6,9 @@ require('ts-node').register();
 let childs = [];
 // /** @type {AbortController|null} */
 // let abortController = null;
-let indicator = false;
+/** @type {import('child_process').ChildProcess|null} */
+let winIndicator;
+let winQueue = false;
 
 const testDist = function (taskDone) {
   /** @type {gulp.TaskFunction} */
@@ -23,12 +25,21 @@ const testDist = function (taskDone) {
       //   // gulp page:copy
       //   await require('./gulpfile.shared').copy();
       // });
-      if (!indicator) {
-        indicator = true;
-        spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true }).on('exit', () => {
-          indicator = false;
-          cb();
+      if (!winIndicator) {
+        winIndicator = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true }).on('exit', () => {
+          winIndicator = null;
+          if (winQueue) {
+            winQueue = false;
+            // re-run current task
+            runTestDist(cb);
+          } else {
+            cb();
+          }
         });
+      } else {
+        console.log('another instance still running', winIndicator.pid);
+        winQueue = true;
+        cb();
       }
     } else {
       const child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
