@@ -3,6 +3,7 @@ import { Modal } from 'rsuite';
 
 interface State {
   open: boolean;
+  text?: string[];
 }
 
 class AdBlockModal extends React.Component<any, State> {
@@ -11,7 +12,8 @@ class AdBlockModal extends React.Component<any, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      text: []
     };
   }
 
@@ -32,6 +34,10 @@ class AdBlockModal extends React.Component<any, State> {
           if (this._mounted) this.setState({ open });
         });
     });
+
+    import('./utils/adblock').then(({ text }) => {
+      if (this._mounted) this.setState({ text });
+    });
   }
 
   componentWillUnmount(): void {
@@ -43,16 +49,18 @@ class AdBlockModal extends React.Component<any, State> {
   }
 
   render() {
-    const { open } = this.state;
+    const { open, text = [] } = this.state;
 
     return (
       <>
         <Modal backdrop="static" role="alertdialog" open={open} size="full">
           <Modal.Title className="text-center">AdBlock Detected</Modal.Title>
           <Modal.Body>
-            Our website is made possible by displaying online advertisements to our visitors. We only display a few
-            banner ads. We do not install any ad spam code. Please consider supporting us by disabling your ad blocker.
-            {/* <Image src="https://giphy.com/embed/OqKNWrCt94ttupaFYL/giphy.gif" /> */}
+            <ul>
+              {text.map(str => (
+                <li key={str}>{str}</li>
+              ))}
+            </ul>
           </Modal.Body>
         </Modal>
       </>
