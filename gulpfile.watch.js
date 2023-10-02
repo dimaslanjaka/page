@@ -1,20 +1,32 @@
 const gulp = require('gulp');
+const { copy } = require('./gulpfile.shared');
+const { buildSite } = require('./gulpfile.webpack');
 const spawn = require('child_process').spawn;
-/** @type {ReturnType<typeof spawn>|null} */
-let child = null;
+require('ts-node').register();
+
+/** @type {import('child_process').ChildProcess[]} */
+let childs = [];
 
 const testDist = function (taskDone) {
   /** @type {gulp.TaskFunction} */
   const runTestDist = function (cb) {
-    if (child) {
-      // console.log('kill start', child.pid, 'killed', child.killed);
-      childKill(child);
-      // console.log('kill end', child.pid, 'killed', child.killed);
-      child = null;
+    childKill(childs);
+    if (process.platform === 'win32') {
+      // windows doesnt kill subprocesses
+      // yarn build:webpack
+      buildSite(() => {
+        // gulp page:copy
+        copy().then(() => {
+          // yarn build:html
+          require('./html');
+        });
+      });
+    } else {
+      const child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
+      // child.on('exit', () => cb());
+      childs.push(child);
+      cb();
     }
-    child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
-    // child.on('exit', () => cb());
-    cb();
   };
   runTestDist(() => {
     //
@@ -36,7 +48,7 @@ const testDist = function (taskDone) {
   process.once('SIGINT', function () {
     console.log('signint signal received');
     if (watcher) watcher.close();
-    childKill(child);
+    childKill(childs);
     taskDone();
   });
 };
@@ -46,17 +58,25 @@ gulp.task('td', testDist);
 
 /**
  * kill spawn
- * @param {ReturnType<typeof spawn>|null} child
+ * @param {import('child_process').ChildProcess[]} childs
  */
-function childKill(child) {
-  if (child.stdin) child.stdin.pause();
-  if (!child.killed) {
-    child.kill();
-    if (process.platform === 'win32') {
-      spawn('taskkill', ['/pid', child.pid, '/f', '/t'], { shell: true });
-    } else {
-      spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
+function childKill(childs) {
+  for (let i = 0; i < childs.length; i++) {
+    const child = childs.shift();
+    if (child) {
+      if (child.stdin) child.stdin.pause();
+      if (child.stdout) child.stdout.destroy();
+      if (child.stderr) child.stderr.destroy();
+      if (!child.killed) {
+        child.kill();
+        if (process.platform === 'win32') {
+          spawn('taskkill', ['/pid', child.pid, '/f', '/t'], { shell: true });
+        } else {
+          spawn('kill', ['-9', child.pid], { stdio: 'inherit' });
+        }
+      }
     }
+    console.log(child.pid, 'killed', child.killed);
   }
 }
 

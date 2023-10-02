@@ -1,4 +1,3 @@
-const { spawn } = require('git-command-helper');
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
@@ -96,12 +95,36 @@ const buildStatic = done => {
   );
 };
 
-const buildSite = done =>
-  spawn('cross-env-shell', ['NODE_ENV=production', 'webpack', '--mode', 'production'])
-    .then(() => done())
-    .catch(done);
+/**
+ * gulp webpack build production using NodeJS API
+ * @param {<T>(err?: null | Error, result?: T)=>any} done
+ */
+const buildProduction = done => {
+  const webpack = require('webpack');
+  const config = require('./config/webpack.prod');
+  const merge = Object.assign(config, { mode: 'production' });
+  // add --progress args to webpack
+  merge.plugins.push(new webpack.ProgressPlugin());
+  // same as yarn build:webpack
+  const compiler = webpack(merge);
 
-module.exports = { buildStatic, buildSite };
+  compiler.run(function (err, stats) {
+    if (err) throw err;
+    process.stdout.write(
+      stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+      }) + '\n\n'
+    );
+
+    compiler.close(done);
+  });
+};
+
+module.exports = { buildStatic, buildSite: buildProduction };
 
 if (require.main === module) {
   buildStatic(() => {
