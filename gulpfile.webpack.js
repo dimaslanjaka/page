@@ -70,7 +70,7 @@ function createConfig(entry, output) {
 const buildStatic = done => {
   webpack(
     [
-      createConfig('./src/components/Adsense/utils/index.ts', path.join(__dirname, 'dist/assets/js/r-ads.js')),
+      createConfig('./src/components/Adsense/utils/main.ts', path.join(__dirname, 'dist/assets/js/r-ads.js')),
       createConfig('./public/page/assets/js/analystic.js', path.join(__dirname, 'dist/assets/js/analystic.js')),
       createConfig('./src/utils/scroll-helper.ts', path.join(__dirname, 'dist/assets/js/remember-scroll-position.js')),
       createConfig('./src/utils/scroll-helper.ts', path.join(__dirname, 'dist/assets/js/scroll-to-hash.js')),

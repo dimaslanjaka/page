@@ -12,10 +12,11 @@ import initializeRandomAds from './initializeRandomAds';
  */
 
 /** Option */
-if (!window.adsense_option)
+if (!window.adsense_option) {
   window.adsense_option = {
     places: []
   };
+}
 
 /**
  * do not show ads to these page title
@@ -46,6 +47,8 @@ export function triggerAdsense(_e?: Event) {
 
   const { adblock } = window.adsense_option || {};
 
+  console.log('options', window.adsense_option);
+
   if (adblock) {
     import('./adblock').then(({ default: adblock }) => {
       import('./adblock.scss').then(() => {
@@ -57,35 +60,22 @@ export function triggerAdsense(_e?: Event) {
   }
 }
 
-/*if (typeof module === 'object' && 'exports' in module) {
-  module.exports = { triggerAdsense };
-}*/
-
-/** main */
-
-if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-  if (!banned && !localhost) {
-    // skip showing ads on non-domain host
-    // skip showing ads from banned page
-    if (document.readyState !== 'loading') {
-      // fix react
-      // document.addEventListener('load', triggerAdsense);
-      document.addEventListener('scroll', triggerAdsense);
-      //triggerAdsense(undefined);
-    } else {
-      document.addEventListener('DOMContentLoaded', triggerAdsense);
+/**
+ * adsense main function
+ */
+export function main() {
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    if (!banned && !localhost) {
+      // skip showing ads on non-domain host
+      // skip showing ads from banned page
+      if (document.readyState !== 'loading') {
+        // fix react
+        // document.addEventListener('load', triggerAdsense);
+        document.addEventListener('scroll', triggerAdsense);
+        //triggerAdsense(undefined);
+      } else {
+        document.addEventListener('DOMContentLoaded', triggerAdsense);
+      }
     }
   }
 }
-
-// console.info('adsense', {
-//   localhost,
-//   banned,
-//   state: document.readyState,
-//   react:
-//     window.React ||
-//     window.__REACT_DEVTOOLS_GLOBAL_HOOK__ ||
-//     document.querySelector('[data-reactroot], [data-reactid]') ||
-//     Array.from(document.querySelectorAll('*')).some(e => typeof e['_reactRootContainer'] !== 'undefined') ||
-//     Array.from(document.querySelectorAll('[id]')).some(e => typeof e['_reactRootContainer'] !== 'undefined'),
-// });
