@@ -6,7 +6,7 @@ if (!window.adsense_option) {
   window.adsense_option = {
     places: ['.RsuiteLayout'],
     localhost: ['adsense.webmanajemen.com', 'agc.io', 'dev.webmanajemen.com'],
-    adblock: true
+    adblock: false
   };
 }
 
@@ -117,6 +117,14 @@ const router = createBrowserRouter([
                 // element: <TestAdsense />
                 async lazy() {
                   const { default: Component } = await import('src/pages/TestAdsense');
+                  return { Component };
+                }
+              },
+              {
+                path: 'adblock',
+                // element: <TestAdsense />
+                async lazy() {
+                  const { default: Component } = await import('src/components/Adsense/AdBlockModal');
                   return { Component };
                 }
               }
