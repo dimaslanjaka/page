@@ -7,7 +7,7 @@ class adblock {
   /**
    * inject adblock dynamically
    */
-  inject() {
+  async inject() {
     this.html();
 
     const ykrd1 = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -21,13 +21,11 @@ class adblock {
       adblockWrapper.classList.add('ykwrp_' + ykrd2);
     }
 
-    this.ajaxMethod().then(hideNotifAdblock).catch(showNotifAdblock);
-
     // make popup closable
-    const closeId = document.getElementById('close-notif');
-    if (closeId) {
-      closeId.addEventListener('click', hideNotifAdblock);
-    }
+    // const closeId = document.getElementById('close-notif');
+    // if (closeId) {
+    //   closeId.addEventListener('click', hideNotifAdblock);
+    // }
 
     function hideNotifAdblock() {
       const el = document.getElementById(ykrd1);
@@ -37,6 +35,26 @@ class adblock {
       const el = document.getElementById(ykrd1);
       el && el.classList.remove('ykth-hide');
     }
+
+    try {
+      await this.ajaxMethod();
+      return hideNotifAdblock();
+    } catch (_) {
+      return showNotifAdblock();
+    }
+  }
+
+  /**
+   * load stylesheet
+   * @returns
+   */
+  load() {
+    const style = document.createElement('link');
+    style.href = '//raw.githack.com/dimaslanjaka/public-source/master/assets/adblock-notify/style.css';
+    style.type = 'text/css';
+    style.rel = 'stylesheet';
+    document.head.append(style);
+    return this;
   }
 
   scriptMethod() {
@@ -62,7 +80,7 @@ class adblock {
     });
   }
 
-  ajaxMethod() {
+  ajaxMethod(): Promise<null | Error> {
     return new Promise((resolve, reject) => {
       fetch('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {
         method: 'HEAD',
@@ -71,11 +89,11 @@ class adblock {
       })
         .then(response => response.text())
         .then(_response => {
-          console.log('adblock disabled');
+          // console.log('adblock disabled');
           resolve(null);
         })
         .catch(() => {
-          console.log('adblock enabled');
+          console.error('adblock enabled');
           reject(new Error('adblock enabled'));
         });
     });

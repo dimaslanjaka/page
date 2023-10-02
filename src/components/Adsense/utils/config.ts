@@ -47,8 +47,6 @@ export interface AdsenseOption {
    */
   localhost?: string[];
   allAds?: AdsList;
-  /** enable adblock detector */
-  adblock?: boolean;
 }
 
 // initialize undefined window properties

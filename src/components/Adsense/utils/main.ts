@@ -1,3 +1,5 @@
 // runner for static file
 
-import('.').then(({ main }) => main());
+import * as index from './index';
+
+index.main();

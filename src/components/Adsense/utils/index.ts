@@ -27,12 +27,16 @@ const banned = [/lagu|jackpot|montok|hack|crack|nulled/gi]
 /** localhost indicator */
 const localhost = islocalhost();
 
+interface TriggerOptions extends Partial<Event> {
+  react?: boolean;
+}
+
 /**
  * Trigger adsense
  * @param _e
  * @returns
  */
-export function triggerAdsense(_e?: Event) {
+export async function triggerAdsense(ev: TriggerOptions = {}) {
   // run once
   if (window.adsenseInitialized) return;
   window.adsenseInitialized = true;
@@ -45,18 +49,20 @@ export function triggerAdsense(_e?: Event) {
     applyEnviromentAds();
   };
 
-  const { adblock } = window.adsense_option || {};
-
-  console.log('options', window.adsense_option);
-
-  if (adblock) {
-    import('./adblock').then(({ default: adblock }) => {
-      import('./adblock.scss').then(() => {
-        new adblock().inject();
-      });
-    });
-  } else {
+  const { default: adblock } = await import('./adblock');
+  if (!ev.react) {
+    await new adblock().load().inject();
     apply();
+    // on non react always return false
+    return false;
+  } else {
+    try {
+      const test = await new adblock().ajaxMethod();
+      if (test === null) apply();
+      return test === null;
+    } catch (_) {
+      return true;
+    }
   }
 }
 
