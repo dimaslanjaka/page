@@ -14,12 +14,11 @@ const testDist = function (taskDone) {
     if (process.platform === 'win32') {
       // windows doesnt kill subprocesses
       // yarn build:webpack
-      buildSite(() => {
+      buildSite(async () => {
+        // yarn build:html
+        await require('./html/generate').generateRouteHtml();
         // gulp page:copy
-        copy().then(() => {
-          // yarn build:html
-          require('./html');
-        });
+        await copy();
       });
     } else {
       const child = spawn('yarn', ['test:dist'], { stdio: 'inherit', shell: true });
