@@ -32,6 +32,9 @@ class AdBlockModal extends React.Component<any, State> {
         })
         .then(open => {
           if (this._mounted) this.setState({ open });
+        })
+        .catch(() => {
+          //
         });
     });
 

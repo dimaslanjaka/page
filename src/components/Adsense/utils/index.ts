@@ -34,7 +34,7 @@ interface TriggerOptions extends Partial<Event> {
 /**
  * Trigger adsense
  * @param _e
- * @returns
+ * @returns is blocked?
  */
 export async function triggerAdsense(ev: TriggerOptions = {}) {
   // run once
@@ -57,9 +57,9 @@ export async function triggerAdsense(ev: TriggerOptions = {}) {
     return false;
   } else {
     try {
-      const test = await new adblock().ajaxMethod();
-      if (test === null) apply();
-      return test === null;
+      const result = await new adblock().ajaxMethod();
+      if (result === false) apply();
+      return false;
     } catch (_) {
       return true;
     }

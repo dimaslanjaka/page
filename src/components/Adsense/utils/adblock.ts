@@ -88,7 +88,7 @@ class adblock {
     });
   }
 
-  ajaxMethod(): Promise<null | Error> {
+  ajaxMethod(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       fetch('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {
         method: 'HEAD',
@@ -98,10 +98,10 @@ class adblock {
         .then(response => response.text())
         .then(_response => {
           // console.log('adblock disabled');
-          resolve(null);
+          resolve(false);
         })
         .catch(() => {
-          console.error('adblock enabled');
+          // console.error('adblock enabled');
           reject(new Error('adblock enabled'));
         });
     });
