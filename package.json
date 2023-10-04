@@ -144,8 +144,5 @@
     "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/0f213ec/release/hexo-post-parser.tgz",
     "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/raw/ff4b648/release/cross-spawn.tgz"
   },
-  "packageManager": "yarn@3.6.3",
-  "workspaces": [
-    "packages/hwp"
-  ]
+  "packageManager": "yarn@3.6.3"
 }

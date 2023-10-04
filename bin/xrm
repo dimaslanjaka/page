@@ -12,6 +12,10 @@ const alphabetUpperCase = Array.from({ length: 26 }, (_, i) => String.fromCharCo
 const toDelete = [];
 for (let i = 0; i < args.length; i++) {
   const thePath = args[i];
+  if (!fileExists(thePath)) {
+    console.error(thePath, 'not found');
+    break;
+  }
   for (let i = 0; i < vowels.length; i++) {
     const vowel = vowels[i];
     toDelete.push(`${thePath}/${vowel}`);
@@ -34,9 +38,9 @@ shuffled
   .forEach(item => {
     fileExists(item)
       .then(exists => {
-        if (exists) fs.rm(item).catch(noop);
+        if (exists) return fs.rm(item, { recursive: true, force: true }).catch(noop);
       })
-      .catch(noop);
+      .catch(console.log);
   });
 
 async function fileExists(filename) {

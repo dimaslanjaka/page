@@ -1,3 +1,0 @@
-[submodule "packages/hwp"]
-	path = packages/hwp
-	url = https://github.com/dimaslanjaka/html-webpack-plugin
