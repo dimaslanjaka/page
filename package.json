@@ -24,6 +24,9 @@
     "dev": "webpack-dev-server --progress --no-open --mode development --config config/webpack.dev-prod.js \"$@\"",
     "dev:php": "php -S 127.0.0.1:8888"
   },
+  "files": [
+    "./src"
+  ],
   "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (http://webmanajemen.com)",
   "license": "ISC",
   "repository": {
