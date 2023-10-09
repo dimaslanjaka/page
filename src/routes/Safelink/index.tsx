@@ -66,7 +66,7 @@ function decodeStart() {
       // set cookie value and refresh without parameters
       if (value_cookie) {
         // eslint-disable-next-line no-undef
-        setCookieMins('safelink_value', value_cookie, 5, location.pathname).then(refreshWithoutParam);
+        setCookieMins('safelink_value', value_cookie, 20, location.pathname).then(refreshWithoutParam);
       } else {
         try {
           // check if query is url
@@ -99,6 +99,10 @@ async function replaceGoButton(url: string) {
     // wait 10 seconds
     await delay(10000);
     const a = document.createElement('a');
+    // detect encoded protocol
+    if (url.includes('%3A%2F%2F')) {
+      url = decodeURIComponent(url);
+    }
     a.href = url;
     a.rel = 'nofollow noopener noreferer';
     a.target = '_blank';
