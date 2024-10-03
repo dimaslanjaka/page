@@ -1,10 +1,12 @@
 {
   "files.autoSave": "onWindowChange",
   "terminal.integrated.env.linux": {
-    "PATH": "${env:PATH}:${workspaceFolder}/node_modules/.bin:${workspaceFolder}/bin:${workspaceFolder}/tmp/bin"
+    "PATH": "${env:PATH}:${workspaceFolder}/node_modules/.bin:${workspaceFolder}/bin:${workspaceFolder}/tmp/bin",
+    "ESLINT_USE_FLAT_CONFIG": "false"
   },
   "terminal.integrated.env.windows": {
-    "PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin;${workspaceFolder}\\tmp\\bin"
+    "PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin;${workspaceFolder}\\tmp\\bin",
+    "ESLINT_USE_FLAT_CONFIG": "false"
   },
   "[javascript]": {
     "editor.formatOnSave": false,
@@ -104,5 +106,6 @@
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
     }
-  }
+  },
+  "eslint.useFlatConfig": false
 }
