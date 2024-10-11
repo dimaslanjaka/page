@@ -11,7 +11,8 @@
     <meta name="description" content="
   WMI - 
 ">
-    <meta name="keywords" content="keyword1, keyword2, keyword3, keyword4">
+    <meta name="keywords" content="">
+    <meta name="search" content="/hexo-search.json">
     <meta name="author" content="Dimas Lanjaka">
     <link rel="icon" type="image/x-icon" href="//www.webmanajemen.com/favicon.ico">
     <link rel="stylesheet" href="https://rawcdn.githack.com/dimaslanjaka/Web-Manajemen/0f634f242ff259087c9fe176e8f28ccaebb5c015/css/all.min.css">
@@ -46,7 +47,8 @@
   
 
 
-    <nav class="bg-gray-900 mb-4">
+    
+<nav class="bg-gray-900 mb-4">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       
@@ -76,7 +78,7 @@
           
             
               <div class="relative group">
-                <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9oZXhvLXRoZW1lcw==" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" hexo-seo="true" alt="WMI" title="WMI">
+                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Site Overview
                   <i class="fa-thin fa-caret-down ml-2"></i>
                 </a>
@@ -107,12 +109,6 @@
                     
                       <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Quiz The Legend Of Neverland</a>
                     
-                      <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Privacy Policy</a>
-                    
-                      <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Terms Of Service</a>
-                    
-                      <a href="/contact" class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
-                    
                   </div>
                 
               </div>
@@ -136,27 +132,15 @@
                 
               </div>
             
-              <div class="relative group">
-                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  Sub Menu 2
-                  <i class="fa-thin fa-caret-down ml-2"></i>
-                </a>
-                
-                
-                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
-                    
-                      <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 1</a>
-                    
-                      <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 2</a>
-                    
-                      <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 3</a>
-                    
-                  </div>
-                
-              </div>
-            
           
         </div>
+      </div>
+      
+      <div class="relative flex items-center sm:ml-6">
+        <button id="openSearchModal" class="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white">
+          <i class="fa fa-search"></i>
+          <span class="sr-only">Open Search</span>
+        </button>
       </div>
     </div>
   </div>
@@ -167,7 +151,7 @@
       
         
           <div class="relative group">
-            <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9oZXhvLXRoZW1lcw==" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" hexo-seo="true" alt="WMI" title="WMI">
+            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
               Site Overview
               <i class="fa-thin fa-caret-down ml-2"></i>
             </a>
@@ -196,12 +180,6 @@
                 
                   <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Quiz The Legend Of Neverland</a>
                 
-                  <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Privacy Policy</a>
-                
-                  <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">Terms Of Service</a>
-                
-                  <a href="/contact" class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
-                
               </div>
             
           </div>
@@ -224,28 +202,25 @@
             
           </div>
         
-          <div class="relative group">
-            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-              Sub Menu 2
-              <i class="fa-thin fa-caret-down ml-2"></i>
-            </a>
-            
-              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
-                
-                  <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 1</a>
-                
-                  <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 2</a>
-                
-                  <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Sub Menu 3</a>
-                
-              </div>
-            
-          </div>
-        
       
     </div>
   </div>
 </nav>
+
+<div id="searchModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-start justify-center min-h-screen px-4">
+    <div class="search-modal bg-gray-800 text-white p-6 rounded-lg shadow-lg relative">
+      <button id="closeSearchModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa fa-times"></i>
+      </button>
+      <h2 class="text-lg font-medium mb-4">Search</h2>
+      <input type="text" id="searchInput" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Type to search...">
+      <div id="searchResults" class="mt-4">
+        
+      </div>
+    </div>
+  </div>
+</div>
 
     <main class="mx-4">
       
@@ -353,108 +328,6 @@
             </article>
         
         <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
-          <img src="https://res.cloudinary.com/dimaslanjaka/image/fetch/w_300,h_300/https://imgdb.net/images/4221.png" alt="Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root" class="w-full h-48 object-cover mb-4" title="Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root" itemprop="image">
-          <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
-              <a href="/2018/10/cara-menggunakan-bruteforce-wps-wifi-di.html">
-                
-                  Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root
-                
-              </a>
-            </h2>
-              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
-                <i class="far fa-folder mr-1"></i>
-                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                      <span itemprop="name">uncategorized</span>
-                    </a>
-                  </span>
-                </span>
-                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
-                  <i class="far fa-tags mr-1"></i>
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/tips-tricks/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">tips &amp; tricks</span>
-                      </a>
-                    </span>,
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/android/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">android</span>
-                      </a>
-                    </span>,
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/tools/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">tools</span>
-                      </a>
-                    </span>
-                  </span>
-                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Penjabaran dari WPS WPA WiFi Tester Tanpa Root</p>
-              </div>
-            </article>
-        
-        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
-          <img src="https://imgdb.net/images/4271.png" alt="Install deb package via Termux" class="w-full h-48 object-cover mb-4" title="Install deb package via Termux" itemprop="image">
-          <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
-              <a href="/2018/10/install-deb-package-via-termux.html">
-                
-                  Install deb package via Termux
-                
-              </a>
-            </h2>
-              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
-                <i class="far fa-folder mr-1"></i>
-                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                      <span itemprop="name">uncategorized</span>
-                    </a>
-                  </span>
-                </span>
-                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
-                  <i class="far fa-tags mr-1"></i>
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/tips-tricks/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">tips &amp; tricks</span>
-                      </a>
-                    </span>,
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/android/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">android</span>
-                      </a>
-                    </span>,
-                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
-                      <a href="/tags/script/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                        <span itemprop="name">script</span>
-                      </a>
-                    </span>
-                  </span>
-                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Install deb package via Termux Packages are manually installed via the dpkg command Debian Package Management System. dpkg is the backend to commands like apt-g</p>
-              </div>
-            </article>
-        
-        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
-          <img src="https://3.bp.blogspot.com/-HATkEN6fBQo/W8WFogUS8rI/AAAAAAAAAUc/3TomXf6lYEwhuMHsB47vS9pe_MispcUzwCLcBGAs/s320/download.png" alt="WPS PIN codes for 6C:B0:CE:1A:CC:3D" class="w-full h-48 object-cover mb-4" title="WPS PIN codes for 6C:B0:CE:1A:CC:3D" itemprop="image">
-          <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
-              <a href="/2018/10/wps-pin-codes-for-6cb0ce1acc3d.html">
-                
-                  WPS PIN codes for 6C:B0:CE:1A:CC:3D
-                
-              </a>
-            </h2>
-              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
-                <i class="far fa-folder mr-1"></i>
-                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
-                      <span itemprop="name">uncategorized</span>
-                    </a>
-                  </span>
-                </span>
-                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">WPS PIN codes for C:B0:CE:1A:CC:3D</p>
-              </div>
-            </article>
-        
-        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
           <img src="https://res.cloudinary.com/dimaslanjaka/image/fetch/https://3.bp.blogspot.com/-KhWvYh2yApY/W3K2X8QfpAI/AAAAAAAAFic/xljYGye6zjsZlJAa-NJKxRsvVnWiq5PTQCK4BGAYYCw/s640/maxresdefault%2B%25281%2529.jpg" alt="How to Create a Wide Screen or Drone View in Mobile Legend NO ROOT" class="w-full h-48 object-cover mb-4" title="How to Create a Wide Screen or Drone View in Mobile Legend NO ROOT" itemprop="image">
           <div class="p-6">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
@@ -545,6 +418,126 @@
                 <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Website Development Indonesia</p>
               </div>
             </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="https://cdn1.imggmi.com/uploads/2018/8/20/e17d8d0b84fe9de0ad5002333f5764f7-full.jpg" alt="Secret of Mix Spring Fruit Wine Durango wild Lands" class="w-full h-48 object-cover mb-4" title="Secret of Mix Spring Fruit Wine Durango wild Lands" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/2018/08/secret-of-mix-spring-fruit-wine-durango.html">
+                
+                  Secret of Mix Spring Fruit Wine Durango wild Lands
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">uncategorized</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/android/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">android</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">games</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/durango/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">durango</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Spring Fruit Wine is a cooking skill which has the biggest effect among other dishes, even though having the biggest buff, this mix</p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="https://res.cloudinary.com/dimaslanjaka/image/fetch/w_300,h_300/https://imgdb.net/images/4221.png" alt="Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root" class="w-full h-48 object-cover mb-4" title="Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/2018/10/cara-menggunakan-bruteforce-wps-wifi-di.html">
+                
+                  Cara Menggunakan Bruteforce WPS WiFi Di Android Tanpa Root
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">uncategorized</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/tips-tricks/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">tips &amp; tricks</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/android/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">android</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/tools/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">tools</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Penjabaran dari WPS WPA WiFi Tester Tanpa Root</p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="https://imgdb.net/images/4271.png" alt="Install deb package via Termux" class="w-full h-48 object-cover mb-4" title="Install deb package via Termux" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/2018/10/install-deb-package-via-termux.html">
+                
+                  Install deb package via Termux
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/uncategorized/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">uncategorized</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/tips-tricks/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">tips &amp; tricks</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/android/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">android</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/script/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">script</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description">Install deb package via Termux Packages are manually installed via the dpkg command Debian Package Management System. dpkg is the backend to commands like apt-g</p>
+              </div>
+            </article>
         </div>
           <nav class="pagination">
             <a class="extend prev" rel="prev" title="accessibility.prev_page" aria-label="accessibility.prev_page" href="/page/57/"><i class="fa-solid fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/page/59/">59</a><span class="space">…</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" title="accessibility.next_page" aria-label="accessibility.next_page" href="/page/59/"><i class="fa-solid fa-angle-right"></i></a>
@@ -552,7 +545,8 @@
       </div>
     
     </main>
-    <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+    
+<footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
   <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
     <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://www.webmanajemen.com" class="hover:underline" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="WMI">WMI™</a>. All Rights Reserved.
     </span>
