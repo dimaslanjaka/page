@@ -1,480 +1,751 @@
-<!DOCTYPE html><html lang="[&quot;id&quot;,&quot;en&quot;,&quot;zh-TW&quot;,&quot;zh-CN&quot;,&quot;zh-HK&quot;,&quot;th&quot;,&quot;tl&quot;,&quot;default&quot;]" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>WMI - Website Management Indonesia</title><meta name="author" content="Dimas Lanjaka"><meta name="copyright" content="Dimas Lanjaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering php, javascript, jquery, mysql, seo, e-commerce and others.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WMI">
-<meta property="og:url" content="https://www.webmanajemen.com/page/168/index.html">
-<meta property="og:site_name" content="WMI">
-<meta property="og:description" content="Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering php, javascript, jquery, mysql, seo, e-commerce and others.">
-<meta property="og:locale" content="id_ID">
-<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
-<meta property="article:author" content="Dimas Lanjaka">
-<meta property="article:tag" content="the legend of neverland, genshin impact, games, how to, tips and tricks, php, javascript, jquery, mysql, seo, e-commerce">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/logo.svg"><link rel="canonical" href="https://www.webmanajemen.com/page/168/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""><link rel="preconnect" href="//static.cloudflareinsights.com"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-106238155-1"></script><script>window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'UA-106238155-1');
-</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;2157c0f3b9e74a92badffe39156166b9&quot;}"></script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"Kami tidak dapat menemukan hasil apapun untuk pencarian: ${query}","hits_stats":"${hits} results found"}},
-  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false,"highlightHeightLimit":false},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'Browser tidak mendukung'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: 'baru saja',
-    min: 'menit yang lalu',
-    hour: 'jam yang lalu',
-    day: 'hari yang lalu',
-    month: 'bulan yang lalu'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: 'Muat lainnya'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: false,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'WMI',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: 'date is undefined'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
+<!DOCTYPE html><html lang="en" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WMI
+  - Website Management Indonesia</title>
+    <meta name="description" content="WMI -">
+    <meta name="keywords" content="">
+    <meta name="search" content="/hexo-search.json">
+    <meta name="author" content="Dimas Lanjaka">
     
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
+    <meta property="og:title" content="WMI
+  - Website Management Indonesia">
+    <meta property="og:description" content="WMI -">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WMI
+  - Website Management Indonesia">
+    <meta name="twitter:description" content="WMI -">
+    <meta name="twitter:image" content="">
+    <link rel="icon" type="image/x-icon" href="//www.webmanajemen.com/favicon.ico">
+    <link rel="stylesheet" href="https://rawcdn.githack.com/dimaslanjaka/Web-Manajemen/0f634f242ff259087c9fe176e8f28ccaebb5c015/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-        if (t === 'dark') activateDarkMode()
-        else if (t === 'light') activateLightMode()
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><link rel="stylesheet" href="//cdn.statically.io/gh/dimaslanjaka/Web-Manajemen/gh-pages/highlight.js/styles/github-dark.css" crossorigin="anonymous" referrerpolicy="no-referrer"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="WMI" type="application/atom+xml">
+  <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="WMI" type="application/atom+xml">
 <link rel="alternate" href="/rss.xml" title="WMI" type="application/rss+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Postingan</div><div class="length-num">1782</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">150</div></a><a href="/categories/"><div class="headline">Kategori</div><div class="length-num">23</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/page/google/login.html"><i class="fa-fw fab fa-google"></i><span> Login</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/page/bot-detect.html"><i class="fa-fw fas fa-robot"></i><span> Bot Detector</span></a></li><li><a class="site-page child" href="/page/cookies.html"><i class="fa-fw fas fa-cookie"></i><span> Cookies Manager</span></a></li><li><a class="site-page child" href="/page/moment-timezone.html"><i class="fa-fw fas fa-clock"></i><span> Moment Timezone Playground</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/The%20Legend%20Of%20Neverland/Quiz.html"><i class="fa-fw fas fa-folder-open"></i><span> Quiz The Legend Of Neverland</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="WMI"><span class="site-name">WMI</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/page/google/login.html"><i class="fa-fw fab fa-google"></i><span> Login</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/page/bot-detect.html"><i class="fa-fw fas fa-robot"></i><span> Bot Detector</span></a></li><li><a class="site-page child" href="/page/cookies.html"><i class="fa-fw fas fa-cookie"></i><span> Cookies Manager</span></a></li><li><a class="site-page child" href="/page/moment-timezone.html"><i class="fa-fw fas fa-clock"></i><span> Moment Timezone Playground</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/The%20Legend%20Of%20Neverland/Quiz.html"><i class="fa-fw fas fa-folder-open"></i><span> Quiz The Legend Of Neverland</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/chimeraland/materials/alligon-meat.html" title="Material Alligon Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/alligon-meat/alligon-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Alligon Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/alligon-meat.html" title="Material Alligon Meat Chimeraland">Material Alligon Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T21:26:37.000Z" title="Diupdate 2022-09-30 04:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
 
-  
-    
-      
-        materials
-        Alligon Meat
-        September 30, 2022 11:26 AM
-        Continue reading Alligon Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Alligon Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Alligon Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Alligon to get.
-                Orient the Resour ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/chimeraland/materials/prowler-meat.html" title="Material Prowler Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/prowler-meat/prowler-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Prowler Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/prowler-meat.html" title="Material Prowler Meat Chimeraland">Material Prowler Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T20:26:37.000Z" title="Diupdate 2022-09-30 03:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
 
-  
-    
-      
-        materials
-        Prowler Meat
-        September 30, 2022 10:26 AM
-        Continue reading Prowler Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Prowler Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Prowler Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Gripine to get.
-                Orient the Resour ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/chimeraland/materials/fortuphant-meat.html" title="Material Fortuphant Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/fortuphant-meat/fortuphant-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Fortuphant Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/fortuphant-meat.html" title="Material Fortuphant Meat Chimeraland">Material Fortuphant Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T19:26:37.000Z" title="Diupdate 2022-09-30 02:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
+<script type="application/ld+json" id="hexo-seo-schema">[
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://www.webmanajemen.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "@id": "https://developers.google.com/search/docs/advanced/structured-data/sitelinks-searchbox",
+      "target": "https://www.webmanajemen.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+]</script>
 
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><script id="hexo-adsense-config" type="application/json">{"enable":true,"article_ads":["source/ads/in_article.html","source/ads/in_article2.html"],"pub":"ca-pub-1048456668116270","adblock":false,"https":false,"field":"site","type":"javascript","exclude":["*.min.html","**/exclude/**/*"],"development":false,"args":{"_":[],"exposeGc":true,"expose-gc":true},"debug":false,"safe":false,"silent":false,"env":"development","version":"7.3.0","cmd":"generate","init":true,"adsense":{"enable":true,"pub":"ca-pub-1048456668116270","article_ads":["source/ads/in_article.html","source/ads/in_article2.html"],"field":"site","https":false,"adblock":false,"type":"javascript","exclude":["*.min.html","**/exclude/**/*"]}}</script><script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1048456668116270" crossorigin="anonymous"></script></head>
+  <body class="bg-white dark:bg-slate-800 dark:text-slate-200">
+    
   
-    
-      
-        materials
-        Fortuphant Meat
-        September 30, 2022 9:26 AM
-        Continue reading Fortuphant Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Fortuphant Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Fortuphant Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Fortuphant to get.
-                Ori ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/chimeraland/materials/rhino-meat.html" title="Material Rhino Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/rhino-meat/rhino-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Rhino Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/rhino-meat.html" title="Material Rhino Meat Chimeraland">Material Rhino Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T18:26:37.000Z" title="Diupdate 2022-09-30 01:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
+    <div id="preloader-mini" class="fixed top-4 right-4 bg-white dark:bg-gray-900 flex items-center justify-center p-2 rounded-full z-50">
+      <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-blue-500 dark:border-blue-300"></div>
+    </div>
+  
 
-  
-    
-      
-        materials
-        Rhino Meat
-        September 30, 2022 8:26 AM
-        Continue reading Rhino Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Rhino Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Rhino Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Rhino to get.
-                Orient the Resource Finder t ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/chimeraland/attendants/vuloneer.html" title="Attendant Vuloneer"><img class="post-bg" src="/chimeraland/attendants/vuloneer/Screenshot_2022-07-30-14-34-42-15_f4fc9fb10454fc3a3dacb99dff89b568.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Attendant Vuloneer"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/attendants/vuloneer.html" title="Attendant Vuloneer">Attendant Vuloneer</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T17:26:37.000Z" title="Diupdate 2022-09-30 00:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/attendants/">attendants</a></span></div><div class="content">
 
-  
-    Vuloneer Information from Chimeraland
-    Vuloneer default maximum attribute
     
+<nav class="bg-gray-900 mb-4">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between h-16">
       
-        
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex-shrink-0 flex items-center">
+          <a href="/">
+            <img src="/logo.svg" alt="Logo" class="h-8 w-auto" title="Logo" itemprop="image">
+          </a>
+          <a href="/" class="text-white text-lg font-semibold ml-2">WMI</a>
+        </div>
+      </div>
+      
+      <div class="hidden sm:block sm:ml-6">
+        <div class="flex space-x-4">
           
             
-              
-                GRADE
+              <div class="relative group">
+                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Site Overview
+                  <i class="fa-thin fa-caret-down ml-2"></i>
+                </a>
                 
-              
-              
-                Attack
                 
-              
-              
-                Health Point (HP)
+                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                    
+                      <a href="/about" class="block px-4 py-2 text-sm hover:bg-gray-700">About</a>
+                    
+                      <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/privacy.html">Privacy Policy</a>
+                    
+                      <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/tos.html">Terms Of Service</a>
+                    
+                      <a href="/contact" class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
+                    
+                  </div>
                 
-              
-              
-                Defense
-                
-              
+              </div>
             
+              <div class="relative group">
+                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  HexoJS
+                  <i class="fa-thin fa-caret-down ml-2"></i>
+                </a>
+                
+                
+                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                    
+                      <a href="https://www.webmanajemen.com/docs/hexo-adsense/" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/docs/hexo-adsense/">hexo-adsense</a>
+                    
+                      <a href="https://www.webmanajemen.com/docs/hexo-shortcodes/" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/docs/hexo-shortcodes/">hexo-shortcodes</a>
+                    
+                      <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9oZXhvLXNlbw==" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://github.com/dimaslanjaka/hexo-seo">hexo-seo</a>
+                    
+                  </div>
+                
+              </div>
+            
+              <div class="relative group">
+                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Games
+                  <i class="fa-thin fa-caret-down ml-2"></i>
+                </a>
+                
+                
+                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                    
+                      <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html">Quiz The Legend Of Neverland</a>
+                    
+                      <a href="https://www.webmanajemen.com/chimeraland/blacklist-player.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/chimeraland/blacklist-player.html">Chimeraland Blacklist Player</a>
+                    
+                  </div>
+                
+              </div>
+            
+              <div class="relative group">
+                <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Utilities
+                  <i class="fa-thin fa-caret-down ml-2"></i>
+                </a>
+                
+                
+                  <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                    
+                      <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com/proxyManager.html" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://sh.webmanajemen.com/proxyManager.html">PHP Proxy Hunter</a>
+                    
+                      <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com:8443/proxy/" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://sh.webmanajemen.com:8443/proxy/">Python Proxy Hunter</a>
+                    
+                      <a href="/android-engineer" class="block px-4 py-2 text-sm hover:bg-gray-700">Android Flashtool Utility</a>
+                    
+                  </div>
+                
+              </div>
+            
+          
+        </div>
+      </div>
+      
+      <div class="relative flex items-center sm:ml-6">
+        <button id="openSearchModal" class="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white">
+          <i class="fa fa-search"></i>
+          <span class="sr-only">Open Search</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      
+      
+        
+          <div class="relative group">
+            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              Site Overview
+              <i class="fa-thin fa-caret-down ml-2"></i>
+            </a>
+            
+              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                
+                  <a href="/about" class="block px-4 py-2 text-sm hover:bg-gray-700">About</a>
+                
+                  <a href="https://www.webmanajemen.com/p/privacy.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/privacy.html">Privacy Policy</a>
+                
+                  <a href="https://www.webmanajemen.com/p/tos.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/tos.html">Terms Of Service</a>
+                
+                  <a href="/contact" class="block px-4 py-2 text-sm hover:bg-gray-700">Contact</a>
+                
+              </div>
+            
+          </div>
+        
+          <div class="relative group">
+            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              HexoJS
+              <i class="fa-thin fa-caret-down ml-2"></i>
+            </a>
+            
+              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                
+                  <a href="https://www.webmanajemen.com/docs/hexo-adsense/" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/docs/hexo-adsense/">hexo-adsense</a>
+                
+                  <a href="https://www.webmanajemen.com/docs/hexo-shortcodes/" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/docs/hexo-shortcodes/">hexo-shortcodes</a>
+                
+                  <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9oZXhvLXNlbw==" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://github.com/dimaslanjaka/hexo-seo">hexo-seo</a>
+                
+              </div>
+            
+          </div>
+        
+          <div class="relative group">
+            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              Games
+              <i class="fa-thin fa-caret-down ml-2"></i>
+            </a>
+            
+              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                
+                  <a href="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/The%20Legend%20Of%20Neverland/Quiz.html">Quiz The Legend Of Neverland</a>
+                
+                  <a href="https://www.webmanajemen.com/chimeraland/blacklist-player.html" class="block px-4 py-2 text-sm hover:bg-gray-700" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/chimeraland/blacklist-player.html">Chimeraland Blacklist Player</a>
+                
+              </div>
+            
+          </div>
+        
+          <div class="relative group">
+            <a href="" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              Utilities
+              <i class="fa-thin fa-caret-down ml-2"></i>
+            </a>
+            
+              <div class="absolute hidden bg-gray-800 text-white rounded-md shadow-lg group-hover:block z-50 w-48">
+                
+                  <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com/proxyManager.html" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://sh.webmanajemen.com/proxyManager.html">PHP Proxy Hunter</a>
+                
+                  <a target="_blank" rel="nofollow noopener noreferer noreferrer external" href="https://sh.webmanajemen.com:8443/proxy/" class="block px-4 py-2 text-sm hover:bg-gray-700" hexo-seo="true" alt="WMI" title="https://sh.webmanajemen.com:8443/proxy/">Python Proxy Hunter</a>
+                
+                  <a href="/android-engineer" class="block px-4 py-2 text-sm hover:bg-gray-700">Android Flashtool Utility</a>
+                
+              </div>
+            
+          </div>
+        
+      
+    </div>
+  </div>
+</nav>
+
+<div id="searchModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-start justify-center min-h-screen px-4">
+    <div class="search-modal bg-gray-800 text-white p-6 rounded-lg shadow-lg relative">
+      <button id="closeSearchModal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa fa-times"></i>
+      </button>
+      <h2 class="text-lg font-medium mb-4">Search</h2>
+      <input type="text" id="searchInput" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="Type to search...">
+      <div id="searchResults" class="mt-4">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <main class="mx-4">
+      
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/flying-wolf-hide/flying-wolf-hide.webp" alt="Material Flying Wolf Hide Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Flying Wolf Hide Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/flying-wolf-hide.html">
+                
+                  Material Flying Wolf Hide Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/litiger-mane/litiger-mane.webp" alt="Material Litiger Mane Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Litiger Mane Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/litiger-mane.html">
+                
+                  Material Litiger Mane Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="https://rawcdn.githack.com/dimaslanjaka/public-source/6a0117ddb2ea327c80dbcc7327cceca1e1b7794e/images/no-image-svgrepo-com.svg" alt="Monster Rockram" class="w-full h-48 object-cover mb-4" title="Monster Rockram" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/monsters/rockram.html">
+                
+                  Monster Rockram
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/monsters/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">monsters</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/pet/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">pet</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/monster/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">monster</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/bone-sheep-skin/bone-sheep-skin.webp" alt="Material Bone Sheep Skin Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Bone Sheep Skin Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/bone-sheep-skin.html">
+                
+                  Material Bone Sheep Skin Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/grouguana-scales/grouguana-scales.webp" alt="Material Grouguana Scales Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Grouguana Scales Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/grouguana-scales.html">
+                
+                  Material Grouguana Scales Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/beast-vital-qi-pill/beast-vital-qi-pill.webp" alt="Material Beast Vital Qi Pill Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Beast Vital Qi Pill Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/beast-vital-qi-pill.html">
+                
+                  Material Beast Vital Qi Pill Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/blood-jade/blood-jade.webp" alt="Material Blood Jade Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Blood Jade Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/blood-jade.html">
+                
+                  Material Blood Jade Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/ambusher-hair/ambusher-hair.webp" alt="Material Ambusher Hair Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Ambusher Hair Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/ambusher-hair.html">
+                
+                  Material Ambusher Hair Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        
+        <article itemscope="" itemtype="http://schema.org/Article" class="post-content bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700" lang="en">
+          <img src="/chimeraland/materials/trileaf-skin/trileaf-skin.webp" alt="Material Trileaf Skin Chimeraland" class="w-full h-48 object-cover mb-4" title="Material Trileaf Skin Chimeraland" itemprop="image">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" itemprop="headline">
+              <a href="/chimeraland/materials/trileaf-skin.html">
+                
+                  Material Trileaf Skin Chimeraland
+                
+              </a>
+            </h2>
+              <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <i class="far fa-folder mr-1"></i>
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">games</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">chimeraland</span>
+                    </a>
+                  </span>,
+                  <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                    <a href="/categories/games/chimeraland/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                      <span itemprop="name">material</span>
+                    </a>
+                  </span>
+                </span>
+                <span class="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
+                  <i class="far fa-tags mr-1"></i>
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/chimeraland/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">chimeraland</span>
+                      </a>
+                    </span>,
+                    <span itemprop="keywords" itemscope="" itemtype="http://schema.org/Thing">
+                      <a href="/tags/material/" itemprop="url" rel="index" class="ml-1 text-blue-600 dark:text-blue-400 hover:underline">
+                        <span itemprop="name">material</span>
+                      </a>
+                    </span>
+                  </span>
+                <p class="text-gray-700 dark:text-gray-400 mb-4" itemprop="description"></p>
+              </div>
+            </article>
+        </div>
+          <nav class="pagination">
+            <a class="extend prev" rel="prev" title="/page/167/" aria-label="accessibility.prev_page" href="/page/167/"><i class="fa-solid fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">…</span><a class="page-number" href="/page/184/">184</a><a class="extend next" rel="next" title="/page/169/" aria-label="accessibility.next_page" href="/page/169/"><i class="fa-solid fa-angle-right"></i></a>
+          </nav>
+      </div>
+    
+    </main>
+    
+<footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+  <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://www.webmanajemen.com" class="hover:underline" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com">WMI™</a>. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+      
+        
+          
+            <li>
+              <a href="/about" class="hover:underline me-4 md:me-6">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.webmanajemen.com/p/privacy.html" class="hover:underline me-4 md:me-6" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/privacy.html">Privacy Policy</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://www.webmanajemen.com/p/tos.html" class="hover:underline me-4 md:me-6" rel="internal follow bookmark" hexo-seo="true" alt="WMI" title="https://www.webmanajemen.com/p/tos.html">Terms Of Service</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact" class="hover:underline">Contact</a>
+            </li>
           
         
       
+    </ul>
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="/js/script.js"></script>
     
-    
-      Note: Vuloneer stat wi ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/chimeraland/materials/vuldo-meat.html" title="Material Vuldo Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/vuldo-meat/vuldo-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Vuldo Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/vuldo-meat.html" title="Material Vuldo Meat Chimeraland">Material Vuldo Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T17:26:37.000Z" title="Diupdate 2022-09-30 00:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
+
+
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BG75CLNJZ1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BG75CLNJZ1');
+</script>
 
   
-    
-      
-        materials
-        Vuldo Meat
-        September 30, 2022 7:26 AM
-        Continue reading Vuldo Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Vuldo Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Vuldo Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Vuldo to get.
-                Orient the Resource Finder t ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/chimeraland/recipes/stir-fried-browtelope.html" title="Recipe Stir-Fried Browtelope Chimeraland"><img class="post-bg" src="https://via.placeholder.com/550x50/FFFFFF/000000/?text=Stir-Fried Browtelope" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Recipe Stir-Fried Browtelope Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/recipes/stir-fried-browtelope.html" title="Recipe Stir-Fried Browtelope Chimeraland">Recipe Stir-Fried Browtelope Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T17:26:37.000Z" title="Diupdate 2022-09-30 00:26:37">2022-09-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/recipes/">recipes</a></span></div><div class="content">
-
-  
-    
-      
-        
-          
-            
-          
-          
-            
-              
-                Stir-Fried Browtelope Cooking Recipe
-              
-              Buff Stir-Fried Browtelope
-              
-                
-                  Buff Stir-Fried Browtelope not yet written
-                
-              
-              recipe
-            
-            
-              webmanajemen.com - recipe Stir-Fried Browtelope
-            
-          
-        
-      
-      
-        we ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/chimeraland/materials/grizzly-meat.html" title="Material Grizzly Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/grizzly-meat/grizzly-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Grizzly Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/grizzly-meat.html" title="Material Grizzly Meat Chimeraland">Material Grizzly Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T16:26:37.000Z" title="Diupdate 2022-09-29 23:26:37">2022-09-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
-
-  
-    
-      
-        materials
-        Grizzly Meat
-        September 30, 2022 6:26 AM
-        Continue reading Grizzly Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Grizzly Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Grizzly Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Grizzly to get.
-                Orient the Resourc ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/chimeraland/materials/leoparbeak-meat.html" title="Material Leoparbeak Meat Chimeraland"><img class="post-bg" src="/chimeraland/materials/leoparbeak-meat/leoparbeak-meat.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Material Leoparbeak Meat Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/materials/leoparbeak-meat.html" title="Material Leoparbeak Meat Chimeraland">Material Leoparbeak Meat Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T15:26:37.000Z" title="Diupdate 2022-09-29 22:26:37">2022-09-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/material/">material</a></span></div><div class="content">
-
-  
-    
-      
-        materials
-        Leoparbeak Meat
-        September 30, 2022 5:26 AM
-        Continue reading Leoparbeak Meat
-      
-      
-        
-      
-    
-    
-      
-        
-          
-            What is the use of the Leoparbeak Meat
-            
-          
-        
-      
-      
-        
-          
-            How to get Leoparbeak Meat
-            
-              
-                Go to the Auction House to obtain it.
-                Hunt Leoparbeak to get.
-                Ori ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/chimeraland/recipes/flame-roasted-horn.html" title="Recipe Flame Roasted Horn Chimeraland"><img class="post-bg" src="https://via.placeholder.com/550x50/FFFFFF/000000/?text=Flame Roasted Horn" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Recipe Flame Roasted Horn Chimeraland"></a></div><div class="recent-post-info"><a class="article-title" href="/chimeraland/recipes/flame-roasted-horn.html" title="Recipe Flame Roasted Horn Chimeraland">Recipe Flame Roasted Horn Chimeraland</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="fas fa-history"></i><span class="article-meta-label">Diupdate</span><time datetime="2022-09-29T15:26:37.000Z" title="Diupdate 2022-09-29 22:26:37">2022-09-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/games/">games</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/">chimeraland</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/games/chimeraland/recipes/">recipes</a></span></div><div class="content">
-
-  
-    
-      
-        
-          
-            
-          
-          
-            
-              
-                Flame Roasted Horn Cooking Recipe
-              
-              Buff Flame Roasted Horn
-              
-                
-                  Buff Flame Roasted Horn not yet written
-                
-              
-              recipe
-            
-            
-              webmanajemen.com - recipe Flame Roasted Horn
-            
-          
-        
-      
-      
-        webmanajemen.c ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/167/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">…</span><a class="page-number" href="/page/167/#content-inner">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/#content-inner">169</a><span class="space">…</span><a class="page-number" href="/page/179/#content-inner">179</a><a class="extend next" rel="next" href="/page/169/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">Dimas Lanjaka</div><div class="author-info__description">Website Management Indonesia is a blog about scripts, tips and tricks, games, software. Covering php, javascript, jquery, mysql, seo, e-commerce and others.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Postingan</div><div class="length-num">1782</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">150</div></a><a href="/categories/"><div class="headline">Kategori</div><div class="length-num">23</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ=="><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYQ==" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:dimaslanjaka@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9mYWNlYm9vay5jb20vZGltYXNsYW5qYWthMQ==" rel="external nofollow noreferrer" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #4267B2;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Postingan Baru</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/11/geckoview-equivalent-cangoback-android-webview.html" title="Geckoview cangoback equivalent of android webview.canGoBack"><img src="https://hacks.mozilla.org/files/2019/06/geckoview_logo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Geckoview cangoback equivalent of android webview.canGoBack"></a><div class="content"><a class="title" href="/2023/11/geckoview-equivalent-cangoback-android-webview.html" title="Geckoview cangoback equivalent of android webview.canGoBack">Geckoview cangoback equivalent of android webview.canGoBack</a><time datetime="2023-11-10T23:41:10.000Z" title="Dibuat 2023-11-11 06:41:10">2023-11-11</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2023/11/list-referrer-of-original-traffic-from-android.html" title="List referrer of original traffic from android">List referrer of original traffic from android</a><time datetime="2023-11-10T01:36:29.000Z" title="Dibuat 2023-11-10 08:36:29">2023-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/what-does-google-servicesjson-really-do.html" title="What does google-services.json really do?"><img src="https://i.stack.imgur.com/BFmz5.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="What does google-services.json really do?"></a><div class="content"><a class="title" href="/2023/10/what-does-google-servicesjson-really-do.html" title="What does google-services.json really do?">What does google-services.json really do?</a><time datetime="2023-10-30T01:19:17.000Z" title="Dibuat 2023-10-30 08:19:17">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/android-webview-get-content-height.html" title="android webview get content height"><img src="https://i.ytimg.com/vi/z1gUOTZrMFc/maxresdefault.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="android webview get content height"></a><div class="content"><a class="title" href="/2023/10/android-webview-get-content-height.html" title="android webview get content height">android webview get content height</a><time datetime="2023-10-28T21:43:36.000Z" title="Dibuat 2023-10-29 04:43:36">2023-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/android-sdk-api-list.html" title="Android SDK API List"><img src="https://github.com/dimaslanjaka/source-posts/assets/12471057/7254c426-aea8-41bc-aad5-c06eee780162" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android SDK API List"></a><div class="content"><a class="title" href="/2023/10/android-sdk-api-list.html" title="Android SDK API List">Android SDK API List</a><time datetime="2023-10-28T03:33:48.000Z" title="Dibuat 2023-10-28 10:33:48">2023-10-28</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>Kategori</span>
-            <a class="card-more-btn" href="/categories/" title="Selengkapnya">
-    <i class="fas fa-angle-right"></i></a>
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/download/"><span class="card-category-list-name">download</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/education/"><span class="card-category-list-name">education</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/education/math/"><span class="card-category-list-name">math</span><span class="card-category-list-count">3</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/flashing/"><span class="card-category-list-name">flashing</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/"><span class="card-category-list-name">games</span><span class="card-category-list-count">975</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/"><span class="card-category-list-name">chimeraland</span><span class="card-category-list-count">934</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/attendants/"><span class="card-category-list-name">attendants</span><span class="card-category-list-count">103</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/games/chimeraland/material/"><span class="card-category-list-name">material</span><span class="card-category-list-count">281</span></a></li></ul></li></ul></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/codepen/" style="font-size: 1.1em; color: #999">codepen</a> <a href="/tags/flash/" style="font-size: 1.1em; color: #999">flash</a> <a href="/tags/proguard/" style="font-size: 1.1em; color: #999">proguard</a> <a href="/tags/springboot/" style="font-size: 1.1em; color: #999">springboot</a> <a href="/tags/blogging/" style="font-size: 1.41em; color: #99a6b7">blogging</a> <a href="/tags/linux-unix/" style="font-size: 1.24em; color: #999fa7">linux/unix</a> <a href="/tags/monster/" style="font-size: 1.47em; color: #99a8bc">monster</a> <a href="/tags/update/" style="font-size: 1.1em; color: #999">update</a> <a href="/tags/hyperlink/" style="font-size: 1.1em; color: #999">hyperlink</a> <a href="/tags/blogger/" style="font-size: 1.44em; color: #99a7ba">blogger</a> <a href="/tags/recipes/" style="font-size: 1.1em; color: #999">recipes</a> <a href="/tags/auto/" style="font-size: 1.1em; color: #999">auto</a> <a href="/tags/social-media/" style="font-size: 1.33em; color: #99a2af">social media</a> <a href="/tags/durango/" style="font-size: 1.3em; color: #99a1ac">durango</a> <a href="/tags/fishing/" style="font-size: 1.1em; color: #999">fishing</a> <a href="/tags/tools/" style="font-size: 1.36em; color: #99a3b1">tools</a> <a href="/tags/react/" style="font-size: 1.19em; color: #999ca1">react</a> <a href="/tags/python/" style="font-size: 1.1em; color: #999">python</a> <a href="/tags/themes/" style="font-size: 1.1em; color: #999">themes</a> <a href="/tags/esm/" style="font-size: 1.13em; color: #999a9c">esm</a> <a href="/tags/github-workflows/" style="font-size: 1.24em; color: #999fa7">github-workflows</a> <a href="/tags/genshin-impact/" style="font-size: 1.27em; color: #99a0a9">genshin impact</a> <a href="/tags/codeigniter/" style="font-size: 1.16em; color: #999b9e">codeigniter</a> <a href="/tags/recaptcha/" style="font-size: 1.1em; color: #999">recaptcha</a> <a href="/tags/templates/" style="font-size: 1.1em; color: #999">templates</a> <a href="/tags/map/" style="font-size: 1.1em; color: #999">map</a> <a href="/tags/random/" style="font-size: 1.1em; color: #999">random</a> <a href="/tags/hexo/" style="font-size: 1.21em; color: #999ea4">hexo</a> <a href="/tags/php/" style="font-size: 1.39em; color: #99a4b4">php</a> <a href="/tags/chimeraland/" style="font-size: 1.5em; color: #99a9bf">chimeraland</a> <a href="/tags/regexp/" style="font-size: 1.13em; color: #999a9c">regexp</a> <a href="/tags/math/" style="font-size: 1.1em; color: #999">math</a> <a href="/tags/batch/" style="font-size: 1.1em; color: #999">batch</a> <a href="/tags/api/" style="font-size: 1.1em; color: #999">api</a> <a href="/tags/chest-location/" style="font-size: 1.13em; color: #999a9c">chest location</a> <a href="/tags/groovy/" style="font-size: 1.1em; color: #999">groovy</a> <a href="/tags/hosting/" style="font-size: 1.13em; color: #999a9c">hosting</a> <a href="/tags/js/" style="font-size: 1.1em; color: #999">js</a> <a href="/tags/drama/" style="font-size: 1.1em; color: #999">drama</a> <a href="/tags/webflux/" style="font-size: 1.1em; color: #999">webflux</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="Selengkapnya">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">Oktober 2023</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">September 2023</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">Agustus 2023</span><span class="card-archive-list-count">23</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">Juli 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">Juni 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">Mei 2023</span><span class="card-archive-list-count">175</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">April 2023</span><span class="card-archive-list-count">9</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">©2014 - 2023 By Dimas Lanjaka</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9oZXhvLmlv">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2plcnJ5YzEyNy9oZXhvLXRoZW1lLWJ1dHRlcmZseQ==">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Kembali ke atas"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/tw_cn.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="https://www.webmanajemen.com/page/assets/js/r-ads.js"></script><script src="/page/assets/js/highlight.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Memuat Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Cari postingan" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly/source/js/search/local-search.min.js"></script></div></div>
 <script src="/hexo-shortcodes-lib/githubcard.js"></script>
 <link rel="stylesheet" href="/hexo-shortcodes-lib/gist.css">
+<div id="hexo-adsense-hidden" style="display:none"><div hexo-adsense="ads-content"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1048456668116270" data-ad-slot="8640099506"></ins></div><div hexo-adsense="ads-content"><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1048456668116270" data-ad-slot="3470283861"></ins></div></div><script src="/hexo-adsense/article-ads.js?hash=ebdab790f5613c0920eb6e75d53f9f67"></script><link rel="stylesheet" href="/hexo-adsense/article-ads.css?hash=8fe6766b5f3770e79e8954de1e0baede">
+      
 
-      </body></html>
+</body></html>
