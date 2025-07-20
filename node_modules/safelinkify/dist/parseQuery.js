@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseQuery = void 0;
+exports.parseQuery = parseQuery;
 var toURL_1 = __importDefault(require("./toURL"));
 var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 /**
@@ -33,18 +33,18 @@ function parseQuery(query, url) {
     }
     var parse = (0, toURL_1.default)(url);
     if (parse) {
-        if (parse.hash) {
-            result = Object.assign(result, parseQueries(parse.hash.substring(1)));
-        }
+        // First parse search, then hash (hash overrides search)
         if (parse.search) {
             result = Object.assign(result, parseQueries(parse.search));
         }
+        if (parse.hash) {
+            result = Object.assign(result, parseQueries(parse.hash.substring(1)));
+        }
     }
-    if (typeof query == 'string' && query in result) {
-        return result[query];
+    if (typeof query == 'string') {
+        return Object.prototype.hasOwnProperty.call(result, query) ? result[query] : undefined;
     }
     return result;
 }
-exports.parseQuery = parseQuery;
 _global_parseQuery.parseQuery = parseQuery;
 exports.default = parseQuery;

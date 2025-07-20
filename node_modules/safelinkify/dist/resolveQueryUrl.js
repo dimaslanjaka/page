@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = resolveQueryUrl;
 var encryptionURL_1 = __importDefault(require("./encryptionURL"));
 var parseQuery_1 = require("./parseQuery");
 var toURL_1 = __importDefault(require("./toURL"));
@@ -46,5 +47,4 @@ function resolveQueryUrl(url, passphrase, debug) {
     }
     return result;
 }
-exports.default = resolveQueryUrl;
 _global_resolveQueryUrl.resolveQueryUrl = resolveQueryUrl;

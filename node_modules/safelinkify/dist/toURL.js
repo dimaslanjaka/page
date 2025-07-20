@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fixUrl = exports.isValidHttpUrl = void 0;
+exports.isValidHttpUrl = isValidHttpUrl;
+exports.fixUrl = fixUrl;
+exports.default = toURL;
 /**
  * is url valid
  * @param string
@@ -16,7 +18,6 @@ function isValidHttpUrl(string) {
     }
     return url.protocol === 'http:' || url.protocol === 'https:';
 }
-exports.isValidHttpUrl = isValidHttpUrl;
 /**
  * fix url
  * * doubled slashes
@@ -33,7 +34,6 @@ function fixUrl(url) {
     }
     return str.replace(/([^:]\/)\/+/g, '$1');
 }
-exports.fixUrl = fixUrl;
 /**
  * transform url string to {@link Nullable}<{@link URL}>
  * @param url
@@ -49,6 +49,10 @@ function toURL(url) {
             // test full url with protocol://
             return new URL(url);
         }
+        else {
+            // Not a valid URL for our use case
+            return null;
+        }
     }
     catch (error) {
         if (error instanceof Error)
@@ -56,4 +60,3 @@ function toURL(url) {
         return null;
     }
 }
-exports.default = toURL;

@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bufferToString = exports.streamToString = exports.capitalizer = exports.escapeRegex = void 0;
+exports.escapeRegex = escapeRegex;
+exports.capitalizer = capitalizer;
+exports.streamToString = streamToString;
+exports.bufferToString = bufferToString;
 /**
  * escape regex string
  * @param string
@@ -15,7 +18,6 @@ function escapeRegex(string, method) {
     if (method === '2')
         return string.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
 }
-exports.escapeRegex = escapeRegex;
 /**
  * capitalize string first letter of each word which mixed with symbols
  * @param str
@@ -39,7 +41,6 @@ function capitalizer(str, moreSymbols) {
     });
     return str;
 }
-exports.capitalizer = capitalizer;
 /**
  * Stream to string
  * @param stream
@@ -53,7 +54,6 @@ function streamToString(stream) {
         stream.on('end', function () { return resolve(Buffer.concat(chunks).toString('utf8')); });
     });
 }
-exports.streamToString = streamToString;
 /**
  * Buffer to string
  * @param array
@@ -69,4 +69,3 @@ function bufferToString(array) {
         return array.toString();
     }
 }
-exports.bufferToString = bufferToString;
